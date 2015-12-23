@@ -1,6 +1,19 @@
-<header></header>
-<main>
+<header>
+	<div class="header__logo-container">
+		<i class="mdi-navigation-menu header__logo-container-guide-btn"></i>
+		<a href="#!" class="header__logo">DooF</a>
+	</div>
 	<div class="facets"></div>
+	<div class="header__user-information">
+		{{#if isLoggedIn}}
+			<!--<span class="user-name">{{name}}</span>-->
+			<img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img user_header_img">
+		{{else}}
+			<span>Login</span>
+		{{/if}}
+	</div>
+</header>
+<main>
 	<div class="restaurantsList"></div>
 	<div class="map"></div>
 </main>

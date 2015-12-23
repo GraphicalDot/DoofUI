@@ -9,6 +9,8 @@ require.config({
 		'handlebars': './../vendors/handlebars-v4.0.2',
 
 		'text': './../vendors/requirejs/plugins/text',
+		'require-async': './../vendors/requirejs/plugins/require-async',
+		'google-map-loader': './../vendors/google-map-loader',
 
 		// Materialaze CSS dependencies
 		'picker': './../vendors/materialize/js/date_picker/picker',

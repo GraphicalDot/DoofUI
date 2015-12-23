@@ -10,6 +10,8 @@ define(function(require) {
 		initialize: function(opts) {
 			self= this;
 			this.doofRegion= opts.doofRegion;
+
+			this.user= opts.user;
 		},
 		appRoutes: {
 			"": "landingPage",
@@ -18,7 +20,7 @@ define(function(require) {
 		controller: {
 			"landingPage": function() {
 				var LandingPage= require('./landingPage/i-landingPage');
-				var landingPage= new LandingPage();
+				var landingPage= new LandingPage({user: self.user});
 				self.doofRegion.show(landingPage);
 			},
 			"application": function() {}

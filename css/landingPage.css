@@ -2,6 +2,29 @@
 	flex: 1 0;
 }
 
+#landingPage .landingPage-user-box {
+	position: absolute;
+	top: 60px;
+	right: 60px;
+}
+
+#landingPage .landingPage-user-box .landingPage-profile-box > a,
+#landingPage .landingPage-user-box .landingPage-login-box > a {
+	text-transform: uppercase;
+	font-weight: 700;
+	border: 0;
+	height: 45px;
+	line-height: 45px;
+	/*min-width: 220px;*/
+	background: #e53838;
+}
+
+#landingPage .landingPage-user-box .landingPage-profile-box a img{
+	width: 35px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
 #landingPage .landingPage-background {
 	position: fixed;
 	top: 0;

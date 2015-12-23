@@ -46,6 +46,7 @@ require.config({
 		'facebook': '//connect.facebook.net/en_US/sdk',
 		'typeahead': './../vendors/typeahead/typeahead.bundle',
 		'es6Promises': './../vendors/es6-promises',
+		'async': './../vendors/async'
 	},
 	shim: {
 		'jquery': {
@@ -191,7 +192,7 @@ require.config({
 
 require(['jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago', 'typeahead'], function () {
 
-	require(['jquery', './app', './../global_variables'], function($, App) {
-		App.start({el: '.doof'});
+	require(['jquery', './app', './../global_variables', 'facebook'], function ($, App) {
+		App.start({ el: '.doof' });
 	});
 });

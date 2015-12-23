@@ -23,7 +23,11 @@ define(function(require) {
 				var landingPage= new LandingPage({user: self.user});
 				self.doofRegion.show(landingPage);
 			},
-			"application": function() {}
+			"application": function() {
+				var ApplicationView= require('./application/l-applicationView');
+				var applicationView= new ApplicationView({user: self.user});
+				self.doofRegion.show(applicationView);
+			}
 		}
 	});
 

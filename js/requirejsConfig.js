@@ -46,7 +46,8 @@ require.config({
 		'facebook': '//connect.facebook.net/en_US/sdk',
 		'typeahead': './../vendors/typeahead/typeahead.bundle',
 		'es6Promises': './../vendors/es6-promises',
-		'async': './../vendors/async'
+		'async': './../vendors/async',
+		'gmaps': './../vendors/gmaps'
 	},
 	shim: {
 		'jquery': {

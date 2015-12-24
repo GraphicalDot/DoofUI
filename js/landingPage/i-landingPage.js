@@ -2,8 +2,8 @@ define(function (require) {
 
 	"use strict";
 
-	var _= require('underscore');
-	var Backbone= require('backbone');
+	var _ = require('underscore');
+	var Backbone = require('backbone');
 	var Marionette = require('backbone.marionette');
 	var Handlebars = require('handlebars');
 	var Template = require('text!./landingPage.html');
@@ -36,10 +36,10 @@ define(function (require) {
 		className: 'center white-text',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
-			this.model= opts.user;
+			this.model = opts.user;
 		},
 		templateHelpers: {
-			isLoggedIn: function() {
+			isLoggedIn: function () {
 				return this.model.isAuthorized();
 			},
 		},
@@ -47,22 +47,22 @@ define(function (require) {
 			'click .login-btn': 'doLogin',
 			'click .logout-btn': 'doLogout'
 		},
-		doLogin: function(e) {
-			var self= this;
+		doLogin: function (e) {
+			var self = this;
 			e.preventDefault();
-			this.model.login().then(function(success) {
+			this.model.login().then(function (success) {
 				self.render();
 				$('.dropdown-button').dropdown();
-			}, function(error) {});
+			}, function (error) { });
 		},
-		doLogout: function(e) {
-			var self= this;
+		doLogout: function (e) {
+			var self = this;
 			e.preventDefault();
-			this.model.logout().then(function() {
+			this.model.logout().then(function () {
 				self.render();
 			});
 		},
-		onShow: function() {
+		onShow: function () {
 			$('.dropdown-button').dropdown();
 		}
 	});

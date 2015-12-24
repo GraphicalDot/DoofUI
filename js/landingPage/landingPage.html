@@ -1,20 +1,20 @@
 <div class="landingPage-user-box">
 	{{#if isLoggedIn}}
-		<div class="landingPage-profile-box">
-			 <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='user-dropdown'>
-				<img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img">
-				<span>{{name}}</span>
-				<i class="mdi-navigation-expand-more right"></i>
-			</a>
-			<ul id="user-dropdown" class="dropdown-content">
-				<li><a href="#/application">Visit Application</a></li>
-				<li><a class="logout-btn" href="#">Logout</a></li>
-			</ul>
-		</div>
+	<div class="landingPage-profile-box">
+		<a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='user-dropdown'>
+			<img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img">
+			<span>{{name}}</span>
+			<i class="mdi-navigation-expand-more right"></i>
+		</a>
+		<ul id="user-dropdown" class="dropdown-content">
+			<li><a href="#/application">Visit Application</a></li>
+			<li><a class="logout-btn" href="#">Logout</a></li>
+		</ul>
+	</div>
 	{{else}}
-		<div class="landingPage-login-box">
-			<a href="#!" class="btn waves-effect waves-light login-btn">Login Boi!</a>
-		</div>
+	<div class="landingPage-login-box">
+		<a href="#!" class="btn waves-effect waves-light login-btn">Login Boi!</a>
+	</div>
 	{{/if}}
 </div>
 
@@ -26,7 +26,8 @@
 
 <div class="landingPage-content">
 	<div class="landingPage-content__welcome-text">Welcome to</div>
-	<div class="landingPage-content__content-logo"><h4>Doof</h4></div>
+	<div class="landingPage-content__content-logo">
+		<h4>Doof</h4></div>
 	<div class="landingPage-content__description">
 		<p class="flow-text">Doof is Food discovery web application which lets user search and know about trending Restaurants and Foods nearby them
 			based on Sentiments.</p>

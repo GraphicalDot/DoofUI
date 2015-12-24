@@ -1,17 +1,17 @@
-define(function(require) {
+define(function (require) {
 
 	"use strict";
 
-	var _= require('underscore');
-	var Backbone= require('backbone');
-	var Handlebars= require('handlebars');
-	var Marionette= require('backbone.marionette');
-	var Template= require('text!./applicationView.html');
+	var _ = require('underscore');
+	var Backbone = require('backbone');
+	var Handlebars = require('handlebars');
+	var Marionette = require('backbone.marionette');
+	var Template = require('text!./applicationView.html');
 
-	var FooterView= require('./footer/i-footer');
-	var FacetsView= require('./facets/i-facets');
-	var RestaurantsListView= require('./restaurants/c-restaurantsList');
-	var MapView= require('./map/i-map');
+	var FooterView = require('./footer/i-footer');
+	var FacetsView = require('./facets/i-facets');
+	var RestaurantsListView = require('./restaurants/c-restaurantsList');
+	var MapView = require('./map/i-map');
 
 	Backbone.Marionette.LayoutView.prototype.mixinTemplateHelpers = function (target) {
 		var self = this;
@@ -36,7 +36,7 @@ define(function(require) {
 		return _.extend(target, result);
 	};
 
-	var ApplicationView= Marionette.LayoutView.extend({
+	var ApplicationView = Marionette.LayoutView.extend({
 		id: 'applicationPage',
 		template: Handlebars.compile(Template),
 		regions: {
@@ -45,21 +45,21 @@ define(function(require) {
 			'map': '.map',
 			'footer': 'footer'
 		},
-		initialize: function(opts) {
+		initialize: function (opts) {
 
-			this.model= opts.user;
-			this.footerView= new FooterView();
-			this.facetsView= new FacetsView();
+			this.model = opts.user;
+			this.footerView = new FooterView();
+			this.facetsView = new FacetsView();
 
-			this.restaurantsListView= new RestaurantsListView();
-			this.mapView= new MapView();
+			this.restaurantsListView = new RestaurantsListView();
+			this.mapView = new MapView();
 		},
 		templateHelpers: {
-			isLoggedIn: function() {
+			isLoggedIn: function () {
 				return this.model.isAuthorized();
 			},
 		},
-		onShow: function() {
+		onShow: function () {
 			this.showChildView('footer', this.footerView);
 			this.showChildView('facets', this.facetsView);
 			this.showChildView('restaurantsList', this.restaurantsListView);

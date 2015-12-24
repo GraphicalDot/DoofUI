@@ -1,18 +1,26 @@
 <header>
 	<div class="header__logo-container">
-		<i class="mdi-navigation-menu header__logo-container-guide-btn"></i>
-		<a href="#!" class="header__logo">DooF</a>
+		<a href="#!" class="header__logo"><img src="css/images/doof.png" alt="Doof logo"></a>
 	</div>
 	<div class="facets"></div>
-	<div class="header__user-information">
-		{{#if isLoggedIn}}
-		<span class="user-name">{{name}}</span>
-		<img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img user_header_img"> {{else}}
-		<span>Login</span> {{/if}}
-	</div>
+	<ul class="header__nav-menu">
+		<li><a href="#!">Send Feedback</a></li>
+		<li class="header__nav-menu-user-info">
+			{{#if isLoggedIn}}
+				<a class="user-profile-dropdown-button" data-beloworigin="true" href="#!" data-activates="user-profile-dropdown"><img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img z-depth-1"></a>
+			{{else}}
+				<a href="#!">Login</a>
+			{{/if}}
+			</a>
+		</li>
+	</ul>
 </header>
 <main>
 	<div class="restaurantsList"></div>
 	<div class="map"></div>
 </main>
 <footer></footer>
+<ul id="user-profile-dropdown" class="dropdown-content">
+	<li>My Profile</li>
+	<li>Logout</li>
+</ul>

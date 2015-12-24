@@ -1,0 +1,7 @@
+.restaurants-list-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	overflow-y: scroll;
+}

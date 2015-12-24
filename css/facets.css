@@ -1,7 +1,7 @@
 /*facets*/
 .facets-row {
 	position: relative;
-	max-width: 650px;
+	max-width: 550px;
 	/*overflow: hidden;*/
 	margin: auto;
 	padding: 0;
@@ -9,7 +9,7 @@
 
 .facets-row .searchbox {
 	border: none;
-	background: rgba(255,255,255,.15)!important;
+	background: #eeeeee!important;
 	height: 40px;
 	box-shadow: none;
 	border-radius: 2px;
@@ -27,12 +27,12 @@
 	position: absolute;
 	top: 8px;
 	left: 20px;
-	background-image: -webkit-image-set(url(https://www.google.com/images/icons/material/system/2x/search_white_24dp.png) 2x,url(https://www.google.com/images/icons/material/system/1x/search_white_24dp.png) 1x);
+	background-image: -webkit-image-set(url(https://www.google.com/images/icons/material/system/2x/search_black_24dp.png) 2x,url(https://www.google.com/images/icons/material/system/1x/search_black_24dp.png) 1x);
 	background-size: 24px;
 }
 
 input.food_restaurant_search {
-	color: #fff!important;
+	color: rgba(0, 0, 0, 0.7)!important;
 	background-color: transparent;
 	border: 0;
 	display: inline-block;
@@ -63,7 +63,7 @@ input.food_restaurant_search:focus {
 
 .facets-row i {
 	display: block;
-	color: #fff;
+	color: rgba(0, 0, 0, 0.7);
 }
 
 .twitter-typeahead {
@@ -74,7 +74,7 @@ input.food_restaurant_search:focus {
 .tt-menu {
 	/*left: -64px!important;*/
 	width: 100%;
-	background-color: #fff;
+	background-color: rgba(0, 0, 0, 0.7);
     border-radius: 0 0 2px 2px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 	border-top: 1px solid #e6e6e6;
@@ -148,17 +148,17 @@ input.food_restaurant_search:focus {
 
 
 ::-webkit-input-placeholder {
-   color: rgba(255, 255, 255, 0.8);
+   color: rgba(0, 0, 0, 0.7);
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: rgba(255, 255, 255, 0.8);
+   color: rgba(0, 0, 0, 0.7);
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: rgba(255, 255, 255, 0.8);
+   color: rgba(0, 0, 0, 0.7);
 }
 
 :-ms-input-placeholder {
-   color: rgba(255, 255, 255, 0.8);
+   color: rgba(0, 0, 0, 0.7);
 }

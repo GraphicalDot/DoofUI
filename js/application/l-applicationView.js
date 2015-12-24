@@ -2,6 +2,7 @@ define(function (require) {
 
 	"use strict";
 
+	var $= require('jquery');
 	var _ = require('underscore');
 	var Backbone = require('backbone');
 	var Handlebars = require('handlebars');
@@ -46,24 +47,48 @@ define(function (require) {
 			'footer': 'footer'
 		},
 		initialize: function (opts) {
+			var self = this;
 
 			this.model = opts.user;
+			this.restaurantData = opts.restaurants;
+			this.lat = opts.lat;
+			this.lng = opts.lng;
+
 			this.footerView = new FooterView();
 			this.facetsView = new FacetsView();
 
-			this.restaurantsListView = new RestaurantsListView();
-			this.mapView = new MapView();
+			this.restaurantsListView = new RestaurantsListView({ collection: this.restaurantData });
+			this.mapView = new MapView({ collection: self.restaurantData, lat: this.lat, lng: this.lng });
 		},
 		templateHelpers: {
 			isLoggedIn: function () {
 				return this.model.isAuthorized();
 			},
 		},
+		childEvents: {
+			'location:changed': 'updateData'
+		},
+		updateData: function(childView, lat, lng) {
+			var self= this;
+			this.restaurantData.fetch({ method: 'POST', data: { lat: lat, lng: lng } }).done(function () {
+				self.mapView.showMarkers(self.restaurantData.toJSON());
+			});
+		},
 		onShow: function () {
+			var self = this;
 			this.showChildView('footer', this.footerView);
 			this.showChildView('facets', this.facetsView);
-			this.showChildView('restaurantsList', this.restaurantsListView);
-			this.showChildView('map', this.mapView);
+			this.restaurantData.fetch({ method: 'POST', data: { lat: self.lat, lng: self.lng } }).done(function () {
+				self.showChildView('restaurantsList', self.restaurantsListView);
+				self.showChildView('map', self.mapView);
+			});
+
+			if(this.model.isAuthorized()) {
+			 	$('.user-profile-dropdown-button').dropdown({
+					 constrain_width: false,
+					 alignment: 'center'
+				 });
+			}
 		}
 	});
 

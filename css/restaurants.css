@@ -1,7 +1,9 @@
-.restaurants-list-wrapper {
+.restaurantList .restaurant-list-wrapper {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-
-	overflow-y: scroll;
+	outline-offset: -2px;
 }
+
+	.restaurant-list-wrapper .restaurant {
+		cursor: pointer;
+	}

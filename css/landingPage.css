@@ -1,5 +1,6 @@
 #landingPage {
 	flex: 1 0;
+	align-self: center;
 }
 
 #landingPage .landingPage-user-box {

@@ -1,17 +1,39 @@
 #applicationPage {
-	height: 100%;
-    width: 100%;
     display: flex;
+	min-height: 100vH;
+	width: 100%;
     flex-direction: column;
+	align-items: stretch;
 }
+
+#applicationPage > main {
+	display: flex;
+	flex: 1;
+	align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+#applicationPage > main .restaurantsList {
+	flex: 0 0 420px;
+	z-index: 99;
+	background-color: #F7F8FA;
+	overflow-y: auto;
+	/*box-shadow: 0 0 20px rgba(0,0,0,0.3);*/
+}
+
+#applicationPage > main .map {
+	flex: 1;
+	position: relative;
+}
+
 
 #applicationPage > header {
 	height: 60px;
-	line-height: 60px;
-	width: 100%;
+	/*width: 100%;*/
 	background: #fff;
 	z-index: 100;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 20px rgba(0,0,0,0.3);
 
 	display: flex;
     flex-direction: row;
@@ -79,34 +101,31 @@
 	height: 40px;
 }
 
-#applicationPage > main {
-	position: relative;
-	width: 100%;
+/*#applicationPage > main {
 	flex: 1 auto;
-	background-color: #F7F8FA;
+	position: relative;
+	height: 100%;
+	width: 100%;
 
 	display: flex;
 	flex-direction: row;
-}
+}*/
 
-#applicationPage > main .restaurantsList {
-	display: none;
-	position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+/*#applicationPage > main .restaurantsList {
+	width: 33%;
+	max-width: 420px;
 	overflow-y: auto;
 	outline-offset: -2px;
 	border-right: 1px solid #d6d9db;
-	width: 33%;
-	max-width: 450px;
+	box-shadow: 0 0 20px rgba(0,0,0,0.3);
 
-}
+	flex: 1 auto;
+}*/
 
-#applicationPage > main .map {
+/*#applicationPage > main .map {
 	position: relative;
 	flex: 1 auto;
-}
+}*/
 
 #map {
 	position: absolute;

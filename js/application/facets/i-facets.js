@@ -33,12 +33,12 @@ define(function (require) {
 						});
 					},
 					templates: {
-						empty: ['<div class="empty-message">', 'No food found', '</div>'].join('\n'),
+						empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No food found', '</div>'].join('\n'),
 						suggestion: function (data) {
 							var str = data.replace(/\s+/g, '');
 							return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
 						},
-						header: '<i class="material-icons suggestion-type typeahead-header food">search</i><span>Food</span>'
+						header: '<i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Food</span>'
 					}
 				},
 				{
@@ -56,12 +56,12 @@ define(function (require) {
 						});
 					},
 					templates: {
-						empty: ['<div class="empty-message">', 'No restaurant found', '</div>'].join('\n'),
+						empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No restaurant found', '</div>'].join('\n'),
 						suggestion: function (data) {
 							var str = data.replace(/\s+/g, '');
 							return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
 						},
-						header: '<i class="material-icons suggestion-type typeahead-header restaurant-s">trending_up</i><span>Restaurants</span>'
+						header: '<i class="material-icons suggestion-type typeahead-header restaurant-s">restaurant_menu</i><span>Restaurants</span>'
 					}
 				}
 				).on('typeahead:asyncrequest', function () {
@@ -69,6 +69,8 @@ define(function (require) {
 				}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
 					$('.Typeahead-spinner').hide();
 				});
+                
+                
 		}
 	});
 

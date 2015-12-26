@@ -7,7 +7,7 @@
 		<li><a href="#!">Send Feedback</a></li>
 		<li class="header__nav-menu-user-info">
 			{{#if isLoggedIn}}
-				<a class="user-profile-dropdown-button" data-beloworigin="true" href="#!" data-activates="user-profile-dropdown"><img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img z-depth-1"></a>
+				<a class="user-profile-dropdown-button" data-beloworigin="true" href="#!" data-activates="user-profile-dropdown"><img src="{{picture.data.url}}" alt="facebook image" class="circle responsive_img z-depth-1"><i class="material-icons right">arrow_drop_down</i></a>
 			{{else}}
 				<a href="#!">Login</a>
 			{{/if}}
@@ -21,6 +21,6 @@
 </main>
 <footer></footer>
 <ul id="user-profile-dropdown" class="dropdown-content">
-	<li>My Profile</li>
-	<li>Logout</li>
+	<li><a href="#!"><i class="material-icons">face</i>Your Profile</a></li>
+	<li><a href="#!"><i class="material-icons">power_settings_new</i>Logout</a></li>
 </ul>

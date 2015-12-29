@@ -10,7 +10,7 @@ function truncate(str, maxLength, suffix) {
 
 
 function d3BubbleGraph(data, domEl) {
-	
+
 	var margin = { top: 20, right: 200, bottom: 0, left: 20 },
 		width = 250,
 		height = 400,

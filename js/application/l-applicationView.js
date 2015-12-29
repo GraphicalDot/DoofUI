@@ -44,7 +44,8 @@ define(function (require) {
 			'facets': '.facets',
 			'restaurantsList': '.restaurantsList',
 			'map': '.map',
-			'footer': 'footer'
+			'footer': 'footer',
+			'single': '.single-content'
 		},
 		initialize: function (opts) {
 			var self = this;
@@ -58,7 +59,7 @@ define(function (require) {
 			this.facetsView = new FacetsView();
 
 			this.restaurantsListView = new RestaurantsListView({ collection: this.restaurantData });
-			this.mapView = new MapView({ collection: self.restaurantData, lat: this.lat, lng: this.lng });
+			this.mapView = new MapView({ collection: this.restaurantData, lat: this.lat, lng: this.lng });
 		},
 		templateHelpers: {
 			isLoggedIn: function () {
@@ -66,19 +67,46 @@ define(function (require) {
 			},
 		},
 		childEvents: {
+			"show:restaurants": "updateData",
+			"show:restaurant": "showRestaurant",
 			'location:changed': 'updateData'
 		},
-		updateData: function(childView, lat, lng) {
-			var self= this;
-			this.restaurantData.fetch({ method: 'POST', data: { lat: lat, lng: lng } }).done(function () {
-				self.mapView.showMarkers(self.restaurantData.toJSON());
-			});
+		updateData: function(childView, newData) {
+			if (newData) {
+				this.restaurantsListView.updateData(newData);
+			} else {
+				this.restaurantsListView.updateData(this.collection);
+			}
+		},
+		showRestaurant: function (view, restaurant_id, restaurant_details, restaurant_data) {
+			var self = this;
+			var Restaurant = require('./../models/restaurant');
+			var SingleView= require('./singleView/i-singleView');
+
+			if(restaurant_data) {
+				this.singleView = new SingleView({ model: restaurant_data, restaurant_info: {eatery_details: {}}});
+				self.showChildView('single', self.singleView);
+			} else {
+				var restaurant = new Restaurant();
+				this.singleView = new SingleView({ model: restaurant, restaurant_info: restaurant_details });
+				restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
+					// self.singleView.render();
+					// var divContent= self.singleView.$el[0];
+					// self.mapView.showMarkerDetail(divContent, restaurant_id);
+					// self.singleView.destroy();
+					self.showChildView('single', self.singleView);
+				});
+			}
 		},
 		onShow: function () {
 			var self = this;
 			this.showChildView('footer', this.footerView);
 			this.showChildView('facets', this.facetsView);
-			this.restaurantData.fetch({ method: 'POST', data: { lat: self.lat, lng: self.lng } }).done(function () {
+
+			self.lat= 28.5538388889;
+			self.lng= 77.1945111111;
+
+			this.restaurantData.fetch({ method: 'POST', data: { latitude: self.lat, longitude: self.lng } }).done(function () {
 				self.showChildView('restaurantsList', self.restaurantsListView);
 				self.showChildView('map', self.mapView);
 			});

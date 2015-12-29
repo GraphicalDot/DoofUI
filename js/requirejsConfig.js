@@ -45,8 +45,14 @@ require.config({
 		'waves': './../vendors/materialize/js/waves',
 
 		'd3': './../vendors/d3/d3.min',
+		'd3.tips': './../vendors/d3/d3.tips',
+		'radialGraph': './../vendors/d3/radialGraph',
+		'd3bubbleGraph': './../vendors/d3/d3.bubbleGraph',
+		'nvd3': './../vendors/d3/nv.d3',
+
 		'facebook': '//connect.facebook.net/en_US/sdk',
 		'typeahead': './../vendors/typeahead/typeahead.bundle',
+		'bloodhound': './../vendors/typeahead/bloodhound',
 		'es6Promises': './../vendors/es6-promises',
 		'async': './../vendors/async',
 		'gmaps': './../vendors/gmaps'
@@ -187,15 +193,48 @@ require.config({
 			}
 		},
 
+		'bloodhound': {
+			deps: ['jquery'],
+        	exports: "Bloodhound"
+		},
+
 		'handlebars': {
 			exports: 'Handlebars'
 		},
+
+		'd3.tips': {
+			deps: ['d3']
+		},
+
+		'radialGraph': {
+			deps: ['d3', 'd3.tips']
+		},
+
+		'd3bubbleGraph': {
+			deps: ['d3']
+		},
+
+		'nvd3': {
+			deps: ['d3']
+		}
 	}
 });
 
-require(['jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago', 'typeahead'], function () {
+require(['jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function () {
 
 	require(['jquery', './app', './../global_variables', 'facebook'], function ($, App) {
+
+		$.fn.enterKey = function (fnc) {
+			return this.each(function () {
+				$(this).keypress(function (ev) {
+					var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+					if (keycode == '13') {
+						fnc.call(this, ev);
+					}
+				});
+			});
+		}
+
 		App.start({ el: '.doof' });
 	});
 });

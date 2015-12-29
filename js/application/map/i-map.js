@@ -16,7 +16,6 @@ define(function (require) {
 			this.markersArray = [];
 		},
 		showCustomControls: function () {
-
 		},
 		showMarkers: function (markers) {
 			var self = this;
@@ -32,14 +31,14 @@ define(function (require) {
 			_.each(markers, function (marker, i) {
 				window.setTimeout(function() {
 					var markerObject = {};
-					markerObject.lat = marker.eatery_coordinates ? marker.eatery_coordinates[0] : marker.location.lat;
-					markerObject.lng = marker.eatery_coordinates ? marker.eatery_coordinates[1] : marker.location.lon;
+					markerObject.lat = marker.location[1];
+					markerObject.lng = marker.location[0];
 
 					var mapMarker = new google.maps.Marker({
 						map: self.map,
 						position: new google.maps.LatLng(markerObject.lat, markerObject.lng),
 						title: marker.eatery_name,
-						eatery_id: marker.eatery_id,
+						eatery_id: marker.__eatery_id,
 						address: marker.eatery_address,
 						html: "<div id='infobox'>" + marker.eatery_name + "<br />" + marker.eatery_address + "</div>"
 					})
@@ -57,8 +56,19 @@ define(function (require) {
 				}, i*200);
 			});
 		},
+		showMarkerDetail: function(htmlContent, id) {
+			console.log(id);
+			var self= this;
+			_.each(self.markersArray, function(marker) {
+				if(marker.eatery_id=== id) {
+					self.infoWindow.setContent(htmlContent);
+ 					self.infoWindow.open(self.map, marker);
+				}
+			})
+		},
 		onShow: function () {
 			var self = this;
+			console.log(this.collection);
 			require(["require-async!http://maps.googleapis.com/maps/api/js"], function () {
 				var mapCanvas = document.getElementById("map");
 				var centerPoint = new google.maps.LatLng(self.lat, self.lng);
@@ -72,7 +82,7 @@ define(function (require) {
 
 				var map = new google.maps.Map(mapCanvas, mapOptions);
 				self.map = map;
-				self.infoWindow = new google.maps.InfoWindow({ content: "" });
+				self.infoWindow = new google.maps.InfoWindow({ content: "",  });
 				self.showMarkers(self.collection.toJSON());
 
 				self.myLocationMarker = new google.maps.Marker({

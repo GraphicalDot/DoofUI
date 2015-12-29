@@ -1,0 +1,57 @@
+<div class="row">
+	<div class="col s12">
+		<div id="detail-close"><i class="material-icons">clear</i></div>
+		<div class="pickery_details">
+			<h5><span class="specialFont specialColor">{{name}}</span></h5>
+			<h6>{{address}}</h6>
+		</div>
+	</div>
+	<div id="graphs" class="col s12">
+		<div class="row">
+			<div class="col s12">
+				<ul class="tabs">
+					<li class="tab col s3"><a href="#ambience">Ambience</a></li>
+					<li class="tab col s3"><a href="#cost">Cost</a></li>
+					<li class="tab col s3"><a href="#food">Food</a></li>
+					<li class="tab col s3"><a href="#service">Service</a></li>
+				</ul>
+			</div>
+			<div id="ambience" class="col s12">
+				<h5 class="left">Ambience</h5>
+				<svg id="ambience-graph"></svg>
+			</div>
+			<div id="cost" class="col s12">
+				<h5 class="left">Cost</h5>
+				<svg id="cost-graph"></svg>
+			</div>
+			<div id="food" class="col s12">
+				<h5 class="left">Food</h5>
+				<svg id="food-graph"></svg>
+			</div>
+			<div id="service" class="col s12">
+				<h5 class="left">Service</h5>
+				<svg id="service-graph"></svg>
+			</div>
+		</div>
+	</div>
+	<div id="reviews" class="col s12">
+		<ul>
+			<li>{Review will come here. But right now its lorem ipsum}</li>
+			<li>{Review will come here. But right now its lorem ipsum}</li>
+			<li>{Review will come here. But right now its lorem ipsum}</li>
+		</ul>
+		<div class="row">
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="textarea1" class="materialize-textarea"></textarea>
+						<label for="textarea1">Textarea</label>
+					</div>
+				</div>
+				<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+					<i class="material-icons right">send</i>
+				</button>
+			</form>
+		</div>
+	</div>
+</div>

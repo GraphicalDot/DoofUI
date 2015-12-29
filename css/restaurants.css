@@ -1,3 +1,31 @@
+.restaurant-text-content {
+	display: flex;
+	flex-direction: column;
+	padding: 5px 10px;
+	cursor: pointer;
+	/*border-bottom: 1px solid #7fc0b2;
+	border-top: 1px solid #7fc0b2;*/
+		color: rgba(0,0,0, 0.87);
+    display: inline-block;
+	padding: 20px 20px;
+    font-size: 13px;
+    line-height: 16px;
+    width: 100%;
+	padding-top: 2px;
+}
+
+.restaurant-text-content .header {
+	flex: 1;
+	display: flex;
+	padding-top: 2px;
+	flex-direction: column;
+}
+/*
+.restaurantsList h5 {
+	font-weight: bold;
+	text-align: center;
+}
+
 .restaurantList .restaurant-list-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -7,7 +35,82 @@
 	.restaurant-list-wrapper .restaurant {
 		cursor: pointer;
 	}
-    
+
+.restaurant_box {
+	margin-bottom: 0.8rem;
+	    padding: 10px;
+}*/
+
+.food-name {
+	flex: 1;
+	    line-height: 20px;
+	font-size: 24px;
+    font-size: 1.5rem;
+	font-family: 'norwester';
+    width: 100%;
+    white-space: normal;
+	color: #008265;
+	    line-height: 40px;
+    font-size: 28px;
+    text-transform: capitalize;
+    font-weight: 300;
+	/*font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.4rem;*/
+}
+
+.food-sentiment {
+	flex: 0 0 10em;
+	font-size: 0.7rem;
+    text-align: center;
+    line-height: 1rem;
+	line-height: 25px;
+    vertical-align: middle;
+    display: flex;
+}
+
+.food-sentiment i,
+.restaurant-sentiment i {
+	font-size: 1.3rem;
+
+    color: #ccc;
+}
+
+.food-sentiment i.active,
+.restaurant-sentiment i.active {
+	color: #E60042;
+}
+
+.food-sentiment i:last-child,
+.restaurant-sentiment i:last-child {
+	margin-right: 7px;
+}
+
+.restaurant-detail {
+	padding-top: 2px;
+}
+
+.restaurant-name {
+	        font-size: 1.3rem;
+    line-height: 140%;
+    font-weight: bold;
+    color: rgba(0,0,0,0.73);
+}
+
+.restaurant-address {
+	    padding-top: 10px;
+    /*line-height: 150%;*/
+	    padding-top: 10px;
+    color: rgba(0,0,0,0.67);
+    /* font-weight: bold; */
+    letter-spacing: 0.2px;
+}
+
+.card-content {
+	font-size: 0.9rem;
+	padding: 0px!important;
+}
+
 ::-webkit-scrollbar {
         width: 9px;
     height: 9px;
@@ -16,4 +119,3 @@
 ::-webkit-scrollbar-thumb {
     background: #ccc;
 }
-   

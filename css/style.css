@@ -322,6 +322,10 @@ i.empty_message_icon {
 	cursor: pointer;
 }
 
+.restaurant-list-item.active > .card-panel {
+	background-color: #F4FAD2;
+}
+
 .card-header {
 	font-size: 1.2em;
 	padding-top: 2px;

@@ -11,6 +11,7 @@ body {
 	font-size: 1rem;
 	font-weight: 400;
 
+	overflow: hidden;
 	background-color: #fff;
 }
 
@@ -34,15 +35,15 @@ body {
 
 #landingPage .landingPage-background img,
 #landingPage .landingPage-background__overlay {
-    
+
     /* Set rules to fill background */
   min-height: 100%;
   min-width: 1024px;
-	
+
   /* Set up proportionate scaling */
   width: 100%;
   height: auto;
-	
+
   /* Set up positioning */
   position: fixed;
   top: 0;
@@ -58,6 +59,10 @@ body {
     display: flex;
     flex: 1;
     flex-direction: column;
+
+	height: 100%;
+	min-height: 100vH;
+	height: 100vH;
 }
 
 .doof-header {
@@ -290,6 +295,8 @@ i.empty_message_icon {
     display: flex;
     flex: 1;
     background-color:  white;
+
+	overflow-y: auto;
 }
 
 .doof-body .map {
@@ -305,4 +312,72 @@ i.empty_message_icon {
     bottom: 0;
     height: 100%;
     width: 100%;
+}
+
+.restaurant-list-item {
+	padding-left: 10px;
+	padding-right: 10px;
+
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.card-header {
+	font-size: 1.2em;
+	padding-top: 2px;
+}
+
+.card-header > .food-name,
+.card-header > .restaurant-name {
+	font-size: 1.5em;
+	color: #008265;
+	text-transform: capitalize;
+	/*font-weight: 300;*/
+}
+
+.card-header > .food-sentiments,
+.card-header > .restaurant-sentiments {
+	font-size: 0.818rem;
+	font-weight: 300;
+}
+
+.card-header > .food-sentiments i,
+.card-header > .restaurant-sentiments i{
+	font-size: 1rem;
+	color: #D4D2D2;
+}
+
+.card-header > .food-sentiments i.active,
+.card-header > .restaurant-sentiments i.active {
+	color: rgba(229,0,71,00.727);
+}
+
+.card-header > .food-sentiments i:last-child,
+.card-header > .restaurant-sentiments i:last-child {
+	margin-right: 7px;
+}
+
+.card-description {
+	font-size: 1em;
+	padding-top: 2px;
+}
+
+.card-description > .restaurant-name span {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: rgba(0,0,0,0.727);
+}
+
+.card-description > .restaurant-address {
+	padding-top: 7px;
+	font-size: 0.727em;
+}
+
+::-webkit-scrollbar {
+        width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
 }

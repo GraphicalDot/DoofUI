@@ -49,7 +49,7 @@ requirejs.config({
         'facebook': '//connect.facebook.net/en_US/sdk',
 
         'typeahead': './../libraries/typeahead.bundle',
-        
+
         'es6promise': './../libraries/es6promises'
     },
     shim: {
@@ -87,7 +87,7 @@ requirejs.config({
         'toasts': {
             deps: ['hammerjs', 'velocity']
         },
-        
+
         'carousel': {
             deps: ['jquery']
         },
@@ -183,13 +183,11 @@ requirejs.config({
 });
 
 require(['jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function () {
-    
+
     //  fetch api end points here
     window.get_trending = "http://52.76.176.188:8000/gettrending";
     window.get_suggestions= "http://52.76.176.188:8000/suggestions";
-    require(['./doof'], function (Doof) {    
+    require(['./doof'], function (Doof) {
         Doof.start();
     });
 });
-
-    

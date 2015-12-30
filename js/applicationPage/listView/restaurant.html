@@ -1,1 +1,52 @@
-{{name}}
+<div class="card-panel restaurant-list">
+	{{#if isFood}}
+		<div class="food-detail card-header">
+			<div class="food-name">{{name}}</div>
+			<div class="food-sentiments">
+				{{#if_eq sentiment "excellent"}}
+					<i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "good"}}
+					<i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons">mood</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "average"}}
+					<i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons">mood</i><i class="material-icons">mood</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "poor"}}
+					<i class="material-icons active">mood_bad</i><i class="material-icons active">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "terrible"}}
+					<i class="material-icons active">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i>
+				{{/if_eq}}
+				 - {{total_sentiments}} sentiments
+			</div>
+		</div>
+		<div class="restaurant-detail card-description">
+			<div class="restaurant-name">at <span>{{eatery_name}}</span></div>
+			<div class="restaurant-address">{{eatery_details.eatery_address}}</div>
+		</div>
+	{{else}}
+		<div class="restaurant-detail card-header">
+			<div class="restaurant-name">{{eatery_name}}</div>
+			<div class="restaurant-sentiments">
+				{{#if_eq sentiment "excellent"}}
+					<i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "good"}}
+					<i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons">mood</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "average"}}
+					<i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons active">mood</i><i class="material-icons">mood</i><i class="material-icons">mood</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "poor"}}
+					<i class="material-icons active">mood_bad</i><i class="material-icons active">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i>
+				{{/if_eq}}
+				{{#if_eq sentiment "terrible"}}
+					<i class="material-icons active">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i><i class="material-icons">mood_bad</i>
+				{{/if_eq}}
+				- {{total_sentiments}} sentiments
+			</div>
+			<div class="restaurant-address">{{eatery_address}}</div>
+		</div>
+	{{/if}}
+</div>

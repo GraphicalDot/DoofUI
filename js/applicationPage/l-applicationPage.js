@@ -14,6 +14,9 @@ define(function (require) {
     var MapView= require('./mapView/i-map');
     var Restaurants= require('./../models/restaurants');
 
+	var Restaurant= require('./../models/restaurant');
+	var RestaurantDetailView= require('./detailView/i-detailView');
+
     function findLatLong() {
         var promise= new Promise(function(resolve) {
             if (navigator.geolocation) {
@@ -59,10 +62,24 @@ define(function (require) {
             this.mapView= new MapView({collection: this.collection, lat: this.position.lat, lng: this.position.lng});
         },
 		childEvents: {
+			'show:restaurants': 'showRestaurants',
+			'show:restaurant': 'showRestaurant',
 			"highlight:restaurant": "highlight",
 			"unhighlight:restaurant": "unhighlight",
 			"highlightMarker:restaurant": "highlightMarker",
 			"unhighlightMarker:restaurant": "unhighlightMarker"
+		},
+		showRestaurants: function(childView, restaurant_data) {
+			self.mapView.updateMarkers(restaurant_data.toJSON());
+			self.listView.updateCollection(restaurant_data);
+		},
+		showRestaurant: function(childView, restaurant_id, restaurant_detail) {
+			var restaurant= new Restaurant();
+			var detailView= new RestaurantDetailView({model: restaurant, restaurant_detail: restaurant_detail});
+
+			restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
+				this.showChildView('detail', detailView);
+			});
 		},
 		highlight: function(childView, eatery_id) {
 			if(eatery_id) {

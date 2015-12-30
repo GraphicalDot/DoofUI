@@ -45,6 +45,7 @@ requirejs.config({
         'waves': './../libraries/materialize/js/waves',
 
         'd3': './../libraries/d3.v3.min',
+		'nvd3': './../libraries/nvd3',
 
         'facebook': '//connect.facebook.net/en_US/sdk',
 
@@ -172,6 +173,10 @@ requirejs.config({
             deps: ['jquery']
         },
 
+		'nvd3': {
+			deps: ['d3']
+		},
+
         'facebook': { exports: 'FB' },
         'typeahead': {
             deps: ['jquery'],
@@ -182,11 +187,24 @@ requirejs.config({
     }
 });
 
-require(['jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function () {
+require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function ($) {
+
+	$.fn.enterKey = function (fnc) {
+		return this.each(function () {
+			$(this).keypress(function (ev) {
+				var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+				if (keycode == '13') {
+					fnc.call(this, ev);
+				}
+			});
+		});
+	}
 
     //  fetch api end points here
     window.get_trending = "http://52.76.176.188:8000/gettrending";
-    window.get_suggestions= "http://52.76.176.188:8000/suggestions";
+    window.get_suggestions = "http://52.76.176.188:8000/suggestions";
+	window.textsearch = "http://52.76.176.188:8000/textsearch";
+
     require(['./doof'], function (Doof) {
         Doof.start();
     });

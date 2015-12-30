@@ -62,6 +62,10 @@ define(function (require) {
 	var RestaurantsListView = Marionette.CollectionView.extend({
 		id: 'restaurants-list-view',
 		childView: RestaurantView,
+		updateCollection: function(newCollection) {
+			this.collection= newCollection;
+			this.render();
+		}
 	});
 
 	return RestaurantsListView;

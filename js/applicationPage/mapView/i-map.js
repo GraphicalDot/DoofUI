@@ -58,6 +58,11 @@ define(function (require) {
 			});
 			self.markersArray = [];
 		},
+		updateMarkers: function(data) {
+			this.collection= data;
+			self.data= data.toJSON();
+			this.showMarker();
+		},
 		showMarker: function () {
 			var self = this;
 			var markersBound = new google.maps.LatLngBounds();

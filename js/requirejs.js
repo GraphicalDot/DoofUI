@@ -204,8 +204,9 @@ require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery
     window.get_trending = "http://52.76.176.188:8000/gettrending";
     window.get_suggestions = "http://52.76.176.188:8000/suggestions";
 	window.textsearch = "http://52.76.176.188:8000/textsearch";
+	window.geteatery= "http://52.76.176.188:8000/geteatery";
 	window.getkey= "http://52.76.176.188:8000/getkey";
-
+	
     require(['./doof'], function (Doof) {
         Doof.start();
     });

@@ -262,6 +262,7 @@ i.empty_message_icon {
     display: flex;
     flex: 1;
     overflow: hidden;
+	position: relative;
 }
 
 .doof-body .left-body {
@@ -384,4 +385,54 @@ i.empty_message_icon {
 
 ::-webkit-scrollbar-thumb {
     background: #ccc;
+}
+
+.detail {
+	position: absolute;
+    top: 0;
+    left: 420px;
+    z-index: 99;
+    background-color: white;
+    bottom: 0;
+    margin: 10px;
+    width: 500px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	overflow-y: auto;
+}
+
+#detail-view {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#detail-view {
+	z-index: 7;
+}
+
+.graph {
+	width: 500px!important;
+    height: 600px!important;
+}
+
+.detail-close {
+	position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 2em;
+    z-index: 1;
+}
+
+.detail-restaurant-information,
+.restaurant-reviews {
+	padding: 10px;
+}
+
+.detail-restaurant-name {
+	    font-size: 3rem;
+    font-weight: 300;
+    color: #E5004A;
+}
+
+.detail-restaurant-address {
+	font-size: 0.9rem;
 }

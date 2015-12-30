@@ -74,11 +74,12 @@ define(function (require) {
 			self.listView.updateCollection(restaurant_data);
 		},
 		showRestaurant: function(childView, restaurant_id, restaurant_detail) {
+			var self= this;
 			var restaurant= new Restaurant();
 			var detailView= new RestaurantDetailView({model: restaurant, restaurant_detail: restaurant_detail});
 
 			restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
-				this.showChildView('detail', detailView);
+				self.showChildView('detail', detailView);
 			});
 		},
 		highlight: function(childView, eatery_id) {

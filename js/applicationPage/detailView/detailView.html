@@ -1,29 +1,29 @@
 <i class="material-icons detail-close">clear</i>
 
-<div class="restaurant-information">
-	<div class="restaurant-name">{{eatery_name}}</div>
-	<div class="restaurant-address">{{eatery_address}}</div>
-	<div class="restaurant-graph"></div>
+<div class="detail-restaurant-information">
+	<div class="detail-restaurant-name">{{restaurant-name}}</div>
+	<div class="detail-restaurant-address">{{restaurant-address}}</div>
+	<div class="restaurant-overall-graph"></div>
 </div>
 
-<div class="restaurant detail">
-	<ul class="detail_tabs">
-		<li><a href="#ambience">Ambience</a></li>
-		<li><a href="#food">Food</a></li>
-		<li><a href="#cost">Cost</a></li>
-		<li><a href="#service">Service</a></li>
-		<li><a href="#menu">Menu</a></li>
+<div class="detail-restaurant-detail">
+	<ul class="detail_tabs tabs">
+		<li class="tab"><a href="#ambience">Ambience</a></li>
+		<li class="tab"><a href="#food" class="active">Food</a></li>
+		<li class="tab"><a href="#cost">Cost</a></li>
+		<li class="tab"><a href="#service">Service</a></li>
+		<li class="tab"><a href="#menu">Menu</a></li>
 	</ul>
-	<svg id="ambience"></svg>
-	<svg id="food"></svg>
-	<svg id="cost"></svg>
-	<svg id="service"></svg>
-	<svg id="menu"></svg>
+	<svg class="graph" id="ambience"></svg>
+	<svg class="graph" id="food"></svg>
+	<svg class="graph" id="cost"></svg>
+	<svg class="graph" id="service"></svg>
+	<svg class="graph" id="menu"></svg>
 </div>
 
 <div class="restaurant-reviews">
 	<form>
 		<textarea name="review-box" id="review-box" cols="30" rows="10" placeholder="Write a review"></textarea>
-		<button type="submit" class="btn waves-effect">Post</button>
+		<button type="submit" class="btn waves-effect right">Post</button>
 	</form>
 </div>

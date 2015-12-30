@@ -90,7 +90,8 @@ a,
     font-size: 1.19rem;
     color: white;
     text-decoration: underline;
-    transition: all 0.0.618s ease-in;
+    transition: all 0.618s ease-in;
+    -webkit-transition: all 0.618s ease-in;
 }
 
 .landingPage-content__madmachines a:hover {
@@ -150,11 +151,17 @@ a,
 
 .header__nav-menu li a{
     color: rgba(0,0,0,0.618);
-    transition: all 0.0.618s ease-in;
+    transition: all 0.618s ease-in;
+    -webkit-transition: all 0.618s ease-in;
 }
 
 .header__nav-menu li a:hover{
     color: rgba(229,0,71,0.62);
+}
+
+.header__nav-menu-user-info .dropdown-icon {
+    font-size: 16px;
+    float: right;
 }
 
 #doof-search-view {
@@ -163,20 +170,24 @@ a,
     background: #f5f5f5 ;
     height: 42px;
     border-radius: 2px 2px 0 0;
-    border: 1px solid #D4D2D2;
-    font-size: 1rem;
+    /*border: 1px solid #D4D2D2;*/
+    font-size: 1.1rem;
 }
 
 #doof_search_box {
-    color: rgba(0,0,0,0.618);
-    background-color: transparent;
+    color: rgba(0,0,0,0.918);
     border: 0;
-    height: 100%;
-    height: 42px;
-    width: 100%;
-    width: calc(100%-54px);
-    padding-left: 54px;
     margin: 0;
+    width: 100%;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    clear: both;
+    padding-left: 54px;
+        font-size: 1.1rem;
 }
 
 #doof_search_box:focus {
@@ -185,6 +196,12 @@ a,
 }
 
 #doof-search-view i {
+    color: rgba(0,0,0,0.62);
+    transition: all 0.618s ease-in;
+    -webkit-transition: all 0.618s ease-in;
+}
+
+#doof-search-view i:hover {
     color: rgba(229,0,71,0.62);
 }
 
@@ -194,8 +211,9 @@ a,
 	right: 0;
 	top: 0;
 	cursor: pointer;
-    padding: 8px 15px;
-	height: 40px;
+    padding: 10px 15px;
+    height: 36px;
+    font-size: 1.5rem;
 }
 
 #doof-search-view i.search_icon {
@@ -219,7 +237,7 @@ a,
     /*box-shadow: 0 2px 2px rgba(0,0,0,0.54);*/
     font-size: 1rem;
     overflow-x: hidden;
-    margin-top: -2px;
+    margin-top: -5px;
     border: 1px solid #D4D2D2;
 }
 
@@ -236,23 +254,29 @@ a,
     text-transform: uppercase;
     font-size: 1em;
     font-weight: bold;
+    font-family: 'Josefin Sans', sans-serif;
 	line-height: 40px;
     height: 40px;
 }
 
 .tt-suggestion {
     position: relative;
-    color: rgba(0,0,0,0.618);
-    font-size: 0.818em;
+    color: rgba(0,0,0,0.818);
+    font-size: 0.9em;
     line-height: 30px;
     min-height: 30px;
-    padding-left: 69.2px;
+    padding-left: 53px;
     cursor: pointer;
     text-align: left;
+    letter-spacing: 0.56px;
+}
+
+.tt-suggestion:hover {
+    background: #eeeeee ;
 }
 
 .empty-message {
-	color: rgba(0,0,0,0.618);
+	color: rgba(0,0,0,0.918);
     font-size: 1em;
 	font-weight: bold;
     line-height: 40px;
@@ -261,14 +285,18 @@ a,
 
 i.empty_message_icon {
     float: left;
-    height: 40px;
-    padding: 8px 15px;
+    padding: 10px 15px;
+    height: 36px;
+    font-size: 1.5rem;
+     color: rgba(229,0,71,0.62);
 }
 
 .suggestion-type {
     float: left;
-    padding: 8px 15px;
-    height: 40px;
+    padding: 10px 15px;
+    height: 36px;
+    font-size: 1.5rem;
+    color: rgba(229,0,71,0.62)!important;
 }
 
 .tt-highlight {
@@ -282,22 +310,22 @@ i.empty_message_icon {
 }
 
 ::-webkit-input-placeholder {
-   color: rgba(0,0,0,0.618);
+   color: rgba(0,0,0,0.718);
    font-size: 0.818em;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: rgba(0,0,0,0.618);
+   color: rgba(0,0,0,0.718);
    font-size: 0.818em;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: rgba(0,0,0,0.618);
+   color: rgba(0,0,0,0.718);
    font-size: 0.818em;
 }
 
 :-ms-input-placeholder {
-   color: rgba(0,0,0,0.618);
+   color: rgba(0,0,0,0.718);
    font-size: 0.818em;
 }
 
@@ -330,7 +358,7 @@ i.empty_message_icon {
 
 .sub-menu li {
     display: inline-block;
-    color: rgba(0,0,0,0.618);
+    color: rgba(0,0,0,0.718);
     font-weight: bold;
     font-size: 0.875rem;
 }
@@ -478,4 +506,20 @@ i.empty_message_icon {
 
 .detail-restaurant-address {
 	font-size: 0.9rem;
+}
+
+#feedback {
+    text-align: center;
+    padding: 15px;
+}
+
+#feedback h6 {
+    margin: 0;
+    line-height: 1.42857143;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    padding-top: 26px;
+    margin-bottom: 30px;
+    color: #E60048;
 }

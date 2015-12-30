@@ -82,12 +82,12 @@ define(function (require) {
                             });
                         },
                         templates: {
-                            empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No food found', '</div>'].join('\n'),
+                            empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No dish found', '</div>'].join('\n'),
                             suggestion: function (data) {
                                 var str = data.replace(/\s+/g, '');
                                 return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
                             },
-                            header: '<i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Food</span>'
+                            header: '<i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Dishes</span>'
                         }
                     }, {
                         limit: 12,
@@ -109,7 +109,7 @@ define(function (require) {
                                 var str = data.replace(/\s+/g, '');
                                 return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
                             },
-                            header: '<i class="material-icons suggestion-type typeahead-header restaurant">kitchen</i><span>Restaurant</span>'
+                            header: '<i class="material-icons suggestion-type typeahead-header restaurant">store_mall_directory</i><span>Restaurant</span>'
                         }
                     }, {
                         limit: 12,
@@ -131,7 +131,7 @@ define(function (require) {
                                 var str = data.replace(/\s+/g, '');
                                 return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
                             },
-                            header: '<i class="material-icons suggestion-type typeahead-header cuisine">kitchen</i><span>Cuisines</span>'
+                            header: '<i class="material-icons suggestion-type typeahead-header cuisine">local_dining</i><span>Cuisines</span>'
                         }
                     }
                 ).on('typeahead:asyncrequest', function () {

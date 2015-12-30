@@ -12,6 +12,7 @@ define(function (require) {
 
 	var self;
 
+    // This model handles facebook auth and everything. 
 	var User = Backbone.Model.extend({
 		defaults: { id: null, third_party_id: null, name: null, email: null, image: null, status: 0 },
 		initialize: function (opts) {
@@ -27,7 +28,6 @@ define(function (require) {
 			FB.getLoginStatus(function (response) {
 				self.facebookResponse = response;
 				self.fetchData().then(function(success) {
-					console.log(window.usersfeedback);
 					self.sendUserData();
 					userChannel.trigger('logged_in');
 				}, function(error) {});

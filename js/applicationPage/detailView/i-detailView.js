@@ -24,12 +24,17 @@ define(function (require) {
 			}
 		},
 		events: {
-			'click .detail-close': 'closeIt'
+			'click .detail-close': 'closeIt',
+			'click .submit-review-form': 'reviewSubmit'
 		},
 		closeIt: function(e) {
 			e.preventDefault();
 			this.remove();
 			$('.detail').addClass('hide');
+		},
+		reviewSubmit:function(e) {
+			e.preventDefault();
+			var review= $("#review-box").val();
 		},
 		makeCharts: function () {
 

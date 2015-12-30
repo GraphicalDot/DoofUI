@@ -5,9 +5,17 @@
 	<div class="search"></div>
 	<ul class="header__nav-menu">
 		<li><a href="#feedback" class="waves-effect waves-light feedback-link">Send Feedback</a></li>
-		<li class="header__nav-menu-user-info">
-			<a href="#!">Login</a>
-		</li>
+		{{#if isLoggedIn}}
+			<li class="header__nav-menu-user-info">
+				<a href="#/application">{{username}}</a>
+				<!--<a href="#!"><img class="circle responsive-img" src="{{profile_picture.data.url}}" alt="user-image"></a>-->
+			</li>
+		{{else}}
+			<li class="header__nav-menu-user-info">
+				<a href="#!">Login</a>
+			</li>
+		{{/if}}
+
 	</ul>
 </header>
 <div class="doof-body">

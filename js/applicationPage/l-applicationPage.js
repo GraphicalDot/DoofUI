@@ -17,6 +17,8 @@ define(function (require) {
 	var Restaurant= require('./../models/restaurant');
 	var RestaurantDetailView= require('./detailView/i-detailView');
 
+	var Radio= require('radio');
+
     function findLatLong() {
         var promise= new Promise(function(resolve) {
             if (navigator.geolocation) {
@@ -39,8 +41,10 @@ define(function (require) {
             detail: '.detail',
             feedback: '.feedback'
         },
-        initialize: function () {
+        initialize: function (opts) {
+
             var self= this;
+			self.user= opts.user;
             this.xhrRequest= '';
             //    find lat, long
             this.position =  { lat: 28.5192, lng: 77.2130 };
@@ -57,10 +61,29 @@ define(function (require) {
             });
             this.collection= new Restaurants();
 
+			var userChannel = Radio.channel('user');
+
+			userChannel.on('logged_in', function() {
+				console.log(self.user);
+				// self.render();
+				// self.show();
+			});
+
             this.searchView= new SearchBox();
             this.listView= new ListView({collection: this.collection});
             this.mapView= new MapView({collection: this.collection, lat: this.position.lat, lng: this.position.lng});
         },
+		templateHelpers: {
+			isLoggedIn: function () {
+				return this.user.isAuthorized();
+			},
+			username: function() {
+				return this.user.get('name');
+			},
+			profile_picture: function() {
+				return this.user.get('picture');
+			}
+		},
 		childEvents: {
 			'show:restaurants': 'showRestaurants',
 			'show:restaurant': 'showRestaurant',
@@ -70,17 +93,26 @@ define(function (require) {
 			"unhighlightMarker:restaurant": "unhighlightMarker"
 		},
 		showRestaurants: function(childView, restaurant_data) {
-			self.mapView.updateMarkers(restaurant_data.toJSON());
+			var self= this;
+			self.mapView.updateMarkers(restaurant_data);
 			self.listView.updateCollection(restaurant_data);
 		},
 		showRestaurant: function(childView, restaurant_id, restaurant_detail) {
 			var self= this;
-			var restaurant= new Restaurant();
-			var detailView= new RestaurantDetailView({model: restaurant, restaurant_detail: restaurant_detail});
-
-			restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
+			var detailView;
+			var id= $(childView.el).attr('id');
+			if(id=== 'doof-search-view') {
+				console.log(restaurant_id);
+				detailView= new RestaurantDetailView({model: restaurant_id});
 				self.showChildView('detail', detailView);
-			});
+			} else {
+				var restaurant= new Restaurant();
+				detailView= new RestaurantDetailView({model: restaurant, restaurant_detail: restaurant_detail});
+
+				restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
+					self.showChildView('detail', detailView);
+				});
+			}
 		},
 		highlight: function(childView, eatery_id) {
 			if(eatery_id) {

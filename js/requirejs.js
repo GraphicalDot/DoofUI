@@ -9,6 +9,8 @@ requirejs.config({
         'marionette': './../libraries/backbone.marionette.min',
         'handlebars': './../libraries/handlebars-v4.0.5',
 
+		'radio': './../libraries/backbone.radio',
+
         'text': './../libraries/require-text',
         'r-async': './../libraries/require-async',
 
@@ -47,6 +49,8 @@ requirejs.config({
         'd3': './../libraries/d3.v3.min',
 		'nvd3': './../libraries/nvd3',
 
+		'async': './../libraries/async',
+
         'facebook': '//connect.facebook.net/en_US/sdk',
 
         'typeahead': './../libraries/typeahead.bundle',
@@ -59,6 +63,11 @@ requirejs.config({
         'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
         'marionette': { deps: ['backbone'], exports: 'Marionette' },
         'handlebars': { exports: 'Handlebars' },
+
+		'radio': {
+			deps: ['marionette'],
+			exports: 'Radio'
+		},
 
         'velocity': {
             deps: ['jquery'],
@@ -206,7 +215,11 @@ require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery
 	window.textsearch = "http://52.76.176.188:8000/textsearch";
 	window.geteatery= "http://52.76.176.188:8000/geteatery";
 	window.getkey= "http://52.76.176.188:8000/getkey";
-	
+	window.usersfeedback= "http://52.76.176.188:8000/usersfeedback";
+	window.fetchreview= "http://52.76.176.188:8000/fetchreview";
+	window.writereview= "http://52.76.176.188:8000/writereview";
+	window.usersdetails= "http://52.76.176.188:8000/usersdetails";
+
     require(['./doof'], function (Doof) {
         Doof.start();
     });

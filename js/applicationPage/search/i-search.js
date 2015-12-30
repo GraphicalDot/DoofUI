@@ -43,15 +43,15 @@ define(function (require) {
 			});
 		},
 		onRestaurantSelect: function (restaurant_name) {
-			// var self = this;
+			var self = this;
 			if (!restaurant_name) {
 				this.clearSearch();
 				return;
 			}
 			this.model.fetch({method: 'POST', data: {type: 'eatery', text: restaurant_name}}).then(function() {
-				//self.triggerMethod('show:restaurant', self.model);
+				console.log(self.model);
+				self.triggerMethod('show:restaurant', self.model);
 
-				//issue need to be resolved here.. no presence of id :3
 			});
 		},
 		onNullSelect: function(value) {
@@ -65,6 +65,7 @@ define(function (require) {
 			});
 		},
         onShow: function () {
+			var self= this;
             require(['typeahead'], function () {
                 $("#doof_search_box").typeahead(
                     { hint: true, highlight: true, minLength: 4 },

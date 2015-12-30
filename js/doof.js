@@ -7,6 +7,8 @@ define(function (require) {
     var Backbone = require('backbone');
     var Marionette = require('marionette');
 
+	var User= require('./models/user');
+
     var Router = require('./router');
 
 	Backbone.Marionette.ItemView.prototype.mixinTemplateHelpers = function (target) {
@@ -48,11 +50,13 @@ define(function (require) {
 				}
 			}
 		});
+
+		Doof.user= new User();
     });
 
     Doof.on("start", function () {
 
-		new Router({ region: Doof.region, secret: Doof.SECRET_TOKEN_KEY });
+		new Router({ region: Doof.region, secret: Doof.SECRET_TOKEN_KEY, user: Doof.user });
         if (Backbone.history) {
             Backbone.history.start();
         }

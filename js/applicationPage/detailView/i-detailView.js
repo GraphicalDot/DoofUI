@@ -3,6 +3,7 @@ define(function(require) {
 	"use strict";
 
 	var $= require('jquery');
+	var _ = require('underscore');
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./detailView.html');
@@ -16,6 +17,42 @@ define(function(require) {
 			this.restaurant_detail= opts.restaurant_detail;
 		},
 		makeCharts: function() {
+
+			function json_maker(input) {
+				var output= [];
+
+				var categories= ['terrible', 'poor', 'average', 'mix', 'good', 'excellent'];
+				_.each(categories, function(category) {
+					var obj= {key: category, color: 'red', values: []};
+					output.push(obj);
+				});
+				//in food case, we get an array
+				if(Array.isArray(input)) {
+					_.each(input, function(key) {
+						var dataSet= key;
+						output[0].values.append({"label": key, value: dataSet.terrible});
+						output[1].values.append({"label": key, value: dataSet.poor});
+						output[2].values.append({"label": key, value: dataSet.average});
+						output[3].values.append({"label": key, value: dataSet.mix});
+						output[4].values.append({"label": key, value: dataSet.good});
+						output[5].values.append({"label": key, value: dataSet.excellent});
+					});
+				}
+				else {
+					for(var key in input) {
+						if(input.hasOwnProperty(key)) {
+							var dataSet= input[key];
+							output[0].values.append({"label": key, value: dataSet.terrible});
+							output[1].values.append({"label": key, value: dataSet.poor});
+							output[2].values.append({"label": key, value: dataSet.average});
+							output[3].values.append({"label": key, value: dataSet.mix});
+							output[4].values.append({"label": key, value: dataSet.good});
+							output[5].values.append({"label": key, value: dataSet.excellent});
+						}
+					}
+				}
+				return output;
+			}
 
 			require(['nvd3'], function(nv) {
 				window.nv.addGraph(function() {

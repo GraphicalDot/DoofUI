@@ -112,6 +112,8 @@ define(function (require) {
                     self.showChildView('list', self.listView);
                 }, 2000);
             });
+
+			$('.feedback-link').leanModal();
         }
 
     });

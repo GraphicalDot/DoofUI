@@ -10,9 +10,17 @@ body {
 	font-size: 16px;
 	font-size: 1rem;
 	font-weight: 400;
+    /*font-family: 'Josefin Sans', sans-serif;*/
+    font-family: 'Neuton', serif;
 
 	overflow: hidden;
 	background-color: #fff;
+}
+
+a,
+.btn,
+.josefin {
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .doof {
@@ -52,6 +60,41 @@ body {
 
 #landingPage .landingPage-background__overlay {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+.landingPage-content {
+    max-width: 620px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.landingPage-content__welcome-text {
+    font-weight: bold;
+    
+}
+
+.landingPage-content__content-logo h4 {
+    margin-top: 0.31rem;
+    font-size: 4rem;
+}
+
+.landingPage-content__madmachines p {
+    margin-bottom: 0;
+    color: rgba(255,255,255,0.62);
+}
+
+.landingPage-content__madmachines {
+    margin-top: 50px;
+}
+
+.landingPage-content__madmachines a {
+    font-size: 1.19rem;
+    color: white;
+    text-decoration: underline;
+    transition: all 0.0.618s ease-in;
+}
+
+.landingPage-content__madmachines a:hover {
+    color: rgba(255, 138, 174, 0.62);
 }
 
 

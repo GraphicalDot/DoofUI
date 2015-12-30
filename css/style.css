@@ -113,7 +113,7 @@ a,
     height: 60px;
     z-index: 11;
     box-shadow: 0 0 3.75px rgba(0,0,0,0.618);
-    border: 1px solid rgba(212, 210, 210, 0.62);
+    /*border: 1px solid rgba(212, 210, 210, 0.62);*/
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -3,6 +3,7 @@ define(function (require) {
     "use strict";
 
     var $ = require('jquery');
+    var Backbone= require('backbone');
     var Handlebars = require('handlebars');
     var Marionette = require('marionette');
     var Template = require('text!./applicationPage.html');
@@ -84,23 +85,23 @@ define(function (require) {
             'click .logout-btn': 'doLogout',
             'click .login-btn': 'doLogin'
         },
-        
-        doLogout: function() {
-            var self= this;
-            this.user.logout().then(function(success) {
-                
+
+        doLogout: function () {
+            var self = this;
+            this.user.logout().then(function (success) {
+
                 self.render();
-                Backbone.history.loadUrl(Backbone.history.fragment); 
+                Backbone.history.loadUrl(Backbone.history.fragment);
             });
-        },  
-        doLogin: function() {
-            var self= this;
-            this.user.login().then(function(success) {
+        },
+        doLogin: function () {
+            var self = this;
+            this.user.login().then(function (success) {
                 self.render();
-                Backbone.history.loadUrl(Backbone.history.fragment); 
+                Backbone.history.loadUrl(Backbone.history.fragment);
             });
-        },  
-        submitFeedback: function(e) {
+        },
+        submitFeedback: function (e) {
             e.preventDefault();
             //submit form here.
         },
@@ -112,7 +113,7 @@ define(function (require) {
             "highlightMarker:restaurant": "highlightMarker",
             "unhighlightMarker:restaurant": "unhighlightMarker"
         },
-        
+
         showRestaurants: function (childView, restaurant_data) {
             var self = this;
             self.mapView.updateMarkers(restaurant_data);
@@ -157,13 +158,13 @@ define(function (require) {
         unhighlightMarker: function (childView, eatery_id) {
             this.mapView.unhighlightMarker(eatery_id);
         },
-        onDomRefresh: function() {
+        onDomRefresh: function () {
             $('.feedback-link').leanModal();
-            
+
             $('.dropdown-button').dropdown({
                 belowOrigin: true
             });
-            this.searchView= new SearchBox();
+            this.searchView = new SearchBox();
             this.showChildView('search', this.searchView);
             // this.showChildView('map', this.mapView);
             // this.showChildView('list', this.listView);

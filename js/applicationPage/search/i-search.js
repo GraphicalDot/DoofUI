@@ -23,14 +23,14 @@ define(function (require) {
 			this.triggerMethod('show:restaurants');
 		},
 		onCuisineSelect: function(cuisine_name) {
-			var self= this;
-			if(!cuisine_name) {
-				this.clearSearch();
-				return;
-			}
-			this.model.fetch({method: 'POST', data: {type: 'cuisine', text: cuisine_name}}).then(function() {
-				self.triggerMethod('show:restaurants', self.model);
-			});
+			// var self= this;
+			// if(!cuisine_name) {
+			// 	this.clearSearch();
+			// 	return;
+			// }
+			// this.model.fetch({method: 'POST', data: {type: 'cuisine', text: cuisine_name}}).then(function() {
+			// 	self.triggerMethod('show:restaurants', self.model);
+			// });
 		},
 		onFoodSelect: function (food_name) {
 			var self = this;

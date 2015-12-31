@@ -49,6 +49,8 @@ requirejs.config({
         'd3': './../libraries/d3.v3.min',
 		'nvd3': './../libraries/nvd3',
 
+		'oms': './../libraries/oms.min',
+
 		'async': './../libraries/async',
 
         'facebook': '//connect.facebook.net/en_US/sdk',
@@ -186,6 +188,11 @@ requirejs.config({
 			deps: ['d3']
 		},
 
+		'oms': {
+			deps: ['r-async!http://maps.googleapis.com/maps/api/js'],
+			exports: 'OverlappingMarkerSpiderfier'
+		},
+
         'facebook': { exports: 'FB' },
         'typeahead': {
             deps: ['jquery'],
@@ -213,12 +220,12 @@ require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery
     window.get_trending = "http://52.76.176.188:8000/gettrending";
     window.get_suggestions = "http://52.76.176.188:8000/suggestions";
 	window.textsearch = "http://52.76.176.188:8000/textsearch";
-	window.geteatery= "http://52.76.176.188:8000/geteatery";
-	window.getkey= "http://52.76.176.188:8000/getkey";
-	window.usersfeedback= "http://52.76.176.188:8000/usersfeedback";
-	window.fetchreview= "http://52.76.176.188:8000/fetchreview";
-	window.writereview= "http://52.76.176.188:8000/writereview";
-	window.usersdetails= "http://52.76.176.188:8000/usersdetails";
+	window.geteatery = "http://52.76.176.188:8000/geteatery";
+	window.getkey = "http://52.76.176.188:8000/getkey";
+	window.usersfeedback = "http://52.76.176.188:8000/usersfeedback";
+	window.fetchreview = "http://52.76.176.188:8000/fetchreview";
+	window.writereview = "http://52.76.176.188:8000/writereview";
+	window.usersdetails = "http://52.76.176.188:8000/usersdetails";
 
     require(['./doof'], function (Doof) {
         Doof.start();

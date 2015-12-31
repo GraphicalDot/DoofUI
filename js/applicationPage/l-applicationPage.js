@@ -43,7 +43,7 @@ define(function (require) {
             var userChannel = Radio.channel('user');
 
             self.user = opts.user;
-            
+
             // hack to work with geolocation async time problem. Only send one request.
             this.xhrRequest = '';
             //    find lat, long
@@ -62,8 +62,8 @@ define(function (require) {
 
             this.collection = new Restaurants();
 
-            this.listView = new ListView({ collection: this.collection });
-            this.mapView = new MapView({ collection: this.collection, lat: this.position.lat, lng: this.position.lng });
+            this.listView = new ListView({ collection: this.collection, user: this.user });
+            this.mapView = new MapView({ collection: this.collection, lat: this.position.lat, lng: this.position.lng, user: this.user });
 
             userChannel.on('logged_in', function () {
                 self.render();
@@ -124,11 +124,11 @@ define(function (require) {
             var detailView;
             var id = $(childView.el).attr('id');
             if (id === 'doof-search-view') {
-                detailView = new RestaurantDetailView({ model: restaurant_id });
+                detailView = new RestaurantDetailView({ model: restaurant_id, user: self.user });
                 self.showChildView('detail', detailView);
             } else {
                 var restaurant = new Restaurant();
-                detailView = new RestaurantDetailView({ model: restaurant, restaurant_detail: restaurant_detail });
+                detailView = new RestaurantDetailView({ model: restaurant, restaurant_detail: restaurant_detail, user: self.user });
 
                 restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
                     self.showChildView('detail', detailView);
@@ -137,8 +137,9 @@ define(function (require) {
         },
         highlight: function (childView, eatery_id) {
             if (eatery_id) {
+				var $targets= $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
                 var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]').filter(":first");
-                $target.addClass('active');
+                $targets.addClass('active');
                 $target.velocity("scroll", {
                     container: $('.list'),
                     duration: 500,

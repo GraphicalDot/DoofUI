@@ -1,9 +1,11 @@
+/* global Materialize */
 define(function (require) {
 
 	"use strict";
 
 	var $ = require('jquery');
 	var _ = require('underscore');
+	var Backbone= require('backbone');
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./detailView.html');
@@ -14,8 +16,15 @@ define(function (require) {
 		id: 'detail-view',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
+			var self= this;
 			this.restaurant_detail = opts.restaurant_detail;
-			console.log(this.restaurant_detail);
+			this.user= opts.user;
+
+			var Reviews= Backbone.Model.extend({url: window.fetchreview});
+			var reviews= new Reviews();
+			reviews.fetch({method: 'POST', data: {__eatery_id: this.restaurant_detail.__eatery_id}}).then(function() {
+				self.render();
+			});
 		},
 		templateHelpers: function() {
 			return {
@@ -35,6 +44,17 @@ define(function (require) {
 		reviewSubmit:function(e) {
 			e.preventDefault();
 			var review= $("#review-box").val();
+
+			var SendReview= Backbone.Model.extend({url: window.writereview});
+			var sendReview= new SendReview();
+
+			if(this.user.isAuthorized()) {
+				sendReview.fetch({method: 'POST', data: {fb_id: this.user.get('id'), "review_text": review, "__eatery_id": this.restaurant_detail.__eatery_id, "eatery_name": this.restaurant_detail.eatery_name}}).then(function(response) {
+					console.log(response);
+				});
+			} else {
+				Materialize.toast('Please login to submit');
+			}
 		},
 		makeCharts: function () {
 
@@ -101,8 +121,11 @@ define(function (require) {
 			});
 
 		},
-		onShow: function () {
+		onDomRefresh: function() {
 			$('ul.detail_tabs').tabs();
+
+		},
+		onShow: function () {
 			this.makeCharts();
 			$('.detail').removeClass('hide');
 		}

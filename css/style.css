@@ -12,6 +12,7 @@ body {
 	font-weight: 400;
     /*font-family: 'Josefin Sans', sans-serif;*/
     font-family: 'Neuton', serif;
+	letter-spacing: 0.414px;
 
 	overflow: hidden;
 	background-color: #fff;
@@ -69,7 +70,7 @@ a,
 
 .landingPage-content__welcome-text {
     font-weight: bold;
-    
+
 }
 
 .landingPage-content__content-logo h4 {
@@ -153,6 +154,7 @@ a,
     color: rgba(0,0,0,0.618);
     transition: all 0.618s ease-in;
     -webkit-transition: all 0.618s ease-in;
+	font-weight: 600;
 }
 
 .header__nav-menu li a:hover{
@@ -167,7 +169,7 @@ a,
 #doof-search-view {
     position: relative;
     padding: 0;
-    background: #f5f5f5 ;
+    background: #e0e0e0 ;
     height: 42px;
     border-radius: 2px 2px 0 0;
     /*border: 1px solid #D4D2D2;*/
@@ -187,7 +189,7 @@ a,
     text-overflow: ellipsis;
     clear: both;
     padding-left: 54px;
-        font-size: 1.1rem;
+        font-size: 1.17rem;
 }
 
 #doof_search_box:focus {
@@ -396,10 +398,14 @@ i.empty_message_icon {
 
 .restaurant-list-item h6 {
         text-align: center;
-    font-weight: 700;
-    color: #E60049;
-    font-size: 1.3rem;
-    line-height: 110%;
+    /*font-weight: 700;*/
+    color: #464646;
+	    font-size: 1.22rem;
+    line-height: 130%;
+	    text-transform: uppercase;
+    font-weight: 400;
+	margin: 17px;
+    /*color: #212121;*/
 }
 
 i.address-icon {
@@ -421,7 +427,7 @@ i.address-icon {
         display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    
+
 }
 
 .card-header > .food-name,
@@ -450,6 +456,11 @@ i.address-icon {
 	color: #D4D2D2;
 }
 
+.card-header > .food-sentiments i.good.active,
+.card-header > .restaurant-sentiments i.good.active {
+	color: #008265;
+}
+
 .card-header > .food-sentiments i.active,
 .card-header > .restaurant-sentiments i.active {
 	color: rgba(229,0,71,00.727);
@@ -472,8 +483,8 @@ i.address-icon {
 .card-description > .restaurant-name span {
     font-size: 1.2em;
     font-weight: bold;
-    color: rgba(228, 0, 87, 0.79);
-    letter-spacing: 0.11px;
+    color: #E60048;
+    /*letter-spacing: 0.11px;*/
     margin-left: 2px;
 }
 
@@ -499,9 +510,24 @@ i.address-icon {
     background-color: white;
     bottom: 0;
     margin: 10px;
-    width: 500px;
+    width: 540px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	overflow-y: auto;
+}
+
+#detail-view .tabs {
+	width: 100%!important;
+    font-size: 0.718rem;
+    border: 1px solid #E0E0E0;
+	overflow: hidden!important;
+}
+
+#detail-view .tab {
+	border-left: 1px solid #E0E0E0;
+}
+
+#detail-view .tab a {
+	font-weight: 600;
 }
 
 #detail-view {
@@ -528,13 +554,20 @@ i.address-icon {
 
 .detail-restaurant-information,
 .restaurant-reviews {
-	padding: 10px;
+	padding: 13px 17px;
+}
+
+.detail-restaurant-detail {
+	padding: 7px 10px;
 }
 
 .detail-restaurant-name {
-	    font-size: 3rem;
+	        font-size: 2.5rem;
     font-weight: 300;
     color: #E5004A;
+    font-family: 'Josefin Sans', sans-serif;
+    /* font-weight: bold; */
+    line-height: 120%;
 }
 
 .detail-restaurant-address {

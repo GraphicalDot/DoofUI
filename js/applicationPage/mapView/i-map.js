@@ -36,14 +36,14 @@ define(function (require) {
             var self = this;
             this.unhighlightMarker();
             _.each(this.markersArray, function (marker, i) {
-                if (marker.restaurant_id && eatery_id && marker.restaurant_id === eatery_id) {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                    self.animationMarker = marker;
-                    setTimeout(function () {
-                        marker.setAnimation(null);
-                        self.animationMarker = '';
-                    }, 3000);
-                }
+				if (marker.get('restaurant_id') === eatery_id) {
+					if (self.animationMarker) {
+						self.animationMarker.setAnimation(null);
+						self.animationMarker = '';
+					}
+					marker.setAnimation(google.maps.Animation.BOUNCE);
+					self.animationMarker = marker;
+				}
             });
         },
         unhighlightMarker: function (eatery_id) {
@@ -69,11 +69,30 @@ define(function (require) {
             this.clearOldMarkers();
 
             _.each(self.data, function (datum) {
+				var markerLatLngObject = '';
+				var distance = 0;
+				if (datum.eatery_details) {
+					markerLatLngObject = new google.maps.LatLng(datum.eatery_details.eatery_longitude_latitude[0], datum.eatery_details.eatery_longitude_latitude[1]);
+					distance = +calculateDistance(self.lat, self.lng, datum.eatery_details.eatery_longitude_latitude[0], datum.eatery_details.eatery_longitude_latitude[1]);
+				} else {
+					markerLatLngObject = new google.maps.LatLng(datum.location[1], datum.location[0]);
+					distance = +calculateDistance(self.lat, self.lng, datum.location[1], datum.location[0]);
+				}
 
-                var markerLatLngObject = new google.maps.LatLng(datum.location[1], datum.location[0]);
+				var isExistBefore = false;
+				// check if previous marker with same restaurant id is not created before
+				_.each(self.markersArray, function (marker, i) {
+					if (marker.get('restaurant_id') === datum.__eatery_id) {
+						isExistBefore = true;
+						return;
+					}
+				});
 
-                var distance = +calculateDistance(self.lat, self.lng, datum.location[1], datum.location[0]);
+				if (isExistBefore) {
+					return;
+				}
 
+				var address = datum.eatery_details ? datum.eatery_details.eatery_address : datum.eatery_address;
                 var googleMapMarker = new google.maps.Marker({
                     map: self.map,
                     icon: './css/images/restaurant-marker.jpg',
@@ -84,8 +103,8 @@ define(function (require) {
                     food_name: datum.food_name,
                     distance: distance,
                     category: datum.category,
-                    address: datum.eatery_address,
-                    html: "<div id='infobox'>" + datum.eatery_name + "<br />" + datum.eatery_address + "</div>"
+                    address: address,
+                    html: "<div id='infobox'>" + datum.eatery_name + "<br />" + address + "</div>"
                 });
 
                 google.maps.event.addListener(googleMapMarker, 'mouseover', function () {
@@ -104,16 +123,20 @@ define(function (require) {
                     self.triggerMethod('show:restaurant', marker_id, datum);
                 });
 
+				self.oms.addMarker(googleMapMarker);
+
+
                 self.markersArray.push(googleMapMarker);
                 markersBound.extend(markerLatLngObject);
+
             });
 
             this.map.fitBounds(markersBound);
         },
         onShow: function () {
             var self = this;
-            require(["r-async!http://maps.googleapis.com/maps/api/js"], function () {
-                var mapCanvas = document.getElementById("map-view");
+            require(["r-async!http://maps.googleapis.com/maps/api/js", 'oms'], function (map, OverlappingMarkerSpiderfier) {
+				var mapCanvas = document.getElementById("map-view");
                 var centerPoint = new google.maps.LatLng(self.lat, self.lng);
 
                 var mapOptions = {
@@ -123,40 +146,16 @@ define(function (require) {
                     mapTypeControl: true,
                     styles: [
                         {
-                            "featureType": "all",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "invert_lightness": true
-                                },
-                                {
-                                    "hue": "#ff1a00"
-                                },
-                                {
-                                    "saturation": -100
-                                },
-                                {
-                                    "lightness": 33
-                                },
-                                {
-                                    "gamma": 0.5
-                                }
-                            ]
+                            "featureType": "all", "elementType": "all",
+							"stylers": [{ "invert_lightness": true }, { "hue": "#ff1a00" }, { "saturation": -100 }, { "lightness": 33 }, { "gamma": 0.5 }]
                         },
                         {
-                            "featureType": "water",
-                            "elementType": "geometry",
-                            "stylers": [
-                                {
-                                    "color": "#2D333C"
-                                }
-                            ]
+                            "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#2D333C" }]
                         }
                     ]
                 }
 
-                var map = new google.maps.Map(mapCanvas, mapOptions);
-                self.map = map;
+                self.map = new google.maps.Map(mapCanvas, mapOptions);
 
                 self.myLocationMarker = new google.maps.Marker({
                     map: self.map,
@@ -165,6 +164,14 @@ define(function (require) {
                 });
 
                 self.infoWindow = new google.maps.InfoWindow({ content: "", });
+
+				self.oms = new OverlappingMarkerSpiderfier(self.map);
+
+				self.oms.addListener('click', function (marker, event) {
+					self.infoWindow.setContent(marker.html);
+					self.infoWindow.open(self.map, marker);
+				});
+
                 self.data = self.collection.toJSON();
 
                 self.showMarker();

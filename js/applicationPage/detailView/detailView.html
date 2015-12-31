@@ -21,6 +21,13 @@
 	<svg class="graph" id="menu"></svg>
 </div>
 
+<ul class="reviews">
+	{{#each reviews}}
+		<li>{{value}}</li>
+	{{else}}
+		<li>Nothing to show here.</li>
+	{{/each}}
+</ul>
 <div class="restaurant-reviews">
 		<textarea name="review-box" id="review-box" cols="30" rows="10" placeholder="Write a review"></textarea>
 		<button type="submit" class="btn waves-effect right submit-review-form">Post</button>

@@ -335,6 +335,7 @@ i.empty_message_icon {
     display: flex;
     flex: 1;
     overflow: hidden;
+    height: 100%;
 	position: relative;
 }
 
@@ -367,10 +368,12 @@ i.empty_message_icon {
 
 .left-body .list {
     display: flex;
-    flex: 1;
+    flex: 1 1 auto;
     background-color:  white;
 
 	overflow-y: auto;
+    -webkit-flex: 1 1 auto;
+    height: 0px;
 }
 
 .doof-body .map {
@@ -493,12 +496,14 @@ i.address-icon {
 	font-size: 1em;
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar,
+::-moz-scrollbar {
         width: 9px;
     height: 9px;
 }
 
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb,
+::-moz-scrollbar-thumb {
     background: #ccc;
 }
 

@@ -7,6 +7,8 @@ define(function (require) {
     var Handlebars = require('handlebars');
     var Marionette = require('marionette');
     var Template = require('text!./restaurant.html');
+    
+    var Radio= require('radio');
 
    	Handlebars.registerHelper('if_eq', function (a, b, opts) {
         if (a == b) {// Or === depending on your needs
@@ -26,6 +28,9 @@ define(function (require) {
     var RestaurantView = Marionette.ItemView.extend({
         className: 'restaurant-list-item',
         template: Handlebars.compile(Template),
+        initialize: function() {
+            this.applicationChannel= Radio.channel('application');  
+        },
         attributes: function () {
             return {
                 'eatery-id': this.model.get('__eatery_id')
@@ -38,14 +43,17 @@ define(function (require) {
         },
         highlight: function () {
             $(this.el).addClass('active');
-            this.triggerMethod('highlightMarker:restaurant', this.model.get('__eatery_id'));
+            this.applicationChannel.trigger("highlightMarker:restaurant", this.model.get('__eatery_id'));
+            // this.triggerMethod('itemview:highlightMarker:restaurant', this.model.get('__eatery_id'));
         },
         unhighlight: function () {
             $(this.el).removeClass('active');
-            this.triggerMethod('unhighlightMarker:restaurant', this.model.get('__eatery_id'));
+            this.applicationChannel.trigger("unhighlightMarker:restaurant", this.model.get('__eatery_id'));
+            // this.triggerMethod('itemview:unhighlightMarker:restaurant', this.model.get('__eatery_id'));
         },
         show: function () {
-            this.triggerMethod('show:restaurant', this.model.get('__eatery_id'), this.model.toJSON());
+            this.applicationChannel.trigger("show:restaurant", this.model.get('__eatery_id'), this.model.toJSON());
+            // this.triggerMethod('itemview:show:restaurant', this.model.get('__eatery_id'), this.model.toJSON());
         },
         templateHelpers: {
             newCategory: function () {
@@ -72,9 +80,18 @@ define(function (require) {
                 var keys = ['excellent', 'good', 'average', 'poor', 'terrible'];
                 var highest = '', highestValue = 0;
                 _.each(keys, function (key, i) {
-                    if (data[key] > highestValue) {
-                        highest = key;
-                        highestValue = data[key];
+                    if(data[key]){
+                        if (data[key] > highestValue) {
+                            highest = key;
+                            highestValue = data[key];
+                        }    
+                    }else{
+                        if(data.eatery_details){
+                            if (data.eatery_details.overall[key] > highestValue) {
+                                highest = key;
+                                highestValue = data[key];
+                            }    
+                        }
                     }
                 });
                 return highest;

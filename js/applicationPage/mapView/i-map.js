@@ -6,7 +6,9 @@ define(function (require) {
     var _ = require('underscore');
     var Handlebars = require('handlebars');
     var Marionette = require('marionette');
-
+    
+    var Radio = require('radio');
+    
     var rad = function (x) {
         return x * Math.PI / 180;
     };
@@ -31,6 +33,7 @@ define(function (require) {
             this.lng = opts.lng;
             this.markersArray = [];
             this.data = '';
+            this.applicationChannel= Radio.channel('application');
         },
         highlightMarker: function (eatery_id) {
             var self = this;
@@ -60,7 +63,7 @@ define(function (require) {
         },
         updateMarkers: function (data) {
             this.collection = data;
-            self.data = data.toJSON();
+            this.data = data.toJSON();
             this.showMarker();
         },
         showMarker: function () {
@@ -69,11 +72,24 @@ define(function (require) {
             this.clearOldMarkers();
 
             _.each(self.data, function (datum) {
+                
 				var markerLatLngObject = '';
 				var distance = 0;
 				if (datum.eatery_details) {
-					markerLatLngObject = new google.maps.LatLng(datum.eatery_details.eatery_longitude_latitude[0], datum.eatery_details.eatery_longitude_latitude[1]);
-					distance = +calculateDistance(self.lat, self.lng, datum.eatery_details.eatery_longitude_latitude[0], datum.eatery_details.eatery_longitude_latitude[1]);
+                    // if(datum.eatery_details.eatery_longitude_latitude) {
+                    //     markerLatLngObject = new google.maps.LatLng(datum.eatery_details.eatery_longitude_latitude[0], datum.eatery_details.eatery_longitude_latitude[1]);
+					//    distance = +calculateDistance(self.lat, self.lng, datum.eatery_details.eatery_longitude_latitude[0], datum.eatery_details.eatery_longitude_latitude[1]);    
+                    // } else if(datum.eatery_details.location) {
+                    //     markerLatLngObject = new google.maps.LatLng(datum.eatery_details.location[0], datum.eatery_details.location[1]);
+					//    distance = +calculateDistance(self.lat, self.lng, datum.eatery_details.location[0], datum.eatery_details.location[1]);
+                    // }
+                    if(datum.eatery_details.location[0]== 0|| datum.eatery_details.location[1]== 0) {
+                        return ;
+                    }
+                    
+                    markerLatLngObject = new google.maps.LatLng(datum.eatery_details.location[0], datum.eatery_details.location[1]);
+                    distance = +calculateDistance(self.lat, self.lng, datum.eatery_details.location[0], datum.eatery_details.location[1]);
+					
 				} else {
 					markerLatLngObject = new google.maps.LatLng(datum.location[1], datum.location[0]);
 					distance = +calculateDistance(self.lat, self.lng, datum.location[1], datum.location[0]);
@@ -91,40 +107,42 @@ define(function (require) {
 				if (isExistBefore) {
 					return;
 				}
-
+                
 				var address = datum.eatery_details ? datum.eatery_details.eatery_address : datum.eatery_address;
                 var googleMapMarker = new google.maps.Marker({
                     map: self.map,
                     icon: './css/images/restaurant-marker.jpg',
                     position: markerLatLngObject,
-                    title: datum.eatery_name,
-                    restaurant_name: datum.eatery_name,
-                    restaurant_id: datum.__eatery_id,
+                    title: datum.eatery_details ? datum.eatery_details.eatery_name : datum.eatery_name,
+                    restaurant_name: datum.eatery_details ? datum.eatery_details.eatery_name : datum.eatery_name,
+                    restaurant_id: datum.eatery_details ? datum.eatery_details.__eatery_id : datum.__eatery_id,
                     food_name: datum.food_name,
                     distance: distance,
                     category: datum.category,
                     address: address,
-                    html: "<div id='infobox'>" + datum.eatery_name + "<br />" + address + "</div>"
+                    html: "<div id='infobox'>" + datum.eatery_details ? datum.eatery_details.eatery_name : datum.eatery_name + "<br />" + address + "</div>"
                 });
 
                 google.maps.event.addListener(googleMapMarker, 'mouseover', function () {
                     self.infoWindow.setContent(this.get('html'));
-                    self.triggerMethod('highlight:restaurant', this.get('restaurant_id'));
+                    self.applicationChannel.trigger("highlight:restaurant", this.get('restaurant_id'));
+                    // self.triggerMethod('highlight:restaurant', this.get('restaurant_id'));
                     self.infoWindow.open(self.map, this);
                 });
 
                 google.maps.event.addListener(googleMapMarker, 'mouseout', function () {
-                    self.triggerMethod('unhighlight:restaurant', this.get('restaurant_id'));
+                    self.applicationChannel.trigger("unhighlight:restaurant", this.get('restaurant_id'));
+                    // self.triggerMethod('unhighlight:restaurant', this.get('restaurant_id'));
                     self.infoWindow.close();
                 });
 
                 google.maps.event.addListener(googleMapMarker, 'click', function () {
                     var marker_id = this.get('restaurant_id');
-                    self.triggerMethod('show:restaurant', marker_id, datum);
+                    self.applicationChannel.trigger("show:restaurant", marker_id, datum);
+                    // self.triggerMethod('show:restaurant', marker_id, datum);
                 });
 
 				self.oms.addMarker(googleMapMarker);
-
 
                 self.markersArray.push(googleMapMarker);
                 markersBound.extend(markerLatLngObject);
@@ -144,15 +162,16 @@ define(function (require) {
                     zoom: 16,
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     mapTypeControl: true,
-                    styles: [
-                        {
-                            "featureType": "all", "elementType": "all",
-							"stylers": [{ "invert_lightness": true }, { "hue": "#ff1a00" }, { "saturation": -100 }, { "lightness": 33 }, { "gamma": 0.5 }]
-                        },
-                        {
-                            "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#2D333C" }]
-                        }
-                    ]
+                    
+                    // styles: [
+                    //     {
+                    //         "featureType": "all", "elementType": "all",
+					// 		"stylers": [{ "invert_lightness": true }, { "hue": "#ff1a00" }, { "saturation": -100 }, { "lightness": 40 }, { "gamma": 0.6 }]
+                    //     },
+                    //     {
+                    //         "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#2D333C" }]
+                    //     }
+                    // ]
                 }
 
                 self.map = new google.maps.Map(mapCanvas, mapOptions);

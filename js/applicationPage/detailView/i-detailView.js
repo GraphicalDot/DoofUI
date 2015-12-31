@@ -12,24 +12,30 @@ define(function (require) {
 
 	var d3 = require('d3');
 
+
+
 	return Marionette.ItemView.extend({
 		id: 'detail-view',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			var self= this;
 			this.restaurant_detail = opts.restaurant_detail;
+            // var eatery_id= opts.restaurant_detail
 			this.user= opts.user;
 
-			var Reviews= Backbone.Model.extend({url: window.fetchreview});
-			var reviews= new Reviews();
-			reviews.fetch({method: 'POST', data: {__eatery_id: this.restaurant_detail.__eatery_id}}).then(function() {
-				self.render();
+			var Reviews= Backbone.Collection.extend({url: window.fetchreview, parse: function(res) {return res.result;}});
+			this.reviews= new Reviews();
+			this.reviews.fetch({method: 'POST', data: {__eatery_id: this.restaurant_detail.__eatery_id}}).then(function() {
+                self.render();
 			});
 		},
 		templateHelpers: function() {
 			return {
-				'restaurant-name': this.restaurant_detail.eatery_name ? this.restaurant_detail.eatery_name : '',
-				'restaurant-address': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_address : ''
+				'restaurant-name': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_name : this.restaurant_detail.eatery_name,
+				'restaurant-address': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_address : this.restaurant_detail.eatery_address,
+                reviews: function() {
+                    return this.reviews.toJSON();
+                },
 			}
 		},
 		events: {
@@ -43,6 +49,7 @@ define(function (require) {
 		},
 		reviewSubmit:function(e) {
 			e.preventDefault();
+            var self= this;
 			var review= $("#review-box").val();
 
 			var SendReview= Backbone.Model.extend({url: window.writereview});
@@ -50,10 +57,13 @@ define(function (require) {
 
 			if(this.user.isAuthorized()) {
 				sendReview.fetch({method: 'POST', data: {fb_id: this.user.get('id'), "review_text": review, "__eatery_id": this.restaurant_detail.__eatery_id, "eatery_name": this.restaurant_detail.eatery_name}}).then(function(response) {
-					console.log(response);
+                    if(response.success) {
+                        $("#review-box").val('');
+                        Materialize.toast('Your review has been posted. Please refresh.', 4000);
+                    }
 				});
 			} else {
-				Materialize.toast('Please login to submit');
+				Materialize.toast('Please login to submit', 4000);
 			}
 		},
 		makeCharts: function () {

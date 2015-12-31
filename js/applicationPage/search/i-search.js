@@ -6,6 +6,8 @@ define(function (require) {
     var Handlebars = require('handlebars');
     var Marionette = require('marionette');
     var Template = require('text!./search.html');
+    
+    var Radio = require('radio');
 
 	var SearchModel= require('./../../models/search');
 
@@ -14,23 +16,25 @@ define(function (require) {
         template: Handlebars.compile(Template),
 		initialize: function() {
 			this.model= new SearchModel();
+            this.applicationChannel= Radio.channel('application');
 		},
 		events: {
 			'click .clear_button': 'clearSearch'
 		},
 		clearSearch: function () {
 			$("#doof_search_box").val('');
-			this.triggerMethod('show:restaurants');
+            this.applicationChannel.trigger("show:restaurants");
+			// this.triggerMethod('show:restaurants');
 		},
 		onCuisineSelect: function(cuisine_name) {
-			// var self= this;
-			// if(!cuisine_name) {
-			// 	this.clearSearch();
-			// 	return;
-			// }
-			// this.model.fetch({method: 'POST', data: {type: 'cuisine', text: cuisine_name}}).then(function() {
-			// 	self.triggerMethod('show:restaurants', self.model);
-			// });
+			var self= this;
+			if(!cuisine_name) {
+				this.clearSearch();
+				return;
+			}
+			this.model.fetch({method: 'POST', data: {type: 'cuisine', text: cuisine_name}}).then(function() {
+				self.applicationChannel.trigger('show:restaurants', self.model);
+			});
 		},
 		onFoodSelect: function (food_name) {
 			var self = this;
@@ -39,7 +43,7 @@ define(function (require) {
 				return;
 			}
 			this.model.fetch({method: 'POST', data: {type: 'dish', text: food_name}}).then(function() {
-				self.triggerMethod('show:restaurants', self.model);
+				self.applicationChannel.trigger('show:restaurants', self.model);
 			});
 		},
 		onRestaurantSelect: function (restaurant_name) {
@@ -49,9 +53,7 @@ define(function (require) {
 				return;
 			}
 			this.model.fetch({method: 'POST', data: {type: 'eatery', text: restaurant_name}}).then(function() {
-				console.log(self.model);
-				self.triggerMethod('show:restaurant', self.model);
-
+                self.applicationChannel.trigger('show:restaurant', self.model.toJSON()[0].__eatery_id, self.model.toJSON()[0]);
 			});
 		},
 		onNullSelect: function(value) {
@@ -61,7 +63,7 @@ define(function (require) {
 				return;
 			}
 			this.model.fetch({method: 'POST', data: {type: null, text: value}}).then(function() {
-				self.triggerMethod('show:restaurants', self.model);
+				self.applicationChannel.trigger('show:restaurants', self.model);
 			});
 		},
         onShow: function () {

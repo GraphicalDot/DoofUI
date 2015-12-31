@@ -1,6 +1,6 @@
-{{#if newCategory.status}}
+<!--{{#if newCategory.status}}
     <h6>{{newCategory.value}}</h6>
-{{/if}}
+{{/if}}-->
 
 <div class="card-panel restaurant-list">
 	{{#if isFood}}
@@ -26,13 +26,13 @@
 			</div>
 		</div>
 		<div class="restaurant-detail card-description">
-			<div class="restaurant-name">at <span>{{eatery_name}}</span></div>
+			<div class="restaurant-name">at <span>{{eatery_details.eatery_name}}</span></div>
 			<div class="restaurant-address"><i class="material-icons address-icon">place</i>{{escapedAddreess}}</div>
 		</div>
 
 	{{else}}
 		<div class="restaurant-detail card-header">
-			<div class="restaurant-name">{{eatery_name}}</div>
+			<div class="restaurant-name">{{eatery_details.eatery_name}}</div>
 			<div class="restaurant-sentiments">
 				{{#if_eq sentiment "excellent"}}
 					<i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i>
@@ -49,7 +49,7 @@
 				{{#if_eq sentiment "terrible"}}
 					<i class="material-icons bad active">mood_bad</i><i class="material-icons bad">mood_bad</i><i class="material-icons bad">mood_bad</i><i class="material-icons bad">mood_bad</i><i class="material-icons bad">mood_bad</i>
 				{{/if_eq}}
-				<br/>- {{total_sentiments}} sentiments
+				<br/>- {{eatery_details.overall.total_sentiments}} sentiments
 			</div>
 		</div>
         <div class="restaurant-address"><i class="material-icons address-icon">place</i>{{escapedAddreess}}</div>

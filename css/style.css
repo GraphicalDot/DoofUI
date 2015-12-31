@@ -351,6 +351,7 @@ i.empty_message_icon {
 
 .left-body .sub-menu {
     margin: 0;
+    display: none!important;
     height: 37.08px;
     line-height: 37.08px;
     display: flex;
@@ -418,7 +419,8 @@ i.address-icon {
 }
 
 .card-panel {
-    padding: 5px 5px 7px 13px!Important;
+    padding: 10px 5px 14px 13px!Important;
+    background-color: #e0e0e0;
 }
 
 .restaurant-list-item.active > .card-panel {
@@ -448,7 +450,7 @@ i.address-icon {
 .card-header > .restaurant-sentiments {
 	font-size: 0.818rem;
 	font-weight: 300;
-        flex: 0 0 85px;
+        flex: 0 0 100px;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: bold;
 }
@@ -511,7 +513,7 @@ i.address-icon {
 	position: absolute;
     top: 0;
     left: 420px;
-    z-index: 99;
+    z-index: 1;
     background-color: white;
     bottom: 0;
     margin: 10px;
@@ -548,6 +550,11 @@ i.address-icon {
     height: 600px!important;
 }
 
+#reviews {
+    padding-left: 17px;
+    padding-right: 17px;
+}
+
 .detail-close {
 	position: absolute;
     top: 5px;
@@ -557,8 +564,7 @@ i.address-icon {
     z-index: 1;
 }
 
-.detail-restaurant-information,
-.restaurant-reviews {
+.detail-restaurant-information {
 	padding: 13px 17px;
 }
 
@@ -593,4 +599,17 @@ i.address-icon {
     padding-top: 26px;
     margin-bottom: 30px;
     color: #E60048;
+}
+
+.reviews li {
+    margin-bottom: 30px;
+}
+
+.reviews li:last-child {
+    margin-bottom: 10px;
+}
+
+.reviews .date {
+    float: right;
+    text-align: right;
 }

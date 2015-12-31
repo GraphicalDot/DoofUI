@@ -41,6 +41,7 @@ define(function (require) {
         initialize: function (opts) {
             var self = this;
             var userChannel = Radio.channel('user');
+            this.applicationChannel= Radio.channel('application');
 
             self.user = opts.user;
 
@@ -49,15 +50,8 @@ define(function (require) {
             //    find lat, long
             this.position = { lat: 28.5192, lng: 77.2130 };
             findLatLong().then(function (location) {
-                if (self.xhrRequest) {
-                    self.xhrRequest.abort();
-                    if (self.geoTimer) {
-                        clearTimeout(self.geoTimer);
-                        self.geoTimer = '';
-                    }
-                    self.position = { lat: location.lat, lng: location.lng };
-                    self.onShow();
-                }
+                self.position = { lat: location.lat, lng: location.lng };
+                self.onShow();
             });
 
             this.collection = new Restaurants();
@@ -65,6 +59,29 @@ define(function (require) {
             this.listView = new ListView({ collection: this.collection, user: this.user });
             this.mapView = new MapView({ collection: this.collection, lat: this.position.lat, lng: this.position.lng, user: this.user });
 
+            this.applicationChannel.on('show:restaurant', function(id, info) {
+               self.openRestaurant(id, info);   
+            });
+            
+            this.applicationChannel.on('show:restaurants', function(data) {
+               self.showRestaurants(data);   
+            });
+            
+            this.applicationChannel.on('highlight:restaurant', function(id, info) {
+               self.highlight(id, info);   
+            });
+            
+            this.applicationChannel.on('unhighlight:restaurant', function(id, info) {
+               self.unhighlight(id, info);   
+            });
+            
+            this.applicationChannel.on('highlightMarker:restaurant', function(id, info) {
+               self.highlightMarker(id, info);   
+            });
+            
+            this.applicationChannel.on('unhighlightMarker:restaurant', function(id, info) {
+               self.unhighlightMarker(id, info);   
+            });
             userChannel.on('logged_in', function () {
                 self.render();
             });
@@ -103,21 +120,43 @@ define(function (require) {
         },
         submitFeedback: function (e) {
             e.preventDefault();
+            var Feedback= Backbone.Model.extend({url: window.usersfeedback});
+			var feedback= new Feedback();
+            
+            if($("#feedback-name").val() && $("#feedback-email").val() && $("#feedback-body").val()) {
+                feedback.fetch({method: 'POST', data: {fb_id: this.user.get('id'), "feedback": $("#feedback-body").val(), "name": $("#feedback-name").val(), "email": $("#feedback-email").val()}}).then(function(response) {
+                    if(response.success) {
+                          $('#feedback').closeModal();
+
+                        Materialize.toast(response.message, 3000);
+                    }
+                });
+            }
             //submit form here.
         },
-        childEvents: {
-            'show:restaurants': 'showRestaurants',
-            'show:restaurant': 'showRestaurant',
-            "highlight:restaurant": "highlight",
-            "unhighlight:restaurant": "unhighlight",
-            "highlightMarker:restaurant": "highlightMarker",
-            "unhighlightMarker:restaurant": "unhighlightMarker"
-        },
+        // childEvents: {
+        //     'show:restaurants': 'showRestaurants',
+        //     'show:restaurant': 'showRestaurant',
+        //     'open:restaurant': 'openRestaurant',
+        //     "highlight:restaurant": "highlight",
+        //     "unhighlight:restaurant": "unhighlight",
+        //     "highlightMarker:restaurant": "highlightMarker",
+        //     "unhighlightMarker:restaurant": "unhighlightMarker"
+        // },
 
-        showRestaurants: function (childView, restaurant_data) {
+        showRestaurants: function (restaurant_data) {
             var self = this;
+            if(!restaurant_data) {restaurant_data= this.collection;};
             self.mapView.updateMarkers(restaurant_data);
             self.listView.updateCollection(restaurant_data);
+        },
+        openRestaurant: function (restaurant_id, restaurant_detail) {
+            var self= this;
+            var restaurant = new Restaurant();
+            var detailView = new RestaurantDetailView({ model: restaurant, restaurant_detail: restaurant_detail, user: self.user });
+            restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
+                self.showChildView('detail', detailView);
+            });
         },
         showRestaurant: function (childView, restaurant_id, restaurant_detail) {
             var self = this;
@@ -128,14 +167,12 @@ define(function (require) {
                 self.showChildView('detail', detailView);
             } else {
                 var restaurant = new Restaurant();
-                detailView = new RestaurantDetailView({ model: restaurant, restaurant_detail: restaurant_detail, user: self.user });
-
                 restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
                     self.showChildView('detail', detailView);
                 });
             }
         },
-        highlight: function (childView, eatery_id) {
+        highlight: function (eatery_id) {
             if (eatery_id) {
 				var $targets= $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
                 var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]').filter(":first");
@@ -143,19 +180,20 @@ define(function (require) {
                 $target.velocity("scroll", {
                     container: $('.list'),
                     duration: 500,
+                    
                     offset: -180,
                     easing: "ease-in-out"
                 });
             }
         },
-        unhighlight: function (childView, eatery_id) {
+        unhighlight: function (eatery_id) {
             var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
             $target.removeClass('active');
         },
-        highlightMarker: function (childView, eatery_id) {
+        highlightMarker: function (eatery_id) {
             this.mapView.highlightMarker(eatery_id);
         },
-        unhighlightMarker: function (childView, eatery_id) {
+        unhighlightMarker: function (eatery_id) {
             this.mapView.unhighlightMarker(eatery_id);
         },
         onDomRefresh: function () {

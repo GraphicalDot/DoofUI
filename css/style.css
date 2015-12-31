@@ -387,11 +387,29 @@ i.empty_message_icon {
 }
 
 .restaurant-list-item {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 8px;
+	padding-right: 12px;
 
 	font-size: 1rem;
 	cursor: pointer;
+}
+
+.restaurant-list-item h6 {
+        text-align: center;
+    font-weight: 700;
+    color: #E60049;
+    font-size: 1.3rem;
+    line-height: 110%;
+}
+
+i.address-icon {
+    font-size: 0.8em;
+    /* float: left; */
+    color: #E8003B;
+}
+
+.card-panel {
+    padding: 5px 5px 7px 13px!Important;
 }
 
 .restaurant-list-item.active > .card-panel {
@@ -400,21 +418,30 @@ i.empty_message_icon {
 
 .card-header {
 	font-size: 1.2em;
-	padding-top: 2px;
+        display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    
 }
 
 .card-header > .food-name,
 .card-header > .restaurant-name {
-	font-size: 1.5em;
-	color: #008265;
-	text-transform: capitalize;
-	/*font-weight: 300;*/
+     flex: 1;
+    align-self: flex-end;
+	font-size: 1.2em;
+    color: #008265;
+    text-transform: capitalize;
+    /* font-weight: 300; */
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .card-header > .food-sentiments,
 .card-header > .restaurant-sentiments {
 	font-size: 0.818rem;
 	font-weight: 300;
+        flex: 0 0 85px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
 }
 
 .card-header > .food-sentiments i,
@@ -435,18 +462,24 @@ i.empty_message_icon {
 
 .card-description {
 	font-size: 1em;
-	padding-top: 2px;
+	/*padding-top: 2px;*/
+}
+
+.restaurant-name {
+    margin-top: -7px;
 }
 
 .card-description > .restaurant-name span {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: rgba(0,0,0,0.727);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgba(228, 0, 87, 0.79);
+    letter-spacing: 0.11px;
+    margin-left: 2px;
 }
 
 .card-description > .restaurant-address {
-	padding-top: 7px;
-	font-size: 0.727em;
+	padding-top: 5px;
+	font-size: 1em;
 }
 
 ::-webkit-scrollbar {

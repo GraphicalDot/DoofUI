@@ -124,7 +124,6 @@ define(function (require) {
             var detailView;
             var id = $(childView.el).attr('id');
             if (id === 'doof-search-view') {
-                console.log(restaurant_id);
                 detailView = new RestaurantDetailView({ model: restaurant_id });
                 self.showChildView('detail', detailView);
             } else {

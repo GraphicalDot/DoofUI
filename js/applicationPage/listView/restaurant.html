@@ -1,3 +1,7 @@
+{{#if newCategory.status}}
+    <h6>{{newCategory.value}}</h6>
+{{/if}}
+
 <div class="card-panel restaurant-list">
 	{{#if isFood}}
 		<div class="food-detail card-header">
@@ -23,8 +27,9 @@
 		</div>
 		<div class="restaurant-detail card-description">
 			<div class="restaurant-name">at <span>{{eatery_name}}</span></div>
-			<div class="restaurant-address">{{eatery_details.eatery_address}}</div>
+			<div class="restaurant-address"><i class="material-icons address-icon">place</i>{{escapedAddreess}}</div>
 		</div>
+        
 	{{else}}
 		<div class="restaurant-detail card-header">
 			<div class="restaurant-name">{{eatery_name}}</div>
@@ -46,7 +51,7 @@
 				{{/if_eq}}
 				- {{total_sentiments}} sentiments
 			</div>
-			<div class="restaurant-address">{{eatery_address}}</div>
 		</div>
+        <div class="restaurant-address"><i class="material-icons address-icon">place</i>{{escapedAddreess}}</div>
 	{{/if}}
 </div>

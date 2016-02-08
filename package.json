@@ -1,0 +1,36 @@
+{
+  "name": "doof",
+  "version": "0.0.1",
+  "description": "Food and Restaurant Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaali-python/DoofUI.git"
+  },
+  "keywords": [
+    "NLP",
+    "ML",
+    "Recommendations",
+    "Food",
+    "Restaurant",
+    "Discovery"
+  ],
+  "author": "Mad Machines",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaali-python/DoofUI/issues"
+  },
+  "homepage": "https://github.com/kaali-python/DoofUI#readme",
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "backbone.marionette": "^2.4.4",
+    "handlebars": "^4.0.5",
+    "jquery": "^2.2.0",
+    "materialize-css": "^0.97.5",
+    "requirejs": "^2.1.22",
+    "underscore": "^1.8.3"
+  }
+}

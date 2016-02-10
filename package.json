@@ -15,6 +15,7 @@
     "jquery": "^2.2.0",
     "materialize-css": "^0.97.5",
     "requirejs": "^2.1.22",
+    "text": "github:requirejs/text",
     "underscore": "^1.8.3"
   }
 }

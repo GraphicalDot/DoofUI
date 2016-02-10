@@ -2,6 +2,9 @@ require.config({
 	urlArgs: new Date().getTime(),
 	waitSeconds: 0,
 	paths: {
+		//require js
+		'text': '../../node_modules/text/text',
+
 		//backbone
 		'jquery': '../../node_modules/jquery/dist/jquery.min',
 		'underscore': '../../node_modules/underscore/underscore-min',

@@ -1,12 +1,14 @@
-define(function(require) {
+define(function (require) {
 	'use strict';
 
-	var Marionette= require('marionette');
-	var Handlebars= require('handlebars');
+	var Marionette = require('marionette');
+	var Handlebars = require('handlebars');
 
-	var Template= require('text!./landingPage.html');
+	var Template = require('text!./landingPage.html');
 
-	var LandingPage= Marionette.ItemView.extend({
+	var LandingPage = Marionette.ItemView.extend({
+		id: 'landingPage',
+		classNmae: 'doof-lp',
 		template: Handlebars.compile(Template)
 	});
 

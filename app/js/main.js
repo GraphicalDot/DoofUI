@@ -83,7 +83,7 @@ require.config({
 		'transitions': { deps: ['jquery', 'scrollFire'] },
 		'waves': { exports: 'Waves' },
 		'velocity': { deps: ['jquery'], exports: 'Vel' },
-		
+
 		'facebook': {
 			exports: 'FB'
 		},

@@ -44,6 +44,9 @@ require.config({
 		'transitions': '../../node_modules/materialize-css/js/transitions',
 		'velocity': '../../node_modules/materialize-css/js/velocity.min',
 		'waves': '../../node_modules/materialize-css/js/waves',
+
+		'facebook': '//connect.facebook.net/en_US/sdk',
+		'es6Promises': '../../node_modules/es6-promise/dist/es6-promise',
 	},
 	shim: {
 		'jquery': { exports: '$' },
@@ -80,12 +83,16 @@ require.config({
 		'transitions': { deps: ['jquery', 'scrollFire'] },
 		'waves': { exports: 'Waves' },
 		'velocity': { deps: ['jquery'], exports: 'Vel' },
+		
+		'facebook': {
+			exports: 'FB'
+		},
 	}
 });
 
 require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function ($) {
 
-	require(['./app'], function(App) {
+	require(['./app'], function (App) {
 		App.start();
 	});
 });

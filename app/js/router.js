@@ -7,6 +7,7 @@ define(function (require) {
 	var Router = Marionette.AppRouter.extend({
 		initialize: function (opts) {
 			this.region = opts.region;
+			this.user= opts.user;
 		},
 		routes: {
 			'': 'landingPage',
@@ -14,11 +15,15 @@ define(function (require) {
 		},
 		landingPage: function () {
 			var LandingPage = require('./landingPage/iLandingPage-view');
-			var landingPage = new LandingPage();
+			var landingPage = new LandingPage({user: this.user});
 			this.region.show(landingPage);
 			$(".loader").fadeOut();
 		},
-		application: function () { }
+		application: function () {
+			var ApplicationPage = require('./applicationPage/l-application');
+			var applicationPage = new ApplicationPage({user: this.user});
+			this.region.show(applicationPage);
+		 }
 	});
 
 	return Router;

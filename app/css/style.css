@@ -2,17 +2,52 @@
 	height: 100%;
 	min-height: 100vH;
 	width: 100%;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-	background-image: url('./images/lp-background.jpg');
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	background-size: cover;
-
 	color: white;
+}
+
+#landingPage .lp-bg-container {
+    z-index: -1;
+}
+
+#landingPage .lp-bg-container img,
+#landingPage .lp-bg-container .lp-background__overlay {
+
+    /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#landingPage .lp-background__overlay {
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.lp-content {
+	text-align: center;
+	max-width: 1000px;
+}
+
+.lp-content__welcome-text,
+.lp-content__content-logo {
+	font-weight: bold;
+}
+.lp-content__content-logo {
+	margin-top: 0;
+	color: #FFCE00;
 }
 
 .doof-lp-logo {
@@ -24,4 +59,46 @@
 	font-size: 2rem;
     max-width: 1000px;
 	text-align: center;
+}
+
+.lp-content__description {
+	font-size: 1.5rem;
+	font-weight: 300;
+	margin-bottom: 64px;
+}
+
+.landing-content__enter_application {
+	display: flex;
+    background-color: white;
+    border-radius: 5px;
+    height: 45px;
+}
+
+.landing-content__enter_application label {
+	padding: 0 10px;
+}
+
+.landing-content__enter_application label i {
+	line-height: 45px;
+    color: #D72828;
+}
+
+#lp-locationBox {
+	flex: 1;
+    margin-bottom: 0;
+    color: rgba(0, 0, 0, 0.8);
+    border: 0;
+}
+
+.lp-content__enter-btn {
+	flex: 0 0 300px;
+}
+
+#lp-enter-btn {
+	height: 45px;
+    line-height: 45px;
+    width: 100%;
+    background: #d72828;
+    color: #ffce00;
+    font-weight: bold;
 }

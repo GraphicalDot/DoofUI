@@ -1,184 +1,186 @@
 require.config({
-    urlArgs: new Date().getTime(),
-    waitSeconds: 0,
-    paths: {
-        'jquery': '../../node_modules/jquery/dist/jquery',
-        'underscore': '../../node_modules/underscore/underscore',
-        'backbone': '../../node_modules/backbone/backbone',
-        'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
-        'handlebars': '../../node_modules/handlebars/dist/handlebars',
+	urlArgs: new Date().getTime(),
+	waitSeconds: 0,
+	paths: {
+		'jquery': '../../node_modules/jquery/dist/jquery',
+		'underscore': '../../node_modules/underscore/underscore',
+		'backbone': '../../node_modules/backbone/backbone',
+		'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
+		'handlebars': '../../node_modules/handlebars/dist/handlebars',
 
 		'radio': '../../node_modules/backbone.radio/build/backbone.radio',
 
-        'text': '../../node_modules/text/text',
+		'text': '../../node_modules/text/text',
 
-        'picker': '../../node_modules/materialize-css/js/date_picker/picker',
-        'picker.date': '../../node_modules/materialize-css/js/date_picker/picker.date',
-        'animation': '../../node_modules/materialize-css/js/animation',
-        'buttons': '../../node_modules/materialize-css/js/buttons',
-        'cards': '../../node_modules/materialize-css/js/cards',
-        'carousel': '../../node_modules/materialize-css/js/carousel',
-        'character_counter': '../../node_modules/materialize-css/js/character_counter',
-        'chips': '../../node_modules/materialize-css/js/chips',
-        'collapsible': '../../node_modules/materialize-css/js/collapsible',
-        'dropdown': '../../node_modules/materialize-css/js/dropdown',
-        'forms': '../../node_modules/materialize-css/js/forms',
-        'global': '../../node_modules/materialize-css/js/global',
-        'hammerjs': '../../node_modules/materialize-css/js/hammer.min',
-        'jquery.easing': '../../node_modules/materialize-css/js/jquery.easing.1.3',
-        'jquery.hammer': '../../node_modules/materialize-css/js/jquery.hammer',
-        'jquery.timeago': '../../node_modules/materialize-css/js/jquery.timeago.min',
-        'leanModal': '../../node_modules/materialize-css/js/leanModal',
-        'materialbox': '../../node_modules/materialize-css/js/materialbox',
-        'parallax': '../../node_modules/materialize-css/js/parallax',
-        'prism': '../../node_modules/materialize-css/js/prism',
-        'pushpin': '../../node_modules/materialize-css/js/pushpin',
-        'scrollFire': '../../node_modules/materialize-css/js/scrollFire',
-        'scrollspy': '../../node_modules/materialize-css/js/scrollspy',
-        'sideNav': '../../node_modules/materialize-css/js/sideNav',
-        'slider': '../../node_modules/materialize-css/js/slider',
-        'tabs': '../../node_modules/materialize-css/js/tabs',
-        'toasts': '../../node_modules/materialize-css/js/toasts',
-        'tooltip': '../../node_modules/materialize-css/js/tooltip',
-        'transitions': '../../node_modules/materialize-css/js/transitions',
-        'velocity': '../../node_modules/materialize-css/js/velocity.min',
-        'waves': '../../node_modules/materialize-css/js/waves',
+		'picker': '../../node_modules/materialize-css/js/date_picker/picker',
+		'picker.date': '../../node_modules/materialize-css/js/date_picker/picker.date',
+		'animation': '../../node_modules/materialize-css/js/animation',
+		'buttons': '../../node_modules/materialize-css/js/buttons',
+		'cards': '../../node_modules/materialize-css/js/cards',
+		'carousel': '../../node_modules/materialize-css/js/carousel',
+		'character_counter': '../../node_modules/materialize-css/js/character_counter',
+		'chips': '../../node_modules/materialize-css/js/chips',
+		'collapsible': '../../node_modules/materialize-css/js/collapsible',
+		'dropdown': '../../node_modules/materialize-css/js/dropdown',
+		'forms': '../../node_modules/materialize-css/js/forms',
+		'global': '../../node_modules/materialize-css/js/global',
+		'hammerjs': '../../node_modules/materialize-css/js/hammer.min',
+		'jquery.easing': '../../node_modules/materialize-css/js/jquery.easing.1.3',
+		'jquery.hammer': '../../node_modules/materialize-css/js/jquery.hammer',
+		'jquery.timeago': '../../node_modules/materialize-css/js/jquery.timeago.min',
+		'leanModal': '../../node_modules/materialize-css/js/leanModal',
+		'materialbox': '../../node_modules/materialize-css/js/materialbox',
+		'parallax': '../../node_modules/materialize-css/js/parallax',
+		'prism': '../../node_modules/materialize-css/js/prism',
+		'pushpin': '../../node_modules/materialize-css/js/pushpin',
+		'scrollFire': '../../node_modules/materialize-css/js/scrollFire',
+		'scrollspy': '../../node_modules/materialize-css/js/scrollspy',
+		'sideNav': '../../node_modules/materialize-css/js/sideNav',
+		'slider': '../../node_modules/materialize-css/js/slider',
+		'tabs': '../../node_modules/materialize-css/js/tabs',
+		'toasts': '../../node_modules/materialize-css/js/toasts',
+		'tooltip': '../../node_modules/materialize-css/js/tooltip',
+		'transitions': '../../node_modules/materialize-css/js/transitions',
+		'velocity': '../../node_modules/materialize-css/js/velocity.min',
+		'waves': '../../node_modules/materialize-css/js/waves',
 
-        'd3': '../../node_modules/d3/d3',
+		'd3': '../../node_modules/d3/d3',
 		'nvd3': '../../node_modules/nvd3/build/nv.d3',
 
 		'oms': '../../node_modules/marker-spider/dist/oms.min',
 
-        'facebook': '//connect.facebook.net/en_US/sdk',
+		'facebook': '//connect.facebook.net/en_US/sdk',
 
-        'typeahead': '../../node_modules/typeahead/typeahead',
+		'typeahead': '../../node_modules/typeahead/typeahead',
 
-        'es6promise': '../../node_modules/es6-promise/dist/es6-promise'
-    },
-    shim: {
-        'jquery': { exports: '$' },
-        'underscore': { exports: '_' },
-        'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
-        'marionette': { deps: ['backbone'], exports: 'Marionette' },
-        'handlebars': { exports: 'Handlebars' },
+		'es6promise': '../../node_modules/es6-promise/dist/es6-promise',
+
+		'google-map-loader': '../../node_modules/google-map-loader',
+	},
+	shim: {
+		'jquery': { exports: '$' },
+		'underscore': { exports: '_' },
+		'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
+		'marionette': { deps: ['backbone'], exports: 'Marionette' },
+		'handlebars': { exports: 'Handlebars' },
 
 		'radio': {
 			deps: ['marionette'],
 			exports: 'Radio'
 		},
 
-        'velocity': {
-            deps: ['jquery'],
-            exports: 'Vel'
-        },
+		'velocity': {
+			deps: ['jquery'],
+			exports: 'Vel'
+		},
 
-        'jquery.easing': {
-            deps: ['jquery']
-        },
+		'jquery.easing': {
+			deps: ['jquery']
+		},
 
-        'animation': {
-            deps: ['jquery']
-        },
+		'animation': {
+			deps: ['jquery']
+		},
 
-        'hammerjs': {
-            exports: 'Hammer'
-        },
+		'hammerjs': {
+			exports: 'Hammer'
+		},
 
-        'jquery.hammer': {
-            deps: ['jquery', 'hammerjs', 'waves']
-        },
+		'jquery.hammer': {
+			deps: ['jquery', 'hammerjs', 'waves']
+		},
 
-        'global': {
-            deps: ['jquery']
-        },
+		'global': {
+			deps: ['jquery']
+		},
 
-        'toasts': {
-            deps: ['hammerjs', 'velocity']
-        },
+		'toasts': {
+			deps: ['hammerjs', 'velocity']
+		},
 
-        'carousel': {
-            deps: ['jquery']
-        },
+		'carousel': {
+			deps: ['jquery']
+		},
 
-        'collapsible': {
-            deps: ['jquery']
-        },
+		'collapsible': {
+			deps: ['jquery']
+		},
 
-        'dropdown': {
-            deps: ['jquery']
-        },
+		'dropdown': {
+			deps: ['jquery']
+		},
 
-        'leanModal': {
-            deps: ['jquery']
-        },
+		'leanModal': {
+			deps: ['jquery']
+		},
 
-        'materialbox': {
-            deps: ['jquery']
-        },
+		'materialbox': {
+			deps: ['jquery']
+		},
 
-        'parallax': {
-            deps: ['jquery']
-        },
+		'parallax': {
+			deps: ['jquery']
+		},
 
-        'tabs': {
-            deps: ['jquery']
-        },
+		'tabs': {
+			deps: ['jquery']
+		},
 
-        'tooltip': {
-            deps: ['jquery']
-        },
+		'tooltip': {
+			deps: ['jquery']
+		},
 
-        'sideNav': {
-            deps: ['jquery']
-        },
+		'sideNav': {
+			deps: ['jquery']
+		},
 
-        'scrollspy': {
-            deps: ['jquery']
-        },
+		'scrollspy': {
+			deps: ['jquery']
+		},
 
-        'forms': {
-            deps: ['jquery', 'global']
-        },
+		'forms': {
+			deps: ['jquery', 'global']
+		},
 
-        'slider': {
-            deps: ['jquery']
-        },
+		'slider': {
+			deps: ['jquery']
+		},
 
-        'cards': {
-            deps: ['jquery']
-        },
+		'cards': {
+			deps: ['jquery']
+		},
 
-        'pushpin': {
-            deps: ['jquery']
-        },
+		'pushpin': {
+			deps: ['jquery']
+		},
 
-        'buttons': {
-            deps: ['jquery']
-        },
+		'buttons': {
+			deps: ['jquery']
+		},
 
-        'transitions': {
-            deps: ['jquery', 'scrollFire']
-        },
+		'transitions': {
+			deps: ['jquery', 'scrollFire']
+		},
 
-        'scrollFire': {
-            deps: ['jquery', 'global']
-        },
+		'scrollFire': {
+			deps: ['jquery', 'global']
+		},
 
-        'waves': {
-            exports: 'Waves'
-        },
+		'waves': {
+			exports: 'Waves'
+		},
 
-        'character_counter': {
-            deps: ['jquery']
-        },
+		'character_counter': {
+			deps: ['jquery']
+		},
 
-        'chips': {
-            deps: ['jquery']
-        },
+		'chips': {
+			deps: ['jquery']
+		},
 
-        'jquery.timeago': {
-            deps: ['jquery']
-        },
+		'jquery.timeago': {
+			deps: ['jquery']
+		},
 
 		'nvd3': {
 			deps: ['d3']
@@ -188,27 +190,27 @@ require.config({
 			exports: 'OverlappingMarkerSpiderfier'
 		},
 
-        'facebook': { exports: 'FB' },
-        'typeahead': {
-            deps: ['jquery'],
-            init: function ($) {
-                return require.s.contexts._.registry['typeahead.js'].factory($);
-            }
-        },
-    }
+		'facebook': { exports: 'FB' },
+		'typeahead': {
+			deps: ['jquery'],
+			init: function ($) {
+				return require.s.contexts._.registry['typeahead.js'].factory($);
+			}
+		},
+	}
 });
 
 
 
 require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function ($) {
 
-	require(['./helpers', './doof'], function(Helpers, Doof) {
+	require(['./helpers', './doof'], function (Helpers, Doof) {
 		Doof.start();
 	});
 
-    // window.get_trending = "http://52.76.176.188:8000/gettrending";
+	// window.get_trending = "http://52.76.176.188:8000/gettrending";
 	// window.nearest_eateries = "http://52.76.176.188:8000/nearesteateries";
-    // window.get_suggestions = "http://52.76.176.188:8000/suggestions";
+	// window.get_suggestions = "http://52.76.176.188:8000/suggestions";
 	// window.textsearch = "http://52.76.176.188:8000/textsearch";
 	// window.geteatery = "http://52.76.176.188:8000/geteatery";
 	// window.getkey = "http://52.76.176.188:8000/getkey";

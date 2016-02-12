@@ -65,8 +65,15 @@
 
 .landing-content__enter_application {
 	display: flex;
-	background-color: white;
+	/*background-color: white;*/
 	border-radius: 5px;
+}
+
+.landingPage-content__locationBox-wrapper {
+	flex: 1;
+	background: white;
+    display: flex;
+		height: 45px;
 }
 
 #landingPage-locationBox {
@@ -78,7 +85,8 @@
 }
 
 .landingPage-content__enter-btn {
-	flex: 0 0 300px;
+	flex: 0 0 45px;
+	margin-bottom: 10px;
 }
 #landingPage-enter-btn {
 	    height: 46px;
@@ -113,11 +121,12 @@
 
 .landing-content__enter_application label {
 	padding: 0 10px;
-    background: transparent;
+	height: 45px;
+	background: transparent;
 }
 
 .landing-content__enter_application label i {
-	    line-height: 46px;
+		line-height: 45px;
     color: #D72828;
 }
 
@@ -132,6 +141,11 @@
 	/*font-weight: bold;*/
 	text-transform: capitalize;
 	 color: #FFCE00;
+}
+
+.landingPage-content__enterApplication-wrapper {
+	    display: flex;
+    flex-direction: column;
 }
 
 #applicationPage {

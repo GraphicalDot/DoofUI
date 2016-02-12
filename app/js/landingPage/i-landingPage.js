@@ -1,92 +1,127 @@
+/* global Materialize */
 define(function (require) {
-
 	"use strict";
 
-	var Backbone= require('backbone');
+	var Promise = require('es6promise').Promise;
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./landingPage.html');
 
 	var LandingPage = Marionette.ItemView.extend({
 		id: 'landingPage',
-		className: 'white-text center',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
-			this.position = { lat: 28.5192, lng: 77.2130 };
-			this.address= "Delhi";
-			// this.user.on('change', this.render, this);
+			this.location = {
+				latLng: [28.613939, 77.209021],
+				place: 'Delhi'
+			};
+			this.user = opts.user;
+		},
+		templateHelpers: function () {
+			return {
+				'isUserAuthorized': function () {
+					return this.user.isAuthorized();
+				},
+				'getUsername': function () {
+					return this.user.get('name');
+				},
+			}
+		},
+		ui: {
+			'enterButton': '#landingPage-enter-btn',
+			'enter_as_options': 'input[type="radio"][name="enter_as"]'
 		},
 		events: {
-			"click #landingPage-enter-btn": "checkIfData"
+			"click @ui.enterButton": "enterInsideDoof"
 		},
-		checkIfData: function (e) {
-			var self= this;
+		enterInsideDoof: function (e) {
 			e.preventDefault();
-
-			var NearbyRestaurants = Backbone.Collection.extend({ url: window.nearest_eateries, parse: function (res) { return res.result; } });
-			this.nearbyRestaurants = new NearbyRestaurants();
-			this.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: this.position.lat, longitude: this.position.lng } }).then(function () {
-				if(self.nearbyRestaurants && self.nearbyRestaurants.length) {
-					self.trigger("goToApplication", self.position, self.address);
+			var self = this;
+			this.isDataPresent().then(function (nearestEateries) {
+				if (self.ui.enter_as_options.is(':checked')) {
+					self.trigger("goToApplication", self.location, nearestEateries);
 				} else {
-					Materialize.toast("No data present for the given location. Please change.",2000);
+					Materialize.toast("Select a user.", 2000);
 				}
+			}, function (err) {
+				Materialize.toast("No data present for the given location. Please change.", 2000);
 			});
 		},
-		onShow: function () {
+		isDataPresent: function (e) {
 			var self = this;
-			require(['../../libraries/google-map-loader'], function (GoogleMapLoader) {
-				GoogleMapLoader.done(function (GoogleMaps) {
-					var input = document.getElementById("landingPage-locationBox");
-					var autoComplete = new GoogleMaps.places.Autocomplete(input);
-					var geoCoder = new GoogleMaps.Geocoder;
-
-					function geoCodeLatLng() {
-						geoCoder.geocode({ 'location': self.position }, function (results, status) {
+			var promise = new Promise(function (resolve, reject) {
+				var NearestEateriesModel = require('../models/nearest_eateries');
+				var nearestEateries = new NearestEateriesModel();
+				nearestEateries.fetch({ method: 'POST', data: { latitude: self.location.latLng[0], longitude: self.location.latLng[1] } }).then(function () {
+					if (nearestEateries.length) {
+						resolve(nearestEateries);
+					} else {
+						reject();
+					}
+				});
+			});
+			return promise;
+		},
+		geoCodeLatLng: function (lat, lng) {
+			var self = this;
+			var promise = new Promise(function (resolve, reject) {
+				require(['google-map-loader'], function (GoogleMapLoader) {
+					GoogleMapLoader.done(function (GoogleMaps) {
+						var geoCoder = new GoogleMaps.Geocoder;
+						geoCoder.geocode({ 'location': { lat: lat, lng: lng } }, function (results, status) {
 							if (status === GoogleMaps.GeocoderStatus.OK) {
-								if (results[1]) {
-									input.value = results[1].formatted_address;
-									self.address= results[1].formatted_address;
-								}
+								var result_address = results[1] ? results[1] : results[0];
+								self.location.place = result_address.formatted_address;
+								resolve();
 							} else {
-								input.value = "Sorry, couldnt get your address. Please find one here."
+								reject();
 							}
 						});
-					}
-
+					});
+				});
+			});
+			return promise;
+		},
+		createGoogleAutocomplete: function (input) {
+			var self = this;
+			require(['google-map-loader'], function (GoogleMapLoader) {
+				GoogleMapLoader.done(function (GoogleMaps) {
+					var autoComplete = new GoogleMaps.places.Autocomplete(input);
 					autoComplete.addListener('place_changed', function () {
 						var place = autoComplete.getPlace();
 						if (!place.geometry) { return; }
 						if (place.geometry.location) {
-							self.position.lat = place.geometry.location.lat();
-							self.position.lng = place.geometry.location.lng();
+							self.location.latLng[0] = place.geometry.location.lat();
+							self.location.latLng[1] = place.geometry.location.lng();
 						}
 					});
-
-					function onGeoSuccess(position) {
-						self.position.lat = position.coords.latitude;
-						self.position.lng = position.coords.longitude;
-						self.accuracy = position.coords.accuracy;
-
-						geoCodeLatLng();
-					};
-
-					function onGeoFail() {
-						// geoCodeLatLng();
-						input.value = "Sorry, couldnt get your location. You can help us find here.."
-					};
-
-					var opts = {};
-
-					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, opts);
-					} else {
-						onGeoFail();
-					}
 				});
 			});
 		},
-   });
+		onShow: function () {
+			var self = this;
+			var input = document.getElementById("landingPage-locationBox");
+			self.createGoogleAutocomplete(input);
+			function geoSuccess(position) {
+				self.location.latLng[0] = position.coords.latitude;
+				self.location.latLng[1] = position.coords.longitude;
+				self.location.accuracy = position.coords.accuracy;
+				self.geoCodeLatLng(self.location.latLng[0], self.location.latLng[1]).then(function () {
+					input.value = self.location.place;
+				}, function (err) {
+					input.value = "Sorry, couldnt get your address. Please find one here."
+				});
+			}
+			function geoFail() {
+				input.value = "Sorry, couldnt get your address. Please find one here."
+			}
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(geoSuccess, geoFail, {});
+			} else {
+				geoFail();
+			}
+		},
+	});
 
 	return LandingPage;
 });

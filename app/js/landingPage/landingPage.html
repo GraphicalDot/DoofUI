@@ -1,10 +1,10 @@
 <div class="landingPage-background">
-    <img src="css/images/landingPage-bg.jpg" alt="Bg">
-    <div class="landingPage-background__overlay"></div>
+	<img src="css/images/landingPage-bg.jpg" alt="Bg">
+	<div class="landingPage-background__overlay"></div>
 </div>
 
 <div class="landingPage-content">
-    <!--<div class="landingPage-content__welcome-text">Welcome to</div>-->
+	<!--<div class="landingPage-content__welcome-text">Welcome to</div>-->
 	<h1 class="landingPage-content__content-logo">Welcome to <span class="landing_special"> Doof </span></h1>
 	<p class="landingPage-content__description">
 		<span class="landing_special_2">Doof</span> is
@@ -18,11 +18,21 @@
 			based on Sentiments.</p>
     </div>-->
 	<div class="landing-content__enter_application">
-		<label for="landingPage-locationBox"><i class="material-icons">place</i></label>
-		<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location">
-		<div class="landingPage-content__enter-btn"><a href="#/application" id="landingPage-enter-btn" class="btn waves-effect waves-light">Enter Application</a></div>
+		<div class="landingPage-content__locationBox-wrapper">
+			<label for="landingPage-locationBox"><i class="material-icons">place</i></label>
+			<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location">
+		</div>
+		<div class="landingPage-content__enterApplication-wrapper">
+			<div class="landingPage-content__enter-btn"><a href="#/application" id="landingPage-enter-btn" class="btn waves-effect waves-light">Enter Application</a></div>
+			<input type="radio" name="enter_as" id="guest">
+			<label for="guest">Enter as Guest</label>
+			<input type="radio" name="enter_as" id="facebook">
+			<label for="facebook">
+				{{#if isUserAuthorized}} Enter as {{getUsername}} {{else}} Enter using Facebook Account {{/if}}
+			</label>
+		</div>
 	</div>
-    <!--<div class="landingPage-content__madmachines">
+	<!--<div class="landingPage-content__madmachines">
         <p>Created by</p>
         <a href="http://www.madmachines.io" target="_blank">Mad Machines</a>
     </div>-->

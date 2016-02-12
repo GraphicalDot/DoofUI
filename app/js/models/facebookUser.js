@@ -46,7 +46,7 @@ define(function (require) {
 							third_party_id: response['third_party_id'],
 							name: response['name'],
 							email: response['email'],
-							picture: response['picture'].data.url
+							image: response['picture'].data.url
 						}, { silent: true });
 						resolve();
 					});
@@ -56,7 +56,7 @@ define(function (require) {
 		},
 		sendUserData: function () {
 			var userDetails = new UserDetailModel();
-			userDetails.fetch({ method: 'POST', data: { email: self.get('email'), fb_id: self.get('id'), picture: self.get('picture'), name: self.get('name') } });
+			userDetails.fetch({ method: 'POST', data: { email: this.get('email'), fb_id: this.get('id'), picture: this.get('picture'), name: this.get('name') } });
 		},
 		isAuthorized: function () {
 			return Boolean(this.get("third_party_id"));

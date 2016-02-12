@@ -1,0 +1,10 @@
+{{#if isLoggedIn}}
+	<!--<a class='dropdown-button' href="#/application" data-activates='profile-dropdown'><img src="{{photu}}" class="circle responsive_img"><i class="material-icons dropdown-icon">arrow_drop_down</i></a>-->
+	<a class='dropdown-button' href="#/application" data-activates='profile-dropdown'>{{name}}<i class="material-icons dropdown-icon">arrow_drop_down</i></a>
+	<ul id='profile-dropdown' class='dropdown-content'>
+		<li><a href="#/application" class="profile-btn">My Profile</a></li>
+		<li><a href="#/application" class="logout-btn">Logout</a></li>
+	</ul>
+{{else}}
+	<a href="#/application" class="login-btn">Login</a>
+{{/if}}

@@ -4,55 +4,236 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Doof</title>
-	<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.css">
+
+	<meta name="author" content="Mad Machines">
+	<meta name="description" content="Doof- Find restaurents around you.">
+	<meta name="keywords" content="food,recommendation,new-delhi,restaurants,ambience,cost,service,NLP,AI,chat">
+
+	<link rel="stylesheet" href="libraries/materialize/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="shortcut icon" type="image/png" href="css/images/favicon.png" />
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+	
+
+
 	<style>
 		html,
 		body {
 			height: 100%;
-			min-height: 100vH;
 			width: 100%;
 			margin: 0;
 			padding: 0;
-			overflow: hidden;
 		}
 
 		body {
-			background-color: white;
 			font-size: 16px;
 			font-size: 1rem;
 			font-weight: 400;
-		}
-
-		.doof {
-			height: 100%;
-			min-height: 100vH;
-			width: 100%;
-			z-index: 1;
+			/*font-family: 'Josefin Sans', sans-serif;*/
+			/*font-family: 'Neuton', serif;*/
+			letter-spacing: 0.414px;
+			overflow: hidden;
+			background-color: #fff;
 		}
 
 		.loader {
 			position: absolute;
 			top: 0;
 			left: 0;
-			width: 100%;
-			height: 100%;
-			min-height: 100vH;
-			z-index: 2;
-			background-color: white;
+			right: 0;
+			bottom: 0;
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			background: #FFDE74;
+			z-index: 99;
+			flex-direction: column;
+			font-family: 'Neuton', serif;
+		}
+
+		.loader h2 {
+			/*font-family: 'Josefin Sans', sans-serif;*/
+			font-size: 7.2rem;
+			font-weight: bold;
+			color: #d72828;
+		}
+
+		.loader h5 {
+			font-size: 1.8rem;
+			color: #d72828;
+			margin-bottom: 40px;
+		}
+
+		input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, input[type=text]:focus.valid, input[type=password].valid, input[type=password]:focus.valid, input[type=email].valid, input[type=email]:focus.valid, input[type=url].valid, input[type=url]:focus.valid, input[type=time].valid, input[type=time]:focus.valid, input[type=date].valid, input[type=date]:focus.valid, input[type=datetime-local].valid, input[type=datetime-local]:focus.valid, input[type=tel].valid, input[type=tel]:focus.valid, input[type=number].valid, input[type=number]:focus.valid, input[type=search].valid, input[type=search]:focus.valid, textarea.materialize-textarea.valid, textarea.materialize-textarea:focus.valid {
+			box-shadow: none;
+		}
+
+
+		input:not([type]):focus:not([readonly]),
+		input[type=text]:focus:not([readonly]),
+		input[type=password]:focus:not([readonly]),
+		input[type=email]:focus:not([readonly]),
+		input[type=url]:focus:not([readonly]),
+		input[type=time]:focus:not([readonly]),
+		input[type=date]:focus:not([readonly]),
+		input[type=datetime-local]:focus:not([readonly]),
+		input[type=tel]:focus:not([readonly]),
+		input[type=number]:focus:not([readonly]),
+		input[type=search]:focus:not([readonly]),
+		textarea.materialize-textarea:focus:not([readonly]) {
+			border: none;
+			box-shadow: none;
+		}
+
+		.toast {
+			    background-color: #FAB605;
+				color: #D72828;
+		}
+
+		.loader h5 {
+			-webkit-animation: animation 1500ms linear both;
+			animation: animation 1500ms linear both;
+		}
+
+		@-webkit-keyframes animation {
+			0% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+			}
+			2.1% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 11.127, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 11.127, 0, 1);
+			}
+			4.1% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 18.051, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 18.051, 0, 1);
+			}
+			8.21% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 22.991, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 22.991, 0, 1);
+			}
+			12.41% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 19.465, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 19.465, 0, 1);
+			}
+			16.62% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 12.292, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 12.292, 0, 1);
+			}
+			20.82% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 5.151, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 5.151, 0, 1);
+			}
+			25.03% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.023, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.023, 0, 1);
+			}
+			29.13% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.71, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.71, 0, 1);
+			}
+			33.23% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3.439, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3.439, 0, 1);
+			}
+			50.05% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.007, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.007, 0, 1);
+			}
+			58.26% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.514, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.514, 0, 1);
+			}
+			75.08% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.002, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.002, 0, 1);
+			}
+			83.28% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.077, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.077, 0, 1);
+			}
+			100% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+			}
+		}
+
+		@keyframes animation {
+			0% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+			}
+			2.1% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 11.127, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 11.127, 0, 1);
+			}
+			4.1% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 18.051, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 18.051, 0, 1);
+			}
+			8.21% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 22.991, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 22.991, 0, 1);
+			}
+			12.41% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 19.465, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 19.465, 0, 1);
+			}
+			16.62% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 12.292, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 12.292, 0, 1);
+			}
+			20.82% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 5.151, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 5.151, 0, 1);
+			}
+			25.03% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.023, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.023, 0, 1);
+			}
+			29.13% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.71, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2.71, 0, 1);
+			}
+			33.23% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3.439, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3.439, 0, 1);
+			}
+			50.05% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.007, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.007, 0, 1);
+			}
+			58.26% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.514, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.514, 0, 1);
+			}
+			75.08% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.002, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.002, 0, 1);
+			}
+			83.28% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.077, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.077, 0, 1);
+			}
+			100% {
+				-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+				transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+			}
 		}
 	</style>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="libraries/nvd3.css">
 </head>
 
 <body>
 	<div class="doof"></div>
 	<div class="loader">
+		<!--<h2>Doof</h2>-->
+		<h5>Please wait while we load Doof..</h5>
 		<div class="preloader-wrapper small active">
-			<div class="spinner-layer spinner-green-only">
+			<div class="spinner-layer spinner-red">
 				<div class="circle-clipper left">
 					<div class="circle"></div>
 				</div>
@@ -65,7 +246,17 @@
 			</div>
 		</div>
 	</div>
-	<script src="../node_modules/requirejs/require.js" data-main="js/main"></script>
+	<script data-main="js/requirejs" src="libraries/require.js"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71928008-1', 'auto');
+  ga('send', 'pageview');
+	</script>
 </body>
 
 </html>

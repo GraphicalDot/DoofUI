@@ -1,0 +1,63 @@
+<header class="doof-header">
+	<div class="header__logo-body">
+		<a href="#/application"><img src="css/images/doof.png" alt="Doof logo"></a>
+	</div>
+	<div class="search"></div>
+	<ul class="header__nav-menu">
+		<li><a href="#feedback" class="waves-effect waves-light feedback-link modal-close">Send Feedback</a></li>
+		<li class="header__nav-menu-user-info"></li>
+	</ul>
+</header>
+<div class="doof-body">
+	<div class="left-body">
+		<ul class="sub-menu">
+			<li><a href="#!" class="seeTrending active">Trending</a></li>
+			<li><a href="#!" class="seeNearMe">Near you</a></li>
+			<div class="sub-menu-indicator"></div>
+		</ul>
+		<div class="list"></div>
+		<div class="list-pagination">
+			<div class="results_number">Showing results 1-10</div>
+			<div class="list-paging-buttons">
+				<a href="#" id="list-paging-left-btn" class="pagination-icons disabled"><i class="material-icons">chevron_left</i></a>
+				<a href="#" id="list-paging-right-btn" class="pagination-icons"><i class="material-icons">chevron_right</i></a>
+			</div>
+		</div>
+	</div>
+	<div class="detail hide"></div>
+	<div class="profile-box hide"></div>
+	<div class="map"></div>
+	<!--<div class="feedback hide"></div>-->
+</div>
+
+
+<div id="feedback" class="modal">
+	<div class="row">
+		<h6><i class="material-icons">feedback</i> Please leave your valuable feedback.</h6>
+		<form id="feedback-form" class="col s12">
+			<div class="row">
+				<div class="input-field col s6">
+					{{#if isLoggedIn}}
+					<input class="validate" type="text" id="feedback-name" value="{{username}}" required> {{else}}
+					<input class="validate" type="text" id="feedback-name" required> {{/if}}
+					<label class="active" for="feedback-name">Your name</label>
+				</div>
+				<div class="input-field col s6">
+					{{#if isLoggedIn}}
+					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" value="{{useremail}}" required> {{else}}
+					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" required> {{/if}}
+					<label class="active" for="feedback-email">Your email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea class="validate materialize-textarea" id="feedback-body" required></textarea>
+					<label for="feedback-body">Your comments:</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+				<i class="material-icons left">send</i>
+			</button>
+		</form>
+	</div>
+</div>

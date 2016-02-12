@@ -1,0 +1,22 @@
+<a href="#/application" class="close-user-profile-btn"><i class="material-icons">clear</i></a>
+
+<div class="user-profile-details">
+	<img src="{{picture.data.url}}" alt="user-image" class="circle user-img">
+	<div class="user-profile-info">
+		<h4 class="user-name">{{name}}</h4>
+		<p class="user-email">{{email}}</p>
+	</div>
+</div>
+
+<div class="user-profile-reviews">
+	<h6 class="submited_text">Reviews by you: </h6>
+	<ul class="user-profile-reviews-list">
+		{{#each reviews}}
+			<li>
+				<div class="user-profile-restaurant-name">{{__eatery_name}}</div>
+				<div class="user-profile-review">{{review_text}}</div>
+				<span class="user-profile-date">{{epoch}}</span>
+			</li>
+		{{/each}}
+	</ul>
+</div>

@@ -11,12 +11,12 @@
 	color: white;
 }
 
-#landingPage .lp-bg-container {
+#landingPage .landingPage-background__container {
     z-index: -1;
 }
 
-#landingPage .lp-bg-container img,
-#landingPage .lp-bg-container .lp-background__overlay {
+#landingPage .landingPage-background__container .landingPage-background__image,
+#landingPage .landingPage-background__container .landingPage-background__image-overlay {
 
     /* Set rules to fill background */
   min-height: 100%;
@@ -32,38 +32,35 @@
   left: 0;
 }
 
-#landingPage .lp-background__overlay {
+#landingPage .landingPage-background__image-overlay {
     background-color: rgba(0, 0, 0, 0.55);
 }
 
-.lp-content {
+.landingPage-content__center {
 	text-align: center;
 	max-width: 1000px;
 }
 
-.lp-content__welcome-text,
-.lp-content__content-logo {
+.landingPage-content__welcome-text,
+.landingPage-content__logo {
 	font-weight: bold;
 }
-.lp-content__content-logo {
+.landingPage-content__logo {
 	margin-top: 0;
 	color: #FFCE00;
-}
-
-.doof-lp-logo {
 	font-size: 5rem;
 	font-weight: bold;
 }
 
-.doof-lp-intro {
+.landingPage-content__description {
 	font-size: 2rem;
     max-width: 1000px;
 	text-align: center;
-}
-
-.lp-content__description {
 	font-size: 1.5rem;
 	font-weight: 300;
+}
+
+.landingPage-content__description:last-child {
 	margin-bottom: 64px;
 }
 

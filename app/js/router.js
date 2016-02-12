@@ -20,9 +20,9 @@ define(function (require) {
 			$(".loader").fadeOut();
 		},
 		application: function () {
-			var ApplicationPage = require('./applicationPage/l-application');
-			var applicationPage = new ApplicationPage({user: this.user});
-			this.region.show(applicationPage);
+			// var ApplicationPage = require('./applicationPage/l-application');
+			// var applicationPage = new ApplicationPage({user: this.user});
+			// this.region.show(applicationPage);
 		 }
 	});
 

@@ -26,13 +26,12 @@ define(function(require) {
 		   landingPage.on("goToApplication", function(position, address) {
 			   self.application(position, address);
 		   });
-		   $('.loader').velocity("fadeOut",  "easeInSine", { duration: 800 });
+		   $('.loader').velocity("fadeOut");
        },
        application: function(position, address) {
-		   console.log(address);
            var applicationPage= new ApplicationPage({user: this.user, position: position, address: address});
            this.region.show(applicationPage);
-		   $('.loader').velocity("fadeOut",  "easeInSine", { duration: 800 });
+		   $('.loader').velocity("fadeOut");
        }
    });
 

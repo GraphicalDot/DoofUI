@@ -206,19 +206,6 @@ require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery
 		Doof.start();
 	});
 
-	// var apis = {};
-
-    // //  fetch api end points here
-	// $.ajax({ method: "POST", url: "http://52.76.176.188:8000/apis", data: { "key": '967d2b1f6111a198431532149879983a1ad3501224fb0dbf947499b1' } }).done(function (response) {
-	// 	// console.log(response);
-	// 	if (response.success) {
-	// 		apis = response.result;
-	// 		// store api end points
-	// 	} else {
-	// 		// throw a error
-	// 	}
-	// });
-
     // window.get_trending = "http://52.76.176.188:8000/gettrending";
 	// window.nearest_eateries = "http://52.76.176.188:8000/nearesteateries";
     // window.get_suggestions = "http://52.76.176.188:8000/suggestions";
@@ -230,9 +217,4 @@ require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery
 	// window.writereview = "http://52.76.176.188:8000/writereview";
 	// window.usersdetails = "http://52.76.176.188:8000/usersdetails";
 	// window.userprofile = "http://52.76.176.188:8000/userprofile";
-
-	// // Pass api end points to Doof Application
-    // require(['./doof'], function (Doof) {
-    //     Doof.start({ apis: apis });
-    // });
 });

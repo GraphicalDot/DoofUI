@@ -1,63 +1,59 @@
-/* global requirejs */
-requirejs.config({
+require.config({
     urlArgs: new Date().getTime(),
     waitSeconds: 0,
     paths: {
-        'jquery': './../libraries/jquery.min',
-        'underscore': './../libraries/underscore-min',
-        'backbone': './../libraries/backbone-min',
-        'marionette': './../libraries/backbone.marionette.min',
-        'handlebars': './../libraries/handlebars-v4.0.5',
+        'jquery': '../../node_modules/jquery/dist/jquery',
+        'underscore': '../../node_modules/underscore/underscore',
+        'backbone': '../../node_modules/backbone/backbone',
+        'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
+        'handlebars': '../../node_modules/handlebars/dist/handlebars',
 
-		'radio': './../libraries/backbone.radio',
+		'radio': '../../node_modules/backbone.radio/build/backbone.radio',
 
-        'text': './../libraries/require-text',
-        'r-async': './../libraries/require-async',
+        'text': '../../node_modules/text/text',
 
-        'picker': './../libraries/materialize/js/date_picker/picker',
-        'picker.date': './../libraries/materialize/js/date_picker/picker.date',
-        'animation': './../libraries/materialize/js/animation',
-        'buttons': './../libraries/materialize/js/buttons',
-        'cards': './../libraries/materialize/js/cards',
-        'carousel': './../libraries/materialize/js/carousel',
-        'character_counter': './../libraries/materialize/js/character_counter',
-        'chips': './../libraries/materialize/js/chips',
-        'collapsible': './../libraries/materialize/js/collapsible',
-        'dropdown': './../libraries/materialize/js/dropdown',
-        'forms': './../libraries/materialize/js/forms',
-        'global': './../libraries/materialize/js/global',
-        'hammerjs': './../libraries/materialize/js/hammer.min',
-        'jquery.easing': './../libraries/materialize/js/jquery.easing.1.3',
-        'jquery.hammer': './../libraries/materialize/js/jquery.hammer',
-        'jquery.timeago': './../libraries/materialize/js/jquery.timeago.min',
-        'leanModal': './../libraries/materialize/js/leanModal',
-        'materialbox': './../libraries/materialize/js/materialbox',
-        'parallax': './../libraries/materialize/js/parallax',
-        'prism': './../libraries/materialize/js/prism',
-        'pushpin': './../libraries/materialize/js/pushpin',
-        'scrollFire': './../libraries/materialize/js/scrollFire',
-        'scrollspy': './../libraries/materialize/js/scrollspy',
-        'sideNav': './../libraries/materialize/js/sideNav',
-        'slider': './../libraries/materialize/js/slider',
-        'tabs': './../libraries/materialize/js/tabs',
-        'toasts': './../libraries/materialize/js/toasts',
-        'tooltip': './../libraries/materialize/js/tooltip',
-        'transitions': './../libraries/materialize/js/transitions',
-        'velocity': './../libraries/materialize/js/velocity.min',
-        'waves': './../libraries/materialize/js/waves',
+        'picker': '../../node_modules/materialize-css/js/date_picker/picker',
+        'picker.date': '../../node_modules/materialize-css/js/date_picker/picker.date',
+        'animation': '../../node_modules/materialize-css/js/animation',
+        'buttons': '../../node_modules/materialize-css/js/buttons',
+        'cards': '../../node_modules/materialize-css/js/cards',
+        'carousel': '../../node_modules/materialize-css/js/carousel',
+        'character_counter': '../../node_modules/materialize-css/js/character_counter',
+        'chips': '../../node_modules/materialize-css/js/chips',
+        'collapsible': '../../node_modules/materialize-css/js/collapsible',
+        'dropdown': '../../node_modules/materialize-css/js/dropdown',
+        'forms': '../../node_modules/materialize-css/js/forms',
+        'global': '../../node_modules/materialize-css/js/global',
+        'hammerjs': '../../node_modules/materialize-css/js/hammer.min',
+        'jquery.easing': '../../node_modules/materialize-css/js/jquery.easing.1.3',
+        'jquery.hammer': '../../node_modules/materialize-css/js/jquery.hammer',
+        'jquery.timeago': '../../node_modules/materialize-css/js/jquery.timeago.min',
+        'leanModal': '../../node_modules/materialize-css/js/leanModal',
+        'materialbox': '../../node_modules/materialize-css/js/materialbox',
+        'parallax': '../../node_modules/materialize-css/js/parallax',
+        'prism': '../../node_modules/materialize-css/js/prism',
+        'pushpin': '../../node_modules/materialize-css/js/pushpin',
+        'scrollFire': '../../node_modules/materialize-css/js/scrollFire',
+        'scrollspy': '../../node_modules/materialize-css/js/scrollspy',
+        'sideNav': '../../node_modules/materialize-css/js/sideNav',
+        'slider': '../../node_modules/materialize-css/js/slider',
+        'tabs': '../../node_modules/materialize-css/js/tabs',
+        'toasts': '../../node_modules/materialize-css/js/toasts',
+        'tooltip': '../../node_modules/materialize-css/js/tooltip',
+        'transitions': '../../node_modules/materialize-css/js/transitions',
+        'velocity': '../../node_modules/materialize-css/js/velocity.min',
+        'waves': '../../node_modules/materialize-css/js/waves',
 
-        'd3': './../libraries/d3.v3.min',
-		'nvd3': './../libraries/nvd3',
+        'd3': '../../node_modules/d3/d3',
+		'nvd3': '../../node_modules/nvd3/build/nv.d3',
 
-		'oms': './../libraries/oms.min',
-
-		'async': './../libraries/async',
+		'oms': '../../node_modules/marker-spider/dist/oms.min',
 
         'facebook': '//connect.facebook.net/en_US/sdk',
 
-        'typeahead': './../libraries/typeahead.bundle',
+        'typeahead': '../../node_modules/typeahead/typeahead',
 
-        'es6promise': './../libraries/es6promises'
+        'es6promise': '../../node_modules/es6-promise/dist/es6-promise'
     },
     shim: {
         'jquery': { exports: '$' },
@@ -202,47 +198,41 @@ requirejs.config({
     }
 });
 
+
+
 require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago'], function ($) {
 
-	$.fn.enterKey = function (fnc) {
-		return this.each(function () {
-			$(this).keypress(function (ev) {
-				var keycode = (ev.keyCode ? ev.keyCode : ev.which);
-				if (keycode == '13') {
-					fnc.call(this, ev);
-				}
-			});
-		});
-	}
-
-
-	var apis= {};
-
-    //  fetch api end points here
-	$.ajax({method: "POST", url: "http://52.76.176.188:8000/apis", data: {"key": '967d2b1f6111a198431532149879983a1ad3501224fb0dbf947499b1'}}).done(function(response) {
-		// console.log(response);
-		if(response.success) {
-			apis= response.result;
-			// store api end points
-		} else {
-			// throw a error
-		}
+	require(['./helpers', './doof'], function(Helpers, Doof) {
+		Doof.start();
 	});
 
-    window.get_trending = "http://52.76.176.188:8000/gettrending";
-	window.nearest_eateries= "http://52.76.176.188:8000/nearesteateries";
-    window.get_suggestions = "http://52.76.176.188:8000/suggestions";
-	window.textsearch = "http://52.76.176.188:8000/textsearch";
-	window.geteatery = "http://52.76.176.188:8000/geteatery";
-	window.getkey = "http://52.76.176.188:8000/getkey";
-	window.usersfeedback = "http://52.76.176.188:8000/usersfeedback";
-	window.fetchreview = "http://52.76.176.188:8000/fetchreview";
-	window.writereview = "http://52.76.176.188:8000/writereview";
-	window.usersdetails = "http://52.76.176.188:8000/usersdetails";
-	window.userprofile= "http://52.76.176.188:8000/userprofile";
+	// var apis = {};
 
-	// Pass api end points to Doof Application
-    require(['./doof'], function (Doof) {
-        Doof.start({apis: apis});
-    });
+    // //  fetch api end points here
+	// $.ajax({ method: "POST", url: "http://52.76.176.188:8000/apis", data: { "key": '967d2b1f6111a198431532149879983a1ad3501224fb0dbf947499b1' } }).done(function (response) {
+	// 	// console.log(response);
+	// 	if (response.success) {
+	// 		apis = response.result;
+	// 		// store api end points
+	// 	} else {
+	// 		// throw a error
+	// 	}
+	// });
+
+    // window.get_trending = "http://52.76.176.188:8000/gettrending";
+	// window.nearest_eateries = "http://52.76.176.188:8000/nearesteateries";
+    // window.get_suggestions = "http://52.76.176.188:8000/suggestions";
+	// window.textsearch = "http://52.76.176.188:8000/textsearch";
+	// window.geteatery = "http://52.76.176.188:8000/geteatery";
+	// window.getkey = "http://52.76.176.188:8000/getkey";
+	// window.usersfeedback = "http://52.76.176.188:8000/usersfeedback";
+	// window.fetchreview = "http://52.76.176.188:8000/fetchreview";
+	// window.writereview = "http://52.76.176.188:8000/writereview";
+	// window.usersdetails = "http://52.76.176.188:8000/usersdetails";
+	// window.userprofile = "http://52.76.176.188:8000/userprofile";
+
+	// // Pass api end points to Doof Application
+    // require(['./doof'], function (Doof) {
+    //     Doof.start({ apis: apis });
+    // });
 });

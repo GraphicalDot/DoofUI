@@ -28,7 +28,7 @@ define(function (require) {
 		},
 		application: function (location, nearEateries) {
 			var ApplicationPage = require('./applicationPage/l-applicationPage');
-			var applicationPage = new ApplicationPage({ user: this.user, position: location, eateries: nearEateries });
+			var applicationPage = new ApplicationPage({ user: this.user, position: location, collection: nearEateries });
 			this.region.show(applicationPage);
 			$('.loader').velocity("fadeOut", 1000);
 		}

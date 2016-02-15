@@ -51,7 +51,7 @@ require.config({
 
 		'facebook': '//connect.facebook.net/en_US/sdk',
 
-		'typeahead': '../../node_modules/typeahead/typeahead',
+		'typeahead': '../../node_modules/typeahead.bundle',
 
 		'es6promise': '../../node_modules/es6-promise/dist/es6-promise',
 

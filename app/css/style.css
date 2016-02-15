@@ -199,12 +199,12 @@
 }
 
 .header__nav-menu > li {
-    display: inline-block;
+    /*display: inline-block;*/
     font-size: 0.818rem;
     font-weight: 700;
     text-transform: uppercase;
 	padding: 0 19px;
-	height: 60px;
+	/*height: 60px;*/
 	line-height: 60px;
 	border-left: 1px solid #990000;
     /*margin: 0 14.2px;*/
@@ -265,7 +265,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     clear: both;
-    /*padding-left: 160px;*/
+    /*padding-left: 50px;*/
         font-size: 1.12rem;
     height: 42px;
     line-height: 42px;

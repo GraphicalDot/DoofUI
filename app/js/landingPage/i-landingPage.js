@@ -13,7 +13,7 @@ define(function (require) {
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			this.location = {
-				latLng: [28.613939, 77.209021],
+				latLng: {lat: 28.613939, lng: 77.209021},
 				place: 'Delhi'
 			};
 			this.user = opts.user;
@@ -68,7 +68,7 @@ define(function (require) {
 			var promise = new Promise(function (resolve, reject) {
 				var NearestEateriesModel = require('../models/nearest_eateries');
 				var nearestEateries = new NearestEateriesModel();
-				nearestEateries.fetch({ method: 'POST', data: { latitude: self.location.latLng[0], longitude: self.location.latLng[1] } }).then(function () {
+				nearestEateries.fetch({ method: 'POST', data: { latitude: self.location.latLng.lat, longitude: self.location.latLng.lng } }).then(function () {
 					if (nearestEateries.length) {
 						resolve(nearestEateries);
 					} else {
@@ -107,8 +107,8 @@ define(function (require) {
 						var place = autoComplete.getPlace();
 						if (!place.geometry) { return; }
 						if (place.geometry.location) {
-							self.location.latLng[0] = place.geometry.location.lat();
-							self.location.latLng[1] = place.geometry.location.lng();
+							self.location.latLng.lat = place.geometry.location.lat();
+							self.location.latLng.lng = place.geometry.location.lng();
 						}
 					});
 				});
@@ -119,10 +119,10 @@ define(function (require) {
 			var input = document.getElementById("landingPage-locationBox");
 			self.createGoogleAutocomplete(input);
 			function geoSuccess(position) {
-				self.location.latLng[0] = position.coords.latitude;
-				self.location.latLng[1] = position.coords.longitude;
+				self.location.latLng.lat = position.coords.latitude;
+				self.location.latLng.lng = position.coords.longitude;
 				self.location.accuracy = position.coords.accuracy;
-				self.geoCodeLatLng(self.location.latLng[0], self.location.latLng[1]).then(function () {
+				self.geoCodeLatLng(self.location.latLng.lat, self.location.latLng.lng).then(function () {
 					input.value = self.location.place;
 				}, function (err) {
 					input.value = "Sorry, couldnt get your address. Please find one here."

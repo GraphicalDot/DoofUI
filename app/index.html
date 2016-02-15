@@ -54,7 +54,7 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			background: #faab49;
+			background-color: #fff;
 			z-index: 10;
 		}
 
@@ -63,10 +63,18 @@
 		}
 
 		.loader_status {
-			font-weight: bold;
-			color: #716c6b;
+			font-weight: 300;
+			color: rgba(0, 0, 0, 0.87);
+			margin-top: 14px;
+			font-family: "Roboto";
+		}
+
+		.loader_status .highlight {
+			text-transform: uppercase;
+			color: #E83047;
 			font-size: 1.2rem;
-			margin-top: 20px;
+			font-weight: 700;
+			font-family: "Open Sans", sans-serif;
 		}
 	</style>
 	<link rel="stylesheet" href="css/style.css">
@@ -89,7 +97,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="loader_status">Hello</div>
+		<div class="loader_status">Please wait, we are loading <span class="highlight">Doof</span>.</div>
 	</div>
 	<script data-main="js/requirejs" src="../node_modules/requirejs/require.js"></script>
 

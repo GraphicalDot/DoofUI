@@ -24,13 +24,13 @@ define(function (require) {
 			landingPage.on("goToApplication", function (location, nearEateries) {
 				self.application(location, nearEateries);
 			});
-			$('.loader').velocity("fadeOut");
+			$('.loader').velocity("fadeOut", 1000);
 		},
 		application: function (location, nearEateries) {
 			var ApplicationPage = require('./applicationPage/l-applicationPage');
 			var applicationPage = new ApplicationPage({ user: this.user, position: location, eateries: nearEateries });
 			this.region.show(applicationPage);
-			$('.loader').velocity("fadeOut");
+			$('.loader').velocity("fadeOut", 1000);
 		}
 	});
 

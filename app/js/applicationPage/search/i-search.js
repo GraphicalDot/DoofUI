@@ -124,9 +124,7 @@ define(function (require) {
 							});
 						},
 						templates: {
-							pending: '<div></div>',
 							notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No dish found', '</div>'].join('\n'),
-							empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No dish found', '</div>'].join('\n'),
 							suggestion: function (data) {
 								var str = data.replace(/\s+/g, '');
 								return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
@@ -149,7 +147,7 @@ define(function (require) {
 							});
 						},
 						templates: {
-							empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Restaurant found', '</div>'].join('\n'),
+							notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Restaurant found', '</div>'].join('\n'),
 							suggestion: function (data) {
 								var str = data.replace(/\s+/g, '');
 								return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
@@ -172,7 +170,7 @@ define(function (require) {
 							});
 						},
 						templates: {
-							empty: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Cuisines found', '</div>'].join('\n'),
+							notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Cuisines found', '</div>'].join('\n'),
 							suggestion: function (data) {
 								var str = data.replace(/\s+/g, '');
 								return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
@@ -181,9 +179,9 @@ define(function (require) {
 						}
 					}
 				).on('typeahead:asyncrequest', function () {
-					// $('.Typeahead-spinner').show();
+					$('.Typeahead-spinner').show();
 				}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
-					// $('.Typeahead-spinner').hide();
+					$('.Typeahead-spinner').hide();
 				});
 
 				$("#doof_search_box").bind("typeahead:select", function (ev, suggestion) {
@@ -192,19 +190,19 @@ define(function (require) {
 					var $headerEl = $suggestionEl.closest('.tt-dataset').find('.typeahead-header');
 
 					if ($headerEl.hasClass('food')) {
-						// self.onFoodSelect(suggestion);
+						self.onFoodSelect(suggestion);
 					} else if($headerEl.hasClass('cuisine')) {
-						// self.onCuisineSelect(suggestion);
+						self.onCuisineSelect(suggestion);
 					} else {
-						// self.onRestaurantSelect(suggestion);
+						self.onRestaurantSelect(suggestion);
 					}
 				});
 
 				$("#doof_search_box").enterKey(function (e) {
 					if ($(this).val()) {
-						// self.onNullSelect($(this).val());
+						self.onNullSelect($(this).val());
 					} else {
-						// self.clearSearch();
+						self.clearSearch();
 					}
 				});
 			});
@@ -212,22 +210,6 @@ define(function (require) {
 		onShow: function () {
 			this.makeGeoLocatorBox();
 			this.makeSuggestionBox();
-			// var self= this;
-      //       // require(['typeahead'], function () {
-			// 	var input = document.getElementById("doof_location_box");
-			// 	var autoComplete = new google.maps.places.Autocomplete(input);
-			// 	console.log(input);
-			// 	autoComplete.addListener('place_changed', function () {
-			// 		var place = autoComplete.getPlace();
-			// 		if (!place.geometry) { return; }
-			// 		if (place.geometry.location) {
-			// 			// self.position.lat = place.geometry.location.lat();
-			// 			// self.position.lng = place.geometry.location.lng();
-			// 		}
-			// 	});
-
-
-
 		}
 	});
 

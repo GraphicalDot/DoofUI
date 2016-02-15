@@ -2,6 +2,7 @@
 define(function (require) {
 	"use strict";
 
+	var $ = require('jquery');
 	var Promise = require('es6promise').Promise;
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
@@ -25,6 +26,9 @@ define(function (require) {
 				'getUsername': function () {
 					return this.user.get('name');
 				},
+				'startingAddress': function() {
+					return this.location.place;
+				},
 			}
 		},
 		ui: {
@@ -32,7 +36,19 @@ define(function (require) {
 			'enter_as_options': 'input[type="radio"][name="enter_as"]'
 		},
 		events: {
-			"click @ui.enterButton": "enterInsideDoof"
+			"click @ui.enterButton": "enterInsideDoof",
+			"change @ui.enter_as_options": "changedUserMode"
+		},
+		changedUserMode: function (e) {
+			var target = $(e.currentTarget);
+			var self = this;
+			if (target.hasClass('is_not_logged')) {
+				this.user.login().then(function (success) {
+					self.render();
+				}, function (err) {
+
+				});
+			}
 		},
 		enterInsideDoof: function (e) {
 			e.preventDefault();

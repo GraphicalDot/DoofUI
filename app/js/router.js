@@ -21,14 +21,14 @@ define(function (require) {
 			var LandingPage = require('./landingPage/i-landingPage');
 			var landingPage = new LandingPage({ user: this.user });
 			this.region.show(landingPage);
-			landingPage.on("goToApplication", function (position, address) {
-				self.application(position, address);
+			landingPage.on("goToApplication", function (location, nearEateries) {
+				self.application(location, nearEateries);
 			});
 			$('.loader').velocity("fadeOut");
 		},
-		application: function (position, address) {
+		application: function (location, nearEateries) {
 			var ApplicationPage = require('./applicationPage/l-applicationPage');
-			var applicationPage = new ApplicationPage({ user: this.user, position: position, address: address });
+			var applicationPage = new ApplicationPage({ user: this.user, position: location, eateries: nearEateries });
 			this.region.show(applicationPage);
 			$('.loader').velocity("fadeOut");
 		}

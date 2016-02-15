@@ -20,16 +20,23 @@
 	<div class="landing-content__enter_application">
 		<div class="landingPage-content__locationBox-wrapper">
 			<label for="landingPage-locationBox"><i class="material-icons">place</i></label>
-			<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location">
+			<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location" value="{{startingAddress}}">
 		</div>
 		<div class="landingPage-content__enterApplication-wrapper">
 			<div class="landingPage-content__enter-btn"><a href="#/application" id="landingPage-enter-btn" class="btn waves-effect waves-light">Enter Application</a></div>
 			<input type="radio" name="enter_as" id="guest">
 			<label for="guest">Enter as Guest</label>
-			<input type="radio" name="enter_as" id="facebook">
+			{{#if isUserAuthorized}}
+			<input type="radio" name="enter_as" id="facebook" class="is_logged">
 			<label for="facebook">
-				{{#if isUserAuthorized}} Enter as {{getUsername}} {{else}} Enter using Facebook Account {{/if}}
+				Enter as {{getUsername}}
 			</label>
+			{{else}}
+			<input type="radio" name="enter_as" id="facebook" class="is_not_logged">
+			<label for="facebook">
+				Enter using Facebook Account
+			</label>
+			{{/if}}
 		</div>
 	</div>
 	<!--<div class="landingPage-content__madmachines">

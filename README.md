@@ -13,7 +13,12 @@ Steps:-
 3. https://thesocietea.org/2016/01/building-es6-javascript-for-the-browser-with-gulp-babel-and-more -> ES6
 
 
+https://adblitz.withyoutube.com
+
 a. http://featurejs.com/
 b. https://ellisonleao.github.io/sharer.js ->  Create custom social share elements on DOM objects
 
 c. http://www.sitepoint.com/parallel-javascript-with-paralleljs
+
+
+Sharing is caring .. https://ellisonleao.github.io/sharer.js/

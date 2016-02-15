@@ -50,13 +50,17 @@ define(function (require) {
 						}, { silent: true });
 						resolve();
 					});
+				} else {
+					resolve();
 				}
 			});
 			return promise;
 		},
 		sendUserData: function () {
-			var userDetails = new UserDetailModel();
-			userDetails.fetch({ method: 'POST', data: { email: this.get('email'), fb_id: this.get('id'), picture: this.get('picture'), name: this.get('name') } });
+			if(this.get('status')) {
+				var userDetails = new UserDetailModel();
+				userDetails.fetch({ method: 'POST', data: { email: this.get('email'), fb_id: this.get('id'), picture: this.get('picture'), name: this.get('name') } });
+			}
 		},
 		isAuthorized: function () {
 			return Boolean(this.get("third_party_id"));
@@ -66,6 +70,7 @@ define(function (require) {
 			var promise = new Promise(function (resolve, reject) {
 				FB.login(function (response) {
 					if (response.authResponse) {
+						self.set({ status: response.status }, { silent: true });
 						self.fetchInfo().then(function () {
 							self.sendUserData();
 							resolve();

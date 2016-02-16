@@ -1,6 +1,5 @@
 /* global Materialize */
 define(function (require) {
-
 	"use strict";
 
 	var $ = require('jquery');
@@ -9,6 +8,8 @@ define(function (require) {
 	var Template = require('text!./header.html');
 
 	var Radio = require('radio');
+
+	var ProfileView = require('./../user-profile/view');
 
 	return Marionette.ItemView.extend({
 		initialize: function () {
@@ -35,8 +36,7 @@ define(function (require) {
 		},
 		showProfile: function (e) {
 			e.preventDefault();
-			var ProfileView = require('./../user-profile/view');
-			var profileView = new ProfileView({ model: this.model });
+
 			this.applicationChannel.trigger("showProfile", profileView);
 			// this.showChildView('profile-box', profileView);
 		},

@@ -199,7 +199,7 @@
 }
 
 .header__nav-menu > li {
-    /*display: inline-block;*/
+    display: inline-block;
     font-size: 0.818rem;
     font-weight: 700;
     text-transform: uppercase;

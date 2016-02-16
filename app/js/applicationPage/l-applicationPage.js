@@ -1,15 +1,14 @@
 define(function (require) {
 	"use strict";
 
-	// var $ = require('jquery');
 	// var Backbone = require('backbone');
+	var $ = require('jquery');
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./applicationPage.html');
 
 	// var Promise = require('es6promise').Promise;
 
-	// var ListView = require('./listView/c-list');
 	// var MapView = require('./mapView/i-map');
 	// var Restaurants = require('./../models/restaurants');
 
@@ -33,6 +32,7 @@ define(function (require) {
 	// }
 
 	var SearchView= require('./search/i-search');
+	var ListView = require('./listView/c-list');
 
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
@@ -52,6 +52,7 @@ define(function (require) {
 			this.address= opts.position.place;
 
 			this.searchView= new SearchView({address: this.address, latLng: this.latLng});
+			this.listView = new ListView({ collection: this.collection, user: this.user });
 			// 			var self = this;
 			// 			this.applicationChannel = Radio.channel('application');
 			// 			self.user = opts.user;
@@ -109,9 +110,19 @@ define(function (require) {
 			// }
 		},
 		events: {
+			'click  #sub-menu-food-item': 'subMenuFoodClicked',
+			'click #sub-menu-restaurant-item': 'subMenuRestaurantClicked'
 			// 'submit form#feedback-form': 'submitFeedback',
 			// 'click .seeNearMe': 'showNearMe',
 			// 'click .seeTrending': 'showTrending',
+		},
+		subMenuFoodClicked: function(e) {
+			e.preventDefault();
+			console.log('Food clciked');
+		},
+		subMenuRestaurantClicked: function(e) {
+			e.preventDefault();
+			console.log('Restaurant clciked');
 		},
 		submitFeedback: function (e) {
 			// e.preventDefault();
@@ -215,6 +226,8 @@ define(function (require) {
 		},
 		onShow: function () {
 			this.showChildView('search', this.searchView);
+			this.showChildView('list', this.listView);
+			$('ul.sub-menu').tabs();
 			// var self = this;
 			// this.showChildView('header', this.headerView);
 			// this.searchView = new SearchBox({ position: self.position, address: self.address });

@@ -451,49 +451,49 @@ i.empty_message_icon {
 }
 
 .left-body .sub-menu {
-    margin: 0;
+    /*margin: 0;*/
     /*display: none!important;*/
-    height: 46px;
+    /*height: 46px;
     line-height: 46px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around;*/
     border-bottom: 1px solid rgba(212, 210, 210, 0.62);
     box-shadow: 0 0px 2px rgba(212, 210, 210, 0.62);
-	background-color: white;
-	position: relative;
+	/*background-color: white;
+	position: relative;*/
 }
 
 .sub-menu-indicator {
-	position: absolute;
+	/*position: absolute;
 	left: 0;
 	bottom: 0;
 	width: 50%;
 	height: 3px;
     background-color: #ffb606;
-    will-change: left, right;
+    will-change: left, right;*/
 }
 
 .sub-menu li {
-    display: inline-block;
+    /*display: inline-block;
     color: rgba(0,0,0,0.718);
     font-weight: bold;
     font-size: 0.875rem;
 	flex: 1;
-	text-align: center;
+	text-align: center;*/
 }
 
 .sub-menu li:first-child {
-	border-right: 1px solid #e5e5e5;
+	/*border-right: 1px solid #e5e5e5;*/
 	/*border-bottom: 3px solid #ffb606;*/
 }
 
 .sub-menu li a {
-	color: #999999;
-	text-transform: uppercase;
+	/*color: #999999;
+	text-transform: uppercase;*/
 }
 
 .sub-menu li a.active {
-	color: #333;
+	/*color: #333;*/
 }
 
 .left-body .list {

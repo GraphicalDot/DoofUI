@@ -9,6 +9,7 @@ define(function(require) {
 		model: Eatery,
 		url: "http://52.76.176.188:8000/nearesteateries",
 		parse: function(response) {
+			if(response.error) {return [];}
 			return response.result;
 		}
 	});

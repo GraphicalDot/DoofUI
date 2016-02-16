@@ -138,11 +138,11 @@ define(function (require) {
 
 		},
 		onDomRefresh: function () {
-			$('ul.detail_tabs').tabs();
 
 		},
 		onShow: function () {
 			var self= this;
+			$('ul.detail_tabs').tabs();
 			this.makeCharts();
 			$('.detail').removeClass('hide');
 

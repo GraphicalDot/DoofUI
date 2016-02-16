@@ -9,13 +9,10 @@ define(function (require) {
 
 	// var Promise = require('es6promise').Promise;
 
-	// var MapView = require('./mapView/i-map');
 	// var Restaurants = require('./../models/restaurants');
 
 	// var SearchBox = require('./search/i-search');
 
-	// var Restaurant = require('./../models/restaurant');
-	// var RestaurantDetailView = require('./detailView/i-detailView');
 
 	// var Radio = require('radio');
 
@@ -33,6 +30,12 @@ define(function (require) {
 
 	var SearchView= require('./search/i-search');
 	var ListView = require('./listView/c-list');
+	var MapView = require('./mapView/i-map');
+	var RestaurantDetailView = require('./detailView/i-detailView');
+
+	var TrendingItems= require('./../models/get_trending');
+	var NearbyRestaurants= require('./../models/nearest_eateries');
+	var Restaurant = require('./../models/geteatery');
 
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
@@ -53,6 +56,7 @@ define(function (require) {
 
 			this.searchView= new SearchView({address: this.address, latLng: this.latLng});
 			this.listView = new ListView({ collection: this.collection, user: this.user });
+			this.mapView = new MapView({ collection: this.collection, lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
 			// 			var self = this;
 			// 			this.applicationChannel = Radio.channel('application');
 			// 			self.user = opts.user;
@@ -62,7 +66,6 @@ define(function (require) {
 			// 			this.collection = new Restaurants();
 
 			// 			this.listView = new ListView({ collection: this.collection, user: this.user });
-			// 			this.mapView = new MapView({ collection: this.collection, lat: this.position[0], lng: this.position[1], user: this.user });
 
 			// 			this.applicationChannel.on("showProfile", function (profileView) {
 			// 				self.showChildView('profile-box', profileView);
@@ -110,19 +113,34 @@ define(function (require) {
 			// }
 		},
 		events: {
-			'click  #sub-menu-food-item': 'subMenuFoodClicked',
-			'click #sub-menu-restaurant-item': 'subMenuRestaurantClicked'
+			'click  #sub-menu-trending-item': 'subMenuTrendingClicked',
+			'click #sub-menu-nearme-item': 'subMenuNearmeClicked'
 			// 'submit form#feedback-form': 'submitFeedback',
-			// 'click .seeNearMe': 'showNearMe',
-			// 'click .seeTrending': 'showTrending',
 		},
-		subMenuFoodClicked: function(e) {
-			e.preventDefault();
-			console.log('Food clciked');
+		childEvents: {
+			'open:restaurant': 'openRestaurant'
 		},
-		subMenuRestaurantClicked: function(e) {
+		updateDataInApplication: function(newCollection) {
+			this.listView.updateCollection(newCollection);
+			this.mapView.updateMarkers(newCollection);
+		},
+		subMenuTrendingClicked: function(e) {
 			e.preventDefault();
-			console.log('Restaurant clciked');
+			var self= this;
+			var trendingItems= new TrendingItems();
+			trendingItems.fetch({method: 'POST', data: {latitude: this.latLng.lat, longitude:  this.latLng.lng}}).done(function() {
+				self.collection= trendingItems;
+				self.updateDataInApplication(self.collection);
+			});
+		},
+		subMenuNearmeClicked: function(e) {
+			e.preventDefault();
+			var self= this;
+			var nearbyRestaurants= new NearbyRestaurants();
+			nearbyRestaurants.fetch({method: 'POST', data: {latitude: this.latLng.lat, longitude: this.latLng.lng}}).done(function() {
+				self.collection= nearbyRestaurants;
+				self.updateDataInApplication(self.collection);
+			});
 		},
 		submitFeedback: function (e) {
 			// e.preventDefault();
@@ -141,44 +159,19 @@ define(function (require) {
 			// }
 			//submit form here.
 		},
-
-		showNearMe: function (e) {
-			// var self = this;
-			// e.preventDefault();
-			// var NearbyRestaurants = Backbone.Collection.extend({ url: window.nearest_eateries, parse: function (res) { return res.result; } });
-			// this.nearbyRestaurants = new NearbyRestaurants();
-			// this.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: this.position[0], longitude: this.position[1] } }).then(function () {
-			// 	$(".seeNearMe").addClass('active');
-			// 	$(".seeTrending").removeClass('active');
-			// 	var xPosition = $(".seeNearMe").parent().offset();
-			// 	$(".sub-menu-indicator").css({ "left": xPosition.left - 1 });
-
-			// 	self.showRestaurants(self.nearbyRestaurants, 'nearby');
-			// });
-		},
-		showTrending: function (e) {
-			// e.preventDefault();
-			// $(".seeNearMe").removeClass('active');
-			// $(".seeTrending").addClass('active');
-			// var xPosition = $(".seeTrending").parent().offset();
-			// $(".sub-menu-indicator").css({ "left": xPosition.left - 1 });
-			// var trending_restaurant_data = this.collection;
-			// this.mapView.updateMarkers(trending_restaurant_data);
-			// this.listView.updateCollection(trending_restaurant_data);
-		},
 		showRestaurants: function (restaurant_data, isNearby) {
 			// var self = this;
 			// if (!restaurant_data) { restaurant_data = this.collection; };
 			// self.mapView.updateMarkers(restaurant_data);
 			// self.listView.updateCollection(restaurant_data, isNearby);
 		},
-		openRestaurant: function (restaurant_id, restaurant_detail) {
-			// var self = this;
-			// var restaurant = new Restaurant();
-			// var detailView = new RestaurantDetailView({ model: restaurant, restaurant_detail: restaurant_detail, user: self.user });
-			// restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
-			// 	self.showChildView('detail', detailView);
-			// });
+		openRestaurant: function (childView, restaurant_id, restaurant_details) {
+			var self= this;
+			var restaurant= new Restaurant();
+			var detailView = new RestaurantDetailView({ model: restaurant, user: self.user, restaurant_detail: restaurant_details });
+			restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
+				self.showChildView('detail', detailView);
+			});
 		},
 		showRestaurant: function (childView, restaurant_id, restaurant_detail) {
 			// var self = this;
@@ -227,13 +220,13 @@ define(function (require) {
 		onShow: function () {
 			this.showChildView('search', this.searchView);
 			this.showChildView('list', this.listView);
+			this.showChildView('map', this.mapView);
 			$('ul.sub-menu').tabs();
 			// var self = this;
 			// this.showChildView('header', this.headerView);
 			// this.searchView = new SearchBox({ position: self.position, address: self.address });
 			// this.showChildView('search', this.searchView);
 			// this.fetchXhr = self.collection.fetch({ method: 'POST', data: { latitude: self.position.lat, longitude: self.position.lng } }).done(function () {
-			// 	self.showChildView('map', self.mapView);
 			// 	self.showChildView('list', self.listView);
 			// });
 		}

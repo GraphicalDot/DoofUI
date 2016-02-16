@@ -143,8 +143,8 @@ define(function (require) {
 
                 google.maps.event.addListener(googleMapMarker, 'click', function () {
                     var marker_id = this.get('restaurant_id');
-                    self.applicationChannel.trigger("show:restaurant", marker_id, datum);
-                    // self.triggerMethod('show:restaurant', marker_id, datum);
+                    // self.applicationChannel.trigger("show:restaurant", marker_id, datum);
+                    self.triggerMethod('open:restaurant', marker_id, datum);
                 });
 
 				// self.oms.addMarker(googleMapMarker);
@@ -158,7 +158,7 @@ define(function (require) {
         },
         onShow: function () {
             var self = this;
-			require([ './gmapsloader'], function(GoogleMapsLoader){
+			require(['google-map-loader'], function(GoogleMapsLoader){
 				GoogleMapsLoader.done(function(GoogleMaps){
 					// require(['oms'], function(OverlappingMarkerSpiderfier) {
 						var mapCanvas = document.getElementById("map-view");

@@ -63,7 +63,8 @@ define(function (require) {
             // this.triggerMethod('itemview:unhighlightMarker:restaurant', this.model.get('__eatery_id'));
         },
         show: function () {
-            this.applicationChannel.trigger("show:restaurant", this.model.get('__eatery_id'), this.model.toJSON());
+					this.triggerMethod('open:restaurant', this.model.get('__eatery_id'), this.model.toJSON());
+            // this.applicationChannel.trigger("show:restaurant", this.model.get('__eatery_id'), this.model.toJSON());
             // this.triggerMethod('itemview:show:restaurant', this.model.get('__eatery_id'), this.model.toJSON());
         },
         templateHelpers: {

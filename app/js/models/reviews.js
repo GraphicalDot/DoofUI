@@ -1,9 +1,9 @@
-define(function(require) {
-	"use strict";
+// define(function(require) {
+// 	"use strict";
 
-	var Backbone= require('backbone');
+// 	var Backbone= require('backbone');
 
-	var Feedback= Backbone.Model.extend({
-		url: window.usersfeedback
-	});
-});
+// 	var Feedback= Backbone.Model.extend({
+// 		url: window.usersfeedback
+// 	});
+// });

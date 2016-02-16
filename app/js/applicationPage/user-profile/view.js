@@ -1,31 +1,31 @@
-define(function(require) {
+define(function (require) {
 
 	"use strict";
 
-	var $= require('jquery');
-	var Handlebars= require('handlebars');
-	var Marionette= require('marionette');
-	var Template= require('text!./user-profile.html');
+	var $ = require('jquery');
+	var Handlebars = require('handlebars');
+	var Marionette = require('marionette');
+	var Template = require('text!./user-profile.html');
 
-	var UserReviews= require('./../../models/user_profile');
+	var UserReviews = require('./../../models/user_profile');
 
 	return Marionette.ItemView.extend({
 		id: "user-profile",
 		template: Handlebars.compile(Template),
-		initialize: function() {
-			var self= this;
-			var id= this.model.get('id');
-			this.reviews= new UserReviews();
-			this.reviews.fetch({method: "POST", data: {fb_id: id}}).then(function() {
+		initialize: function () {
+			var self = this;
+			var id = this.model.get('id');
+			this.reviews = new UserReviews();
+			this.reviews.fetch({ method: "POST", data: { fb_id: id } }).then(function () {
 				self.render();
 			});
 		},
-		templateHelpers: function() {
+		templateHelpers: function () {
 			return {
-				reviews: function() {
+				reviews: function () {
 					return this.reviews.toJSON();
 				},
-				userPhoto: function() {
+				userPhoto: function () {
 					return this.model.get('image');
 				}
 			}
@@ -33,12 +33,12 @@ define(function(require) {
 		events: {
 			'click .close-user-profile-btn': 'removeSelf'
 		},
-		removeSelf: function(e) {
+		removeSelf: function (e) {
 			e.preventDefault();
 			this.destroy();
 			$('.profile-box').addClass('hide');
 		},
-		onShow: function() {
+		onShow: function () {
 			$('.profile-box').removeClass('hide');
 		}
 	});

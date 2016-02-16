@@ -57,7 +57,7 @@ define(function (require) {
 			return promise;
 		},
 		sendUserData: function () {
-			if(this.get('status')) {
+			if (this.get('status')) {
 				var userDetails = new UserDetailModel();
 				userDetails.fetch({ method: 'POST', data: { email: this.get('email'), fb_id: this.get('id'), picture: this.get('picture'), name: this.get('name') } });
 			}

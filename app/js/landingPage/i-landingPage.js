@@ -13,7 +13,7 @@ define(function (require) {
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			this.location = {
-				latLng: {lat: 28.613939, lng: 77.209021},
+				latLng: { lat: 28.613939, lng: 77.209021 },
 				place: 'Delhi'
 			};
 			this.user = opts.user;
@@ -26,7 +26,7 @@ define(function (require) {
 				'getUsername': function () {
 					return this.user.get('name');
 				},
-				'startingAddress': function() {
+				'startingAddress': function () {
 					return this.location.place;
 				},
 			}

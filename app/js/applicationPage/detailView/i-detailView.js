@@ -12,8 +12,8 @@ define(function (require) {
 
 	var d3 = require('d3');
 
-	var Reviews= require('./../../models/fetch_review');
-	var WriteReview= require('./../../models/write_review');
+	var Reviews = require('./../../models/fetch_review');
+	var WriteReview = require('./../../models/write_review');
 
 	return Marionette.ItemView.extend({
 		id: 'detail-view',
@@ -26,7 +26,7 @@ define(function (require) {
 			this.reviews = new Reviews();
 
 			var ReviewsView = require('./i-reviewslist');
-			this.reviewsView = new ReviewsView({ collection: this.reviews, __eatery_id: this.restaurant_detail.__eatery_id  });
+			this.reviewsView = new ReviewsView({ collection: this.reviews, __eatery_id: this.restaurant_detail.__eatery_id });
 		},
 		ui: {
 			reviewBox: ".reviews-list"
@@ -35,9 +35,9 @@ define(function (require) {
 			return {
 				'restaurant-name': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_name : this.restaurant_detail.eatery_name,
 				'restaurant-address': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_address : this.restaurant_detail.eatery_address,
-                reviews: function () {
-                    return this.reviews.toJSON();
-                },
+				reviews: function () {
+					return this.reviews.toJSON();
+				},
 			}
 		},
 		events: {
@@ -51,20 +51,20 @@ define(function (require) {
 		},
 		reviewSubmit: function (e) {
 			e.preventDefault();
-            var self = this;
+			var self = this;
 			var review = $("#review-box").val();
 
 			var sendReview = new WriteReview();
 
 			if (this.user.isAuthorized()) {
-				var eatery_name= this.restaurant_detail.eatery_name ? this.restaurant_detail.eatery_name : this.restaurant_detail.eatery_details.eatery_name;
+				var eatery_name = this.restaurant_detail.eatery_name ? this.restaurant_detail.eatery_name : this.restaurant_detail.eatery_details.eatery_name;
 				sendReview.fetch({ method: 'POST', data: { fb_id: this.user.get('id'), "review_text": review, "__eatery_id": this.restaurant_detail.__eatery_id, "eatery_name": eatery_name } }).then(function (response) {
-                    if (response.success) {
-                        $("#review-box").val('');
+					if (response.success) {
+						$("#review-box").val('');
 						self.reviews.add(response.result);
 						self.reviewsView.render();
-                        Materialize.toast('Your review has been posted.', 4000);
-                    }
+						Materialize.toast('Your review has been posted.', 4000);
+					}
 				});
 			} else {
 				Materialize.toast('Please login to submit', 4000);
@@ -139,7 +139,7 @@ define(function (require) {
 
 		},
 		onShow: function () {
-			var self= this;
+			var self = this;
 			$('ul.detail_tabs').tabs();
 			this.makeCharts();
 			$('.detail').removeClass('hide');

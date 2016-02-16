@@ -2,21 +2,21 @@
     <h6>{{newCategory.value}}</h6>
 {{/if}}-->
 {{#if isFood}}
-	<div class="restaurant-photo">
-		<img src="css/images/placeholder_food.png" class="food_image">
-		<span class="restaurant-rating">{{restaurant_overall_sentiment}}</span>
-	</div>
+<div class="restaurant-photo">
+	<img src="css/images/placeholder_food.png" class="food_image">
+	<span class="restaurant-rating">{{restaurant_overall_sentiment}}</span>
+</div>
 {{else}}
-	<div class="restaurant-photo">
-		<img src="css/images/placeholder_rest.png" class="restaurant_image">
-		<span class="restaurant-rating">{{restaurant_overall_sentiment}}</span>
-	</div>
+<div class="restaurant-photo">
+	<img src="css/images/placeholder_rest.png" class="restaurant_image">
+	<span class="restaurant-rating">{{restaurant_overall_sentiment}}</span>
+</div>
 {{/if}}
 <div class="restaurant-list">
 	{{#if isFood}}
-		<div class="food-detail card-header">
-			<div class="food-name">{{name}}</div>
-			<!--<div class="food-sentiments">
+	<div class="food-detail card-header">
+		<div class="food-name">{{name}}</div>
+		<!--<div class="food-sentiments">
 				{{#if_eq sentiment "excellent"}}
 					<i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i>
 				{{/if_eq}}
@@ -34,17 +34,17 @@
 				{{/if_eq}}
 				 <br/> {{total_sentiments}} sentiments
 			</div>-->
-		</div>
-		<div class="restaurant-detail card-description">
-			<div class="restaurant-name"><span>{{escapedRestaurantName}}</span></div>
-			<div class="restaurant-address">{{escapedAddreess}}</div>
-		</div>
+	</div>
+	<div class="restaurant-detail card-description">
+		<div class="restaurant-name"><span>{{escapedRestaurantName}}</span></div>
+		<div class="restaurant-address">{{escapedAddreess}}</div>
+	</div>
 
 	{{else}}
 
-		<div class="restaurant-detail card-header">
-			<div class="restaurant-name">{{escapedRestaurantName}}</div>
-			<!--<div class="restaurant-sentiments">
+	<div class="restaurant-detail card-header">
+		<div class="restaurant-name">{{escapedRestaurantName}}</div>
+		<!--<div class="restaurant-sentiments">
 				{{#if_eq sentiment "excellent"}}
 					<i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i><i class="material-icons good active">mood</i>
 				{{/if_eq}}
@@ -62,12 +62,12 @@
 				{{/if_eq}}
 				<br/> {{eatery_details.overall.total_sentiments}} sentiments
 			</div>-->
-		</div>
-        <div class="restaurant-address">{{escapedAddreess}}</div>
-		<div class="restaurant-top-foods">
-			{{#each top_foods}}
-				<div class="top_food_item"><i class="material-icons">star</i><span>{{this}}</span></div>
-			{{/each}}
-		</div>
+	</div>
+	<div class="restaurant-address">{{escapedAddreess}}</div>
+	<div class="restaurant-top-foods">
+		{{#each top_foods}}
+		<div class="top_food_item"><i class="material-icons">star</i><span>{{this}}</span></div>
+		{{/each}}
+	</div>
 	{{/if}}
 </div>

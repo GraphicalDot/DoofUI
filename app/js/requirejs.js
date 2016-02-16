@@ -207,16 +207,4 @@ require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery
 	require(['./helpers', './doof'], function (Helpers, Doof) {
 		Doof.start();
 	});
-
-	// window.get_trending = "http://52.76.176.188:8000/gettrending";
-	// window.nearest_eateries = "http://52.76.176.188:8000/nearesteateries";
-	// window.get_suggestions = "http://52.76.176.188:8000/suggestions";
-	// window.textsearch = "http://52.76.176.188:8000/textsearch";
-	// window.geteatery = "http://52.76.176.188:8000/geteatery";
-	// window.getkey = "http://52.76.176.188:8000/getkey";
-	// window.usersfeedback = "http://52.76.176.188:8000/usersfeedback";
-	// window.fetchreview = "http://52.76.176.188:8000/fetchreview";
-	// window.writereview = "http://52.76.176.188:8000/writereview";
-	// window.usersdetails = "http://52.76.176.188:8000/usersdetails";
-	// window.userprofile = "http://52.76.176.188:8000/userprofile";
 });

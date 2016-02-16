@@ -8,7 +8,7 @@ define(function (require) {
 
 	// var Radio = require('radio');
 
-	var TextSearchModel= require('./../../models/text_search');
+	var TextSearchModel = require('./../../models/text_search');
 
 	var SearchBox = Marionette.ItemView.extend({
 		id: 'doof-search-view',
@@ -16,7 +16,7 @@ define(function (require) {
 		initialize: function (opts) {
 			this.position = { lat: opts.latLng.lat, lng: opts.latLng.lng };
 			this.address = opts.address;
-			this.textSearchModel= new TextSearchModel();
+			this.textSearchModel = new TextSearchModel();
 			// this.model= new SearchModel();
 			// this.position= opts.position;
 			// this.address= opts.address;
@@ -45,12 +45,12 @@ define(function (require) {
 			// this.onNullSelect(searchValue);
 		},
 		onCuisineSelect: function (cuisine_name) {
-			var self= this;
+			var self = this;
 			// if(!cuisine_name) {
 			// 	this.clearSearch();
 			// 	return;
 			// }
-			this.textSearchModel.fetch({method: 'POST', data: {type: 'cuisine', text: cuisine_name}}).then(function() {
+			this.textSearchModel.fetch({ method: 'POST', data: { type: 'cuisine', text: cuisine_name } }).then(function () {
 				console.log(self.textSearchModel);
 				self.triggerMethod('show:restaurants', self.textSearchModel);
 			});
@@ -61,7 +61,7 @@ define(function (require) {
 			// 	this.clearSearch();
 			// 	return;
 			// }
-			this.textSearchModel.fetch({method: 'POST', data: {type: 'dish', text: food_name}}).then(function() {
+			this.textSearchModel.fetch({ method: 'POST', data: { type: 'dish', text: food_name } }).then(function () {
 				self.triggerMethod('show:restaurants', self.textSearchModel);
 			});
 			// 	self.applicationChannel.trigger('show:restaurants', self.model);
@@ -73,7 +73,7 @@ define(function (require) {
 			// 	this.clearSearch();
 			// 	return;
 			// }
-			this.textSearchModel.fetch({method: 'POST', data: {type: 'eatery', text: restaurant_name}}).then(function() {
+			this.textSearchModel.fetch({ method: 'POST', data: { type: 'eatery', text: restaurant_name } }).then(function () {
 				self.triggerMethod('open:restaurant', self.textSearchModel.toJSON()[0].__eatery_id, self.textSearchModel.toJSON()[0]);
 			});
 		},
@@ -109,8 +109,8 @@ define(function (require) {
 			});
 		},
 		makeSuggestionBox: function () {
-			var self= this;
-			require(["typeahead"], function() {
+			var self = this;
+			require(["typeahead"], function () {
 				$("#doof_search_box").typeahead(
 					{ hint: true, highlight: true, minLength: 4 },
 					{
@@ -183,11 +183,11 @@ define(function (require) {
 							header: '<i class="material-icons suggestion-type typeahead-header cuisine">local_dining</i><span>Cuisines</span>'
 						}
 					}
-				).on('typeahead:asyncrequest', function () {
-					$('.Typeahead-spinner').show();
-				}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
-					$('.Typeahead-spinner').hide();
-				});
+					).on('typeahead:asyncrequest', function () {
+						$('.Typeahead-spinner').show();
+					}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
+						$('.Typeahead-spinner').hide();
+					});
 
 				$("#doof_search_box").bind("typeahead:select", function (ev, suggestion) {
 					var str = suggestion.replace(/\s+/g, '');
@@ -196,7 +196,7 @@ define(function (require) {
 
 					if ($headerEl.hasClass('food')) {
 						self.onFoodSelect(suggestion);
-					} else if($headerEl.hasClass('cuisine')) {
+					} else if ($headerEl.hasClass('cuisine')) {
 						self.onCuisineSelect(suggestion);
 					} else {
 						self.onRestaurantSelect(suggestion);

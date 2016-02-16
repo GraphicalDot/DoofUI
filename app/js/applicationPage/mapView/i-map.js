@@ -130,14 +130,14 @@ define(function (require) {
 
                 google.maps.event.addListener(googleMapMarker, 'mouseover', function () {
                     self.infoWindow.setContent(this.get('html'));
-                    self.applicationChannel.trigger("highlight:restaurant", this.get('restaurant_id'));
-                    // self.triggerMethod('highlight:restaurant', this.get('restaurant_id'));
+                    // self.applicationChannel.trigger("highlight:restaurant", this.get('restaurant_id'));
+                    self.triggerMethod('highlight:restaurant', this.get('restaurant_id'));
                     self.infoWindow.open(self.map, this);
                 });
 
                 google.maps.event.addListener(googleMapMarker, 'mouseout', function () {
-                    self.applicationChannel.trigger("unhighlight:restaurant", this.get('restaurant_id'));
-                    // self.triggerMethod('unhighlight:restaurant', this.get('restaurant_id'));
+                    // self.applicationChannel.trigger("unhighlight:restaurant", this.get('restaurant_id'));
+                    self.triggerMethod('unhighlight:restaurant', this.get('restaurant_id'));
                     self.infoWindow.close();
                 });
 

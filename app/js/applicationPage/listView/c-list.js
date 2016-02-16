@@ -54,12 +54,12 @@ define(function (require) {
         },
         highlight: function () {
             $(this.el).addClass('active');
-            this.applicationChannel.trigger("highlightMarker:restaurant", this.model.get('__eatery_id'));
-            // this.triggerMethod('itemview:highlightMarker:restaurant', this.model.get('__eatery_id'));
+            // this.applicationChannel.trigger("highlightMarker:restaurant", this.model.get('__eatery_id'));
+            this.triggerMethod('highlight:marker', this.model.get('__eatery_id'));
         },
         unhighlight: function () {
             $(this.el).removeClass('active');
-            this.applicationChannel.trigger("unhighlightMarker:restaurant", this.model.get('__eatery_id'));
+            this.applicationChannel.trigger("unhighlight:marker", this.model.get('__eatery_id'));
             // this.triggerMethod('itemview:unhighlightMarker:restaurant', this.model.get('__eatery_id'));
         },
         show: function () {

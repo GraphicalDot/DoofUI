@@ -12,18 +12,17 @@ define(function (require) {
 
 	var d3 = require('d3');
 
-
+	var Reviews= require('./../../models/fetch_review');
+	var WriteReview= require('./../../models/write_review');
 
 	return Marionette.ItemView.extend({
 		id: 'detail-view',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
-			var self = this;
+			// var self = this;
 			this.restaurant_detail = opts.restaurant_detail;
-            // var eatery_id= opts.restaurant_detail
+			// var eatery_id= opts.restaurant_detail
 			this.user = opts.user;
-
-			var Reviews = Backbone.Collection.extend({ url: window.fetchreview, parse: function (res) { return res.result; } });
 			this.reviews = new Reviews();
 
 			var ReviewsView = require('./i-reviewslist');
@@ -55,8 +54,7 @@ define(function (require) {
             var self = this;
 			var review = $("#review-box").val();
 
-			var SendReview = Backbone.Model.extend({ url: window.writereview });
-			var sendReview = new SendReview();
+			var sendReview = new WriteReview();
 
 			if (this.user.isAuthorized()) {
 				var eatery_name= this.restaurant_detail.eatery_name ? this.restaurant_detail.eatery_name : this.restaurant_detail.eatery_details.eatery_name;

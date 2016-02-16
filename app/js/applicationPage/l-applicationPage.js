@@ -2,32 +2,10 @@
 define(function (require) {
 	"use strict";
 
-	// var Backbone = require('backbone');
 	var $ = require('jquery');
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./applicationPage.html');
-
-	// var Promise = require('es6promise').Promise;
-
-	// var Restaurants = require('./../models/restaurants');
-
-	// var SearchBox = require('./search/i-search');
-
-
-	// var Radio = require('radio');
-
-	// function findLatLong() {
-	// 	var promise = new Promise(function (resolve) {
-	// 		if (navigator.geolocation) {
-	// 			navigator.geolocation.getCurrentPosition(function (position) {
-	// 				resolve({ lat: position.coords.latitude, lng: position.coords.longitude });
-	// 			});
-	// 		}
-	// 	});
-	// 	return promise;
-
-	// }
 
 	var SearchView = require('./search/i-search');
 	var UserProfileView = require('./_header/i-userProfile');
@@ -61,35 +39,6 @@ define(function (require) {
 			this.headerView = new UserProfileView({ model: this.user });
 			this.listView = new ListView({ collection: this.collection, user: this.user });
 			this.mapView = new MapView({ collection: this.collection, lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
-			// 			this.applicationChannel = Radio.channel('application');
-			// 			this.applicationChannel.on("showProfile", function (profileView) {
-			// 				self.showChildView('profile-box', profileView);
-			// 			});
-
-			// 			this.applicationChannel.on('show:restaurant', function (id, info) {
-			// 				self.openRestaurant(id, info);
-			// 			});
-
-			// 			this.applicationChannel.on('show:restaurants', function (data) {
-			// 				self.showRestaurants(data);
-			// 			});
-
-			// 			this.applicationChannel.on('highlight:restaurant', function (id, info) {
-			// 				self.highlight(id, info);
-			// 			});
-
-			// 			this.applicationChannel.on('unhighlight:restaurant', function (id, info) {
-			// 				self.unhighlight(id, info);
-			// 			});
-
-			// 			this.applicationChannel.on('highlightMarker:restaurant', function (id, info) {
-			// 				self.highlightMarker(id, info);
-			// 			});
-
-			// 			this.applicationChannel.on('unhighlightMarker:restaurant', function (id, info) {
-			// 				self.unhighlightMarker(id, info);
-			// 			});
-			
 		},
 		templateHelpers: {
 			isLoggedIn: function () {
@@ -109,7 +58,15 @@ define(function (require) {
 		},
 		childEvents: {
 			'show:restaurants': 'showRestaurants',
-			'open:restaurant': 'openRestaurant'
+			'open:restaurant': 'openRestaurant',
+			'highlight:restaurant': 'highlight',
+			'unhighlight:restaurant': 'unhighlight',
+			'highlight:marker': 'highlightMarker',
+			'unhighlight:marker': 'unhighlightMarker',
+			'show:profile': 'showProfile'
+		},
+		showProfile: function (childView, profileView) {
+			this.showChildView('profile-box', profileView);
 		},
 		updateDataInApplication: function (newCollection) {
 			this.listView.updateCollection(newCollection);
@@ -158,44 +115,27 @@ define(function (require) {
 				self.showChildView('detail', detailView);
 			});
 		},
-		// showRestaurant: function (childView, restaurant_id, restaurant_detail) {
-		// 	// var self = this;
-		// 	// var detailView;
-		// 	// var id = $(childView.el).attr('id');
-		// 	// if (id === 'doof-search-view') {
-		// 	// 	detailView = new RestaurantDetailView({ model: restaurant_id, user: self.user });
-		// 	// 	self.showChildView('detail', detailView);
-		// 	// } else {
-		// 	// 	var restaurant = new Restaurant();
-		// 	// 	restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
-		// 	// 		self.showChildView('detail', detailView);
-		// 	// 	});
-		// 	// }
-		// },
-		// highlight: function (eatery_id) {
-		// 	// if (eatery_id) {
-		// 	// 	var $targets = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
-		// 	// 	var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]').filter(":first");
-		// 	// 	$targets.addClass('active');
-		// 	// 	$target.velocity("scroll", {
-		// 	// 		container: $('.list'),
-		// 	// 		duration: 500,
-
-		// 	// 		offset: -180,
-		// 	// 		easing: "ease-in-out"
-		// 	// 	});
-		// 	// }
-		// },
-		// unhighlight: function (eatery_id) {
-		// 	// var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
-		// 	// $target.removeClass('active');
-		// },
-		// highlightMarker: function (eatery_id) {
-		// 	// this.mapView.highlightMarker(eatery_id);
-		// },
-		// unhighlightMarker: function (eatery_id) {
-		// 	// this.mapView.unhighlightMarker(eatery_id);
-		// },
+		highlight: function (childView, eatery_id) {
+			var $targets = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
+			var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]').filter(":first");
+			$targets.addClass('active');
+			$target.velocity("scroll", {
+				container: $('.list'),
+				duration: 500,
+				offset: -180,
+				easing: "ease-in-out"
+			});
+		},
+		unhighlight: function (childView, eatery_id) {
+			var $target = $('.list .restaurant-list-item[eatery-id="' + eatery_id + '"]');
+			$target.removeClass('active');
+		},
+		highlightMarker: function (childView, eatery_id) {
+			this.mapView.highlightMarker(eatery_id);
+		},
+		unhighlightMarker: function (childView, eatery_id) {
+			this.mapView.unhighlightMarker(eatery_id);
+		},
 		onShow: function () {
 			$('.feedback-link').leanModal();
 			this.showChildView('search', this.searchView);
@@ -205,6 +145,5 @@ define(function (require) {
 			$('ul.sub-menu').tabs();
 		}
 	});
-
 	return ApplicationPage;
 });

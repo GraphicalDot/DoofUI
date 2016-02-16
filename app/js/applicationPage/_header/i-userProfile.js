@@ -36,9 +36,8 @@ define(function (require) {
 		},
 		showProfile: function (e) {
 			e.preventDefault();
-
-			this.applicationChannel.trigger("showProfile", profileView);
-			// this.showChildView('profile-box', profileView);
+			var profileView = new ProfileView({ model: this.model });
+			this.triggerMethod('show:profile', profileView);
 		},
 
         doLogout: function () {

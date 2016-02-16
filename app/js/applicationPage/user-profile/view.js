@@ -4,9 +4,10 @@ define(function(require) {
 
 	var $= require('jquery');
 	var Handlebars= require('handlebars');
-	var Backbone= require('backbone');
 	var Marionette= require('marionette');
 	var Template= require('text!./user-profile.html');
+
+	var UserReviews= require('./../../models/user_profile');
 
 	return Marionette.ItemView.extend({
 		id: "user-profile",
@@ -14,15 +15,6 @@ define(function(require) {
 		initialize: function() {
 			var self= this;
 			var id= this.model.get('id');
-			var UserReviews= Backbone.Model.extend({url: window.userprofile,
-				parse:function(response) {
-					if(response.success) {
-						return response.result;
-					} else {
-						throw new Error('Cannot fetch Reviews');
-						return [];
-					}
-				}});
 			this.reviews= new UserReviews();
 			this.reviews.fetch({method: "POST", data: {fb_id: id}}).then(function() {
 				self.render();
@@ -34,7 +26,7 @@ define(function(require) {
 					return this.reviews.toJSON();
 				},
 				userPhoto: function() {
-					return this.model.get('picture').data.url;
+					return this.model.get('image');
 				}
 			}
 		},

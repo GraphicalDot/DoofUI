@@ -1,7 +1,7 @@
 <a href="#/application" class="close-user-profile-btn"><i class="material-icons">clear</i></a>
 
 <div class="user-profile-details">
-	<img src="{{picture.data.url}}" alt="user-image" class="circle user-img">
+	<img src="{{userPhoto}}" alt="user-image" class="circle user-img">
 	<div class="user-profile-info">
 		<h4 class="user-name">{{name}}</h4>
 		<p class="user-email">{{email}}</p>
@@ -17,6 +17,8 @@
 			<div class="user-profile-review">{{review_text}}</div>
 			<span class="user-profile-date">{{epoch}}</span>
 		</li>
+		{{else}}
+		<li>No Reviews Written</li>
 		{{/each}}
 	</ul>
 </div>

@@ -52,9 +52,10 @@ define(function (require) {
 			}
 		},
 		events: {
+			'submit form#feedback-form': 'submitFeedback',
 			'click  #sub-menu-trending-item': 'subMenuTrendingClicked',
 			'click #sub-menu-nearme-item': 'subMenuNearmeClicked',
-			'submit form#feedback-form': 'submitFeedback',
+			'click #see-more-results-button': 'showMoreResults'
 		},
 		childEvents: {
 			'show:restaurants': 'showRestaurants',
@@ -72,23 +73,38 @@ define(function (require) {
 			this.listView.updateCollection(newCollection);
 			this.mapView.updateMarkers(newCollection);
 		},
+		showMoreResults: function(e) {
+			// e.preventDefault();
+			this.currentPage= this.currentPage+ 1;
+			console.log(this.currentPage);
+			if(this.currentShowing=== 'trendingItems') {
+				this.subMenuTrendingClicked(e);
+			} else {
+				this.subMenuNearmeClicked(e);
+			}
+		},
 		subMenuTrendingClicked: function (e) {
 			e.preventDefault();
 			var self = this;
 			var trendingItems = new TrendingItems();
-			trendingItems.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng } }).done(function () {
+			this.currentPage= this.currentPage ? this.currentPage : 0;
+			console.log(this.currentPage);
+			trendingItems.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
 				self.collection = trendingItems;
 				self.updateDataInApplication(self.collection);
 			});
+			this.currentShowing= 'trendingItems';
 		},
 		subMenuNearmeClicked: function (e) {
 			e.preventDefault();
 			var self = this;
 			var nearbyRestaurants = new NearbyRestaurants();
-			nearbyRestaurants.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng } }).done(function () {
+			this.currentPage= this.currentPage ? this.currentPage : 0;
+			nearbyRestaurants.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
 				self.collection = nearbyRestaurants;
 				self.updateDataInApplication(self.collection);
 			});
+			this.currentShowing= 'nearmeItems';
 		},
 		submitFeedback: function (e) {
 			e.preventDefault();

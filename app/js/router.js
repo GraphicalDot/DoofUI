@@ -1,7 +1,5 @@
 // This control the Router and controller of application.
-
 define(function (require) {
-
 	"use strict";
 
 	var $ = require('jquery');

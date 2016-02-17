@@ -25,3 +25,12 @@ Sharing is caring .. https://ellisonleao.github.io/sharer.js/
 
 
 |Very Good website with Map -> https://www.waze.com/
+
+Collapsed Information is good unless asked.. -> http://www.aakashweb.com/demos/jquery-collapser/
+
+Money, its a trap. Time -< http://timeago.yarp.com/
+
+
+If you can use it, you can nail it, Typographic animation -> https://jschr.github.io/textillate/
+
+Simple Life, Majama life... Charts -> https://gionkunz.github.io/chartist-js/examples.html

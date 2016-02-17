@@ -68,6 +68,9 @@ define(function (require) {
 			this.data = data.toJSON();
 			this.showMarker();
 		},
+		updateMyPosition: function(latLng) {
+			this.myLocationMarker.updatePosition(latLng);
+		},
 		showMarker: function () {
 			var self = this;
 			var markersBound = new google.maps.LatLngBounds();
@@ -186,7 +189,10 @@ define(function (require) {
 					self.myLocationMarker = new google.maps.Marker({
 						map: self.map,
 						position: centerPoint,
-						title: "My Location"
+						title: "My Location",
+						updatePosition: function(latLng) {
+							self.myLocationMarker.setPosition(new google.maps.LatLng(latLng.lat, latLng.lng));
+						}
 					});
 
 					self.infoWindow = new google.maps.InfoWindow({ content: "", });

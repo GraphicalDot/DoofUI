@@ -93,6 +93,7 @@ define(function (require) {
 			// });
 		},
 		makeGeoLocatorBox: function () {
+			var self= this;
 			require(['google-map-loader'], function (GoogleMapLoader) {
 				GoogleMapLoader.done(function (GoogleMaps) {
 					var input = document.getElementById("doof_location_box");
@@ -101,8 +102,9 @@ define(function (require) {
 						var place = autoComplete.getPlace();
 						if (!place.geometry) { return; }
 						if (place.geometry.location) {
-							this.position.lat = place.geometry.location.lat();
-							this.position.lng = place.geometry.location.lng();
+							self.position.lat = place.geometry.location.lat();
+							self.position.lng = place.geometry.location.lng();
+							self.triggerMethod('update:location', self.position);
 						}
 					});
 				});

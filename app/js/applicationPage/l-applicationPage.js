@@ -64,7 +64,17 @@ define(function (require) {
 			'unhighlight:restaurant': 'unhighlight',
 			'highlight:marker': 'highlightMarker',
 			'unhighlight:marker': 'unhighlightMarker',
-			'show:profile': 'showProfile'
+			'show:profile': 'showProfile',
+			'update:location': 'updateLocation'
+		},
+		updateLocation: function(childView, latLng) {
+			this.latLng= latLng;
+			this.mapView.updateMyPosition(latLng);
+			if($("#sub-menu-nearme-item").hasClass('active')) {
+				this.subMenuNearmeClicked();
+			} else {
+				this.subMenuTrendingClicked();
+			}
 		},
 		showProfile: function (childView, profileView) {
 			this.showChildView('profile-box', profileView);
@@ -84,7 +94,8 @@ define(function (require) {
 			}
 		},
 		subMenuTrendingClicked: function (e) {
-			e.preventDefault();
+			if(e) {e.preventDefault();}
+
 			var self = this;
 			var trendingItems = new TrendingItems();
 			this.currentPage= this.currentPage ? this.currentPage : 0;
@@ -96,7 +107,7 @@ define(function (require) {
 			this.currentShowing= 'trendingItems';
 		},
 		subMenuNearmeClicked: function (e) {
-			e.preventDefault();
+			if(e) {e.preventDefault();}
 			var self = this;
 			var nearbyRestaurants = new NearbyRestaurants();
 			this.currentPage= this.currentPage ? this.currentPage : 0;

@@ -8,10 +8,11 @@ define(function (require) {
 	var Template = require('text!./applicationPage.html');
 
 	var SearchView = require('./search/i-search');
-	var UserProfileView = require('./_header/i-userProfile');
+	var UserView = require('./userMenuView/i-userMenu');
 	var ListView = require('./listView/c-list');
 	var MapView = require('./mapView/i-map');
 	var RestaurantDetailView = require('./detailView/i-detailView');
+	var ProfileView = require('./userProfileView/i-userProfile');
 
 	var TrendingItems = require('./../models/get_trending');
 	var NearbyRestaurants = require('./../models/nearest_eateries');
@@ -22,13 +23,12 @@ define(function (require) {
 		id: 'applicationPage',
 		template: Handlebars.compile(Template),
 		regions: {
-			search: '.search',
+			search: '.masthead__search-container',
+			userMenu: '.nav-menu-item__user',
 			list: '.list',
 			map: '.map',
 			detail: '.detail',
-			feedback: '.feedback',
 			'profile-box': '.profile-box',
-			header: '.header__nav-menu-user-info'
 		},
 		initialize: function (opts) {
 			this.user = opts.user;
@@ -36,7 +36,7 @@ define(function (require) {
 			this.address = opts.position.place;
 
 			this.searchView = new SearchView({ address: this.address, latLng: this.latLng });
-			this.headerView = new UserProfileView({ model: this.user });
+			this.userView = new UserView({ model: this.user });
 			this.listView = new ListView({ collection: this.collection, user: this.user });
 			this.mapView = new MapView({ collection: this.collection, lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
 		},
@@ -58,13 +58,13 @@ define(function (require) {
 			'click #see-more-results-button': 'showMoreResults'
 		},
 		childEvents: {
+			'show:profile': 'showProfile',	//comes from userMenuView upon clicking My Profile.
 			'show:restaurants': 'showRestaurants',
 			'open:restaurant': 'openRestaurant',
 			'highlight:restaurant': 'highlight',
 			'unhighlight:restaurant': 'unhighlight',
 			'highlight:marker': 'highlightMarker',
 			'unhighlight:marker': 'unhighlightMarker',
-			'show:profile': 'showProfile',
 			'update:location': 'updateLocation'
 		},
 		updateLocation: function(childView, latLng) {
@@ -76,7 +76,8 @@ define(function (require) {
 				this.subMenuTrendingClicked();
 			}
 		},
-		showProfile: function (childView, profileView) {
+		showProfile: function () {
+			var profileView = new ProfileView({ model: this.user });
 			this.showChildView('profile-box', profileView);
 		},
 		updateDataInApplication: function (newCollection) {
@@ -165,7 +166,7 @@ define(function (require) {
 		onShow: function () {
 			$('.feedback-link').leanModal();
 			this.showChildView('search', this.searchView);
-			this.showChildView('header', this.headerView);
+			this.showChildView('userMenu', this.userView);
 			this.showChildView('list', this.listView);
 			this.showChildView('map', this.mapView);
 			$('ul.sub-menu').tabs();

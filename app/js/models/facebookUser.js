@@ -85,6 +85,7 @@ define(function (require) {
 			return promise;
 		},
 		logout: function () {
+			var self= this;
 			var promise = new Promise(function (resolve) {
 				FB.logout(function () {
 					self.clear();

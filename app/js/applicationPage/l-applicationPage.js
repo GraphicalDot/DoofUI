@@ -86,7 +86,6 @@ define(function (require) {
 		showMoreResults: function(e) {
 			// e.preventDefault();
 			this.currentPage= this.currentPage+ 1;
-			console.log(this.currentPage);
 			if(this.currentShowing=== 'trendingItems') {
 				this.subMenuTrendingClicked(e);
 			} else {

@@ -224,6 +224,7 @@
 }
 
 #doof_search_box {
+	max-width: 500px;
     color: rgba(0,0,0,1);
 	background-color: white;
     border: 0;

@@ -51,8 +51,11 @@ define(function (require) {
 				return this.user.get('email');
 			}
 		},
+		ui: {
+			'feedbackLink': '#nav-menu__feedback-link'
+		},
 		events: {
-			'submit form#feedback-form': 'submitFeedback',
+			'submit form#feedback-form': 'submitFeedback', //comes after submitting Feedback
 			'click  #sub-menu-trending-item': 'subMenuTrendingClicked',
 			'click #sub-menu-nearme-item': 'subMenuNearmeClicked',
 			'click #see-more-results-button': 'showMoreResults'
@@ -67,10 +70,25 @@ define(function (require) {
 			'unhighlight:marker': 'unhighlightMarker',
 			'update:location': 'updateLocation'
 		},
-		updateLocation: function(childView, latLng) {
-			this.latLng= latLng;
+		submitFeedback: function (e) {
+			e.preventDefault();
+			var userFeedback = new UserFeedback();
+			if ($("#feedback-name").val() && $("#feedback-email").val() && $("#feedback-body").val()) {
+				userFeedback.fetch({ method: 'POST', data: { fb_id: this.user.get('id'), "feedback": $("#feedback-body").val(), "name": $("#feedback-name").val(), "email": $("#feedback-email").val() } }).then(function (response) {
+					if (response.success) {
+						$('#feedback__modal').closeModal();
+						$("#feedback-body").val('');
+						Materialize.toast(response.message, 3000);
+					} else {
+						Materialize.toast("Sorry, some error.. Try again later..", 3000);
+					}
+				});
+			}
+		},
+		updateLocation: function (childView, latLng) {
+			this.latLng = latLng;
 			this.mapView.updateMyPosition(latLng);
-			if($("#sub-menu-nearme-item").hasClass('active')) {
+			if ($("#sub-menu-nearme-item").hasClass('active')) {
 				this.subMenuNearmeClicked();
 			} else {
 				this.subMenuTrendingClicked();
@@ -84,53 +102,40 @@ define(function (require) {
 			this.listView.updateCollection(newCollection);
 			this.mapView.updateMarkers(newCollection);
 		},
-		showMoreResults: function(e) {
+		showMoreResults: function (e) {
 			// e.preventDefault();
-			this.currentPage= this.currentPage+ 1;
-			if(this.currentShowing=== 'trendingItems') {
+			this.currentPage = this.currentPage + 1;
+			if (this.currentShowing === 'trendingItems') {
 				this.subMenuTrendingClicked(e);
 			} else {
 				this.subMenuNearmeClicked(e);
 			}
 		},
 		subMenuTrendingClicked: function (e) {
-			if(e) {e.preventDefault();}
+			if (e) { e.preventDefault(); }
 
 			var self = this;
 			var trendingItems = new TrendingItems();
-			this.currentPage= this.currentPage ? this.currentPage : 0;
+			this.currentPage = this.currentPage ? this.currentPage : 0;
 			console.log(this.currentPage);
 			trendingItems.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
 				self.collection = trendingItems;
 				self.updateDataInApplication(self.collection);
 			});
-			this.currentShowing= 'trendingItems';
+			this.currentShowing = 'trendingItems';
 		},
 		subMenuNearmeClicked: function (e) {
-			if(e) {e.preventDefault();}
+			if (e) { e.preventDefault(); }
 			var self = this;
 			var nearbyRestaurants = new NearbyRestaurants();
-			this.currentPage= this.currentPage ? this.currentPage : 0;
+			this.currentPage = this.currentPage ? this.currentPage : 0;
 			nearbyRestaurants.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
 				self.collection = nearbyRestaurants;
 				self.updateDataInApplication(self.collection);
 			});
-			this.currentShowing= 'nearmeItems';
+			this.currentShowing = 'nearmeItems';
 		},
-		submitFeedback: function (e) {
-			e.preventDefault();
-			var userFeedback = new UserFeedback();
-			if ($("#feedback-name").val() && $("#feedback-email").val() && $("#feedback-body").val()) {
-				userFeedback.fetch({ method: 'POST', data: { fb_id: this.user.get('id'), "feedback": $("#feedback-body").val(), "name": $("#feedback-name").val(), "email": $("#feedback-email").val() } }).then(function (response) {
-					if (response.success) {
-						$('#feedback').closeModal();
-						Materialize.toast(response.message, 3000);
-					} else {
-						Materialize.toast("Sorry, some error.. Try again later..", 3000);
-					}
-				});
-			}
-		},
+
 		showRestaurants: function (childView, restaurant_data) {
 			this.updateDataInApplication(restaurant_data);
 		},
@@ -164,7 +169,7 @@ define(function (require) {
 			this.mapView.unhighlightMarker(eatery_id);
 		},
 		onShow: function () {
-			$('.feedback-link').leanModal();
+			this.ui.feedbackLink.leanModal();
 			this.showChildView('search', this.searchView);
 			this.showChildView('userMenu', this.userView);
 			this.showChildView('list', this.listView);

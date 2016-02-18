@@ -4,10 +4,37 @@
 	</div>
 	<div class="masthead__search-container"></div>
 	<ul class="masthead__nav-menu">
-		<li class="masthead__nav-menu-item nav-menu-item__feedback"><a href="#" id="nav-menu__feedback-link">Send Feedback</a></li>
+		<li class="masthead__nav-menu-item nav-menu-item__feedback"><a href="#feedback__modal" id="nav-menu__feedback-link">Send Feedback</a></li>
 		<li class="masthead__nav-menu-item nav-menu-item__user"></li>
 	</ul>
 </header>
+
+<div id="feedback__modal" class="modal">
+	<div class="row">
+		<h5><i class="material-icons">feedback</i> Please leave your valuable feedback.</h5>
+		<form id="feedback-form" class="col s12">
+			<div class="row">
+				<div class="input-field col s6">
+					<input class="validate" type="text" id="feedback-name" value="{{username}}" required>
+					<label for="feedback-name">Your name</label>
+				</div>
+				<div class="input-field col s6">
+					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" value="{{useremail}}" required>
+					<label class="active" for="feedback-email">Your email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea class="validate materialize-textarea" id="feedback-body" required></textarea>
+					<label for="feedback-body">Your comments:</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light" type="submit">Submit
+				<i class="material-icons left">send</i>
+			</button>
+		</form>
+	</div>
+</div>
 
 <!--<header class="doof-header">
 	<div class="header__logo-body">
@@ -46,36 +73,5 @@
 	<!--<div class="feedback hide"></div>-->
 </div>
 
-
-<div id="feedback" class="modal">
-	<div class="row">
-		<h6><i class="material-icons">feedback</i> Please leave your valuable feedback.</h6>
-		<form id="feedback-form" class="col s12">
-			<div class="row">
-				<div class="input-field col s6">
-					{{#if isLoggedIn}}
-					<input class="validate" type="text" id="feedback-name" value="{{username}}" required> {{else}}
-					<input class="validate" type="text" id="feedback-name" required> {{/if}}
-					<label class="active" for="feedback-name">Your name</label>
-				</div>
-				<div class="input-field col s6">
-					{{#if isLoggedIn}}
-					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" value="{{useremail}}" required> {{else}}
-					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" required> {{/if}}
-					<label class="active" for="feedback-email">Your email</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<textarea class="validate materialize-textarea" id="feedback-body" required></textarea>
-					<label for="feedback-body">Your comments:</label>
-				</div>
-			</div>
-			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
-				<i class="material-icons left">send</i>
-			</button>
-		</form>
-	</div>
-</div>
 
 <div class="search-results"></div>

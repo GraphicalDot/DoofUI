@@ -72,3 +72,15 @@
 	width: 27px;
 	vertical-align: middle;
 }
+
+#feedback__modal {
+	text-align: center;
+	padding: 15px;
+}
+
+#feedback__modal h5 {
+	color: #E60048;
+	font-weight: bold;
+	margin-top: 26px;
+	margin-bottom: 30px;
+}

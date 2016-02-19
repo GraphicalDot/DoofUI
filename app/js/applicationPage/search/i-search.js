@@ -6,12 +6,10 @@ define(function (require) {
 	var Marionette = require('marionette');
 	var Template = require('text!./search.html');
 
-	// var Radio = require('radio');
-
 	var TextSearchModel = require('./../../models/text_search');
 
 	var SearchBox = Marionette.ItemView.extend({
-		id: 'doof-search-view',
+		id: 'doofSearch',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			this.position = { lat: opts.latLng.lat, lng: opts.latLng.lng };

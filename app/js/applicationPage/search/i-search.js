@@ -15,10 +15,6 @@ define(function (require) {
 			this.position = { lat: opts.latLng.lat, lng: opts.latLng.lng };
 			this.address = opts.address;
 			this.textSearchModel = new TextSearchModel();
-			// this.model= new SearchModel();
-			// this.position= opts.position;
-			// this.address= opts.address;
-      //       this.applicationChannel= Radio.channel('application');
 		},
 		templateHelpers: {
 			address: function () {
@@ -94,7 +90,7 @@ define(function (require) {
 			var self= this;
 			require(['google-map-loader'], function (GoogleMapLoader) {
 				GoogleMapLoader.done(function (GoogleMaps) {
-					var input = document.getElementById("doof_location_box");
+					var input = document.getElementById("search__location");
 					var autoComplete = new GoogleMaps.places.Autocomplete(input);
 					autoComplete.addListener('place_changed', function () {
 						var place = autoComplete.getPlace();
@@ -111,7 +107,7 @@ define(function (require) {
 		makeSuggestionBox: function () {
 			var self = this;
 			require(["typeahead"], function () {
-				$("#doof_search_box").typeahead(
+				$("#search_doof").typeahead(
 					{ hint: true, highlight: true, minLength: 4 },
 					{
 						limit: 12,
@@ -189,7 +185,7 @@ define(function (require) {
 						$('.Typeahead-spinner').hide();
 					});
 
-				$("#doof_search_box").bind("typeahead:select", function (ev, suggestion) {
+				$("#search_doof").bind("typeahead:select", function (ev, suggestion) {
 					var str = suggestion.replace(/\s+/g, '');
 					var $suggestionEl = $('.typeahead-suggestion-' + str);
 					var $headerEl = $suggestionEl.closest('.tt-dataset').find('.typeahead-header');
@@ -203,7 +199,7 @@ define(function (require) {
 					}
 				});
 
-				$("#doof_search_box").enterKey(function (e) {
+				$("#search_doof").enterKey(function (e) {
 					if ($(this).val()) {
 						self.onNullSelect($(this).val());
 					} else {

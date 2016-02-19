@@ -1,15 +1,13 @@
-<!--<i class="material-icons search_icon">search</i>-->
-<!--<select class="search_location" id="search_location_select_box">
-	<option value="" disabled>Choose your place</option>
-	<option value="delhi_ncr" selected>Delhi NCR</option>
-</select>-->
-<input type="search" id="search__location" placeholder="Where to search?" value="{{address}}">
-<label for="search__location"><i class="material-icons location-search__icon">place</i></label>
-<input type="search" id="search_doof" placeholder="search for food, cuisine or restaurant">
-<label for="search_doof"><i class="material-icons search__icon">search</i></label>
-<button class="btn waves-effect waves-light" type="submit" name="action" id="search__submit-btn">Search</button>
-<!--<form role="search" class="search_box">-->
+<div class="search-form">
+	<div class="search__location-wrapper">
+		<label for="search__location"><i class="material-icons location-search__icon">place</i></label>
+		<input type="search" id="search__location" placeholder="Where to search?" value="{{address}}">
+	</div>
 
-	<!--<i class="material-icons clear_button">close</i>-->
-<!--</form>-->
-<!--<div class="Typeahead-spinner"></div>-->
+	<div class="search__doof-wrapper">
+		<label for="search_doof"><i class="material-icons search__icon">search</i></label>
+		<input type="search" id="search_doof" placeholder="search for food, cuisine or restaurant">
+	</div>
+	
+	<button class="btn waves-effect waves-light" id="search__submit-btn">Search</button>
+</div>

@@ -22,6 +22,10 @@ define(function (require) {
 				return this.address;
 			}
 		},
+		ui: {
+			'searchLocationBox': '#search__location',
+			'searchDoofBox': '#search_doof'
+		},
 		events: {
 			// 'click .clear_button': 'clearSearch',
 			// 'click .search_button': 'instantSearch',
@@ -82,32 +86,28 @@ define(function (require) {
 			// 	self.applicationChannel.trigger('show:restaurants', self.model);
 			// });
 		},
-		onDomRefresh: function () {
-			// $('#search_location_select_box').material_select({
-			// 	belowOrigin: true
-			// });
-		},
-		makeTypeaheadGeoLocatorBox: function() {
-			require(['google-map-loader', "typeahead"], function(GoogleMapLoader) {
-				GoogleMapLoader.done(function (GoogleMaps) {
-					var geoCoder= new GoogleMaps.Geocoder;
-					$("#search__location").typeahead(
-						{},
-						{
-							source: function(q, syncResults, asyncResults) {
-								geoCoder.geocode({address: q}, function(results, status) {
-									var retVal= _.map(results, function(result) {
-										return result.formatted_address;
-									});
-									asyncResults(retVal);
-								});
-							},
-							name: 'google'
-						}
-					);
-				});
-			});
-		},
+		// makeTypeaheadGeoLocatorBox: function() {
+		// 	var self= this;
+		// 	require(['google-map-loader', "typeahead"], function(GoogleMapLoader) {
+		// 		GoogleMapLoader.done(function (GoogleMaps) {
+		// 			var geoCoder= new GoogleMaps.Geocoder;
+		// 			self.ui.searchLocationBox.typeahead(
+		// 				{ hint: true, highlight: true },
+		// 				{
+		// 					name: 'google',
+		// 					source: function(q, syncResults, asyncResults) {
+		// 						geoCoder.geocode({address: q}, function(results, status) {
+		// 							var retVal= _.map(results, function(result) {
+		// 								return result.formatted_address;
+		// 							});
+		// 							asyncResults(retVal);
+		// 						});
+		// 					},
+		// 				}
+		// 			);
+		// 		});
+		// 	});
+		// },
 		makeGeoLocatorBox: function () {
 			var self= this;
 			require(['google-map-loader'], function (GoogleMapLoader) {
@@ -129,10 +129,10 @@ define(function (require) {
 		makeSuggestionBox: function () {
 			var self = this;
 			require(["typeahead"], function () {
-				$("#search_doof").typeahead(
+				self.ui.searchDoofBox.typeahead(
 					{ hint: true, highlight: true, minLength: 4 },
 					{
-						limit: 12,
+						limit: 10,
 						name: 'food',
 						async: true,
 						source: function (query, processSync, processAsync) {
@@ -152,10 +152,10 @@ define(function (require) {
 								var str = data.replace(/\s+/g, '');
 								return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
 							},
-							header: '<i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Dishes</span>'
+							header: '<div class="search-header search-header__food"><i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Dishes</span></div>'
 						}
 					}, {
-						limit: 12,
+						limit: 10,
 						name: 'restaurant',
 						async: true,
 						source: function (query, processSync, processAsync) {
@@ -175,10 +175,10 @@ define(function (require) {
 								var str = data.replace(/\s+/g, '');
 								return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
 							},
-							header: '<i class="material-icons suggestion-type typeahead-header restaurant">store_mall_directory</i><span>Restaurant</span>'
+							header: '<div class="search-header search-header__restaurant"><i class="material-icons suggestion-type typeahead-header restaurant">store_mall_directory</i><span>Restaurant</span></div>'
 						}
 					}, {
-						limit: 12,
+						limit: 10,
 						name: 'cuisine',
 						async: true,
 						source: function (query, processSync, processAsync) {
@@ -198,7 +198,7 @@ define(function (require) {
 								var str = data.replace(/\s+/g, '');
 								return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
 							},
-							header: '<i class="material-icons suggestion-type typeahead-header cuisine">local_dining</i><span>Cuisines</span>'
+							header: '<div class="search-header search-header__cuisine"><i class="material-icons suggestion-type typeahead-header cuisine">local_dining</i><span>Cuisines</span></div>'
 						}
 					}
 					).on('typeahead:asyncrequest', function () {
@@ -207,7 +207,7 @@ define(function (require) {
 						$('.Typeahead-spinner').hide();
 					});
 
-				$("#search_doof").bind("typeahead:select", function (ev, suggestion) {
+				self.ui.searchDoofBox.bind("typeahead:select", function (ev, suggestion) {
 					var str = suggestion.replace(/\s+/g, '');
 					var $suggestionEl = $('.typeahead-suggestion-' + str);
 					var $headerEl = $suggestionEl.closest('.tt-dataset').find('.typeahead-header');
@@ -221,7 +221,7 @@ define(function (require) {
 					}
 				});
 
-				$("#search_doof").enterKey(function (e) {
+				self.ui.searchDoofBox.enterKey(function (e) {
 					if ($(this).val()) {
 						self.onNullSelect($(this).val());
 					} else {
@@ -231,7 +231,7 @@ define(function (require) {
 			});
 		},
 		onShow: function () {
-			this.makeTypeaheadGeoLocatorBox();
+			this.makeGeoLocatorBox();
 			this.makeSuggestionBox();
 		}
 	});

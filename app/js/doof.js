@@ -5,9 +5,9 @@ define(function (require) {
 	var Marionette = require('marionette');
 
 	var FacebookUser = require('./models/facebookUser');
+	var Router = require('./router');
 	// var GetKeyModel= require('./models/getkey');
 	// var ApisModel = require('./models/apis');
-	var Router = require('./router');
 
 	var Doof = new Marionette.Application();
 	Doof.addRegions({ region: '.doof' })
@@ -22,7 +22,7 @@ define(function (require) {
 	});
 
 	Doof.on("start", function () {
-		//wait for facebook to hide loadnig and continue.
+		//wait for facebook to hide loading and continue.
 		var fbUser = new FacebookUser();
 		fbUser.init().then(function () {
 			return fbUser.checkLogin();

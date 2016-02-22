@@ -10,17 +10,29 @@
 </header>
 
 <div class="doof-body">
-	<div class="left-body">
-		<ul class="sub-menu tabs">
-			<li class="tab"><a href="#" id="sub-menu-trending-item">Trending</a></li>
-			<li class="tab"><a href="#" class="active" id="sub-menu-nearme-item">Near me</a></li>
+	<div class="body__list-container">
+		<ul class="body__main-menu tabs">
+			<li class="tab"><a href="#" id="main-menu__food-link">Food</a></li>
+			<li class="tab"><a href="#" id="main-menu__restaurant-link">Restaurant</a></li>
 		</ul>
+		<div class="body__sub-menu-wrapper">
+			<span>Show me:</span>
+			<div class="body__sub-menu-container">
+				<ul class="body__sub-menu tabs">
+					<li class="tab"><a href="#" id="sub-menu__trending-link">Trending</a></li>
+					<li class="tab"><a href="#" id="sub-menu__nearme-link" class="active">Near me</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="body__list"></div>
+	</div>
+	<!--<div class="left-body">-->
 		<!--<ul class="sub-menu">
 			<li><a href="#!" class="seeTrending active">Trending</a></li>
 			<li><a href="#!" class="seeNearMe">Near you</a></li>
 			<div class="sub-menu-indicator"></div>
 		</ul>-->
-		<div class="list"></div>
+		<!--<div class="list"></div>
 		<a href="#" id="see-more-results-button" class="waves-effect waves-light btn">See more Results..</a>
 		<div class="list-pagination">
 			<div class="results_number">Showing results 1-10</div>
@@ -28,8 +40,8 @@
 				<a href="#" id="list-paging-left-btn" class="pagination-icons disabled"><i class="material-icons">chevron_left</i></a>
 				<a href="#" id="list-paging-right-btn" class="pagination-icons"><i class="material-icons">chevron_right</i></a>
 			</div>
-		</div>
-	</div>
+		</div>-->
+	<!--</div>-->
 	<div class="detail hide"></div>
 	<div class="profile-box hide"></div>
 	<div class="map"></div>

@@ -25,7 +25,7 @@ define(function (require) {
 		regions: {
 			search: '.masthead__search-container',
 			userMenu: '.nav-menu-item__user',
-			list: '.list',
+			list: '.body__list',
 			map: '.map',
 			detail: '.detail',
 			'profile-box': '.profile-box',
@@ -52,7 +52,9 @@ define(function (require) {
 			}
 		},
 		ui: {
-			'feedbackLink': '#nav-menu__feedback-link'
+			'feedbackLink': '#nav-menu__feedback-link',
+			'mainMenuTabs': 'ul.body__main-menu',
+			'subMenuTabs': 'ul.body__sub-menu'
 		},
 		events: {
 			'submit form#feedback-form': 'submitFeedback', //comes after submitting Feedback
@@ -174,7 +176,8 @@ define(function (require) {
 			this.showChildView('userMenu', this.userView);
 			this.showChildView('list', this.listView);
 			this.showChildView('map', this.mapView);
-			$('ul.sub-menu').tabs();
+			this.ui.mainMenuTabs.tabs();
+			this.ui.subMenuTabs.tabs();
 		}
 	});
 	return ApplicationPage;

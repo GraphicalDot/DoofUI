@@ -34,3 +34,5 @@ Money, its a trap. Time -< http://timeago.yarp.com/
 If you can use it, you can nail it, Typographic animation -> https://jschr.github.io/textillate/
 
 Simple Life, Majama life... Charts -> https://gionkunz.github.io/chartist-js/examples.html
+
+https://github.com/whackashoe/antimoderate

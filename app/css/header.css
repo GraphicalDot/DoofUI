@@ -51,6 +51,10 @@
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
 }
 
+.search-form label {
+	position: absolute;
+}
+
 .search__location-wrapper {
 	flex: 0 0 35%;
 	display: flex;
@@ -60,6 +64,11 @@
 .search__doof-wrapper {
 	flex: 1;
 	display: flex;
+}
+
+.twitter-typeahead {
+	width: 100%;
+	padding-left: 40px;
 }
 
 #search_doof,

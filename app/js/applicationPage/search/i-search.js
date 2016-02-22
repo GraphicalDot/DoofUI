@@ -2,6 +2,7 @@ define(function (require) {
 	"use strict";
 
 	var $ = require('jquery');
+	var _= require('underscore');
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./search.html');
@@ -85,6 +86,27 @@ define(function (require) {
 			// $('#search_location_select_box').material_select({
 			// 	belowOrigin: true
 			// });
+		},
+		makeTypeaheadGeoLocatorBox: function() {
+			require(['google-map-loader', "typeahead"], function(GoogleMapLoader) {
+				GoogleMapLoader.done(function (GoogleMaps) {
+					var geoCoder= new GoogleMaps.Geocoder;
+					$("#search__location").typeahead(
+						{},
+						{
+							source: function(q, syncResults, asyncResults) {
+								geoCoder.geocode({address: q}, function(results, status) {
+									var retVal= _.map(results, function(result) {
+										return result.formatted_address;
+									});
+									asyncResults(retVal);
+								});
+							},
+							name: 'google'
+						}
+					);
+				});
+			});
 		},
 		makeGeoLocatorBox: function () {
 			var self= this;
@@ -209,7 +231,7 @@ define(function (require) {
 			});
 		},
 		onShow: function () {
-			this.makeGeoLocatorBox();
+			this.makeTypeaheadGeoLocatorBox();
 			this.makeSuggestionBox();
 		}
 	});

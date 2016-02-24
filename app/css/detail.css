@@ -1,0 +1,127 @@
+#detail-view .tabs {
+	width: 100%!important;
+    font-size: 0.718rem;
+    border: 1px solid #E0E0E0;
+	overflow: hidden!important;
+}
+
+#detail-view .tab {
+	border-left: 1px solid #E0E0E0;
+}
+
+#detail-view .tab a {
+	font-weight: 600;
+}
+
+#detail-view {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#detail-view {
+	z-index: 7;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.graph {
+
+	width: 500px!important;
+    height: 600px!important;
+}
+
+#reviews {
+	display: flex;
+	flex: 1;
+	width: 100%;
+	flex-direction: column;
+}
+
+.reviews {
+	flex: 1 1  auto;
+	 -webkit-flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0px;
+    padding: 13px 17px;
+}
+
+.reviews-list {
+	overflow-y: auto;
+	flex: 1 0;
+}
+
+.restaurant-reviews-box {
+	padding: 20px;
+    background-color: #f2f2f2;
+	    border-top: 1px solid #d9d9d9;
+}
+
+.restaurant-reviews-box> textarea {
+	background-color: white;
+	height: 6rem;
+}
+
+.detail-close {
+	position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 2em;
+	color: #EB4960;
+    z-index: 1;
+}
+
+.detail-restaurant-information {
+	padding: 13px 17px;
+}
+
+.detail-restaurant-detail {
+	flex: 1;
+
+}
+
+.detail-restaurant-name {
+	        font-size: 2.5rem;
+    font-weight: 300;
+    color: #E5004A;
+
+    line-height: 120%;
+}
+
+.detail-restaurant-address {
+	font-size: 0.9rem;
+}
+
+
+#detail-view {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.restaurant-details__meta-information {
+    margin: 10px 15px;
+}
+.restaurant-details__name {
+	font-size: 2.4rem;
+	font-weight: 300;
+	color: #e5004a;
+}
+
+.restaurant-details__information {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+#overview-tab,
+#food-tab,
+#reviews-tab {
+	flex: 1;
+	height: 0;
+	overflow: scroll;
+}

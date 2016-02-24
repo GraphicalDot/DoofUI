@@ -7,12 +7,29 @@
 .body__list-container {
 	flex: 0 0 450px;
 	box-shadow: 1px 0 4px rgba(0,0,0,0.3);
+	    display: flex;
+    flex-direction: column;
+}
+
+.body__list {
+	flex: 1;
+    display: flex;
+    flex-direction: column;
+		    height: 0;
 }
 
 .body__main-menu {
 	background-color: white;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 	box-shadow: 0 0px 2px rgba(212, 210, 210, 0.62)
+}
+
+#restaurants-list-view {
+	min-height: 0;
+    flex: 1;
+    /* display: flex; */
+    /* flex-direction: column; */
+    overflow-y: scroll;
 }
 
 .body__main-menu li.tab {

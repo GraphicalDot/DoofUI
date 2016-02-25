@@ -94,7 +94,7 @@
 
 
 #detail-view {
-	position: relative;
+	/*position: relative;*/
 	height: 100%;
 	width: 100%;
 	margin: 0;
@@ -124,4 +124,8 @@
 	flex: 1;
 	height: 0;
 	overflow: scroll;
+}
+
+#addFoodItemModal {
+	z-index: 1003;
 }

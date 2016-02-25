@@ -9,13 +9,18 @@
 <div class="detail-restaurant-detail">
 <ul class="detail_tabs tabs">
 		<li class="tab"><a href="#ambience">Ambience</a></li>
-		<li class="tab"><a href="#food" class="active">Food</a></li>
+		<li class="tab"><a href="#food_section" class="active">Food</a></li>
 		<li class="tab"><a href="#cost">Cost</a></li>
 		<li class="tab"><a href="#service">Service</a></li>
 		<li class="tab"><a href="#reviews">Reviews</a></li>
 	</ul>
 	<svg class="graph" id="ambience"></svg>
-	<svg class="graph" id="food"></svg>
+	<div id="food_section">
+		<svg class="graph" id="food"></svg>
+		<a href="#addFoodItemModal" class="waves-effect waves-light btn modal-trigger addFoodItemBtn">Add a food item</a>
+
+
+	</div>
 	<svg class="graph" id="cost"></svg>
 	<svg class="graph" id="service"></svg>
 	<div class="" id="reviews">
@@ -25,4 +30,21 @@
                 <button type="submit" class="btn waves-effect right submit-review-form">Post</button>
         </div>
     </div>
+</div>
+<div id="addFoodItemModal" class="modal">
+	<div class="modal-content">
+		<h4>Add Food Item @ {{restaurant-name}}</h4>
+		<form action="">
+			<input type="text" placeholder="enter food name..">
+			Enter your rating..<select name="" id="">
+				<option value="">1</option>
+				<option value="">2</option>
+				<option value="">3</option>
+				<option value="">4</option>
+				<option value="">5</option>
+			</select>
+			<textarea name="" id="" cols="30" rows="10">Enter your review here</textarea>
+			<a href="#" class="waves-light waves-effect btn">Submit Food</a>
+		</form>
+	</div>
 </div>

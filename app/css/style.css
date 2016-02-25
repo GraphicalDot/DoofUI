@@ -475,6 +475,7 @@ i.empty_message_icon {
 .doof-body .map {
     flex: 1;
     position: relative;
+		z-index: -1;
 }
 
 .map #map-view {
@@ -637,7 +638,7 @@ line-height: 20px;
 	position: absolute;
     top: 0;
     left: 450px;
-    z-index: 1;
+    /*z-index: 1;*/
     background-color: white;
     bottom: 0;
     margin: 10px;
@@ -1153,4 +1154,11 @@ li.empty-reviws > p {
     transform: scale(1.0);
     opacity: 0;
   }
+}
+
+#food_section {
+	text-align: center;
+}
+.addFoodItemBtn {
+	margin-top: 35px;
 }

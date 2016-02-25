@@ -141,6 +141,7 @@ define(function (require) {
 		onShow: function () {
 			var self = this;
 			$('ul.detail_tabs').tabs();
+			$('.addFoodItemBtn').leanModal();
 			this.makeCharts();
 			$('.detail').removeClass('hide');
 

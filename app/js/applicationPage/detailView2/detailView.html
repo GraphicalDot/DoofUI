@@ -5,18 +5,43 @@
 	<div class="restaurant-details__sentiments"></div>
 </div>
 <ul class="restaurant-details__tabs tabs">
-	<li class="tab"><a href="#overview-tab" class="active">Overview</a></li>
+	<li class="tab"><a href="#overview-tab" class="active">Details</a></li>
 	<li class="tab"><a href="#food-tab">Food</a></li>
 	<li class="tab"><a href="#reviews-tab">Reviews (0)</a></li>
 </ul>
-<div id="overview-tab">hello</div>
-<div id="food-tab">my name is</div>
-<div id="reviews-tab">
-	<div class="reviews-list"></div>
-	<form action="" class="add-review-box">
-		<textarea name="review-box" id="review-box" cols="30" rows="10" placeholder="Write a review"></textarea>
-		<button type="submit" class="btn waves-effect right submit-review-form">Post</button>
-	</form>
+<div class="restaurant-details__tab-boxes">
+	<div id="overview-tab">
+		<div class="overview-wrapper">
+			<ul class="collection with-header">
+				<li class="collection-header">Ambience</li>
+				{{#each ambience}}
+					<li class="collection">{{@key}} - {{#positivity this}}{{/positivity}}</li>
+				{{/each}}
+			</ul>
+			<ul class="collection with-header">
+				<li class="collection-header">Cost</li>
+				{{#each cost}}
+					<li class="collection">{{@key}} - {{excellent}}</li>
+				{{/each}}
+			</ul>
+			<ul class="collection with-header">
+				<li class="collection-header">Service</li>
+				{{#each service}}
+					<li class="collection">{{@key}} - {{excellent}}</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+	<div id="food-tab">my name is</div>
+	<div id="reviews-tab">
+		<div class="reviews-wrapper">
+			<div class="reviews-list"></div>
+			<form action="" class="add-review-box">
+				<textarea name="review-box" id="review-box" cols="30" rows="10" placeholder="Write a review"></textarea>
+				<button type="submit" class="btn waves-effect right submit-review-form">Post</button>
+			</form>
+		</div>
+	</div>
 </div>
 <!--<div class="restaurant-details__information">
 </div>-->

@@ -11,8 +11,8 @@ define(function (require) {
 	var UserView = require('./userMenuView/i-userMenu');
 	var ListView = require('./listView/c-list');
 	var MapView = require('./mapView/i-map');
-	var RestaurantDetailView = require('./detailView/i-detailView');
-	// var RestaurantDetailView = require('./detailView2/i-detailView');
+	// var RestaurantDetailView = require('./detailView/i-detailView');
+	var RestaurantDetailView = require('./detailView2/i-detailView');
 	var ProfileView = require('./userProfileView/i-userProfile');
 
 	var TrendingItems = require('./../models/get_trending');
@@ -145,7 +145,10 @@ define(function (require) {
 		openRestaurant: function (childView, restaurant_id, restaurant_details) {
 			var self = this;
 			var restaurant = new Restaurant();
-			var detailView = new RestaurantDetailView({ model: restaurant, user: self.user, restaurant_detail: restaurant_details });
+			var detailView = new RestaurantDetailView({
+				model: restaurant, user: self.user, restaurant_detail: restaurant_details
+			});
+
 			restaurant.fetch({ method: "POST", data: { "__eatery_id": restaurant_id } }).then(function () {
 				self.showChildView('detail', detailView);
 			});

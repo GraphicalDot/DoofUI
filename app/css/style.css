@@ -475,7 +475,7 @@ i.empty_message_icon {
 .doof-body .map {
     flex: 1;
     position: relative;
-		z-index: -1;
+		/*z-inwdex: -1;*/
 }
 
 .map #map-view {
@@ -638,7 +638,7 @@ line-height: 20px;
 	position: absolute;
     top: 0;
     left: 450px;
-    /*z-index: 1;*/
+    z-index: 2;
     background-color: white;
     bottom: 0;
     margin: 10px;
@@ -664,50 +664,6 @@ line-height: 20px;
     color: #E60048;
 }
 
-.reviews {
-	margin: 0;
-}
-
-.reviews li {
-    margin-bottom: 20px;
-	    display: flex;
-}
-
-.reviews li:last-child {
-    margin-bottom: 10px;
-}
-
-.reviews li > .left-side {
-	text-align: center;
-    font-size: 13px;
-    color: #82888a;
-}
-
-.reviews li > .left-side > img {
-	height: 60px;
-	width: 60px;
-}
-
-.reviews li > .right-side {
-	flex: 1;
-	margin-left: 30px;
-    border-bottom: 1px solid #dce0e0;
-}
-
-.reviews .date {
-        margin-top: 10px;
-    display: block;
-    font-size: 13px;
-    color: #82888a;
-    margin-bottom: 20px;
-}
-
-.review_text {
-	    font-size: 13px;
-    color: #565a5c;
-    line-height: 20px;
-}
-
 
 .search_location {
 	/*position: absolute;*/
@@ -721,7 +677,7 @@ line-height: 20px;
 	line-height: 45px;
 	color: white;
 	padding-left: 10px;
-	/*font-family: 'Josefin Sans', sans-serif;*/
+	/*font-family: 'Josefin Sans', fsans-serif;*/
 }
 
 .search_box {

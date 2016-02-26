@@ -34,7 +34,7 @@ define(function (require) {
 	var current_list = "";
 
 	var RestaurantView = Marionette.ItemView.extend({
-		className: 'restaurant-list-item card-panel',
+		className: 'restaurant-list-item2 card-panel',
 		template: Handlebars.compile(Template),
 		initialize: function () {
 			this.applicationChannel = Radio.channel('application');
@@ -68,6 +68,9 @@ define(function (require) {
 			// this.triggerMethod('itemview:show:restaurant', this.model.get('__eatery_id'), this.model.toJSON());
 		},
 		templateHelpers: {
+			index: function() {
+				return this._index+1;
+			},
 			newCategory: function () {
 				if (current_list !== this.model.get('category')) {
 					current_list = this.model.get('category');

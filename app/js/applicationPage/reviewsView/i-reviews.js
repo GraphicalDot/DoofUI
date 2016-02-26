@@ -26,6 +26,7 @@ define(function(require) {
 
 	var EmptyReview= Marionette.ItemView.extend({
 		tagName: 'li',
+		className: 'empty-review',
 		template: Handlebars.compile(EmptyTemplate)
 	});
 

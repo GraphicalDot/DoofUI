@@ -305,16 +305,7 @@
     display: none;
 }
 
-.tt-menu {
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    border-radius: 0 0 2px 2px;
-    /*box-shadow: 0 2px 2px rgba(0,0,0,0.54);*/
-    font-size: 1rem;
-    overflow-x: hidden;
-    margin-top: -5px;
-    border: 1px solid #D4D2D2;
-}
+
 
 .tt-dataset {
     border-bottom: 1px solid #eeeeee;
@@ -333,7 +324,7 @@
 	line-height: 40px;
     height: 40px;
 }
-
+/*
 .tt-suggestion {
     position: relative;
     color: rgba(0,0,0,0.818);
@@ -364,15 +355,9 @@ i.empty_message_icon {
     height: 36px;
     font-size: 1.5rem;
      color: rgba(229,0,71,0.62);
-}
+}*/
 
-.suggestion-type {
-    float: left;
-    padding: 10px 15px;
-    height: 36px;
-    font-size: 1.5rem;
-    color: rgba(229,0,71,0.62)!important;
-}
+
 
 .tt-highlight {
 	color: #212121  ;

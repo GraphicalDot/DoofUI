@@ -24,15 +24,18 @@ define(function (require) {
 		},
 		ui: {
 			'searchLocationBox': '#search__location',
-			'searchDoofBox': '#search_doof'
+			'searchDoofBox': '#search_doof',
+			'clearSearchBtn': '.clear-search__icon'
 		},
 		events: {
 			// 'click .clear_button': 'clearSearch',
 			// 'click .search_button': 'instantSearch',
-			'submit .search_box': 'instantSearch'
+			'submit .search_box': 'instantSearch',
+			'click @ui.clearSearchBtn': 'clearSearch'
 		},
 		clearSearch: function (e) {
-			// e.preventDefault();
+			e.preventDefault();
+			this.ui.searchDoofBox.val('');
 			// $("#doof_search_box").val('');
       //       this.applicationChannel.trigger("show:restaurants");
 			// this.triggerMethod('show:restaurants');
@@ -132,7 +135,7 @@ define(function (require) {
 				self.ui.searchDoofBox.typeahead(
 					{ hint: true, highlight: true, minLength: 4 },
 					{
-						limit: 10,
+						limit: 12,
 						name: 'food',
 						async: true,
 						source: function (query, processSync, processAsync) {
@@ -142,7 +145,7 @@ define(function (require) {
 								data: { query: query },
 								dataType: 'json',
 								success: function (json) {
-									return processAsync(json.result[0].suggestions)
+									return processAsync(json.result[0].suggestions);
 								}
 							});
 						},

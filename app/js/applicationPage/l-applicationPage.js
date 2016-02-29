@@ -55,12 +55,14 @@ define(function (require) {
 		ui: {
 			'feedbackLink': '#nav-menu__feedback-link',
 			'mainMenuTabs': 'ul.body__main-menu',
-			'subMenuTabs': 'ul.body__sub-menu'
+			'subMenuTabs': 'ul.body__sub-menu',
+			'getTrendingItem': '#sub-menu__trending-link',
+			'getNearbyItem': '#sub-menu__nearme-link'
 		},
 		events: {
 			'submit form#feedback-form': 'submitFeedback', //comes after submitting Feedback
-			'click  #sub-menu-trending-item': 'subMenuTrendingClicked',
-			'click #sub-menu-nearme-item': 'subMenuNearmeClicked',
+			'click @ui.getTrendingItem': 'subMenuTrendingClicked',
+			'click @ui.getNearbyItem': 'subMenuNearmeClicked',
 			'click #see-more-results-button': 'showMoreResults'
 		},
 		childEvents: {

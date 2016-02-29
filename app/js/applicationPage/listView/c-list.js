@@ -10,6 +10,11 @@ define(function (require) {
 
 	var Radio = require('radio');
 
+	function escapeHtml(text) {
+		return text
+      .replace(/&amp;/g, '&');
+	}
+
 	Handlebars.registerHelper('if_eq', function (a, b, opts) {
 		if (a == b) {// Or === depending on your needs
 			return opts.fn(this);
@@ -18,18 +23,13 @@ define(function (require) {
 		}
 	});
 
-	Handlebars.registerHelper("escaped", function (something) {
-		return escapeHtml(something);
-	});
+
 
 	Handlebars.registerHelper("log", function (something) {
 		console.log(something);
 	});
 
-	function escapeHtml(text) {
-		return text
-      .replace(/&amp;/g, '&');
-	}
+
 
 	var current_list = "";
 
@@ -37,6 +37,7 @@ define(function (require) {
 		className: 'restaurant-list-item2 card-panel',
 		template: Handlebars.compile(Template),
 		initialize: function () {
+			console.log('yo man');
 			this.applicationChannel = Radio.channel('application');
 		},
 		attributes: function () {

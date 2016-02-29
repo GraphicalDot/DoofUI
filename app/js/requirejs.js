@@ -3,6 +3,7 @@ require.config({
 	waitSeconds: 0,
 	paths: {
 		'jquery': '../../node_modules/jquery/dist/jquery',
+		'jquery.actual': '../../node_modules/jquery.actual',
 		'underscore': '../../node_modules/underscore/underscore',
 		'backbone': '../../node_modules/backbone/backbone',
 		'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
@@ -59,6 +60,7 @@ require.config({
 	},
 	shim: {
 		'jquery': { exports: '$' },
+		'jquery.actual': {deps: ['jquery']},
 		'underscore': { exports: '_' },
 		'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
 		'marionette': { deps: ['backbone'], exports: 'Marionette' },

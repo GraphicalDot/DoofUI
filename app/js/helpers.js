@@ -5,6 +5,7 @@ define(function (require) {
 	var _ = require('underscore');
 	var Backbone = require('backbone');
 	var Marionette = require('marionette');
+	var Handlebars = require('handlebars');
 
 	$.fn.enterKey = function (fnc) {
 		return this.each(function () {
@@ -40,6 +41,16 @@ define(function (require) {
 
 		return _.extend(target, result);
 	};
+
+	function escapeHtml(text) {
+		return text
+			.replace(/&amp;/g, '&');
+	}
+
+	Handlebars.registerHelper("escaped", function (something) {
+		return escapeHtml(something);
+	});
+
 
 	return true;
 });

@@ -37,25 +37,19 @@ define(function (require) {
 
 		var output = [
 			{ 'key': 'terrible', 'displayValue': 'Terrible', 'color': '#004e66', 'values': [] },
-			{ 'key': 'poor', 'displayValue': 'Poor', 'color': '#004e66', 'values': [] },
-			{ 'key': 'average', 'displayValue': 'Average', 'color': '#fcbe32', 'values': [] },
-			{ 'key': 'mix', 'displayValue': 'Mix', 'color': '#fcbe32', 'values': [] },
-			{ 'key': 'good', 'displayValue': 'Good', 'color': '#ff5f2e', 'values': [] },
+			{ 'key': 'poor', 'displayValue': 'Poor', 'color': '#647a51', 'values': [] },
+			{ 'key': 'average', 'displayValue': 'Average', 'color': '#c9a73c', 'values': [] },
+			{ 'key': 'mix', 'displayValue': 'Mix', 'color': '#fcab31', 'values': [] },
+			{ 'key': 'good', 'displayValue': 'Good', 'color': '#fd852f', 'values': [] },
 			{ 'key': 'excellent', 'displayValue': 'Excellent', 'color': '#ff5f2e', 'values': [] }
 		];
 		_.each(input, function (single_food, i) {
-			output[0].values.push({ 'label': toTitleCase(single_food.name), 'value': -1*(single_food.terrible) });
-			output[1].values.push({ 'label': toTitleCase(single_food.name), 'value': -1*(single_food.poor) });
-			output[2].values.push({ 'label': toTitleCase(single_food.name), 'value': 1*(single_food.average) });
-			output[3].values.push({ 'label': toTitleCase(single_food.name), 'value': 1*(single_food.mix) });
-			output[4].values.push({ 'label': toTitleCase(single_food.name), 'value': 1*(single_food.good) });
-			output[5].values.push({ 'label': toTitleCase(single_food.name), 'value': 1*(single_food.excellent) });
-			// if(single_food.terrible) {  }
-			// if(single_food.poor) {  }
-			// if(single_food.average) {  }
-			// if(single_food.mix) {  }
-			// if(single_food.good) {  }
-			// if(single_food.excellent) {  }
+			output[0].values.push({ 'label': toTitleCase(single_food.name), 'value': -1*parseInt(single_food.terrible) });
+			output[1].values.push({ 'label': toTitleCase(single_food.name), 'value': -1*parseInt(single_food.poor) });
+			output[2].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.average) });
+			output[3].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.mix ? single_food.mix : 0) });
+			output[4].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.good) });
+			output[5].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.excellent) });
 		});
 		console.log(JSON.stringify(output));
 		return output;
@@ -99,7 +93,7 @@ define(function (require) {
 							.showControls(false)
 							.stacked(true);
 						chart.yAxis.axisLabel('Total Sentiments');
-						chart.xAxis.axisLabel('Food List').axisLabelDistance(20);
+						// chart.xAxis.axisLabel('Food List');
 
 						var a= document.getElementById('overview-tab');
 						var b= document.getElementById('food-tab');

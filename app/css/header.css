@@ -245,9 +245,9 @@ i.empty_message_icon {
 	border-left: 1px solid #990000;
 }
 
-.masthead__nav-menu-item:last-child {
+/*.masthead__nav-menu-item:last-child {*/
 	/*border-right: 1px solid #990000;*/
-}
+/*}*/
 
 .masthead__nav-menu-item > a {
 	color: rgba(255, 255, 255, 0.818);

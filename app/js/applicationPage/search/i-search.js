@@ -2,7 +2,6 @@ define(function (require) {
 	"use strict";
 
 	var $ = require('jquery');
-	var _= require('underscore');
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./search.html');

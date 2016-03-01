@@ -106,6 +106,7 @@ define(function (require) {
 						}
 					}
 				}
+				console.log(JSON.stringify(output));
 				return output;
 			}
 

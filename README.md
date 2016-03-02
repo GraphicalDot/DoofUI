@@ -38,3 +38,18 @@ Simple Life, Majama life... Charts -> https://gionkunz.github.io/chartist-js/exa
 https://github.com/whackashoe/antimoderate
 
 http://mapme.com/
+http://onemilliontweetmap.com/
+
+
+
+Maps Work:-
+1. https://stackoverflow.com/questions/7865446/google-maps-places-api-v3-autocomplete-select-first-option-on-enter   -> Issue for Entering on Nothing.
+2. https://www.wikiwand.com/en/ISO_3166-1_alpha-2 -> Restricting Autocomplete API to India only. [Atleast for now]
+3.
+
+
+Analytics :-
+1, http://boba.space150.com/
+
+Others :-
+1. https://scottjehl.github.io/picturefill/#examples [Something about Polyfills, check usage]

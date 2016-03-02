@@ -36,9 +36,9 @@
 }
 
 #landingPage .landingPage-background__overlay {
-		background: -moz-linear-gradient(top,rgba(108, 108, 108, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
-    background: -webkit-linear-gradient(top,rgba(108, 108, 108, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
-		background: linear-gradient(to bottom,rgba(108, 108, 108, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
+		background: -moz-linear-gradient(top,rgba(173, 37, 37, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
+    background: -webkit-linear-gradient(top,rgba(173, 37, 37, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
+		background: linear-gradient(to bottom,rgba(173, 37, 37, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6141724', endColorstr='#f2141724', GradientType=0 );
 }
 

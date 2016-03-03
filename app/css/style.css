@@ -628,7 +628,8 @@ line-height: 20px;
     background-color: white;
     bottom: 0;
     margin: 10px;
-    width: 540px;
+    width: 33%;
+    max-width: 540px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	/*overflow-y: auto;*/
 }

@@ -37,7 +37,7 @@ define(function (require) {
 				'restaurant-address': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_address : this.restaurant_detail.eatery_address,
 				reviews: function () {
 					return this.reviews.toJSON();
-				},
+				}
 			}
 		},
 		events: {
@@ -145,6 +145,12 @@ define(function (require) {
 			$('.addFoodItemBtn').leanModal();
 			this.makeCharts();
 			$('.detail').removeClass('hide');
+
+			// $('.materialboxed').materialbox();
+			$('.slider').slider(
+				{full_width: true, indicators: false, interval: 2000, height: 200}
+			);
+
 
 			this.reviews.fetch({ method: 'POST', data: { __eatery_id: this.restaurant_detail.__eatery_id } }).then(function () {
 				self.reviewsView.render();

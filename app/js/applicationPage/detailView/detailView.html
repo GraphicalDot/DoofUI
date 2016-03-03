@@ -1,8 +1,17 @@
 <i class="material-icons detail-close">clear</i>
 
 <div class="detail-restaurant-information">
+	<div class="slider detail-restaurant-photos">
+		<ul class="slides">
+			{{#each images}}
+				<li>
+					<img class="responsive_img" src="{{s3_url}}" alt="">
+				</li>
+			{{/each}}
+		</ul>
+	</div>
 	<div class="detail-restaurant-name">{{restaurant-name}}</div>
-	<div class="detail-restaurant-address">{{restaurant-address}}</div>
+	<!--<div class="detail-restaurant-address">{{restaurant-address}}</div>-->
 	<div class="restaurant-overall-graph"></div>
 </div>
 

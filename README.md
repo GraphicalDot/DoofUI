@@ -52,4 +52,9 @@ Analytics :-
 1, http://boba.space150.com/
 
 Others :-
-1. https://scottjehl.github.io/picturefill/#examples [Something about Polyfills, check usage]
+1. https://scottjehl.github.io/picturefill/#examples [Something about Polyfills, check usage];
+
+
+:Text Typography"
+
+1. http://zellwk.com/blog/why-vertical-rhythms/

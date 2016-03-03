@@ -121,7 +121,7 @@ define(function (require) {
 							.duration(250)
 							.margin({ top: 30, right: 20, bottom: 40, left: 120 })
 							.groupSpacing(0.818)
-							.showControls(false)
+							.showControls(true)
 							.stacked(true);
 
 						self.chart.yAxis.axisLabel('Total number of Sentiments');

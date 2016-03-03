@@ -1,4 +1,11 @@
-.search-results {
-	background: white;
-	height: 100%;
+.location-search__geolocate-me {
+	line-height: 44px;
+    color: #d72828;
+    cursor: pointer;
+    width: 40px;
+    text-align: center;
+}
+
+#search__location {
+	padding-left: 0px;
 }

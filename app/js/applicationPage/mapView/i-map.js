@@ -68,7 +68,12 @@ define(function (require) {
 			this.data = data.toJSON();
 			this.showMarker();
 		},
-		updateMyPosition: function(latLng) {
+		updateData: function (newData) {
+			this.collection = newData;
+			this.data = newData.toJSON();
+			this.showMarker();
+		},
+		updateMyPosition: function (latLng) {
 			this.myLocationMarker.updatePosition(latLng);
 		},
 		showMarker: function () {
@@ -190,7 +195,7 @@ define(function (require) {
 						map: self.map,
 						position: centerPoint,
 						title: "My Location",
-						updatePosition: function(latLng) {
+						updatePosition: function (latLng) {
 							self.myLocationMarker.setPosition(new google.maps.LatLng(latLng.lat, latLng.lng));
 						}
 					});

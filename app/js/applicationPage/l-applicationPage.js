@@ -20,6 +20,8 @@ define(function (require) {
 	var Restaurant = require('./../models/geteatery');
 	var UserFeedback = require('./../models/user_feedback');
 
+	var Promise = require('es6promise').Promise;
+
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
 		template: Handlebars.compile(Template),
@@ -33,13 +35,18 @@ define(function (require) {
 		},
 		initialize: function (opts) {
 			this.user = opts.user;
-			this.latLng = opts.position.latLng;
-			this.address = opts.position.place;
+			if (opts.position) {
+				this.latLng = opts.position.latLng ? opts.position.latLng : { lat: 28, lng: 77 };
+				this.address = opts.position.place ? opts.position.place : 'Delhi';
+			}
 
 			this.searchView = new SearchView({ address: this.address, latLng: this.latLng });
 			this.userView = new UserView({ model: this.user });
 			this.listView = new ListView({ collection: this.collection, user: this.user });
 			this.mapView = new MapView({ collection: this.collection, lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
+
+			this.trendingItems = new TrendingItems();
+			this.nearbyRestaurants = new NearbyRestaurants();
 		},
 		templateHelpers: {
 			isLoggedIn: function () {
@@ -61,8 +68,8 @@ define(function (require) {
 		},
 		events: {
 			'submit form#feedback-form': 'submitFeedback', //comes after submitting Feedback
-			'click @ui.getTrendingItem': 'subMenuTrendingClicked',
-			'click @ui.getNearbyItem': 'subMenuNearmeClicked',
+			'click @ui.getTrendingItem': 'showTrendingItems',
+			'click @ui.getNearbyItem': 'showNearbyItems',
 			'click #see-more-results-button': 'showMoreResults'
 		},
 		childEvents: {
@@ -73,7 +80,48 @@ define(function (require) {
 			'unhighlight:restaurant': 'unhighlight',
 			'highlight:marker': 'highlightMarker',
 			'unhighlight:marker': 'unhighlightMarker',
-			'update:location': 'updateLocation'
+			'update:location': 'updateLocation',
+
+			'place:changed': 'onPlaceChanged'
+		},
+		getTrendingItems: function () {
+			var self = this;
+			var promise = new Promise(function (resolve, reject) {
+				self.trendingItems.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
+					resolve(self.trendingItems);
+				}).fail(function () { console.log('trending items fetching failed probably'); reject(); });
+			});
+			return promise;
+		},
+		getNearbyItems: function () {
+			var self = this;
+			var promise = new Promise(function (resolve, reject) {
+				self.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
+					resolve(self.nearbyRestaurants);
+				}).fail(function () { console.log('trending items fetching failed probably'); reject(); });
+			});
+			return promise;
+		},
+		showNewData: function (data) {
+			this.listView.updateData(data);
+			this.mapView.updateData(data);
+		},
+		onPlaceChanged: function (childView) {
+			var self = this;
+			self.latLng = childView.position;
+			if (childView.isDoofSearchActive()) {
+				// show result on search View here.
+			} else {
+				// update my location marker in google map.
+				self.mapView.updateMyPosition(self.latLng);
+
+				// get If trending or nearBy results are selected.
+				if ($("#sub-menu-nearme-item").hasClass('active')) {
+					self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { });
+				} else {
+					self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { });
+				}
+			}
 		},
 		submitFeedback: function (e) {
 			e.preventDefault();
@@ -90,15 +138,6 @@ define(function (require) {
 				});
 			}
 		},
-		updateLocation: function (childView, latLng) {
-			this.latLng = latLng;
-			this.mapView.updateMyPosition(latLng);
-			if ($("#sub-menu-nearme-item").hasClass('active')) {
-				this.subMenuNearmeClicked();
-			} else {
-				this.subMenuTrendingClicked();
-			}
-		},
 		showProfile: function () {
 			var profileView = new ProfileView({ model: this.user });
 			this.showChildView('profile-box', profileView);
@@ -111,16 +150,16 @@ define(function (require) {
 			// e.preventDefault();
 			this.currentPage = this.currentPage + 1;
 			if (this.currentShowing === 'trendingItems') {
-				this.subMenuTrendingClicked(e);
+				this.showTrendingItems(e);
 			} else {
-				this.subMenuNearmeClicked(e);
+				this.showNearbyItems(e);
 			}
 		},
-		subMenuTrendingClicked: function (e) {
+		showTrendingItems: function (e) {
 			if (e) { e.preventDefault(); }
 
 			var self = this;
-			var trendingItems = new TrendingItems();
+
 			this.currentPage = this.currentPage ? this.currentPage : 0;
 			console.log(this.currentPage);
 			trendingItems.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
@@ -129,7 +168,7 @@ define(function (require) {
 			});
 			this.currentShowing = 'trendingItems';
 		},
-		subMenuNearmeClicked: function (e) {
+		showNearbyItems: function (e) {
 			if (e) { e.preventDefault(); }
 			var self = this;
 			var nearbyRestaurants = new NearbyRestaurants();

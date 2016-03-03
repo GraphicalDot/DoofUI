@@ -182,6 +182,10 @@ define(function (require) {
 		updateCollection: function (newCollection) {
 			this.collection = newCollection;
 			this.render();
+		},
+		updateData: function(newData) {
+			this.collection= newData;
+			this.render();
 		}
 	});
 

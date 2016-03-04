@@ -70,7 +70,7 @@ define(function (require) {
 			}
 		},
 		clearSearch: function (e) {
-			e.preventDefault();
+			if(e) e.preventDefault();
 			this.ui.searchDoofBox.val('');
 		},
 		clearDoofSearch: function () {

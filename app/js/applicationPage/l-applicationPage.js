@@ -72,6 +72,7 @@ define(function (require) {
 			'getNearbyItem': '#sub-menu__nearme-link',
 		},
 		events: {
+			'click #search-results__back-btn': 'removeSearch',
 			'submit form#feedback-form': 'submitFeedback', //comes after submitting Feedback
 			'click @ui.getTrendingItem': 'showTrendingItems',
 			'click @ui.getNearbyItem': 'showNearbyItems',
@@ -115,6 +116,12 @@ define(function (require) {
 			this.listView.updateData(data);
 			this.mapView.updateData(data);
 		},
+		removeSearch: function (e) {
+			e.preventDefault();
+			this.searchView.clearSearch();
+			this.searchView.clearDoofSearch();
+			this.triggerSearch(this.searchView);
+		},
 		triggerSearch: function (childView) {
 			var self = this;
 			self.latLng = childView.position;
@@ -136,7 +143,7 @@ define(function (require) {
 				else {
 					self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { });
 				}
-				$(".search-results").css('display', 'none');
+				$(".search-results__wrapper").css('display', 'none');
 			}
 		},
 		showCuisine: function (childView, cuisine_name) {
@@ -145,7 +152,7 @@ define(function (require) {
 				var list = new ListView({ collection: self.textSearchCollection });
 				self.showChildView('search-results', list);
 				self.mapView.updateData(self.textSearchCollection);
-				$(".search-results").css('display', 'block');
+				$(".search-results__wrapper").css('display', 'block');
 			});
 		},
 		showRestaurant: function (childView, restaurant_name) {
@@ -155,7 +162,7 @@ define(function (require) {
 				// var list= new ListView({collection: self.textSearchCollection});
 				// self.showChildView('search-results', list);
 				// self.mapView.updateData(self.textSearchCollection);
-				// $(".search-results").css('display', 'block');
+				// $(".search-results__wrapper").css('display', 'block');
 
 				var eateryInformation = self.textSearchCollection.toJSON()[0];
 				self.openRestaurant(null, eateryInformation.__eatery_id, eateryInformation);
@@ -167,7 +174,7 @@ define(function (require) {
 				var list = new ListView({ collection: self.textSearchCollection });
 				self.showChildView('search-results', list);
 				self.mapView.updateData(self.textSearchCollection);
-				$(".search-results").css('display', 'block');
+				$(".search-results__wrapper").css('display', 'block');
 			});
 		},
 		submitFeedback: function (e) {

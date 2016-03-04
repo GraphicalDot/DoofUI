@@ -1,6 +1,9 @@
 // It contains 2 search box [Location and Doof Search] & a button.
 // If only Location is changed, We update the Result in ListView.
 // If Doof Search is used, then we open a Search View above ListView for searched result, [ On Closing Saerch View, doof search input value is also cleared]
+
+// Pending Work -> Showing Suggestions
+// -> Restaurant Selection API change event.
 define(function (require) {
 	"use strict";
 
@@ -16,8 +19,7 @@ define(function (require) {
 			this.position = opts.latLng;
 			this.address = opts.address;
 			this.doofSearchActive = false;
-			this.isSearching= null;
-			// this.previouslySearchedLocations = [];
+			this.isSearching = null;
 		},
 		templateHelpers: { startingAddress: function () { return this.address; } },
 		ui: {
@@ -67,33 +69,33 @@ define(function (require) {
 				fail();
 			}
 		},
-		clearSearch: function(e) {
+		clearSearch: function (e) {
 			e.preventDefault();
 			this.ui.searchDoofBox.val('');
 		},
-		clearDoofSearch: function() {
-			this.isSearching= null;
-			this.doofSearchActive= false;
+		clearDoofSearch: function () {
+			this.isSearching = null;
+			this.doofSearchActive = false;
 		},
-		letsSearch: function(e) {
+		letsSearch: function (e) {
 			e.preventDefault();
 			this.triggerMethod('search:clicked');
 		},
 		foodSelect: function (food_name) {
-			this.isSearching= 'food';
-			this.doofSearchActive= true;
+			this.isSearching = 'food';
+			this.doofSearchActive = true;
 			this.triggerMethod('food:searched', food_name);
-		 },
+		},
 		restaurantSelect: function (restaurant_name) {
-			this.isSearching= 'restaurant';
-			this.doofSearchActive= true;
+			this.isSearching = 'restaurant';
+			this.doofSearchActive = true;
 			this.triggerMethod('restaurant:searched', restaurant_name);
-		 },
+		},
 		cuisineSelect: function (cuisine_name) {
-			this.isSearching= 'cuisine';
-			this.doofSearchActive= true;
+			this.isSearching = 'cuisine';
+			this.doofSearchActive = true;
 			this.triggerMethod('cuisine:searched', cuisine_name);
-		 },
+		},
 		/*  Geolocation Box :-
 		1. On entering at free space, first option is select by default.
 		2. On Selection of a place, we trigger an event for application to update Data.

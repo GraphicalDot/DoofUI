@@ -20,7 +20,7 @@ define(function (require) {
 	var Restaurant = require('./../models/geteatery');
 	var UserFeedback = require('./../models/user_feedback');
 
-	var TextSearchCollection= require('./../models/text_search'); // It is for Getting Items for Searched Query..
+	var TextSearchCollection = require('./../models/text_search'); // It is for Getting Items for Searched Query..
 
 	var Promise = require('es6promise').Promise;
 
@@ -51,7 +51,7 @@ define(function (require) {
 			this.trendingItems = new TrendingItems();
 			this.nearbyRestaurants = new NearbyRestaurants();
 
-			this.textSearchCollection= new TextSearchCollection();
+			this.textSearchCollection = new TextSearchCollection();
 		},
 		templateHelpers: {
 			isLoggedIn: function () {
@@ -121,14 +121,13 @@ define(function (require) {
 			// update my location marker in google map.
 			self.mapView.updateMyPosition(self.latLng);
 			if (childView.isDoofSearchActive()) {
-				if(childView.isSearching=== 'food') {
+				if (childView.isSearching === 'food') {
 					self.showFood(childView, $("#search_doof").val());
-				} else if (childView.isSearching=== 'restaurant') {
+				} else if (childView.isSearching === 'restaurant') {
 					self.showRestaurant(childView, $("#search_doof").val());
-				} else if(childView.isSearching=== 'cuisine') {
+				} else if (childView.isSearching === 'cuisine') {
 					self.showCuisine(childView, $("#search_doof").val());
 				}
-				// show result on search View here.
 			} else {
 				// get If trending or nearBy results are selected.
 				if ($("#sub-menu-nearme-item").hasClass('active')) {
@@ -140,32 +139,32 @@ define(function (require) {
 				$(".search-results").css('display', 'none');
 			}
 		},
-		showCuisine: function(childView, cuisine_name) {
-			var self= this;
-			this.textSearchCollection.fetch({method: 'POST', data: {type: 'cuisine', text: cuisine_name, lat: childView.position.lat, lng: childView.position.lng}}).then(function() {
-				var list= new ListView({collection: self.textSearchCollection});
+		showCuisine: function (childView, cuisine_name) {
+			var self = this;
+			this.textSearchCollection.fetch({ method: 'POST', data: { type: 'cuisine', text: cuisine_name, lat: childView.position.lat, lng: childView.position.lng } }).then(function () {
+				var list = new ListView({ collection: self.textSearchCollection });
 				self.showChildView('search-results', list);
 				self.mapView.updateData(self.textSearchCollection);
 				$(".search-results").css('display', 'block');
 			});
 		},
-		showRestaurant: function(childView, restaurant_name) {
-			var self= this;
-			this.textSearchCollection.fetch({method: 'POST', data: {type: 'eatery', text: restaurant_name, lat: childView.position.lat, lng: childView.position.lng}}).then(function() {
+		showRestaurant: function (childView, restaurant_name) {
+			var self = this;
+			this.textSearchCollection.fetch({ method: 'POST', data: { type: 'eatery', text: restaurant_name, lat: childView.position.lat, lng: childView.position.lng } }).then(function () {
 				// FOR NOW SINCE DATA IS COMING THIS WAY.. SAHI KARNA H ISKO,
 				// var list= new ListView({collection: self.textSearchCollection});
 				// self.showChildView('search-results', list);
 				// self.mapView.updateData(self.textSearchCollection);
 				// $(".search-results").css('display', 'block');
 
-				var eateryInformation= self.textSearchCollection.toJSON()[0];
+				var eateryInformation = self.textSearchCollection.toJSON()[0];
 				self.openRestaurant(null, eateryInformation.__eatery_id, eateryInformation);
 			});
 		},
-		showFood: function(childView, food_name) {
-			var self= this;
-			this.textSearchCollection.fetch({method: 'POST', data: {type: 'dish', text: food_name, lat: childView.position.lat, lng: childView.position.lng}}).then(function() {
-				var list= new ListView({collection: self.textSearchCollection});
+		showFood: function (childView, food_name) {
+			var self = this;
+			this.textSearchCollection.fetch({ method: 'POST', data: { type: 'dish', text: food_name, lat: childView.position.lat, lng: childView.position.lng } }).then(function () {
+				var list = new ListView({ collection: self.textSearchCollection });
 				self.showChildView('search-results', list);
 				self.mapView.updateData(self.textSearchCollection);
 				$(".search-results").css('display', 'block');

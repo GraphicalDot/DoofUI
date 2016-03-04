@@ -80,14 +80,12 @@ define(function (require) {
 		},
 		childEvents: {
 			'show:profile': 'showProfile',	//comes from userMenuView upon clicking My Profile.
-			'show:restaurants': 'showRestaurants',
 			'open:restaurant': 'openRestaurant',
 			'highlight:restaurant': 'highlight',
 			'unhighlight:restaurant': 'unhighlight',
 			'highlight:marker': 'highlightMarker',
 			'unhighlight:marker': 'unhighlightMarker',
-			'update:location': 'updateLocation',
-
+			
 			'place:changed': 'triggerSearch',
 			'search:clicked': 'triggerSearch',
 			'food:searched': 'showFood',
@@ -200,42 +198,15 @@ define(function (require) {
 			this.listView.updateCollection(newCollection);
 			this.mapView.updateMarkers(newCollection);
 		},
-		// showMoreResults: function (e) {
-		// 	// e.preventDefault();
-		// 	this.currentPage = this.currentPage + 1;
-		// 	if (this.currentShowing === 'trendingItems') {
-		// 		this.showTrendingItems(e);
-		// 	} else {
-		// 		this.showNearbyItems(e);
-		// 	}
-		// },
-		// showTrendingItems: function (e) {
-		// 	if (e) { e.preventDefault(); }
-
-		// 	var self = this;
-
-		// 	this.currentPage = this.currentPage ? this.currentPage : 0;
-		// 	console.log(this.currentPage);
-		// 	trendingItems.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
-		// 		self.collection = trendingItems;
-		// 		self.updateDataInApplication(self.collection);
-		// 	});
-		// 	this.currentShowing = 'trendingItems';
-		// },
-		// showNearbyItems: function (e) {
-		// 	if (e) { e.preventDefault(); }
-		// 	var self = this;
-		// 	var nearbyRestaurants = new NearbyRestaurants();
-		// 	this.currentPage = this.currentPage ? this.currentPage : 0;
-		// 	nearbyRestaurants.fetch({ method: 'POST', data: { latitude: this.latLng.lat, longitude: this.latLng.lng, skip: this.currentPage, limit: 20 } }).done(function () {
-		// 		self.collection = nearbyRestaurants;
-		// 		self.updateDataInApplication(self.collection);
-		// 	});
-		// 	this.currentShowing = 'nearmeItems';
-		// },
-
-		showRestaurants: function (childView, restaurant_data) {
-			this.updateDataInApplication(restaurant_data);
+		showTrendingItems: function (e) {
+			if (e) { e.preventDefault(); }
+			var self= this;
+			self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { });
+		},
+		showNearbyItems: function (e) {
+			if (e) { e.preventDefault(); }
+			var self = this;
+			self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { });
 		},
 		openRestaurant: function (childView, restaurant_id, restaurant_details) {
 			var self = this;

@@ -1,11 +1,32 @@
 .location-search__geolocate-me {
-	line-height: 44px;
+	line-height: 48px;
     color: #d72828;
     cursor: pointer;
-    width: 40px;
+    width: 48px;
+    background-color: #fafafa;
+    border-radius: 3px;
     text-align: center;
 }
 
-#search__location {
-	padding-left: 0px;
+.pac-container .pac-item:first {
+	background-color: #f5f5f5 ;
+}
+
+.search-results {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 450px;
+	background-color: white;
+	z-index: 99;
+
+	display: none;
+	overflow: auto;
+}
+
+.clear-search-results__icon {
+	position: absolute;
+	top: 0;
+	right: 0;
 }

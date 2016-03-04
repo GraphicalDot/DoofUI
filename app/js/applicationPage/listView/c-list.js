@@ -37,7 +37,7 @@ define(function (require) {
 		className: 'restaurant-list-item2 card-panel',
 		template: Handlebars.compile(Template),
 		initialize: function () {
-			console.log('yo man');
+			// console.log('yo man');
 			this.applicationChannel = Radio.channel('application');
 		},
 		attributes: function () {
@@ -170,7 +170,7 @@ define(function (require) {
 					total_sentiments = this.model.get('eatery_details').overall.total_sentiments ? this.model.get('eatery_details').overall.total_sentiments : 1;
 				}
 
-				console.log(this.model.get('eatery_details').eatery_name, terrible, poor, average, mix, good, excellent, total_sentiments);
+				// console.log(this.model.get('eatery_details').eatery_name, terrible, poor, average, mix, good, excellent, total_sentiments);
 				return ((0 * terrible + 2.5 * poor + 4.8 * average + 5.2 * mix + 7.5 * good + 10 * excellent) / total_sentiments).toFixed(1);
 			}
 		}

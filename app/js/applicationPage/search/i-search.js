@@ -9,8 +9,6 @@ define(function (require) {
 	var Marionette = require('marionette');
 	var Template = require('text!./search.html');
 
-	var TextSearchCollection = require('./../../models/text_search');
-
 	var SearchBox = Marionette.ItemView.extend({
 		id: 'doofSearch',
 		template: Handlebars.compile(Template),
@@ -18,31 +16,30 @@ define(function (require) {
 			this.position = opts.latLng;
 			this.address = opts.address;
 			this.doofSearchActive = false;
-			this.previouslySearchedItems = [];
-			this.textSearchCollection = new TextSearchCollection();
+			this.isSearching= null;
+			// this.previouslySearchedLocations = [];
 		},
 		templateHelpers: { startingAddress: function () { return this.address; } },
 		ui: {
 			'geolocatorIcon': '.location-search__geolocate-me',
 			'searchLocationBox': '#search__location',
 			'searchDoofBox': '#search_doof',
-			'clearSearchBtn': '.clear-search__icon'
+			'clearSearchBtn': '.clear-search__icon',
+			'searchBtn': '#search__submit-btn'
 		},
 		events: {
-			'click @ui.geolocatorIcon': 'getLocation'
-			// 'click .clear_button': 'clearSearch',
-			// 'click .search_button': 'instantSearch',
-			// 'submit .search_box': 'instantSearch',
-			// 'click @ui.clearSearchBtn': 'clearSearch'
+			'click @ui.geolocatorIcon': 'getLocation',
+			'click @ui.clearSearchBtn': 'clearSearch',
+			'click @ui.searchBtn': 'letsSearch'
 		},
 		isDoofSearchActive: function () {
-			return this.doofSearchActive;
+			return (this.doofSearchActive && this.ui.searchDoofBox.val());
 		},
-		getLocation: function(e) {
+		getLocation: function (e) {
 			e.preventDefault();
-			var self= this;
+			var self = this;
 			function success(position) {
-				self.position.lat= position.coords.latitude;
+				self.position.lat = position.coords.latitude;
 				self.position.lng = position.coords.longitude;
 				require(['google-map-loader'], function (GoogleMapLoader) {
 					GoogleMapLoader.done(function (GoogleMaps) {
@@ -63,71 +60,40 @@ define(function (require) {
 			function fail() {
 				console.log("Sorry, couldnt get your location");
 			};
-			if(navigator.geolocation) {
-				var options= {};
+			if (navigator.geolocation) {
+				var options = {};
 				navigator.geolocation.getCurrentPosition(success, fail, options);
 			} else {
 				fail();
 			}
 		},
-		// clearSearch: function (e) {
-		// 	e.preventDefault();
-		// 	this.ui.searchDoofBox.val('');
-		// 	$("#doof_search_box").val('');
-		//       this.applicationChannel.trigger("show:restaurants");
-		// 	this.triggerMethod('show:restaurants');
-		// },
-
-		// instantSearch: function (e) {
-		// e.preventDefault();
-		// var searchValue= $("#doof_search_box").val();
-		// this.onNullSelect(searchValue);
-		// },
-		// onCuisineSelect: function (cuisine_name) {
-		// var self = this;
-		// if(!cuisine_name) {
-		// 	this.clearSearch();
-		// 	return;
-		// }
-		// this.textSearchModel.fetch({ method: 'POST', data: { type: 'cuisine', text: cuisine_name } }).then(function () {
-		// self.triggerMethod('show:restaurants', self.textSearchModel);
-		// });
-		// },
-		// onFoodSelect: function (food_name) {
-		// var self = this;
-		// if (!food_name) {
-		// 	this.clearSearch();
-		// 	return;
-		// }
-		// this.textSearchModel.fetch({ method: 'POST', data: { type: 'dish', text: food_name } }).then(function () {
-		// self.triggerMethod('show:restaurants', self.textSearchModel);
-		// });
-		// 	self.applicationChannel.trigger('show:restaurants', self.model);
-		// });
-		// },
-		// onRestaurantSelect: function (restaurant_name) {
-		// var self = this;
-		// if (!restaurant_name) {
-		// 	this.clearSearch();
-		// 	return;
-		// }
-		// this.textSearchModel.fetch({ method: 'POST', data: { type: 'eatery', text: restaurant_name } }).then(function () {
-		// self.triggerMethod('open:restaurant', self.textSearchModel.toJSON()[0].__eatery_id, self.textSearchModel.toJSON()[0]);
-		// });
-		// },
-		// onNullSelect: function (value) {
-		// var self = this;
-		// if (!value) {
-		// 	this.clearSearch();
-		// 	return;
-		// }
-		// this.model.fetch({method: 'POST', data: {type: null, text: value}}).then(function() {
-		// 	self.applicationChannel.trigger('show:restaurants', self.model);
-		// });
-		// },
-		foodSelect: function () { },
-		restaurantSelect: function () { },
-		cuisineSelect: function () { },
+		clearSearch: function(e) {
+			e.preventDefault();
+			this.ui.searchDoofBox.val('');
+		},
+		clearDoofSearch: function() {
+			this.isSearching= null;
+			this.doofSearchActive= false;
+		},
+		letsSearch: function(e) {
+			e.preventDefault();
+			this.triggerMethod('search:clicked');
+		},
+		foodSelect: function (food_name) {
+			this.isSearching= 'food';
+			this.doofSearchActive= true;
+			this.triggerMethod('food:searched', food_name);
+		 },
+		restaurantSelect: function (restaurant_name) {
+			this.isSearching= 'restaurant';
+			this.doofSearchActive= true;
+			this.triggerMethod('restaurant:searched', restaurant_name);
+		 },
+		cuisineSelect: function (cuisine_name) {
+			this.isSearching= 'cuisine';
+			this.doofSearchActive= true;
+			this.triggerMethod('cuisine:searched', cuisine_name);
+		 },
 		/*  Geolocation Box :-
 		1. On entering at free space, first option is select by default.
 		2. On Selection of a place, we trigger an event for application to update Data.
@@ -149,7 +115,7 @@ define(function (require) {
 								var orig_listener = listener;
 								listener = function (event) {
 									var suggestion_selected = $(".pac-item-selected").length > 0;
-									if (event.which == 13 && !suggestion_selected) {
+									if ((event.which == 13 || event.which == 9) && !suggestion_selected) {
 										var simulated_downarrow = $.Event("keydown", {
 											keyCode: 40,
 											which: 40
@@ -180,112 +146,99 @@ define(function (require) {
 			});
 		},
 		makeSuggestionBox: function () {
-			// var self = this;
-			// require(["typeahead"], function () {
-			// 	self.ui.searchDoofBox.typeahead(
-			// 		{ hint: true, highlight: true, minLength: 4 },
-			// 		{
-			// 			limit: 12,
-			// 			name: 'food',
-			// 			async: true,
-			// 			source: function (query, processSync, processAsync) {
-			// 				return $.ajax({
-			// 					url: "http://52.76.176.188:8000/suggestions",
-			// 					type: 'POST',
-			// 					data: { query: query },
-			// 					dataType: 'json',
-			// 					success: function (json) {
-			// 						return processAsync(json.result[0].suggestions);
-			// 					}
-			// 				});
-			// 			},
-			// 			templates: {
-			// 				notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No dish found', '</div>'].join('\n'),
-			// 				suggestion: function (data) {
-			// 					var str = data.replace(/\s+/g, '');
-			// 					return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
-			// 				},
-			// 				header: '<div class="search-header search-header__food"><i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Dishes</span></div>'
-			// 			}
-			// 		}, {
-			// 			limit: 10,
-			// 			name: 'restaurant',
-			// 			async: true,
-			// 			source: function (query, processSync, processAsync) {
-			// 				return $.ajax({
-			// 					url: "http://52.76.176.188:8000/suggestions",
-			// 					type: 'POST',
-			// 					data: { query: query },
-			// 					dataType: 'json',
-			// 					success: function (json) {
-			// 						return processAsync(json.result[1].suggestions)
-			// 					}
-			// 				});
-			// 			},
-			// 			templates: {
-			// 				notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Restaurant found', '</div>'].join('\n'),
-			// 				suggestion: function (data) {
-			// 					var str = data.replace(/\s+/g, '');
-			// 					return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
-			// 				},
-			// 				header: '<div class="search-header search-header__restaurant"><i class="material-icons suggestion-type typeahead-header restaurant">store_mall_directory</i><span>Restaurant</span></div>'
-			// 			}
-			// 		}, {
-			// 			limit: 10,
-			// 			name: 'cuisine',
-			// 			async: true,
-			// 			source: function (query, processSync, processAsync) {
-			// 				return $.ajax({
-			// 					url: "http://52.76.176.188:8000/suggestions",
-			// 					type: 'POST',
-			// 					data: { query: query },
-			// 					dataType: 'json',
-			// 					success: function (json) {
-			// 						return processAsync(json.result[2].suggestions)
-			// 					}
-			// 				});
-			// 			},
-			// 			templates: {
-			// 				notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Cuisines found', '</div>'].join('\n'),
-			// 				suggestion: function (data) {
-			// 					var str = data.replace(/\s+/g, '');
-			// 					return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
-			// 				},
-			// 				header: '<div class="search-header search-header__cuisine"><i class="material-icons suggestion-type typeahead-header cuisine">local_dining</i><span>Cuisines</span></div>'
-			// 			}
-			// 		}
-			// 		).on('typeahead:asyncrequest', function () {
-			// 			$('.Typeahead-spinner').show();
-			// 		}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
-			// 			$('.Typeahead-spinner').hide();
-			// 		});
-
-			// 	self.ui.searchDoofBox.bind("typeahead:select", function (ev, suggestion) {
-			// 		var str = suggestion.replace(/\s+/g, '');
-			// 		var $suggestionEl = $('.typeahead-suggestion-' + str);
-			// 		var $headerEl = $suggestionEl.closest('.tt-dataset').find('.typeahead-header');
-
-			// 		if ($headerEl.hasClass('food')) {
-			// 			self.onFoodSelect(suggestion);
-			// 		} else if ($headerEl.hasClass('cuisine')) {
-			// 			self.onCuisineSelect(suggestion);
-			// 		} else {
-			// 			self.onRestaurantSelect(suggestion);
-			// 		}
-			// 	});
-
-			// 	self.ui.searchDoofBox.enterKey(function (e) {
-			// 		if ($(this).val()) {
-			// 			self.onNullSelect($(this).val());
-			// 		} else {
-			// 			self.clearSearch();
-			// 		}
-			// 	});
-			// });
+			var self = this;
+			require(['typeahead'], function () {
+				var opts = { hint: true, highlight: true, minLength: 4 };
+				var foodQuery = {
+					name: 'food', limit: 12, async: true,
+					source: function (query, processSync, processAsync) {
+						return $.ajax({
+							url: "http://52.76.176.188:8000/suggestions",
+							type: 'POST',
+							data: { query: query },
+							dataType: 'json',
+							success: function (json) {
+								return processAsync(json.result[0].suggestions);
+							}
+						});
+					},
+					templates: {
+						notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No food found', '</div>'].join('\n'),
+						suggestion: function (data) {
+							var str = data.replace(/\s+/g, '');
+							return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
+						},
+						header: '<div class="search-header search-header__food"><i class="material-icons suggestion-type typeahead-header food">kitchen</i><span>Dishes</span></div>'
+					}
+				};
+				var restaurantQuery = {
+					name: 'restaurant', limit: 12, async: true,
+					source: function (query, processSync, processAsync) {
+						return $.ajax({
+							url: "http://52.76.176.188:8000/suggestions",
+							type: 'POST',
+							data: { query: query },
+							dataType: 'json',
+							success: function (json) {
+								return processAsync(json.result[1].suggestions);
+							}
+						});
+					},
+					templates: {
+						notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Restaurant found', '</div>'].join('\n'),
+						suggestion: function (data) {
+							var str = data.replace(/\s+/g, '');
+							return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
+						},
+						header: '<div class="search-header search-header__restaurant"><i class="material-icons suggestion-type typeahead-header restaurant">store_mall_directory</i><span>Restaurant</span></div>'
+					}
+				};
+				var cuisineQuery = {
+					name: 'cuisine', limit: 12, async: true,
+					source: function (query, processSync, processAsync) {
+						return $.ajax({
+							url: "http://52.76.176.188:8000/suggestions",
+							type: 'POST',
+							data: { query: query },
+							dataType: 'json',
+							success: function (json) {
+								return processAsync(json.result[2].suggestions);
+							}
+						});
+					},
+					templates: {
+						notFound: ['<div class="empty-message"><i class="material-icons empty_message_icon">do_not_disturb</i>', 'No Cuisines found', '</div>'].join('\n'),
+						suggestion: function (data) {
+							var str = data.replace(/\s+/g, '');
+							return '<div class="typeahead-suggestion-' + str + '"><strong>' + data + '</strong></div>';
+						},
+						header: '<div class="search-header search-header__cuisine"><i class="material-icons suggestion-type typeahead-header cuisine">local_dining</i><span>Cuisines</span></div>'
+					}
+				};
+				self.ui.searchDoofBox.typeahead(opts, foodQuery, restaurantQuery, cuisineQuery)
+					.on('typeahead:asyncrequest', function () {
+						//show spinner
+					}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
+						//hide spinner
+					}).bind('typeahead:render', function (e) {
+						self.ui.searchDoofBox.parent().find('.tt-selectable:first').addClass('tt-cursor');
+					}).bind("typeahead:select", function (ev, suggestion) {
+						var str = suggestion.replace(/\s+/g, '');
+						var $suggestionEl = $('.typeahead-suggestion-' + str);
+						var $headerEl = $suggestionEl.closest('.tt-dataset').find('.typeahead-header');
+						if ($headerEl.hasClass('food')) {
+							self.foodSelect(suggestion);
+						} else if ($headerEl.hasClass('cuisine')) {
+							self.cuisineSelect(suggestion);
+						} else {
+							self.restaurantSelect(suggestion);
+						}
+					});
+			});
 		},
 		onShow: function () {
 			this.makeGeoLocatorBox();
-			// this.makeSuggestionBox();
+			this.makeSuggestionBox();
 		}
 	});
 

@@ -51,7 +51,6 @@ define(function (require) {
 			output[4].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.good) });
 			output[5].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.excellent) });
 		});
-		console.log(JSON.stringify(output));
 		return output;
 	}
 
@@ -77,6 +76,18 @@ define(function (require) {
 		ui: {
 			'tabs': '.restaurant-details__tabs',
 			'reviewBox': ".reviews-list"
+		},
+		events: {
+			'click .slider__left-arrow': 'previousPhoto',
+			'click .slider__right-arrow': 'nextPhoto'
+		},
+		previousPhoto: function(e) {
+			e.preventDefault();
+			$('.slider').slider('prev');
+		},
+		nextPhoto: function(e) {
+			e.preventDefault();
+			$('.slider').slider('next');
 		},
 		makeFoodChart: function () {
 			var foodData = this.model.get('food'); //food list array
@@ -123,6 +134,8 @@ define(function (require) {
 		onShow: function () {
 			var self = this;
 			$('.detail').removeClass('hide');
+			$('.slider').slider({full_width: true, height: 240, indicators: false});
+			$('.materialboxed').materialbox();
 			this.makeFoodChart()
 			self.ui.tabs.tabs();
 

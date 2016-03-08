@@ -1,47 +1,74 @@
-.detail-restaurant-photos {
-	height: 200px;
+.restaurant-details__meta-information {
+    position: relative;
+}
+.restaurant-details__information {
+	position: absolute;
+	bottom: 0;
+	/*margin: 6px 12px;*/
+	/*font-size: 2.4rem;*/
+	color: white;
+	background-color: rgba(0, 0, 0, 0.618);
+	z-index: 11;
+    width: 100%;
+}
+
+.restaurant-details__name {
+	font-size: 1.8rem;
+}
+/*
+.restaurant-details__information {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}*/
+
+.restaurant-details__tab-boxes {
+	flex: 1;
+	display: flex;
 }
 
 #detail-view .tabs {
-	width: 100%!important;
-    font-size: 0.718rem;
-    border: 1px solid #E0E0E0;
-	overflow: hidden!important;
+	/*width: 100%!important;*/
+	margin-top: 6px;
+	margin-bottom: 12px;
+    	font-size: 0.818rem;
+    	/*border: 1px solid #E0E0E0;*/
+	/*overflow: hidden!important;*/
 }
 
 #detail-view .tab {
-	border-left: 1px solid #E0E0E0;
+	/*border-left: 1px solid #E0E0E0;*/
 }
 
-#detail-view .tab a {
-	font-weight: 600;
+#detail-view .tab a.active {
+	font-weight: bold;
 }
 
 #detail-view {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 #detail-view {
 	z-index: 7;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    	display: flex;
+    	flex-direction: column;
+    	height: 100%;
 }
-
+/*
 .graph {
-
 	width: 500px!important;
     height: 600px!important;
-}
+}*/
 
 .detail-close {
 	position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    font-size: 2em;
+	top: 5px;
+    	right: 5px;
+    	cursor: pointer;
+    	font-size: 2em;
 	color: #EB4960;
-    z-index: 1;
+    	z-index: 99;
 }
 
 .detail-restaurant-information {
@@ -87,25 +114,6 @@
 	flex-direction: column;
 }
 
-.restaurant-details__meta-information {
-    margin: 10px 15px;
-}
-.restaurant-details__name {
-	font-size: 2.4rem;
-	font-weight: 300;
-	color: #e5004a;
-}
-
-.restaurant-details__information {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-}
-
-.restaurant-details__tab-boxes {
-	flex: 1;
-	display: flex;
-}
 
 #overview-tab,
 #food-tab,
@@ -250,4 +258,27 @@
 
 .add-food-item {
 	flex: 0 0 100px;
+}
+
+.slider__left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    color: rgb(215, 40, 40);
+    z-index: 9;
+    cursor: pointer;
+}
+
+.slider__right-arrow {
+position: absolute;
+    top: 50%;
+    right: 0;
+    color: rgb(215, 40, 40);
+    z-index: 9;
+    cursor: pointer;
+}
+
+.slider__left-arrow:hover,
+.slider__right-arrow:hover {
+	color: #d72828;
 }

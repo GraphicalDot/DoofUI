@@ -54,6 +54,9 @@ Analytics :-
 Others :-
 1. https://scottjehl.github.io/picturefill/#examples [Something about Polyfills, check usage];
 
+Forms :-
+1. http://kushagragour.in/lab/superplaceholderjs/  [Super charge your input placeholders]
+
 
 :Text Typography"
 

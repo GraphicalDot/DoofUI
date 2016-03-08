@@ -11,8 +11,8 @@ define(function (require) {
 	var UserView = require('./userMenuView/i-userMenu');
 	var ListView = require('./listView/c-list');
 	var MapView = require('./mapView/i-map');
-	var RestaurantDetailView = require('./detailView/i-detailView');
-	// var RestaurantDetailView = require('./detailView2/i-detailView');
+	// var RestaurantDetailView = require('./detailView/i-detailView');
+	var RestaurantDetailView = require('./detailView2/i-detailView');
 	var ProfileView = require('./userProfileView/i-userProfile');
 
 	var TrendingItems = require('./../models/get_trending');
@@ -85,7 +85,7 @@ define(function (require) {
 			'unhighlight:restaurant': 'unhighlight',
 			'highlight:marker': 'highlightMarker',
 			'unhighlight:marker': 'unhighlightMarker',
-			
+
 			'place:changed': 'triggerSearch',
 			'search:clicked': 'triggerSearch',
 			'food:searched': 'showFood',
@@ -200,7 +200,7 @@ define(function (require) {
 		},
 		showTrendingItems: function (e) {
 			if (e) { e.preventDefault(); }
-			var self= this;
+			var self = this;
 			self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { });
 		},
 		showNearbyItems: function (e) {

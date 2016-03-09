@@ -457,13 +457,13 @@ i.empty_message_icon {
     -webkit-flex: 1 1 auto;
     height: 0px;
 }
-
+/*
 .doof-body .map {
     flex: 1;
     position: relative;
-		/*z-inwdex: -1;*/
-}
 
+}*/
+/*
 .map #map-view {
     position: absolute;
     top: 0;
@@ -472,7 +472,7 @@ i.empty_message_icon {
     bottom: 0;
     height: 100%;
     width: 100%;
-}
+}*/
 
 .restaurant-list-item {
 	/*padding-left: 8px;*/

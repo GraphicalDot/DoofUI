@@ -1,6 +1,28 @@
-.restaurant-details__meta-information {
-    position: relative;
+#detail-view {
+	height: 100%; width: 100%; margin: 0; padding: 0;
+	display: flex; flex-direction: column;
 }
+
+.restaurant-details__meta-information {
+	height: 240px;
+	position: relative;
+}
+
+#detail-view .tabs {
+	height: 48px;
+}
+
+.restaurant-details__tab-boxes {
+	flex: 1;
+	display: flex;
+}
+
+#overview-tab,
+#food-tab,
+#reviews-tab {
+	flex: 1;
+}
+
 .restaurant-details__information {
 	position: absolute;
 	bottom: 0;
@@ -22,19 +44,7 @@
 	flex-direction: column;
 }*/
 
-.restaurant-details__tab-boxes {
-	flex: 1;
-	display: flex;
-}
 
-#detail-view .tabs {
-	/*width: 100%!important;*/
-	margin-top: 6px;
-	margin-bottom: 12px;
-    	font-size: 0.818rem;
-    	/*border: 1px solid #E0E0E0;*/
-	/*overflow: hidden!important;*/
-}
 
 #detail-view .tab {
 	/*border-left: 1px solid #E0E0E0;*/
@@ -44,17 +54,6 @@
 	font-weight: bold;
 }
 
-#detail-view {
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-#detail-view {
-	z-index: 7;
-    	display: flex;
-    	flex-direction: column;
-    	height: 100%;
-}
 /*
 .graph {
 	width: 500px!important;
@@ -104,22 +103,8 @@
 }
 
 
-#detail-view {
-	/*position: relative;*/
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-}
 
 
-#overview-tab,
-#food-tab,
-#reviews-tab {
-	flex: 1;
-}
 
 #addFoodItemModal {
 	z-index: 1003;
@@ -281,4 +266,8 @@ position: absolute;
 .slider__left-arrow:hover,
 .slider__right-arrow:hover {
 	color: #d72828;
+}
+
+.slider .slides li.active {
+	z-index: 1000;
 }

@@ -1,6 +1,57 @@
 #applicationPage {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+	height: 100%; width: 100%; margin: 0; padding: 0;	/* 100% division */
+	display: flex; flex-direction: column;	/* flex column*/
+}
+
+.doof-masthead {
+	height: 72px;
+	background-color: #d72828; box-shadow: 0 0 6px rgba(0, 0, 0, 0.618);
+	z-index: 12;
+	display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+}
+
+.doof-body {
+	flex: 1; display: flex;
+	z-index: 1; position: relative;
+}
+
+.body__list-container,
+.body__search-results-container {
+	background-color: white; box-shadow: .66px 0 3px rgba(0,0,0,0.309);
+}
+
+.body__list-container {
+	flex: 0 0 480px;
+	display: flex; flex-direction: column;
+}
+
+.body__search-results-container {
+	position: absolute; top: 0; left: 0; height: 100%; width: 480px;
+	z-index: 3;
+}
+
+.body__map-container {
+	flex: 1;
+	position: relative;
+}
+
+#map-view {
+    	position: absolute; height: 100%; width: 100%; top:0; left:0;
+}
+
+.body__detail-box,
+.body__profile-box {
+	position: absolute; height:auto; bottom:0; top: 0;
+	margin: 12px; z-index: 3;
+	background-color: white; box-shadow: 0 0 9px rgba(0, 0, 0, 0.309);
+}
+
+.body__detail-box {
+	left: 480px;
+	width: 33.333333%; max-width: 540px;
+}
+
+.body__profile-box {
+	right: 0;
+	width: 480px;
 }

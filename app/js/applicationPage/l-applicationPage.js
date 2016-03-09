@@ -31,10 +31,10 @@ define(function (require) {
 			search: '.masthead__search-container',
 			userMenu: '.nav-menu-item__user',
 			list: '.body__list',
-			map: '.map',
-			detail: '.detail',
-			'profile-box': '.profile-box',
-			'search-results': '.search-results'
+			map: '.body__map-container',
+			detail: '.body__detail-box',
+			'profile-box': '.body__profile-box',
+			'search-results': '.body__search-results-container'
 		},
 		initialize: function (opts) {
 			this.user = opts.user;

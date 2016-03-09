@@ -133,7 +133,7 @@ define(function (require) {
 		},
 		onShow: function () {
 			var self = this;
-			$('.detail').removeClass('hide');
+			$('.body__detail-box').removeClass('hide');
 			$('.slider').slider({full_width: true, height: 240, indicators: false});
 			$('.materialboxed').materialbox();
 			this.makeFoodChart()

@@ -1,0 +1,55 @@
+@import 'variables';
+
+#applicationPage {
+	height: 100%; width: 100%; margin: 0; padding: 0;	/* 100% division */
+	display: flex; flex-direction: column;	/* flex column*/
+}
+
+// Header Section
+.doof-masthead {
+	height: $header-height;
+	background-color: $brand-color;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	.masthead__logo-container {
+		height: 100%;
+		flex: 0 0 $logo-column-width;
+		padding: $space-nearby;
+		text-align: center;
+
+		img {
+			height: 100%;
+			width: auto;
+		}
+	}
+
+	.masthead__search-container {
+		flex: 1;
+		padding: $space-nearby;
+
+		#doofSearch {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			max-width: $search-form-max-width;
+			margin: 0 auto;
+
+			display: flex;
+			align-items: center;
+
+			.search-form {
+				flex: 1;
+				height: 100%;
+				background-color: white;
+				border-radius: 3px;
+				.search-form label {
+					z-index: 2;
+				}
+			}
+		}
+	}
+}
+

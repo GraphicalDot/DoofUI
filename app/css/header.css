@@ -6,14 +6,6 @@
 	/*border-right: 1px solid #990000;*/
 }
 
-.masthead__logo-container {
-	height: 100%;
-	flex: 0 0 240px;
-	padding: 18px 24px;
-	text-align: center;
-	/*border-right: 1px solid #990000;*/
-}
-
 #masthead_logo img {
 	height: 100%;
 	width: auto;

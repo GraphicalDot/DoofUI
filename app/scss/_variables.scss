@@ -1,14 +1,17 @@
 $brand-color: #d72828;
 $brand-text-color: #ffce00;
+$border-color: #e6e6e6;
+$border-color-2: #990000;
+$lighter-background: #fafafa;
 
 $landing-page-text-width: 1080px;
 $landing-page-enter-btn-width: 60px;
 $border-radius: 3px;
 
 
-$first-column-width: 480px;
-$space-nearby: 18px 24px;
+$column-width: 480px;
+$space-nearby: 12px 24px;
 
 $header-height: 72px;
-$logo-column-width: $first-column-width/2;
+$logo-column-width: $column-width/2;
 $search-form-max-width: 1080px;

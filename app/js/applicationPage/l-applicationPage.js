@@ -45,8 +45,8 @@ define(function (require) {
 
 			this.searchView = new SearchView({ address: this.address, latLng: this.latLng });
 			this.userView = new UserView({ model: this.user });
-			this.listView = new ListView({ collection: this.collection, user: this.user });
-			this.mapView = new MapView({ collection: this.collection, lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
+			this.listView = new ListView({ user: this.user });
+			this.mapView = new MapView({ lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
 
 			this.trendingItems = new TrendingItems();
 			this.nearbyRestaurants = new NearbyRestaurants();
@@ -248,6 +248,8 @@ define(function (require) {
 			this.showChildView('map', this.mapView);
 			this.ui.mainMenuTabs.tabs();
 			this.ui.subMenuTabs.tabs();
+
+			this.showTrendingItems();
 		}
 	});
 	return ApplicationPage;

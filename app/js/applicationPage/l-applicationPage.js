@@ -135,7 +135,7 @@ define(function (require) {
 				}
 			} else {
 				// get If trending or nearBy results are selected.
-				if ($("#sub-menu-nearme-item").hasClass('active')) {
+				if ($("#sub-menu__nearme-link").hasClass('active')) {
 					self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { });
 				}
 				else {

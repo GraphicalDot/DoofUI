@@ -8,6 +8,13 @@ b. Body
 @font-face {
   font-family: Utopia;
   src: url("UtopiaStd-Regular.otf") format("opentype"); }
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px; }
+
+::-webkit-scrollbar-thumb {
+  background: #e6e6e6; }
+
 #landingPage {
   flex: 1;
   color: white;
@@ -201,5 +208,267 @@ b. Body
       height: 36px;
       width: 36px;
       vertical-align: middle; }
+
+.doof-body {
+  flex: 1;
+  display: flex;
+  position: relative; }
+  .doof-body .body__list-container,
+  .doof-body .body__search-results-container {
+    background-color: white;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.309); }
+  .doof-body .body__list-container {
+    flex: 0 0 480px;
+    display: flex;
+    flex-direction: column; }
+    .doof-body .body__list-container .body__sub-menu-wrapper {
+      display: flex;
+      align-items: center;
+      height: 72px;
+      padding: 12px 24px;
+      background: #fafafa;
+      box-shadow: inset 0 -1px 0 #e2e1e8; }
+      .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container {
+        width: 100%; }
+        .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container .body__sub-menu li.tab {
+          border: 1px solid #e6e6e6; }
+          .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container .body__sub-menu li.tab a {
+            color: rgba(0, 0, 0, 0.618);
+            font-weight: bold; }
+            .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container .body__sub-menu li.tab a.active {
+              color: #ffce00; }
+        .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container .indicator {
+          height: 3px;
+          background-color: #ffce00; }
+    .doof-body .body__list-container .body__list {
+      flex: 1;
+      display: flex;
+      height: 0; }
+      .doof-body .body__list-container .body__list #restaurants-list-view {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        position: relative; }
+        .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 {
+          margin: 0;
+          display: flex;
+          cursor: pointer;
+          background: white;
+          transition: all 200ms cubic-bezier(0.19, 1, 0.22, 1);
+          position: relative;
+          border-bottom: 1px solid #e6e6e6;
+          border-radius: 0; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2:hover, .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2.active {
+            background-color: #fafafa;
+            box-shadow: 0 0px 8px #787878;
+            z-index: 2; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .card-header > .restaurant-name,
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .card-header > .food-name {
+            margin-bottom: .3em;
+            padding-top: .2em;
+            font-size: 1.1666666666666667em;
+            font-family: Utopia;
+            color: #d72828;
+            text-transform: capitalize;
+            font-weight: bold; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-address {
+            color: #666;
+            margin-bottom: .2em; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-photo {
+            flex: 0 0 120px;
+            height: auto;
+            height: 75px;
+            border: 1px solid #e5e5e5;
+            position: relative; }
+            .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-photo img {
+              height: 100%;
+              width: 100%;
+              background-size: cover; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-list {
+            padding: 0 12px; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-rating {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #ffce00;
+            font-weight: bold; }
+          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            margin-top: 11px; }
+            .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item {
+              margin: 5px 0; }
+              .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item i {
+                font-size: 1.2rem;
+                color: #ffb606;
+                float: left;
+                margin-right: 5px; }
+              .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item span {
+                text-transform: capitalize; }
+                .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item span:first-letter {
+                  text-transform: uppercase; }
+        .doof-body .body__list-container .body__list #restaurants-list-view .restaurants-empty-view {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center; }
+  .doof-body .body__search-results-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 480px;
+    z-index: 2; }
+  .doof-body .body__map-container {
+    flex: 1;
+    position: relative; }
+    .doof-body .body__map-container #map-view {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0; }
+  .doof-body .body__detail-box,
+  .doof-body .body__profile-box {
+    position: absolute;
+    height: auto;
+    bottom: 0;
+    top: 0;
+    width: 480px;
+    margin: 12px 24px;
+    background-color: white;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.309); }
+  .doof-body .body__detail-box {
+    left: 480px; }
+    .doof-body .body__detail-box #detail-view {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column; }
+      .doof-body .body__detail-box #detail-view .restaurant-details__meta-information {
+        height: 240px;
+        position: relative; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__meta-information .restaurant-details__information {
+          position: absolute;
+          bottom: 0;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.618);
+          width: 100%;
+          z-index: 2; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__meta-information .restaurant-details__information .restaurant-details__name {
+            font-size: 1.8rem; }
+      .doof-body .body__detail-box #detail-view .tabs {
+        height: 48px; }
+        .doof-body .body__detail-box #detail-view .tabs a.active {
+          font-weight: bold; }
+      .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes {
+        flex: 1;
+        display: flex; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #overview-tab,
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab,
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab {
+          flex: 1; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #overview-tab {
+          position: relative; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #overview-tab .overview-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab {
+          position: relative; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab .food-tab-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; }
+            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab .food-tab-wrapper #food-graph {
+              flex: 1; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab .add-food-item {
+            flex: 0 0 100px; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab {
+          position: relative; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column; }
+            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list {
+              flex: 1;
+              height: 0;
+              overflow-y: auto; }
+              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews {
+                margin: 0;
+                padding: 12px 24px; }
+                .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li {
+                  margin-bottom: 24px;
+                  display: flex; }
+                  .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side {
+                    text-align: center;
+                    font-size: 12px;
+                    color: #82888a; }
+                    .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side img {
+                      height: 60px;
+                      width: 60px; }
+                  .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .right-side {
+                    flex: 1;
+                    margin-left: 36px;
+                    border-bottom: 1px solid #e6e6e6; }
+                  .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .date {
+                    margin-top: 12px;
+                    font-size: 12px;
+                    color: rgba(0, 0, 0, 0.618);
+                    margin-bottom: 24px; }
+                  .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .review_text {
+                    color: rgba(0, 0, 0, 0.818);
+                    line-height: 18px; }
+                  .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li:last-child {
+                    margin-bottom: 12px; }
+                  .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review {
+                    text-align: center;
+                    flex-direction: column; }
+                    .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review .empty-reviews__image {
+                      width: 354px;
+                      margin: 0 auto; }
+            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .add-review-box {
+              padding: 12px 24px;
+              background-color: #fafafa;
+              border-top: 1px solid #e6e6e6;
+              flex: 0 0 160px; }
+              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .add-review-box textarea {
+                background-color: white;
+                height: 6rem; }
+      .doof-body .body__detail-box #detail-view .detail-close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        font-size: 2em;
+        color: #d72828;
+        z-index: 99; }
+  .doof-body .body__profile-box {
+    right: 0; }
 
 /*# sourceMappingURL=app.css.map */

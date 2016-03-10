@@ -176,8 +176,14 @@ define(function (require) {
 		}
 	});
 
+	var EmptyReview= Marionette.ItemView.extend({
+		className: 'restaurants-empty-view',
+		template: Handlebars.compile('<img src="css/images/no-review.png" alt="" class="responsive-img empty-reviews__image"> <div class="no-review-text">No Restaurant found!</div>')
+	});
+
 	var RestaurantsListView = Marionette.CollectionView.extend({
 		id: 'restaurants-list-view',
+		emptyView: EmptyReview,
 		childView: RestaurantView,
 		updateCollection: function (newCollection) {
 			this.collection = newCollection;

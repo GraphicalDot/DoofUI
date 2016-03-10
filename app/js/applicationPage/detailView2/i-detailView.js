@@ -75,11 +75,18 @@ define(function (require) {
 		},
 		ui: {
 			'tabs': '.restaurant-details__tabs',
-			'reviewBox': ".reviews-list"
+			'reviewBox': ".reviews-list",
+			'closeButton': '.detail-close'
 		},
 		events: {
+			'click @ui.closeButton': 'closeIt',
 			'click .slider__left-arrow': 'previousPhoto',
 			'click .slider__right-arrow': 'nextPhoto'
+		},
+		closeIt: function (e) {
+			e.preventDefault();
+			this.remove();
+			$('.body__detail-box').addClass('hide');
 		},
 		previousPhoto: function(e) {
 			e.preventDefault();

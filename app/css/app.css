@@ -1,0 +1,113 @@
+/*
+Table of Content :-
+1. Landing Page
+2. Application Page
+a. Header
+b. Body
+*/
+#landingPage {
+  flex: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center; }
+  #landingPage .landingPage-background {
+    z-index: -1; }
+    #landingPage .landingPage-background img,
+    #landingPage .landingPage-background .landingPage-background__overlay {
+      /* Set rules to fill background */
+      min-height: 100%;
+      min-width: 1024px;
+      /* Set up proportionate scaling */
+      width: 100%;
+      height: auto;
+      /* Set up positioning */
+      position: fixed;
+      top: 0;
+      left: 0; }
+    #landingPage .landingPage-background .landingPage-background__overlay {
+      background: -moz-linear-gradient(top, rgba(173, 37, 37, 0.1) 0, rgba(10, 20, 40, 0.69) 100%);
+      background: -webkit-linear-gradient(top, rgba(173, 37, 37, 0.1) 0, rgba(10, 20, 40, 0.69) 100%);
+      background: linear-gradient(to bottom, rgba(173, 37, 37, 0.1) 0, rgba(10, 20, 40, 0.69) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6141724', endColorstr='#f2141724', GradientType=0 ); }
+  #landingPage .landingPage-content__welcome-text {
+    font-weight: bold; }
+  #landingPage .landingPage-content__description {
+    max-width: 1080px; }
+  #landingPage .landing-content__enter_application {
+    display: flex; }
+    #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper {
+      flex: 1;
+      height: 48px;
+      display: flex;
+      background: white; }
+      #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper label {
+        padding: 0 12px;
+        height: 48px;
+        background: transparent; }
+        #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper label i {
+          line-height: 48px;
+          color: #d72828; }
+      #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper #landingPage-locationBox {
+        flex: 1;
+        margin-bottom: 0;
+        color: rgba(0, 0, 0, 0.818);
+        width: 100%;
+        height: 48px;
+        border: 0; }
+    #landingPage .landing-content__enter_application .landingPage-content__enter-btn {
+      flex: 0 0 60px; }
+      #landingPage .landing-content__enter_application .landingPage-content__enter-btn #landingPage-enter-btn {
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        background: #d72828;
+        color: #ffce00;
+        font-weight: bold;
+        text-transform: uppercase; }
+
+#applicationPage {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* 100% division */
+  display: flex;
+  flex-direction: column;
+  /* flex column*/ }
+
+.doof-masthead {
+  height: 72px;
+  background-color: #d72828;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  .doof-masthead .masthead__logo-container {
+    height: 100%;
+    flex: 0 0 240px;
+    padding: 18px 24px;
+    text-align: center; }
+    .doof-masthead .masthead__logo-container img {
+      height: 100%;
+      width: auto; }
+  .doof-masthead .masthead__search-container {
+    flex: 1;
+    padding: 18px 24px; }
+    .doof-masthead .masthead__search-container #doofSearch {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center; }
+      .doof-masthead .masthead__search-container #doofSearch .search-form {
+        flex: 1;
+        height: 100%;
+        background-color: white;
+        border-radius: 3px; }
+        .doof-masthead .masthead__search-container #doofSearch .search-form .search-form label {
+          z-index: 2; }
+
+/*# sourceMappingURL=app.css.map */

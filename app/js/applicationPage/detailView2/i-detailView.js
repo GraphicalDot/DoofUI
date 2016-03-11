@@ -32,7 +32,11 @@ define(function (require) {
 	function makeNvJson(input) {
 
 		function toTitleCase(str) {
-			return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+			if(str) {
+				return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+			} else {
+				return str;
+			}
 		}
 
 		var output = [
@@ -44,12 +48,12 @@ define(function (require) {
 			{ 'key': 'excellent', 'displayValue': 'Excellent', 'color': '#ff5f2e', 'values': [] }
 		];
 		_.each(input, function (single_food, i) {
-			output[0].values.push({ 'label': toTitleCase(single_food.name), 'value': -1*parseInt(single_food.terrible) });
-			output[1].values.push({ 'label': toTitleCase(single_food.name), 'value': -1*parseInt(single_food.poor) });
-			output[2].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.average) });
-			output[3].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.mix ? single_food.mix : 0) });
-			output[4].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.good) });
-			output[5].values.push({ 'label': toTitleCase(single_food.name), 'value': parseInt(single_food.excellent) });
+			output[0].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': -1 * parseInt(single_food.terrible) });
+			output[1].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': -1 * parseInt(single_food.poor) });
+			output[2].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.average) });
+			output[3].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.mix ? single_food.mix : 0) });
+			output[4].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.good) });
+			output[5].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.excellent) });
 		});
 		return output;
 	}
@@ -71,6 +75,7 @@ define(function (require) {
 			return {
 				'restaurant-name': this.restaurant_detail.eatery_details.eatery_name,
 				'restaurant-address': this.restaurant_detail.eatery_details.eatery_address,
+				'reviews-length': this.reviews.length
 			}
 		},
 		ui: {
@@ -88,18 +93,18 @@ define(function (require) {
 			this.remove();
 			$('.body__detail-box').addClass('hide');
 		},
-		previousPhoto: function(e) {
+		previousPhoto: function (e) {
 			e.preventDefault();
 			$('.slider').slider('prev');
 		},
-		nextPhoto: function(e) {
+		nextPhoto: function (e) {
 			e.preventDefault();
 			$('.slider').slider('next');
 		},
 		makeFoodChart: function () {
 			var foodData = this.model.get('food'); //food list array
-			var promise= new Promise(function(resolve) {
-				require(['nvd3'], function(nv) {
+			var promise = new Promise(function (resolve) {
+				require(['nvd3'], function (nv) {
 					window.nv.addGraph(function () {
 						var chart;
 						chart = window.nv.models.multiBarHorizontalChart()
@@ -113,10 +118,10 @@ define(function (require) {
 						chart.yAxis.axisLabel('Total Sentiments');
 						// chart.xAxis.axisLabel('Food List');
 
-						var a= document.getElementById('overview-tab');
-						var b= document.getElementById('food-tab');
-						a.style.display= 'none';
-						b.style.display= 'block';
+						var a = document.getElementById('overview-tab');
+						var b = document.getElementById('food-tab');
+						a.style.display = 'none';
+						b.style.display = 'block';
 
 						d3.select('#food-graph')
 							.style('height', b.getBoundingClientRect().height)
@@ -124,8 +129,8 @@ define(function (require) {
 							.datum(makeNvJson(foodData))
 							.call(chart);
 
-						a.style.display= 'block';
-						b.style.display= 'none';
+						a.style.display = 'block';
+						b.style.display = 'none';
 
 						window.nv.utils.windowResize(chart.update);
 						chart.dispatch.on('stateChange', function (e) { window.nv.log('New State:', JSON.stringify(e)); });
@@ -138,13 +143,66 @@ define(function (require) {
 			});
 			return promise;
 		},
+		drawChart: function (data, domEl) {
+			require(['nvd3'], function (nv) {
+				window.nv.addGraph(function () {
+					var chart;
+					chart = window.nv.models.multiBarHorizontalChart()
+						.x(function (d) { return d.label })
+						.y(function (d) { return d.value })
+						.duration(250)
+						.margin({ top: 30, right: 20, bottom: 40, left: 120 })
+						.groupSpacing(0.818)
+						.showControls(false)
+						.stacked(true);
+					chart.yAxis.axisLabel('Total Sentiments');
+					// chart.xAxis.axisLabel('Food List');
+
+					var a = document.getElementById('overview-tab');
+					var b = document.getElementById(domEl+'-tab');
+					a.style.display = 'none';
+					b.style.display = 'block';
+
+					d3.select('#'+domEl+'-graph')
+						.style('height', b.getBoundingClientRect().height)
+						.style('width', b.getBoundingClientRect().width)
+						.datum(makeNvJson(data))
+						.call(chart);
+
+					a.style.display = 'block';
+					b.style.display = 'none';
+
+					window.nv.utils.windowResize(chart.update);
+					chart.dispatch.on('stateChange', function (e) { window.nv.log('New State:', JSON.stringify(e)); });
+					chart.state.dispatch.on('change', function (state) {
+						window.nv.log('state', JSON.stringify(state));
+					});
+				});
+			});
+		},
+		makeAmbienceChart: function () {
+			var ambienceData = this.model.get('ambience');
+			this.drawChart(ambienceData, 'ambience');
+		},
+		makeCostChart: function () {
+			var costData = this.model.get('cost');
+			this.drawChart(costData, 'cost');
+		},
+		makeServiceChart: function () {
+			var serviceData = this.model.get('service');
+			this.drawChart(serviceData, 'service');
+		},
 		onShow: function () {
 			var self = this;
 			$('.body__detail-box').removeClass('hide');
-			$('.slider').slider({full_width: true, height: 240, indicators: false});
+			$('.slider').slider({ full_width: true, height: 240, indicators: false });
 			$('.materialboxed').materialbox();
-			this.makeFoodChart()
+			this.makeFoodChart();
+			this.makeAmbienceChart();
+			this.makeServiceChart();
+			this.makeCostChart();
 			self.ui.tabs.tabs();
+			$('.collapsible').collapsible();
 
 			this.reviews.fetch({ method: 'POST', data: { __eatery_id: this.restaurant_detail.__eatery_id } }).then(function () {
 				self.reviewsView.render();

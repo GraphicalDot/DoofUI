@@ -171,6 +171,24 @@ b. Body
 				}
 			}
 		}
+		.body__list-pagination {
+			flex: 0 0 48px;
+			background-color: #F4F5F5;
+			color: #B0B0B0;
+			font-size: 12px;
+			line-height: 48px;
+			padding-left: 12px;
+			i {
+				cursor: pointer;
+				float: right;
+				color: rgb(176, 176, 176);
+				border-left: 1px solid #d9d9d9;
+				height: 48px;
+				padding: 0 12px;
+				line-height: 48px;
+				font-size: 2.4rem;
+			}
+		}
 	}
 	.body__search-results-container {
 		position: absolute;
@@ -233,6 +251,9 @@ b. Body
 				display: flex;
 				#overview-tab,
 				#food-tab,
+				#cost-tab,
+				#service-tab,
+				#ambience-tab,
 				#reviews-tab {
 					flex: 1;
 				}
@@ -268,6 +289,60 @@ b. Body
 					}
 					.add-food-item {
 						flex: 0 0 100px;
+					}
+				}
+				#cost-tab {
+					position: relative;
+					.cost-tab-wrapper {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						margin: 0;
+						padding: 0;
+
+						display: flex;
+						flex-direction: column;
+						#cost-graph {
+							flex: 1;
+						}
+					}
+				}
+				#service-tab {
+					position: relative;
+					.service-tab-wrapper {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						margin: 0;
+						padding: 0;
+
+						display: flex;
+						flex-direction: column;
+						#service-graph {
+							flex: 1;
+						}
+					}
+				}
+				#ambience-tab {
+					position: relative;
+					.ambience-tab-wrapper {
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						margin: 0;
+						padding: 0;
+
+						display: flex;
+						flex-direction: column;
+						#ambience-graph {
+							flex: 1;
+						}
 					}
 				}
 				#reviews-tab {

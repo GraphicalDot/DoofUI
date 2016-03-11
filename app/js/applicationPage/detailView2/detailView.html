@@ -19,35 +19,62 @@
 <ul class="restaurant-details__tabs tabs">
 	<li class="tab"><a href="#overview-tab" class="active">Details</a></li>
 	<li class="tab"><a href="#food-tab">Food</a></li>
-	<li class="tab"><a href="#reviews-tab">Reviews (0)</a></li>
+	<li class="tab"><a href="#cost-tab">Cost</a></li>
+	<li class="tab"><a href="#service-tab">Service</a></li>
+	<li class="tab"><a href="#ambience-tab">Ambience</a></li>
+	<li class="tab"><a href="#reviews-tab">Reviews ({{reviews-length}})</a></li>
 </ul>
 <div class="restaurant-details__tab-boxes">
 	<div id="overview-tab">
 		<div class="overview-wrapper">
-			<ul class="collection with-header">
-				<li class="collection-header">Ambience</li>
-				{{#each ambience}}
-				<li class="collection">{{@key}} - {{#positivity this}}{{/positivity}}</li>
-				{{/each}}
-			</ul>
-			<ul class="collection with-header">
-				<li class="collection-header">Cost</li>
-				{{#each cost}}
-				<li class="collection">{{@key}} - {{excellent}}</li>
-				{{/each}}
-			</ul>
-			<ul class="collection with-header">
-				<li class="collection-header">Service</li>
-				{{#each service}}
-				<li class="collection">{{@key}} - {{excellent}}</li>
-				{{/each}}
-			</ul>
+			Details oF Restaurant will come here..
+			<!--<ul class="collapsible" data-collapsible="accordion">
+				<li>
+					<div class="collapsible-header">Ambience</div>
+					<div class="collapsible-body">
+						{{#each ambience}}
+							<p>{{@key}} - {{excellent}}, {{good}}, {{mix}}, {{average}}, {{poor}}, {{terrible}}</p>
+						{{/each}}
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header">Service</div>
+					<div class="collapsible-body">
+						{{#each service}}
+							<p>{{@key}} - {{excellent}}, {{good}}, {{mix}}, {{average}}, {{poor}}, {{terrible}}</p>
+						{{/each}}
+					</div>
+				</li>
+				<li>
+					<div class="collapsible-header">Cost</div>
+					<div class="collapsible-body">
+						{{#each cost}}
+							<p>{{@key}} - {{excellent}}, {{good}}, {{mix}}, {{average}}, {{poor}}, {{terrible}}</p>
+						{{/each}}
+					</div>
+				</li>
+			</ul>-->
 		</div>
 	</div>
 	<div id="food-tab">
 		<div class="food-tab-wrapper">
 			<svg id="food-graph"></svg>
 			<div class="add-food-item"><a href="#" class="waves-effect waves-light btn">Add menu item..</a></div>
+		</div>
+	</div>
+	<div id="cost-tab">
+		<div class="cost-tab-wrapper">
+			<svg id="cost-graph"></svg>
+		</div>
+	</div>
+	<div id="service-tab">
+		<div class="service-tab-wrapper">
+			<svg id="service-graph"></svg>
+		</div>
+	</div>
+	<div id="ambience-tab">
+		<div class="ambience-tab-wrapper">
+			<svg id="ambience-graph"></svg>
 		</div>
 	</div>
 	<div id="reviews-tab">

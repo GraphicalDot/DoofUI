@@ -57,7 +57,7 @@ b. Body
         background: transparent; }
         #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper label i {
           line-height: 48px;
-          color: #d72828; }
+          color: #DF0522; }
       #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper #landingPage-locationBox {
         flex: 1;
         margin-bottom: 0;
@@ -71,7 +71,7 @@ b. Body
         width: 100%;
         height: 48px;
         line-height: 48px;
-        background: #d72828;
+        background: #DF0522;
         color: #ffce00;
         font-weight: bold;
         text-transform: uppercase; }
@@ -89,7 +89,7 @@ b. Body
 .doof-masthead {
   height: 72px;
   width: 100%;
-  background-color: #d72828;
+  background-color: #DF0522;
   color: white;
   display: flex;
   flex-direction: row;
@@ -164,7 +164,7 @@ b. Body
         .doof-masthead .masthead__search-container #doofSearch .search-form .search__icon,
         .doof-masthead .masthead__search-container #doofSearch .search-form .clear-search__icon {
           background: #ffce00;
-          color: #d72828;
+          color: #DF0522;
           cursor: pointer;
           width: 48px;
           height: 48px;
@@ -180,10 +180,10 @@ b. Body
           top: 0;
           right: 0; }
           .doof-masthead .masthead__search-container #doofSearch .search-form .clear-search__icon:hover {
-            color: #d72828; }
+            color: #DF0522; }
         .doof-masthead .masthead__search-container #doofSearch .search-form #search__submit-btn {
           background-color: #ffce00;
-          color: #d72828;
+          color: #DF0522;
           border-radius: 0 3px 3px 0;
           height: 48px;
           line-height: 48px;
@@ -268,7 +268,7 @@ b. Body
             padding-top: .2em;
             font-size: 1.1666666666666667em;
             font-family: Utopia;
-            color: #d72828;
+            color: #DF0522;
             text-transform: capitalize;
             font-weight: bold; }
           .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-address {
@@ -318,6 +318,22 @@ b. Body
           flex-direction: column;
           justify-content: center;
           align-items: center; }
+    .doof-body .body__list-container .body__list-pagination {
+      flex: 0 0 48px;
+      background-color: #F4F5F5;
+      color: #B0B0B0;
+      font-size: 12px;
+      line-height: 48px;
+      padding-left: 12px; }
+      .doof-body .body__list-container .body__list-pagination i {
+        cursor: pointer;
+        float: right;
+        color: #b0b0b0;
+        border-left: 1px solid #d9d9d9;
+        height: 48px;
+        padding: 0 12px;
+        line-height: 48px;
+        font-size: 2.4rem; }
   .doof-body .body__search-results-container {
     position: absolute;
     top: 0;
@@ -374,6 +390,9 @@ b. Body
         display: flex; }
         .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #overview-tab,
         .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab,
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #cost-tab,
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #service-tab,
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #ambience-tab,
         .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab {
           flex: 1; }
         .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #overview-tab {
@@ -403,6 +422,48 @@ b. Body
               flex: 1; }
           .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #food-tab .add-food-item {
             flex: 0 0 100px; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #cost-tab {
+          position: relative; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #cost-tab .cost-tab-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; }
+            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #cost-tab .cost-tab-wrapper #cost-graph {
+              flex: 1; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #service-tab {
+          position: relative; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #service-tab .service-tab-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; }
+            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #service-tab .service-tab-wrapper #service-graph {
+              flex: 1; }
+        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #ambience-tab {
+          position: relative; }
+          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #ambience-tab .ambience-tab-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; }
+            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #ambience-tab .ambience-tab-wrapper #ambience-graph {
+              flex: 1; }
         .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab {
           position: relative; }
           .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper {
@@ -466,7 +527,7 @@ b. Body
         right: 5px;
         cursor: pointer;
         font-size: 2em;
-        color: #d72828;
+        color: #DF0522;
         z-index: 99; }
   .doof-body .body__profile-box {
     right: 0; }

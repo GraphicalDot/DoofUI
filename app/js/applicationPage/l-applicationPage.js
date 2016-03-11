@@ -70,13 +70,17 @@ define(function (require) {
 			'subMenuTabs': 'ul.body__sub-menu',
 			'getTrendingItem': '#sub-menu__trending-link',
 			'getNearbyItem': '#sub-menu__nearme-link',
+			'nextPageBtn': '.pagination__next-btn',
+			'prevPageBtn': '.pagination__prev-btn'
 		},
 		events: {
 			'click #search-results__back-btn': 'removeSearch',
 			'submit form#feedback-form': 'submitFeedback', //comes after submitting Feedback
 			'click @ui.getTrendingItem': 'showTrendingItems',
 			'click @ui.getNearbyItem': 'showNearbyItems',
-			'click #see-more-results-button': 'showMoreResults'
+			'click #see-more-results-button': 'showMoreResults',
+			'click @ui.nextPageBtn': 'openNextPage',
+			'click @ui.prevPageBtn': 'openPrevPage'
 		},
 		childEvents: {
 			'show:profile': 'showProfile',	//comes from userMenuView upon clicking My Profile.
@@ -207,6 +211,13 @@ define(function (require) {
 			if (e) { e.preventDefault(); }
 			var self = this;
 			self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { });
+		},
+		openNextPage: function(e) {
+			e.preventDefault();
+			
+		},
+		openPrevPage: function(e) {
+			e.preventDefault();
 		},
 		openRestaurant: function (childView, restaurant_id, restaurant_details) {
 			var self = this;

@@ -1,14 +1,14 @@
 <div class="restaurant-details__meta-information">
 	<div class="restaurant-details__photos">
+		<i class="material-icons slider__left-arrow">chevron_left</i>
 		<div class="slider">
 			<ul class="slides">
-				<i class="material-icons slider__left-arrow">chevron_left</i>
 				{{#each images}}
 					<li><img class="responsive_img materialboxed" src="{{s3_url}}" alt=""></li>
 				{{/each}}
-				<i class="material-icons slider__right-arrow">&#xE5CC;</i>
 			</ul>
 		</div>
+		<i class="material-icons slider__right-arrow">&#xE5CC;</i>
 	</div>
 	<div class="restaurant-details__information">
 		<div class="restaurant-details__name">{{restaurant-name}}</div>

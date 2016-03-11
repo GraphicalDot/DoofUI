@@ -48,8 +48,8 @@ define(function (require) {
 			{ 'key': 'excellent', 'displayValue': 'Excellent', 'color': '#ff5f2e', 'values': [] }
 		];
 		_.each(input, function (single_food, i) {
-			output[0].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': -1 * parseInt(single_food.terrible) });
-			output[1].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': -1 * parseInt(single_food.poor) });
+			output[0].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.terrible) });
+			output[1].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.poor) });
 			output[2].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.average) });
 			output[3].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.mix ? single_food.mix : 0) });
 			output[4].values.push({ 'label': toTitleCase(single_food.name ? single_food.name : i), 'value': parseInt(single_food.good) });
@@ -73,20 +73,22 @@ define(function (require) {
 		},
 		templateHelpers: function () {
 			return {
-				'restaurant-name': this.restaurant_detail.eatery_details.eatery_name,
-				'restaurant-address': this.restaurant_detail.eatery_details.eatery_address,
+				'restaurant-name': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_name : '',
+				'restaurant-address': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_address : '',
 				'reviews-length': this.reviews.length
 			}
 		},
 		ui: {
 			'tabs': '.restaurant-details__tabs',
 			'reviewBox': ".reviews-list",
-			'closeButton': '.detail-close'
+			'closeButton': '.detail-close',
+			'prevSlideArrow': '.slider__left-arrow',
+			'nextSlideArrow': '.slider__right-arrow',
 		},
 		events: {
 			'click @ui.closeButton': 'closeIt',
-			'click .slider__left-arrow': 'previousPhoto',
-			'click .slider__right-arrow': 'nextPhoto'
+			'click @ui.prevSlideArrow': 'previousPhoto',
+			'click @ui.nextSlideArrow': 'nextPhoto'
 		},
 		closeIt: function (e) {
 			e.preventDefault();
@@ -94,11 +96,11 @@ define(function (require) {
 			$('.body__detail-box').addClass('hide');
 		},
 		previousPhoto: function (e) {
-			e.preventDefault();
+			// e.preventDefault();
 			$('.slider').slider('prev');
 		},
 		nextPhoto: function (e) {
-			e.preventDefault();
+			// e.preventDefault();
 			$('.slider').slider('next');
 		},
 		makeFoodChart: function () {

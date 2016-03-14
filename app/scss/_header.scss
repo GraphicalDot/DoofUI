@@ -1,21 +1,22 @@
+$header-height: 72px;
+$logo-column-width: $column-width;
+
 .doof-masthead {
 	height: $header-height;
-	width: 100%;
+	line-height: $header-height;
+	color: #fff;
 	background-color: $brand-color;
-	color: white;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+	width: 100%;
+	z-index: 2;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	display: flex; // flex-direction: row; justify-content: space-between; align-items: center;
 
 	.masthead__logo-container {
 		height: 100%;
-		flex: 0 0 $logo-column-width;
-		padding: $space-nearby;
+		flex: 0 0 $logo-column-width/2;
+		padding: 12px;
 		text-align: center;
-		padding-top: 18px;
-		padding-bottom: 18px;
-		border-right: 1px solid $border-color-2;
+		// border-right: 1px solid $border-color-2;
 		img {
 			height: 100%;
 			width: auto;
@@ -25,7 +26,9 @@
 	.masthead__search-container {
 		flex: 1;
 		height: 100%;
-		padding: $space-nearby;
+		padding: 12px 24px;
+		// border-left: 1px solid rgba(255, 255, 255, 0.38);
+		// border-right: 1px solid rgba(255, 255, 255, 0.38);
 
 		#doofSearch {
 			position: relative;
@@ -127,20 +130,30 @@
 		}
 	}
 	.masthead__nav-menu  {
-		height: $header-height;
-		flex: 0 0 $column-width;
-		text-align: right;
-		margin-bottom: 0;
-		margin-top: 0;
+		height: 100%;
+		flex: 0 0 $column-width/2;
+		margin: 0;
+		display: flex;
+		justify-content: space-around;
 		.masthead__nav-menu-item {
-			display: inline-block;
+			// display: inline-block;
+			float: right;
 			text-transform: uppercase;
-			line-height: 72px;
-			padding: 0 24px;
-			border-left: 1px solid $border-color-2;
+			transition: background-color .3s;
+			// line-height: 72px;
+			// padding: 0 24px;
+			// border-left: 1px solid $border-color-2;
 			a {
-				color: rgba(255, 255, 255, 0.818);
-				font-weight: bold;
+				color: rgba(255, 255, 255, 1);
+    			display: block;
+    			padding: 0 12px;
+    			cursor: pointer;
+				transition: background-color .3s;
+				 &:hover,
+				 &:active {
+					 background-color: #D32F2F;
+				 }
+				// font-weight: bold;
 			}
 		}
 		.usermenu__user-image {

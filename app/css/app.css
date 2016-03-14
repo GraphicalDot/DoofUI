@@ -57,7 +57,7 @@ b. Body
         background: transparent; }
         #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper label i {
           line-height: 48px;
-          color: #DF0522; }
+          color: #F44336; }
       #landingPage .landing-content__enter_application .landingPage-content__locationBox-wrapper #landingPage-locationBox {
         flex: 1;
         margin-bottom: 0;
@@ -71,8 +71,8 @@ b. Body
         width: 100%;
         height: 48px;
         line-height: 48px;
-        background: #DF0522;
-        color: #ffce00;
+        background: #F44336;
+        color: #FFC952;
         font-weight: bold;
         text-transform: uppercase; }
 
@@ -88,21 +88,18 @@ b. Body
 
 .doof-masthead {
   height: 72px;
+  line-height: 72px;
+  color: #fff;
+  background-color: #F44336;
   width: 100%;
-  background-color: #DF0522;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center; }
+  z-index: 2;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  display: flex; }
   .doof-masthead .masthead__logo-container {
     height: 100%;
     flex: 0 0 240px;
-    padding: 12px 24px;
-    text-align: center;
-    padding-top: 18px;
-    padding-bottom: 18px;
-    border-right: 1px solid #990000; }
+    padding: 12px;
+    text-align: center; }
     .doof-masthead .masthead__logo-container img {
       height: 100%;
       width: auto; }
@@ -163,8 +160,8 @@ b. Body
         .doof-masthead .masthead__search-container #doofSearch .search-form .location-search__geolocate-me,
         .doof-masthead .masthead__search-container #doofSearch .search-form .search__icon,
         .doof-masthead .masthead__search-container #doofSearch .search-form .clear-search__icon {
-          background: #ffce00;
-          color: #DF0522;
+          background: #FFC952;
+          color: #F44336;
           cursor: pointer;
           width: 48px;
           height: 48px;
@@ -180,29 +177,32 @@ b. Body
           top: 0;
           right: 0; }
           .doof-masthead .masthead__search-container #doofSearch .search-form .clear-search__icon:hover {
-            color: #DF0522; }
+            color: #F44336; }
         .doof-masthead .masthead__search-container #doofSearch .search-form #search__submit-btn {
-          background-color: #ffce00;
-          color: #DF0522;
+          background-color: #FFC952;
+          color: #F44336;
           border-radius: 0 3px 3px 0;
           height: 48px;
           line-height: 48px;
           font-weight: bold; }
   .doof-masthead .masthead__nav-menu {
-    height: 72px;
-    flex: 0 0 480px;
-    text-align: right;
-    margin-bottom: 0;
-    margin-top: 0; }
+    height: 100%;
+    flex: 0 0 240px;
+    margin: 0;
+    display: flex;
+    justify-content: space-around; }
     .doof-masthead .masthead__nav-menu .masthead__nav-menu-item {
-      display: inline-block;
+      float: right;
       text-transform: uppercase;
-      line-height: 72px;
-      padding: 0 24px;
-      border-left: 1px solid #990000; }
+      transition: background-color .3s; }
       .doof-masthead .masthead__nav-menu .masthead__nav-menu-item a {
-        color: rgba(255, 255, 255, 0.818);
-        font-weight: bold; }
+        color: white;
+        display: block;
+        padding: 0 12px;
+        cursor: pointer;
+        transition: background-color .3s; }
+        .doof-masthead .masthead__nav-menu .masthead__nav-menu-item a:hover, .doof-masthead .masthead__nav-menu .masthead__nav-menu-item a:active {
+          background-color: #D32F2F; }
     .doof-masthead .masthead__nav-menu .usermenu__user-image {
       cursor: pointer;
       height: 36px;
@@ -236,10 +236,10 @@ b. Body
             color: rgba(0, 0, 0, 0.618);
             font-weight: bold; }
             .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container .body__sub-menu li.tab a.active {
-              color: #ffce00; }
+              color: #FFC952; }
         .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container .indicator {
           height: 3px;
-          background-color: #ffce00; }
+          background-color: #FFC952; }
     .doof-body .body__list-container .body__list {
       flex: 1;
       display: flex;
@@ -268,7 +268,7 @@ b. Body
             padding-top: .2em;
             font-size: 1.1666666666666667em;
             font-family: Utopia;
-            color: #DF0522;
+            color: #F44336;
             text-transform: capitalize;
             font-weight: bold; }
           .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-address {
@@ -290,7 +290,7 @@ b. Body
             position: absolute;
             bottom: 0;
             right: 0;
-            background: #ffce00;
+            background: #FFC952;
             font-weight: bold; }
           .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods {
             font-size: 12px;

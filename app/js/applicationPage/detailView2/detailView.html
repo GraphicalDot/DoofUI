@@ -1,17 +1,24 @@
 <div class="restaurant-details__meta-information">
-	<div class="restaurant-details__photos">
+	<!--<div class="restaurant-details__photos">
 		<i class="material-icons slider__left-arrow">chevron_left</i>
 		<div class="slider">
 			<ul class="slides">
 				{{#each images}}
 					<li><img class="responsive_img materialboxed" src="{{s3_url}}" alt=""></li>
+				{{else}}
+					<li><img src="http://www.placehold.it/350x150"></li>
 				{{/each}}
 			</ul>
 		</div>
 		<i class="material-icons slider__right-arrow">&#xE5CC;</i>
-	</div>
+	</div>-->
 	<div class="restaurant-details__information">
-		<div class="restaurant-details__name">{{restaurant-name}}</div>
+		<h4 class="restaurant-details__name">{{restaurant-name}}</h4>
+		<div class="restaurant-details__meta">
+			<span class="overall-rating">{{restaurant-overall-rating}}</span>
+			<span class="star-rating">{{{restaurant-star-ratings}}}</span>
+			<span class="no-of-review">{{reviews-length}}</span>
+		</div>
 		<div class="restaurant-details__address">{{restaurant-address}}</div>
 	</div>
 	<!--<div class="restaurant-details__sentiments"></div>-->
@@ -27,7 +34,11 @@
 <div class="restaurant-details__tab-boxes">
 	<div id="overview-tab">
 		<div class="overview-wrapper">
-			Details oF Restaurant will come here..
+			<div class="container">
+				<div class="row">
+					<div class="col s12"></div>
+				</div>
+			</div>
 			<!--<ul class="collapsible" data-collapsible="accordion">
 				<li>
 					<div class="collapsible-header">Ambience</div>

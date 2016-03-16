@@ -101,7 +101,7 @@ define(function (require) {
 			var promise = new Promise(function (resolve, reject) {
 				self.trendingItems.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
 					resolve(self.trendingItems);
-				}).fail(function () { console.log('trending items fetching failed probably'); reject(); });
+				}).fail(function () { console.log('trending items fetching failed probably'); reject('trending items fetching failed probably'); });
 			});
 			return promise;
 		},
@@ -110,13 +110,16 @@ define(function (require) {
 			var promise = new Promise(function (resolve, reject) {
 				self.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
 					resolve(self.nearbyRestaurants);
-				}).fail(function () { console.log('trending items fetching failed probably'); reject(); });
+				}).fail(function () { console.log('nearby items fetching failed probably'); reject('nearby items fetching failed probably'); });
 			});
 			return promise;
 		},
 		showNewData: function (data) {
 			this.listView.updateData(data);
 			this.mapView.updateData(data);
+		},
+		showError: function(errorMessage) {
+			this.listView.showErrorMessage(errorMessage);
 		},
 		removeSearch: function (e) {
 			e.preventDefault();
@@ -140,10 +143,10 @@ define(function (require) {
 			} else {
 				// get If trending or nearBy results are selected.
 				if ($("#sub-menu__nearme-link").hasClass('active')) {
-					self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { });
+					self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { self.showError(err) });
 				}
 				else {
-					self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { });
+					self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { self.showError(err) });
 				}
 				$(".search-results__wrapper").css('display', 'none');
 			}
@@ -205,16 +208,16 @@ define(function (require) {
 		showTrendingItems: function (e) {
 			if (e) { e.preventDefault(); }
 			var self = this;
-			self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { });
+			self.getTrendingItems().then(function (results) { self.showNewData(results); }, function (err) { self.showError(err) });
 		},
 		showNearbyItems: function (e) {
 			if (e) { e.preventDefault(); }
 			var self = this;
-			self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { });
+			self.getNearbyItems().then(function (results) { self.showNewData(results); }, function (err) { self.showError(err) });
 		},
 		openNextPage: function(e) {
 			e.preventDefault();
-			
+
 		},
 		openPrevPage: function(e) {
 			e.preventDefault();

@@ -29,10 +29,15 @@ define(function (require) {
 		}
 	});
 
+	function escapedHtml(text) {
+		return text
+      .replace(/&amp;/g, '&');
+	}
+
 	function makeNvJson(input) {
 
 		function toTitleCase(str) {
-			if(str) {
+			if (str) {
 				return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 			} else {
 				return str;
@@ -73,9 +78,42 @@ define(function (require) {
 		},
 		templateHelpers: function () {
 			return {
-				'restaurant-name': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_name : '',
-				'restaurant-address': this.restaurant_detail.eatery_details ? this.restaurant_detail.eatery_details.eatery_address : '',
-				'reviews-length': this.reviews.length
+				'restaurant-name': this.restaurant_detail.eatery_details ? escapedHtml(this.restaurant_detail.eatery_details.eatery_name) : '',
+				'restaurant-address': this.restaurant_detail.eatery_details ? escapedHtml(this.restaurant_detail.eatery_details.eatery_address) : '',
+				'reviews-length': this.reviews.length,
+				'restaurant-overall-rating': function () {
+					var restaurant_sentiments = this.model.get('overall');
+					var terrible= parseInt(restaurant_sentiments.terrible) ? parseInt(restaurant_sentiments.terrible) : 0;
+					var poor= parseInt(restaurant_sentiments.poor) ? parseInt(restaurant_sentiments.poor) : 0;
+					var average= parseInt(restaurant_sentiments.average) ? parseInt(restaurant_sentiments.average) : 0;
+					var mix= parseInt(restaurant_sentiments.mix) ? parseInt(restaurant_sentiments.mix) : 0;
+					var good= parseInt(restaurant_sentiments.good) ? parseInt(restaurant_sentiments.good) : 0;
+					var excellent= parseInt(restaurant_sentiments.excellent) ? parseInt(restaurant_sentiments.excellent) : 0;
+					var total_sentiments= parseInt(restaurant_sentiments.total_sentiments) ? parseInt(restaurant_sentiments.total_sentiments) : 0;
+					return ((0 * terrible + 2.5 * poor + 4.8 * average + 5.2 * mix + 7.5 * good + 10 * excellent) / total_sentiments).toFixed(1);
+				},
+				'restaurant-star-ratings': function () {
+					var restaurant_sentiments = this.model.get('overall');
+					var highest_value = 0;
+					var highest_sentiment = '';
+					_.each(restaurant_sentiments, function (value, key, obj) {
+						if (value > highest_value && key !== 'total_sentiments') {
+							highest_value = value;
+							highest_sentiment = key;
+						}
+					});
+					if (highest_sentiment === 'excellent') {
+						return '<i class="material-icons active">sentiment_very_satisfied</i><i class="material-icons active">sentiment_very_satisfied</i><i class="material-icons active">sentiment_very_satisfied</i><i class="material-icons active">sentiment_very_satisfied</i><i class="material-icons active">sentiment_very_satisfied</i>';
+					} else if (highest_sentiment === 'good') {
+						return '<i class="material-icons active">sentiment_satisfied</i><i class="material-icons active">sentiment_satisfied</i><i class="material-icons active">sentiment_satisfied</i><i class="material-icons active">sentiment_satisfied</i><i class="material-icons">sentiment_satisfied</i>'
+					} else if (highest_sentiment === 'mix' || highest_sentiment === 'average') {
+						return '<i class="material-icons active">sentiment_neutral</i><i class="material-icons active">sentiment_neutral</i><i class="material-icons active">sentiment_neutral</i><i class="material-icons">sentiment_neutral</i><i class="material-icons">sentiment_neutral</i>'
+					} else if (highest_sentiment === 'poor') {
+						return '<i class="material-icons active">sentiment_dissatisfied</i><i class="material-icons active">sentiment_dissatisfied</i><i class="material-icons">sentiment_dissatisfied</i><i class="material-icons">sentiment_dissatisfied</i><i class="material-icons">sentiment_dissatisfied</i>'
+					} else {
+						return '<i class="material-icons active">sentiment_very_dissatisfied</i><i class="material-icons">sentiment_very_dissatisfied</i><i class="material-icons">sentiment_very_dissatisfied</i><i class="material-icons">sentiment_very_dissatisfied</i><i class="material-icons">sentiment_very_dissatisfied</i>'
+					}
+				},
 			}
 		},
 		ui: {
@@ -161,11 +199,11 @@ define(function (require) {
 					// chart.xAxis.axisLabel('Food List');
 
 					var a = document.getElementById('overview-tab');
-					var b = document.getElementById(domEl+'-tab');
+					var b = document.getElementById(domEl + '-tab');
 					a.style.display = 'none';
 					b.style.display = 'block';
 
-					d3.select('#'+domEl+'-graph')
+					d3.select('#' + domEl + '-graph')
 						.style('height', b.getBoundingClientRect().height)
 						.style('width', b.getBoundingClientRect().width)
 						.datum(makeNvJson(data))

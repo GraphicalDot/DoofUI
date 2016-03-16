@@ -15,6 +15,17 @@ define(function (require) {
       .replace(/&amp;/g, '&');
 	}
 
+	function simpleAddress(input) {
+		var output= '';
+		if(input) {
+			var split_input= input.split(',');
+			output= split_input[split_input.length-2]+', '+ split_input[split_input.length-1];
+		} else {
+			output= input;
+		}
+		return output;
+	}
+
 	Handlebars.registerHelper('if_eq', function (a, b, opts) {
 		if (a == b) {// Or === depending on your needs
 			return opts.fn(this);
@@ -132,7 +143,7 @@ define(function (require) {
 						address = this.model.get('eatery_address');
 					}
 				}
-				return escapeHtml(address);
+				return simpleAddress(escapeHtml(address));
 			},
 			top_foods: function () {
 				var foods = [];
@@ -177,16 +188,39 @@ define(function (require) {
 	});
 
 	var EmptyReview= Marionette.ItemView.extend({
-		className: 'restaurants-empty-view',
-		template: Handlebars.compile('<img src="css/images/no-review.png" alt="" class="responsive-img empty-reviews__image"> <div class="no-review-text">No Restaurant found!</div>')
+		initialize: function(opts) {
+			if(!opts.isError) {
+				this.template= Handlebars.compile('<img src="css/images/no-review.png" alt="" class="responsive-img empty-reviews__image"> <div class="no-review-text">No Restaurant found!</div>');
+			} else {
+				this.template= Handlebars.compile('<img src="css/images/no-review.png" alt="" class="responsive-img empty-reviews__image"> <div class="error-text">'+ opts.errorMessage +' </div>')
+			}
+		},
+		className: 'restaurants-empty-view'
 	});
+
+	// var ErrorReview= Marionette.ItemView.extend({
+	// 	initialize: function(opts) {
+	// 		this.message= opts.message;
+	// 	},
+	// 	className: 'restaurants-error-view',
+	// 	template: Handlebars.compile('<img src="css/images/no-review.png" alt="" class="responsive-img empty-reviews__image"> <div class="error-text">'+ this.message +' </div>')
+	// });
 
 	var RestaurantsListView = Marionette.CollectionView.extend({
 		id: 'restaurants-list-view',
 		emptyView: EmptyReview,
+		emptyViewOptions: {
+			isError: false,
+			errorMessage: ''
+		},
 		childView: RestaurantView,
 		updateCollection: function (newCollection) {
 			this.collection = newCollection;
+			this.render();
+		},
+		showErrorMessage: function(errorMessage) {
+			this.emptyViewOptions.isError= true;
+			this.emptyViewOptions.errorMessage= errorMessage;
 			this.render();
 		},
 		updateData: function(newData) {

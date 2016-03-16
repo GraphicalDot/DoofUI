@@ -56,6 +56,11 @@ http://projektkartan.svenskakyrkan.se/
 https://nom.com/ <- Twitch For Food
 https://www.behance.net/gallery/31033665/Tatukada-FREEBIE <- Rsetaurant UI Freebie
 
+http://www.menuism.com/
+http://www.menupages.ie/
+http://www.dineout.co.in/
+http://www.listjs.com/examples/fuzzy-search
+
 
 Maps Work:-
 1. https://stackoverflow.com/questions/7865446/google-maps-places-api-v3-autocomplete-select-first-option-on-enter   -> Issue for Entering on Nothing.

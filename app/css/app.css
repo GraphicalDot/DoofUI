@@ -87,21 +87,22 @@ b. Body
   /* flex column*/ }
 
 .doof-masthead {
+  width: 100%;
   height: 72px;
   line-height: 72px;
+  z-index: 3;
   color: #fff;
   background-color: #F44336;
-  width: 100%;
-  z-index: 2;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   display: flex; }
   .doof-masthead .masthead__logo-container {
     height: 100%;
     flex: 0 0 240px;
-    padding: 12px;
+    padding: 12px 24px;
     text-align: center; }
     .doof-masthead .masthead__logo-container img {
       height: 100%;
+      max-height: 48px;
       width: auto; }
   .doof-masthead .masthead__search-container {
     flex: 1;
@@ -121,7 +122,7 @@ b. Body
         height: 100%;
         background-color: white;
         border-radius: 3px;
-        box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12); }
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02); }
         .doof-masthead .masthead__search-container #doofSearch .search-form label {
           z-index: 10; }
         .doof-masthead .masthead__search-container #doofSearch .search-form .search__location-wrapper {
@@ -209,127 +210,135 @@ b. Body
       width: 36px;
       vertical-align: middle; }
 
+.body__list-container {
+  flex: 0 0 480px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column; }
+  .body__list-container .body__sub-menu-wrapper {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12);
+    z-index: 2;
+    background: #f5f5f5; }
+    .body__list-container .body__sub-menu-wrapper .body__sub-menu-container {
+      width: 100%;
+      font-size: 12px;
+      margin-left: 80px;
+      margin-right: 80px; }
+      .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu {
+        height: 48px;
+        background-color: #f5f5f5; }
+        .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab {
+          height: 48px;
+          line-height: 48px; }
+          .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab a {
+            color: rgba(0, 0, 0, 0.7); }
+            .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab a.active, .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab a:hover {
+              color: rgba(0, 0, 0, 0.87); }
+            .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab a.active {
+              color: #ff5252; }
+        .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu .indicator {
+          background-color: #ff5252; }
+  .body__list-container .body__list {
+    flex: 1;
+    display: flex;
+    height: 0; }
+    .body__list-container .body__list #restaurants-list-view {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      position: relative;
+      padding: 6px 12px;
+      background-color: #fafafa; }
+      .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 {
+        display: flex;
+        cursor: pointer;
+        position: relative; }
+        .body__list-container .body__list #restaurants-list-view .restaurant-list-item2:hover, .body__list-container .body__list #restaurants-list-view .restaurant-list-item2.active {
+          background-color: #fafafa;
+          box-shadow: 0 0px 8px #787878;
+          z-index: 2; }
+        .body__list-container .body__list #restaurants-list-view .restaurant-list-item2:last-child {
+          margin-bottom: 0; }
+
 .doof-body {
   flex: 1;
   display: flex;
   position: relative; }
-  .doof-body .body__list-container,
   .doof-body .body__search-results-container {
     background-color: white;
     box-shadow: 0 0 9px rgba(0, 0, 0, 0.309); }
-  .doof-body .body__list-container {
-    flex: 0 0 480px;
+  .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list {
+    flex: 1;
+    padding: 0 24px; }
+  .doof-body .body__list-container .body__list #restaurants-list-view .card-header > .restaurant-name,
+  .doof-body .body__list-container .body__list #restaurants-list-view .card-header > .food-name {
+    font-size: 1.2rem;
+    font-family: Utopia;
+    color: #F44336;
+    text-transform: capitalize;
+    font-weight: bold; }
+  .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-address {
+    color: #666; }
+  .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-photo {
+    flex: 0 0 120px;
+    height: auto;
+    height: 75px;
+    border: 1px solid #e5e5e5;
+    position: relative; }
+    .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-photo img {
+      height: 100%;
+      width: 100%;
+      background-size: cover; }
+  .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-rating {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #FFC952;
+    font-weight: bold; }
+  .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-top-foods {
+    font-size: 12px;
+    color: #666;
+    margin-top: 12px; }
+    .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-top-foods .top_food_item {
+      margin: 5px 0; }
+      .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-top-foods .top_food_item i {
+        font-size: 1.2rem;
+        color: #ffb606;
+        float: left;
+        margin-right: 5px; }
+      .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-top-foods .top_food_item span {
+        text-transform: capitalize; }
+        .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-top-foods .top_food_item span:first-letter {
+          text-transform: uppercase; }
+  .doof-body .body__list-container .body__list .restaurants-empty-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     display: flex;
-    flex-direction: column; }
-    .doof-body .body__list-container .body__sub-menu-wrapper {
-      display: flex;
-      align-items: center;
-      background: #F44336; }
-      .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container {
-        width: 100%;
-        border-radius: 6px; }
-        .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu {
-          background-color: #FFC952; }
-          .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab a {
-            color: rgba(0, 0, 0, 0.87); }
-            .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu li.tab a.active {
-              font-weight: bold;
-              color: #F44336; }
-          .doof-body .body__list-container .body__sub-menu-wrapper .body__sub-menu-container ul.body__sub-menu .indicator {
-            height: 3px;
-            background-color: #F44336; }
-    .doof-body .body__list-container .body__list {
-      flex: 1;
-      display: flex;
-      height: 0; }
-      .doof-body .body__list-container .body__list #restaurants-list-view {
-        flex: 1;
-        min-height: 0;
-        overflow-y: auto;
-        position: relative; }
-        .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 {
-          margin: 0;
-          display: flex;
-          cursor: pointer;
-          background: white;
-          transition: all 200ms cubic-bezier(0.19, 1, 0.22, 1);
-          position: relative;
-          border-bottom: 1px solid #e6e6e6;
-          border-radius: 0;
-          padding: 12px; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2:hover, .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2.active {
-            background-color: #fafafa;
-            box-shadow: 0 0px 8px #787878;
-            z-index: 2; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-list {
-            flex: 1;
-            padding: 0 24px; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .card-header > .restaurant-name,
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .card-header > .food-name {
-            font-size: 1.2rem;
-            font-family: Utopia;
-            color: #F44336;
-            text-transform: capitalize;
-            font-weight: bold; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-address {
-            color: #666; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-photo {
-            flex: 0 0 120px;
-            height: auto;
-            height: 75px;
-            border: 1px solid #e5e5e5;
-            position: relative; }
-            .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-photo img {
-              height: 100%;
-              width: 100%;
-              background-size: cover; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-rating {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: #FFC952;
-            font-weight: bold; }
-          .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods {
-            font-size: 12px;
-            color: #666;
-            margin-top: 12px; }
-            .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item {
-              margin: 5px 0; }
-              .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item i {
-                font-size: 1.2rem;
-                color: #ffb606;
-                float: left;
-                margin-right: 5px; }
-              .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item span {
-                text-transform: capitalize; }
-                .doof-body .body__list-container .body__list #restaurants-list-view .restaurant-list-item2 .restaurant-top-foods .top_food_item span:first-letter {
-                  text-transform: uppercase; }
-        .doof-body .body__list-container .body__list #restaurants-list-view .restaurants-empty-view {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center; }
-    .doof-body .body__list-container .body__list-pagination {
-      flex: 0 0 48px;
-      background-color: #F4F5F5;
-      color: #B0B0B0;
-      font-size: 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+  .doof-body .body__list-pagination {
+    flex: 0 0 48px;
+    background-color: #F4F5F5;
+    color: #B0B0B0;
+    font-size: 12px;
+    line-height: 48px;
+    padding-left: 12px; }
+    .doof-body .body__list-pagination i {
+      cursor: pointer;
+      float: right;
+      color: #b0b0b0;
+      border-left: 1px solid #d9d9d9;
+      height: 48px;
+      padding: 0 12px;
       line-height: 48px;
-      padding-left: 12px; }
-      .doof-body .body__list-container .body__list-pagination i {
-        cursor: pointer;
-        float: right;
-        color: #b0b0b0;
-        border-left: 1px solid #d9d9d9;
-        height: 48px;
-        padding: 0 12px;
-        line-height: 48px;
-        font-size: 2.4rem; }
+      font-size: 2.4rem; }
   .doof-body .body__search-results-container {
     position: absolute;
     top: 0;

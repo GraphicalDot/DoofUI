@@ -1,24 +1,29 @@
+// Header Variables
 $header-height: 72px;
+$header-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);	//same as taken from nav element of materialize css.
+$search-box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); //taken from google maps.
 $logo-column-width: $column-width;
+$search-form-max-width: 1080px;
 
 .doof-masthead {
+	width: 100%;
 	height: $header-height;
 	line-height: $header-height;
+	z-index: 3;
 	color: #fff;
 	background-color: $brand-color;
-	width: 100%;
-	z-index: 2;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	box-shadow: $header-box-shadow;
 	display: flex; // flex-direction: row; justify-content: space-between; align-items: center;
 
 	.masthead__logo-container {
 		height: 100%;
 		flex: 0 0 $logo-column-width/2;
-		padding: 12px;
+		padding: 12px 24px;
 		text-align: center;
 		// border-right: 1px solid $border-color-2;
 		img {
 			height: 100%;
+			max-height: 48px;
 			width: auto;
 		}
 	}
@@ -46,7 +51,7 @@ $logo-column-width: $column-width;
 				height: 100%;
 				background-color: white;
 				border-radius: 3px;
-				box-shadow: 0 1px 1.5px rgba(0,0,0,0.06),0 1px 1px rgba(0,0,0,0.12);
+				box-shadow: $search-box-shadow;
 				label {
 					z-index: 10;
 				}

@@ -51,6 +51,17 @@ define(function (require) {
 		return escapeHtml(something);
 	});
 
+	Handlebars.registerHelper('undasherized-text', function(opts) {
+		function toTitleCase(str) {
+			if (str) {
+				return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }).replace(/-/g, ' ');
+			} else {
+				return str;
+			}
+		}
+		return toTitleCase(opts.fn(this));
+	});
+
 
 	return true;
 });

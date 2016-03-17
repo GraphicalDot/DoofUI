@@ -12,7 +12,7 @@ define(function (require) {
 	var ListView = require('./listView/c-list');
 	var MapView = require('./mapView/i-map');
 	// var RestaurantDetailView = require('./detailView/i-detailView');
-	var RestaurantDetailView = require('./detailView2/i-detailView');
+	var RestaurantDetailView = require('./detailView/i-detailView');
 	var ProfileView = require('./userProfileView/i-userProfile');
 
 	var TrendingItems = require('./../models/get_trending');

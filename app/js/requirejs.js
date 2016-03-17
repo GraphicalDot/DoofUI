@@ -57,6 +57,9 @@ require.config({
 		'es6promise': '../../node_modules/es6-promise/dist/es6-promise',
 
 		'google-map-loader': '../../node_modules/google-map-loader',
+
+		'bricks': '../../node_modules/bricks',
+		'masonry': '../../node_modules/masonry.pkgd.min',
 	},
 	shim: {
 		'jquery': { exports: '$' },

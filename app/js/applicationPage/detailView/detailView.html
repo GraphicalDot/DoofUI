@@ -1,59 +1,76 @@
 <i class="material-icons detail-close">clear</i>
-
-<div class="detail-restaurant-information">
-	<div class="slider detail-restaurant-photos">
-		<ul class="slides">
-			{{#each images}}
-				<li>
-					<img class="responsive_img" src="{{s3_url}}" alt="">
-				</li>
-			{{/each}}
-		</ul>
+<div class="restaurant-meta-information">
+	<div class="restaurant-sample-photo"></div>
+	<div class="restaurant-information-wrapper">
+		<h4 class="restaurant-name">{{restaurant-name}}</h4>
+		<span class="restaurant-address">{{restaurant-address}}</span>
+		<div class="restaurant-reviews">{{{restaurant-reviews}}}</div>
 	</div>
-	<div class="detail-restaurant-name">{{restaurant-name}}</div>
-	<!--<div class="detail-restaurant-address">{{restaurant-address}}</div>-->
-	<div class="restaurant-overall-graph"></div>
 </div>
 
-<div class="detail-restaurant-detail">
-<ul class="detail_tabs tabs">
-		<li class="tab"><a href="#ambience">Ambience</a></li>
-		<li class="tab"><a href="#food_section" class="active">Food</a></li>
-		<li class="tab"><a href="#cost">Cost</a></li>
-		<li class="tab"><a href="#service">Service</a></li>
-		<li class="tab"><a href="#reviews">Reviews</a></li>
+<div class="restaurant-tabs-menu-wrapper">
+	<ul class="restaurant-tabs-menu tabs">
+		<li class="tab"><a href="#restaurant-overview-tab">Overview</a></li>
+		<li class="tab"><a href="#restaurant-foods-tab">Food</a></li>
+		<li class="tab"><a href="#restaurant-photos-tab">Photos</a></li>
+		<li class="tab"><a href="#restaurant-reviews-tab">Reviews</a></li>
 	</ul>
-	<svg class="graph" id="ambience"></svg>
-	<div id="food_section">
-		<svg class="graph" id="food"></svg>
-		<a href="#addFoodItemModal" class="waves-effect waves-light btn modal-trigger addFoodItemBtn">Add a food item</a>
-
-
-	</div>
-	<svg class="graph" id="cost"></svg>
-	<svg class="graph" id="service"></svg>
-	<div class="" id="reviews">
-		<div class="reviews-list"></div>
-        <div class="restaurant-reviews-box">
-                <textarea name="review-box" id="review-box" cols="30" rows="10" placeholder="Write a review"></textarea>
-                <button type="submit" class="btn waves-effect right submit-review-form">Post</button>
-        </div>
-    </div>
 </div>
-<div id="addFoodItemModal" class="modal">
-	<div class="modal-content">
-		<h4>Add Food Item @ {{restaurant-name}}</h4>
-		<form action="">
-			<input type="text" placeholder="enter food name..">
-			Enter your rating..<select name="" id="">
-				<option value="">1</option>
-				<option value="">2</option>
-				<option value="">3</option>
-				<option value="">4</option>
-				<option value="">5</option>
-			</select>
-			<textarea name="" id="" cols="30" rows="10">Enter your review here</textarea>
-			<a href="#" class="waves-light waves-effect btn">Submit Food</a>
-		</form>
+
+<div class="restaurant-tabs-wrapper">
+	<div id="restaurant-overview-tab" class="restaurant-tab-detail">
+		<div class="ambience-wrapper">
+			<h6>Ambience</h6>
+			<ul class="collapsible ambience-overview" data-collapsible="accordion">
+				{{#each ambience-items.filtered}}
+				<li>
+					<div class="collapsible-header">{{#undasherized-text}}{{@key}}{{/undasherized-text}}</div>
+					<div class="collapsible-body">No Reviews Yet.</div>
+				</li>
+				{{/each}}
+				<li>
+					<div class="collapsible-header">Not Reviewed Yet</div>
+					<div class="collapsible-body">
+						<ul>
+							{{#each ambience-items.notReviewed}}
+							<li>{{#undasherized-text}}{{this}}{{/undasherized-text}}</li>
+							{{/each}}
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="service-wrapper">
+			<h6>Service</h6>
+			<ul class="collapsible service-overview" data-collapsible="accordion">
+				{{#each service-items.filtered}}
+				<li>
+					<div class="collapsible-header">{{#undasherized-text}}{{@key}}{{/undasherized-text}}</div>
+					<div class="collapsible-body">No Reviews Yet.</div>
+				</li>
+				{{/each}}
+				<li>
+					<div class="collapsible-header">Not Reviewed Yet</div>
+					<div class="collapsible-body">
+						<ul>
+							{{#each service-items.notReviewed}}
+							<li>{{#undasherized-text}}{{this}}{{/undasherized-text}}</li>
+							{{/each}}
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="restaurant-foods-tab" class="restaurant-tab-detail">
+		Foods Tab
+	</div>
+	<div id="restaurant-photos-tab" class="restaurant-tab-detail">
+		{{#each images}}
+			<img class="grid-item" class="responsive_img materialboxed" src="{{s3_url}}" alt="">
+		{{/each}}
+	</div>
+	<div id="restaurant-reviews-tab" class="restaurant-tab-detail">
+		Reviews Tab
 	</div>
 </div>

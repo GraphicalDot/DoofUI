@@ -36,6 +36,7 @@ b. Body
 
 // Body Section
 @import 'left-body';
+@import 'detail';
 
 .doof-body {
 	flex: 1;
@@ -164,7 +165,6 @@ b. Body
 			left:0;
 		}
 	}
-	.body__detail-box,
 	.body__profile-box {
 		position: absolute;
 		height:auto;
@@ -177,79 +177,8 @@ b. Body
 		border-radius: 6px;
 	}
 	.body__detail-box {
-		left: 480px;
+		// left: 480px;
 		#detail-view {
-			height: 100%; width: 100%; margin: 0; padding: 0;
-			display: flex; flex-direction: column;
-			.restaurant-details__meta-information {
-				// height: 240px;
-				position: relative;
-				background-color: #F44336;
-    			border-radius: 6px 6px 0 0;
-				.restaurant-details__photos {
-					display: none;
-					i {
-						font-size: 2rem;
-						color: white;
-						background: rgba(0, 0, 0, 0.618);
-						z-index: 1001;
-						cursor: pointer;
-						position: absolute;
-						top: 40%;
-					}
-					i.slider__left-arrow {
-						left: 0;
-					}
-					i.slider__right-arrow {
-						right: 0;
-					}
-					.slider {
-						.slides {
-							li.active {
-								z-index: 1000;
-							}
-						}
-					}
-				}
-				.restaurant-details__information {
-					// position: absolute;
-					// bottom: 0;
-					// color: #fff;
-					// background-color: rgba(0, 0, 0, 0.618);
-					width: 100%;
-					padding: 0px 12px 12px;
-					// background-color: rgba(0, 0, 0, 0.57);
-					// position: absolute;
-					// z-index: 1000;
-					// bottom: 0;
-					// z-index: 1001;
-					.restaurant-details__name {
-						font-size: 3rem;
-						font-weight: bold;
-						color: #FFC952;
-						font-family: Utopia;
-					}
-					.restaurant-details__meta {
-						i {
-							color: #fff;
-							&.active {
-								color: #ffc952;
-							}
-						}
-					}
-					.restaurant-details__address {
-						color: rgba(0, 0, 0, 0.87);
-						font-size: 1rem;
-						font-weight: bold;
-					}
-				}
-			}
-			.tabs {
-				height: 48px;
-				a.active {
-					font-weight: bold;
-				}
-			}
 			.restaurant-details__tab-boxes {
 				flex: 1;
 				display: flex;
@@ -528,3 +457,4 @@ i.empty_message_icon {
     color: rgba(0,0,0,0.518);
 	 text-align: center;
 }
+

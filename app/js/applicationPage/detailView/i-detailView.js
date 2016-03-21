@@ -94,6 +94,18 @@ define(function (require) {
 						};
 					});
 					return { filtered: reviewedAmbienceItem, notReviewed: notReviewedAmbienceItem };
+				},
+				'food-items': function() {
+					var foodList= this.model.get('food');
+					var max_sentiments= parseInt(foodList[0].total_sentiments);
+					foodList= _.each(foodList, function(foodItem, key, obj) {
+						foodItem.max_sentiments= max_sentiments;
+					});
+					return foodList;
+				},
+				'get_percent': function(opts) {
+					console.log(opts);
+					return '70%';
 				}
 			}
 		},
@@ -107,6 +119,8 @@ define(function (require) {
 			this.reviews.fetch({ method: 'POST', data: { __eatery_id: this.restaurant_detail.__eatery_id } }).then(function () {
 				self.reviewsRegion.show(self.reviewsView);
 			});
+
+			$('.food-item-list').collapsible();
 		},
 		onClose: function () {
 			$('.body__detail-box').addClass('hide');

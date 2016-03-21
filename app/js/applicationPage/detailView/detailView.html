@@ -63,7 +63,43 @@
 		</div>
 	</div>
 	<div id="restaurant-foods-tab" class="restaurant-tab-detail">
-		Foods Tab
+		<ul class="collapsible food-item-list" data-collapsible="accordion">
+		{{#each food-items}}
+			<li class="details__food-menu_food-item">
+				<div class="collapsible-header food-menu_food-item-header">
+					<div class="food-item-image-wrapper">
+						{{#if food-item-image}}
+							<img src="{{food-item-image}}" alt="Food image" class="responsive_img circle">
+						{{else}}
+							<img src="http://placehold.it/50x50" alt="Food image" class="responsive_img circle">
+						{{/if}}
+					</div>
+					<div class="food-item-information-wrapper">
+						<span class="food-item-name">{{math @index "+" 1}}. {{#undasherized-text}}{{name}}{{/undasherized-text}}</span>
+						<div class="food-item-graph">
+							<div class="determinate" style="width: {{line_graph this}}"></div>
+						</div>
+					</div>
+					<div class="food-item-actions-wrapper">
+						<div class="happy-sentiment">
+							<i class="material-icons">sentiment_very_satisfied</i>{{math excellent "+" good}}
+						</div>
+						<div class="neutral-sentiment">
+							<i class="material-icons">sentiment_neutral</i>{{math average "+" mix}}
+						</div>
+						<div class="sad-sentiment">
+							<i class="material-icons">sentiment_very_dissatisfied</i>{{math poor "+" terrible}}
+						</div>
+						<i class="material-icons">expand_more</i>
+					</div>
+				</div>
+				<div class="collapsible-body">
+					Hello, nothing to see here yet.
+				</div>
+			</li>
+		{{else}}
+		{{/each}}
+		</ul>
 	</div>
 	<div id="restaurant-photos-tab" class="restaurant-tab-detail">
 		{{#each images}}

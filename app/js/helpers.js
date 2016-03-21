@@ -62,6 +62,19 @@ define(function (require) {
 		return toTitleCase(opts.fn(this));
 	});
 
+	Handlebars.registerHelper('math', function(lValue, operator, rValue, opts) {
+		lValue= parseFloat(lValue) ? parseFloat(lValue) : 0;
+		rValue= parseFloat(rValue) ? parseFloat(rValue) : 0;
+		if(operator=== "+") {
+			return lValue+ rValue;
+		}
+	});
+
+	Handlebars.registerHelper('line_graph', function(obj) {
+		console.log(obj);
+		var ratio= obj.total_sentiments/obj.max_sentiments;
+		return (ratio*100).toFixed(2)+'%';
+	});
 
 	return true;
 });

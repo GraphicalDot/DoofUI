@@ -91,3 +91,63 @@ $active-color: #F44336;
 		}
 	}
 }
+
+.food-menu_food-item-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 90px;
+
+	.food-item-image-wrapper {
+		flex: 0 0 12%;
+		img {
+			width: 100%;
+			height: auto;
+			vertical-align: middle;
+		}
+	}
+	.food-item-information-wrapper {
+		flex: 1;
+		padding: 0 12px;
+		display: flex;
+		flex-direction: column;
+		.food-item-graph {
+			position: relative;
+			height: 4px;
+			display: block;
+			width: 100%;
+			background-color: rgba(255,64,129,0.22);
+			border-radius: 2px;
+			margin: 0.5rem 0 1rem 0;
+			overflow: hidden;
+			.determinate {
+				position: absolute;
+				background-color: inherit;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				background-color: #ff4081;
+				-webkit-transition: width 0.3s linear;
+				-moz-transition: width 0.3s linear;
+				-o-transition: width 0.3s linear;
+				-ms-transition: width 0.3s linear;
+				transition: width 0.3s linear;
+			}
+		}
+	}
+	.food-item-actions-wrapper {
+		padding: 6px;
+		display: flex;
+		.happy-sentiment,
+		.neutral-sentiment,
+		.sad-sentiment {
+			width: 24px;
+			line-height: 10px;
+			color: rgba(0, 0, 0, 0.54);
+		}
+		.material-icons {
+			margin-left: 3px;
+			margin-right: 3px;
+		}
+	}
+}

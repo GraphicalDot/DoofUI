@@ -338,6 +338,56 @@ b. Body
         width: 200px;
         height: auto; }
 
+.food-menu_food-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px; }
+  .food-menu_food-item-header .food-item-image-wrapper {
+    flex: 0 0 12%; }
+    .food-menu_food-item-header .food-item-image-wrapper img {
+      width: 100%;
+      height: auto;
+      vertical-align: middle; }
+  .food-menu_food-item-header .food-item-information-wrapper {
+    flex: 1;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column; }
+    .food-menu_food-item-header .food-item-information-wrapper .food-item-graph {
+      position: relative;
+      height: 4px;
+      display: block;
+      width: 100%;
+      background-color: rgba(255, 64, 129, 0.22);
+      border-radius: 2px;
+      margin: 0.5rem 0 1rem 0;
+      overflow: hidden; }
+      .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate {
+        position: absolute;
+        background-color: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #ff4081;
+        -webkit-transition: width 0.3s linear;
+        -moz-transition: width 0.3s linear;
+        -o-transition: width 0.3s linear;
+        -ms-transition: width 0.3s linear;
+        transition: width 0.3s linear; }
+  .food-menu_food-item-header .food-item-actions-wrapper {
+    padding: 6px;
+    display: flex; }
+    .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment,
+    .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment,
+    .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment {
+      width: 24px;
+      line-height: 10px;
+      color: rgba(0, 0, 0, 0.54); }
+    .food-menu_food-item-header .food-item-actions-wrapper .material-icons {
+      margin-left: 3px;
+      margin-right: 3px; }
+
 .doof-body {
   flex: 1;
   display: flex;

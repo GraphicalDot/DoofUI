@@ -29,7 +29,7 @@ define(function (require) {
 			this.user = opts.user;
 			this.restaurant_detail = opts.restaurant_detail ? opts.restaurant_detail : {};
 			this.reviewsRegion = new Marionette.Region({
-				el: '#restaurant-reviews-tab'
+				el: '.reviews-list'
 			});
 			this.reviews = new ReviewsCollection();
 			this.reviewsView = new ReviewsView({ collection: this.reviews });
@@ -71,9 +71,11 @@ define(function (require) {
 				},
 				'ambience-items': function () {
 					var ambienceList = this.model.get('ambience');
+					var max_sentiments= _.max(ambienceList, function(ambienceItem) {return ambienceItem.total_sentiments;})
 					var notReviewedAmbienceItem = [];
 					var reviewedAmbienceItem= {};
 					_.each(ambienceList, function (ambienceItem, key, obj) {
+						ambienceItem.max_sentiments= max_sentiments.total_sentiments;
 						if (ambienceItem.total_sentiments) {
 							reviewedAmbienceItem[key]= ambienceItem;
 						} else {
@@ -83,17 +85,19 @@ define(function (require) {
 					return { filtered: reviewedAmbienceItem, notReviewed: notReviewedAmbienceItem };
 				},
 				'service-items': function() {
-					var ambienceList = this.model.get('service');
-					var notReviewedAmbienceItem = [];
-					var reviewedAmbienceItem= {};
-					_.each(ambienceList, function (ambienceItem, key, obj) {
-						if (ambienceItem.total_sentiments) {
-							reviewedAmbienceItem[key]= ambienceItem;
+					var serviceList = this.model.get('service');
+					var max_sentiments= _.max(serviceList, function(serviceItem) {return serviceItem.total_sentiments;})
+					var notReviewedServiceItem = [];
+					var reviewedServiceItem= {};
+					_.each(serviceList, function (serviceItem, key, obj) {
+						serviceItem.max_sentiments= max_sentiments.total_sentiments;
+						if (serviceItem.total_sentiments) {
+							reviewedServiceItem[key]= serviceItem;
 						} else {
-							notReviewedAmbienceItem.push(key);
+							notReviewedServiceItem.push(key);
 						};
 					});
-					return { filtered: reviewedAmbienceItem, notReviewed: notReviewedAmbienceItem };
+					return { filtered: reviewedServiceItem, notReviewed: notReviewedServiceItem };
 				},
 				'food-items': function() {
 					var foodList= this.model.get('food');
@@ -114,7 +118,7 @@ define(function (require) {
 			this.ui.tabs.tabs();
 			this.ui.ambienceOverview.collapsible();
 			this.ui.serviceOverview.collapsible();
-			$('.grid-item').materialbox();
+			// $('.grid-item').materialbox();
 			$('.body__detail-box').removeClass('hide');
 			this.reviews.fetch({ method: 'POST', data: { __eatery_id: this.restaurant_detail.__eatery_id } }).then(function () {
 				self.reviewsRegion.show(self.reviewsView);

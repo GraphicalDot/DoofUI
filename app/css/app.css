@@ -279,6 +279,7 @@ b. Body
     width: 100%;
     margin: 0;
     padding: 0;
+    background: #f5f5f5;
     display: flex;
     flex-direction: column; }
     .body__detail-box #detail-view .restaurant-meta-information {
@@ -303,16 +304,14 @@ b. Body
             color: #F44336; }
     .body__detail-box #detail-view .restaurant-tabs-menu-wrapper {
       font-size: 12px;
-      padding: 20px;
-      margin-bottom: 3px;
+      padding: 0 18px;
       background-color: #f5f5f5; }
       .body__detail-box #detail-view .restaurant-tabs-menu-wrapper .tabs {
-        height: 24px;
-        justify-content: flex-start;
+        height: 36px;
         background-color: #f5f5f5; }
         .body__detail-box #detail-view .restaurant-tabs-menu-wrapper .tabs .tab {
-          height: 24px;
-          line-height: 24px;
+          height: 36px;
+          line-height: 36px;
           flex-grow: 0; }
           .body__detail-box #detail-view .restaurant-tabs-menu-wrapper .tabs .tab a {
             color: rgba(0, 0, 0, 0.87);
@@ -333,16 +332,25 @@ b. Body
         right: 0;
         overflow-y: auto;
         padding: 12px 18px; }
-      .body__detail-box #detail-view .restaurant-tabs-wrapper #restaurant-photos-tab img {
-        margin: 12px;
-        width: 200px;
-        height: auto; }
+      .body__detail-box #detail-view .restaurant-tabs-wrapper #restaurant-foods-tab {
+        padding: 0; }
+      .body__detail-box #detail-view .restaurant-tabs-wrapper #restaurant-photos-tab {
+        padding: 0; }
+        .body__detail-box #detail-view .restaurant-tabs-wrapper #restaurant-photos-tab img {
+          width: 49%;
+          height: auto;
+          padding: 3px; }
+
+.food-item-list {
+  margin-top: 0;
+  box-shadow: none;
+  border: 0; }
 
 .food-menu_food-item-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 90px; }
+  padding: 12px; }
   .food-menu_food-item-header .food-item-image-wrapper {
     flex: 0 0 12%; }
     .food-menu_food-item-header .food-item-image-wrapper img {
@@ -354,14 +362,17 @@ b. Body
     padding: 0 12px;
     display: flex;
     flex-direction: column; }
+    .food-menu_food-item-header .food-item-information-wrapper .food-item-name {
+      font-weight: bold;
+      line-height: 2rem;
+      font-family: 'Utopia'; }
     .food-menu_food-item-header .food-item-information-wrapper .food-item-graph {
       position: relative;
-      height: 4px;
+      height: 6px;
       display: block;
       width: 100%;
-      background-color: rgba(255, 64, 129, 0.22);
-      border-radius: 2px;
-      margin: 0.5rem 0 1rem 0;
+      background-color: rgba(0, 0, 0, 0.12);
+      border-radius: 3px;
       overflow: hidden; }
       .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate {
         position: absolute;
@@ -375,18 +386,366 @@ b. Body
         -o-transition: width 0.3s linear;
         -ms-transition: width 0.3s linear;
         transition: width 0.3s linear; }
+        .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:first-child {
+          border-radius: 3px 0 0 3px; }
+        .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:last-child {
+          border-radius: 0 3px 3px 0; }
+    .food-menu_food-item-header .food-item-information-wrapper .food-item-more-information {
+      font-size: 12px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, 0.54); }
   .food-menu_food-item-header .food-item-actions-wrapper {
-    padding: 6px;
-    display: flex; }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 0 24%; }
     .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment,
     .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment,
     .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment {
-      width: 24px;
-      line-height: 10px;
+      line-height: 1rem;
+      width: 2rem;
+      font-size: 12px;
+      text-align: center;
       color: rgba(0, 0, 0, 0.54); }
-    .food-menu_food-item-header .food-item-actions-wrapper .material-icons {
-      margin-left: 3px;
-      margin-right: 3px; }
+      .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes,
+      .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes,
+      .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
+        font-weight: bold; }
+      .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment i,
+      .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment i,
+      .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment i {
+        line-height: 2rem; }
+    .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes {
+      color: #65a877; }
+    .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes {
+      color: #fadb7d; }
+    .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
+      color: #eb7575; }
+
+.ambience-overview .ambience-menu_ambience-item-header,
+.ambience-overview .service-menu_service-item-header,
+.service-overview .ambience-menu_ambience-item-header,
+.service-overview .service-menu_service-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px; }
+  .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper,
+  .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper,
+  .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper,
+  .ambience-overview .service-menu_service-item-header .service-item-information-wrapper,
+  .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper,
+  .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper,
+  .service-overview .service-menu_service-item-header .ambience-item-information-wrapper,
+  .service-overview .service-menu_service-item-header .service-item-information-wrapper {
+    flex: 1;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-name,
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-name,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-name,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-name,
+    .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-name,
+    .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-name,
+    .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-name,
+    .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-name,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-name,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-name,
+    .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-name,
+    .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-name,
+    .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-name,
+    .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-name,
+    .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-name,
+    .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-name {
+      font-weight: bold;
+      line-height: 2rem;
+      font-family: 'Utopia'; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph,
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph,
+    .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph,
+    .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph,
+    .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph,
+    .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph,
+    .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph,
+    .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph,
+    .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph,
+    .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph,
+    .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph,
+    .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph {
+      position: relative;
+      height: 6px;
+      display: block;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.12);
+      border-radius: 3px;
+      overflow: hidden; }
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate,
+      .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+      .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+      .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+      .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+      .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+      .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate,
+      .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+      .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+      .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+      .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate {
+        position: absolute;
+        background-color: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #ff4081;
+        -webkit-transition: width 0.3s linear;
+        -moz-transition: width 0.3s linear;
+        -o-transition: width 0.3s linear;
+        -ms-transition: width 0.3s linear;
+        transition: width 0.3s linear; }
+        .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+        .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child,
+        .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+        .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child,
+        .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+        .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child,
+        .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+        .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+        .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child {
+          border-radius: 3px 0 0 3px; }
+        .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+        .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child,
+        .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+        .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child,
+        .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+        .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child,
+        .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+        .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+        .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child {
+          border-radius: 0 3px 3px 0; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-more-information,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-more-information,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-more-information,
+    .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+    .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-more-information,
+    .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-more-information,
+    .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-more-information,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-more-information,
+    .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-more-information,
+    .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-more-information,
+    .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+    .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-more-information,
+    .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-more-information,
+    .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-more-information {
+      font-size: 12px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, 0.54); }
+  .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper,
+  .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper,
+  .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper,
+  .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper,
+  .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper,
+  .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper,
+  .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper,
+  .service-overview .service-menu_service-item-header .service-item-actions-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 0 24%; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment,
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment,
+    .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment,
+    .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+    .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment,
+    .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment,
+    .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment,
+    .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment,
+    .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment,
+    .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment,
+    .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment,
+    .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment,
+    .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+    .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment,
+    .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment,
+    .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment,
+    .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment {
+      line-height: 1rem;
+      width: 2rem;
+      font-size: 12px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.54); }
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+      .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+      .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+      .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+      .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+      .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+      .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+      .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+      .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+      .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+      .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+      .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+      .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+      .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+      .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+      .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes {
+        font-weight: bold; }
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+      .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment i,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment i,
+      .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment i,
+      .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+      .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+      .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+      .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment i,
+      .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment i,
+      .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment i,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+      .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+      .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment i,
+      .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment i,
+      .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment i,
+      .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+      .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+      .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+      .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment i,
+      .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment i,
+      .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment i {
+        line-height: 2rem; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+    .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+    .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+    .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+    .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+    .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes {
+      color: #65a877; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+    .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+    .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+    .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+    .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+    .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes {
+      color: #fadb7d; }
+    .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+    .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+    .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+    .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+    .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+    .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+    .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+    .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes {
+      color: #eb7575; }
+
+#restaurant-reviews-tab {
+  position: relative; }
+  #restaurant-reviews-tab .reviews-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; }
+    #restaurant-reviews-tab .reviews-wrapper .reviews-list {
+      flex: 1;
+      height: 0;
+      overflow-y: auto; }
+      #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews {
+        margin: 0;
+        padding: 12px 24px; }
+        #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li {
+          margin-bottom: 24px;
+          display: flex; }
+          #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side {
+            text-align: center;
+            font-size: 12px;
+            color: #82888a; }
+            #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side img {
+              height: 60px;
+              width: 60px; }
+          #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .right-side {
+            flex: 1;
+            margin-left: 36px;
+            border-bottom: 1px solid #e6e6e6; }
+          #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .date {
+            margin-top: 12px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.618);
+            margin-bottom: 24px; }
+          #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .review_text {
+            color: rgba(0, 0, 0, 0.818);
+            line-height: 18px; }
+          #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li:last-child {
+            margin-bottom: 12px; }
+          #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review {
+            text-align: center;
+            flex-direction: column; }
+            #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review .empty-reviews__image {
+              width: 354px;
+              margin: 0 auto; }
+    #restaurant-reviews-tab .reviews-wrapper .add-review-box {
+      padding: 12px 24px;
+      background-color: #fafafa;
+      border-top: 1px solid #e6e6e6;
+      flex: 0 0 160px; }
+      #restaurant-reviews-tab .reviews-wrapper .add-review-box textarea {
+        background-color: white;
+        height: 6rem; }
+
+.collapsible-header i {
+  margin-right: 0; }
+
+.collapsible-body {
+  padding: 12px; }
 
 .doof-body {
   flex: 1;
@@ -569,63 +928,6 @@ b. Body
         flex-direction: column; }
         .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #ambience-tab .ambience-tab-wrapper #ambience-graph {
           flex: 1; }
-    .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab {
-      position: relative; }
-      .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column; }
-        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list {
-          flex: 1;
-          height: 0;
-          overflow-y: auto; }
-          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews {
-            margin: 0;
-            padding: 12px 24px; }
-            .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li {
-              margin-bottom: 24px;
-              display: flex; }
-              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side {
-                text-align: center;
-                font-size: 12px;
-                color: #82888a; }
-                .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side img {
-                  height: 60px;
-                  width: 60px; }
-              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .right-side {
-                flex: 1;
-                margin-left: 36px;
-                border-bottom: 1px solid #e6e6e6; }
-              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .date {
-                margin-top: 12px;
-                font-size: 12px;
-                color: rgba(0, 0, 0, 0.618);
-                margin-bottom: 24px; }
-              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li .review_text {
-                color: rgba(0, 0, 0, 0.818);
-                line-height: 18px; }
-              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li:last-child {
-                margin-bottom: 12px; }
-              .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review {
-                text-align: center;
-                flex-direction: column; }
-                .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review .empty-reviews__image {
-                  width: 354px;
-                  margin: 0 auto; }
-        .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .add-review-box {
-          padding: 12px 24px;
-          background-color: #fafafa;
-          border-top: 1px solid #e6e6e6;
-          flex: 0 0 160px; }
-          .doof-body .body__detail-box #detail-view .restaurant-details__tab-boxes #reviews-tab .reviews-wrapper .add-review-box textarea {
-            background-color: white;
-            height: 6rem; }
   .doof-body .body__detail-box #detail-view .detail-close {
     position: absolute;
     top: 0px;

@@ -71,9 +71,60 @@ define(function (require) {
 	});
 
 	Handlebars.registerHelper('line_graph', function(obj) {
-		console.log(obj);
 		var ratio= obj.total_sentiments/obj.max_sentiments;
 		return (ratio*100).toFixed(2)+'%';
+	});
+
+	Handlebars.registerHelper('line_graph_color', function(obj) {
+		var negative_sentiments= obj.poor+ obj.terrible;
+		var positive_sentiments= obj.excellent+ obj.good;
+		var neutral_sentiments= obj.average + (obj.mix ? obj.mix : 0);
+		console.log(negative_sentiments, positive_sentiments, neutral_sentiments);
+		if (positive_sentiments >= neutral_sentiments && positive_sentiments >= negative_sentiments) {
+			return '#4caf50';
+		} else if(neutral_sentiments >= positive_sentiments && neutral_sentiments >= negative_sentiments) {
+			return '#2196f3';
+		} else {
+			return '#f44336';
+		}
+	});
+
+	Handlebars.registerHelper('line_graph_html', function(obj) {
+		console.log(obj);
+		var negative_sentiments= obj.poor+ obj.terrible;
+		var positive_sentiments= obj.excellent+ obj.good;
+		var neutral_sentiments= obj.average + (obj.mix ? obj.mix : 0);
+
+		function getRatio(item1, item2) {
+			var ratio= item1/item2;
+			return (ratio*100).toFixed(2);
+		}
+
+		// <div class="determinate" style="width: {{line_graph this}}; background-color: {{line_graph_color this}}"></div>
+		var negative_line= '<div class="determinate negative-line" style="width: '+ getRatio(negative_sentiments, obj.max_sentiments) +'%; left: 0; background-color: #eb7575"></div>';
+		var neutral_line= '<div class="determinate neutral-line" style="width: '+ getRatio(neutral_sentiments, obj.max_sentiments) +'%; left: '+getRatio(negative_sentiments, obj.max_sentiments)+'%;background-color: #fadb7d"></div>';
+		var positive_line= '<div class="determinate positive-line" style="width: '+ getRatio(positive_sentiments, obj.max_sentiments) +'%; left: '+(getRatio(neutral_sentiments+negative_sentiments, obj.max_sentiments))+'%;background-color: #65a877"></div>';
+		return negative_line+neutral_line+positive_line;
+	});
+
+	Handlebars.registerHelper('is_highest', function(query, obj) {
+		var negative_sentiments= obj.poor+ obj.terrible;
+		var positive_sentiments= obj.excellent+ obj.good;
+		var neutral_sentiments= obj.average + (obj.mix ? obj.mix : 0);
+		if(query=== 'happy') {
+			if (positive_sentiments >= neutral_sentiments && positive_sentiments >= negative_sentiments) {
+				return 'yes';
+			}
+		} else if(query=== 'neutral') {
+			if (neutral_sentiments >= positive_sentiments && neutral_sentiments >= negative_sentiments) {
+				return 'yes';
+			}
+		} else {
+			if (negative_sentiments >= neutral_sentiments && negative_sentiments >= positive_sentiments) {
+				return 'yes';
+			}
+		}
+		return 'no';
 	});
 
 	return true;

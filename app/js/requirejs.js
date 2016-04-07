@@ -2,17 +2,17 @@ require.config({
 	urlArgs: "food=" + (new Date()).getTime(),
 	waitSeconds: 0,
 	paths: {
+		//requirejs plugins
+		'text': '../../node_modules/text/text',
+
+		//backbone
 		'jquery': '../../node_modules/jquery/dist/jquery',
-		'jquery.actual': '../../node_modules/jquery.actual',
 		'underscore': '../../node_modules/underscore/underscore',
 		'backbone': '../../node_modules/backbone/backbone',
 		'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
 		'handlebars': '../../node_modules/handlebars/dist/handlebars',
 
-		'radio': '../../node_modules/backbone.radio/build/backbone.radio',
-
-		'text': '../../node_modules/text/text',
-
+		//materialize
 		'picker': '../../node_modules/materialize-css/js/date_picker/picker',
 		'picker.date': '../../node_modules/materialize-css/js/date_picker/picker.date',
 		'animation': '../../node_modules/materialize-css/js/animation',
@@ -45,171 +45,86 @@ require.config({
 		'velocity': '../../node_modules/materialize-css/js/velocity.min',
 		'waves': '../../node_modules/materialize-css/js/waves',
 
+		//facebook sdk
+		'facebook': '//connect.facebook.net/en_US/sdk',
+
+		//d3 library
 		'd3': '../../node_modules/d3/d3',
 		'nvd3': '../../node_modules/nvd3/build/nv.d3',
 
+		//google maps
+		'google-map-loader': '../../node_modules/google-map-loader',
 		'oms': '../../node_modules/marker-spider/dist/oms.min',
 
-		'facebook': '//connect.facebook.net/en_US/sdk',
-
+		//others
 		'typeahead': '../../node_modules/typeahead.bundle',
-
 		'es6promise': '../../node_modules/es6-promise/dist/es6-promise',
 
-		'google-map-loader': '../../node_modules/google-map-loader',
-
-		'bricks': '../../node_modules/bricks',
-		'masonry': '../../node_modules/masonry.pkgd.min',
+		//dont know if worth?? Can be removed
+		'radio': '../../node_modules/backbone.radio/build/backbone.radio',
+		'jquery.actual': '../../node_modules/jquery.actual',
 	},
 	shim: {
 		'jquery': { exports: '$' },
-		'jquery.actual': {deps: ['jquery']},
 		'underscore': { exports: '_' },
 		'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
 		'marionette': { deps: ['backbone'], exports: 'Marionette' },
 		'handlebars': { exports: 'Handlebars' },
 
-		'radio': {
-			deps: ['marionette'],
-			exports: 'Radio'
-		},
-
-		'velocity': {
-			deps: ['jquery'],
-			exports: 'Vel'
-		},
-
-		'jquery.easing': {
-			deps: ['jquery']
-		},
-
-		'animation': {
-			deps: ['jquery']
-		},
-
-		'hammerjs': {
-			exports: 'Hammer'
-		},
-
-		'jquery.hammer': {
-			deps: ['jquery', 'hammerjs', 'waves']
-		},
-
-		'global': {
-			deps: ['jquery']
-		},
-
-		'toasts': {
-			deps: ['hammerjs', 'velocity']
-		},
-
-		'carousel': {
-			deps: ['jquery']
-		},
-
-		'collapsible': {
-			deps: ['jquery']
-		},
-
-		'dropdown': {
-			deps: ['jquery']
-		},
-
-		'leanModal': {
-			deps: ['jquery']
-		},
-
-		'materialbox': {
-			deps: ['jquery']
-		},
-
-		'parallax': {
-			deps: ['jquery']
-		},
-
-		'tabs': {
-			deps: ['jquery']
-		},
-
-		'tooltip': {
-			deps: ['jquery']
-		},
-
-		'sideNav': {
-			deps: ['jquery']
-		},
-
-		'scrollspy': {
-			deps: ['jquery']
-		},
-
-		'forms': {
-			deps: ['jquery', 'global']
-		},
-
-		'slider': {
-			deps: ['jquery']
-		},
-
-		'cards': {
-			deps: ['jquery']
-		},
-
-		'pushpin': {
-			deps: ['jquery']
-		},
-
-		'buttons': {
-			deps: ['jquery']
-		},
-
-		'transitions': {
-			deps: ['jquery', 'scrollFire']
-		},
-
-		'scrollFire': {
-			deps: ['jquery', 'global']
-		},
-
-		'waves': {
-			exports: 'Waves'
-		},
-
-		'character_counter': {
-			deps: ['jquery']
-		},
-
-		'chips': {
-			deps: ['jquery']
-		},
-
-		'jquery.timeago': {
-			deps: ['jquery']
-		},
-
-		'nvd3': {
-			deps: ['d3']
-		},
-
-		'oms': {
-			exports: 'OverlappingMarkerSpiderfier'
-		},
+		'velocity': { deps: ['jquery'], exports: 'Vel' },
+		'jquery.easing': { deps: ['jquery'] },
+		'animation': { deps: ['jquery'] },
+		'hammerjs': { exports: 'Hammer' },
+		'jquery.hammer': { deps: ['jquery', 'hammerjs', 'waves'] },
+		'global': { deps: ['jquery'] },
+		'toasts': { deps: ['hammerjs', 'velocity'] },
+		'carousel': { deps: ['jquery'] },
+		'collapsible': { deps: ['jquery'] },
+		'dropdown': { deps: ['jquery'] },
+		'leanModal': { deps: ['jquery'] },
+		'materialbox': { deps: ['jquery'] },
+		'parallax': { deps: ['jquery'] },
+		'tabs': { deps: ['jquery'] },
+		'tooltip': { deps: ['jquery'] },
+		'sideNav': { deps: ['jquery'] },
+		'scrollspy': { deps: ['jquery'] },
+		'forms': { deps: ['jquery', 'global'] },
+		'slider': { deps: ['jquery'] },
+		'cards': { deps: ['jquery'] },
+		'pushpin': { deps: ['jquery'] },
+		'buttons': { deps: ['jquery'] },
+		'transitions': { deps: ['jquery', 'scrollFire'] },
+		'scrollFire': { deps: ['jquery', 'global'] },
+		'waves': { exports: 'Waves' },
+		'character_counter': { deps: ['jquery'] },
+		'chips': { deps: ['jquery'] },
+		'jquery.timeago': { deps: ['jquery'] },
 
 		'facebook': { exports: 'FB' },
+
+		'nvd3': { deps: ['d3'] },
+
+		'oms': { exports: 'OverlappingMarkerSpiderfier' },
+
 		'typeahead': {
 			deps: ['jquery'],
 			init: function ($) {
 				return require.s.contexts._.registry['typeahead.js'].factory($);
 			}
 		},
+
+		'jquery.actual': { deps: ['jquery'] },
+		'radio': { deps: ['marionette'], exports: 'Radio' },
 	}
 });
 
-
-
-require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago', 'carousel'], function ($) {
-
-	require(['./helpers', './doof'], function (Helpers, Doof) {
-		Doof.start();
-	});
+require(['./doof'], function(Doof) {
+	Doof.start();
 });
+
+// require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago', 'carousel'], function ($) {
+
+// 	require(['./helpers', './doof'], function (Helpers, Doof) {
+// 		Doof.start();
+// 	});
+// });

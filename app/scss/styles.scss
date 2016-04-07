@@ -1,0 +1,49 @@
+@import 'constants';
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.doof,
+.loader {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.doof {
+	z-index: 1;
+}
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	flex-direction: column;
+	object {
+		width: 120px;
+		height: 120px;
+	}
+	span {
+		font-weight: bold;
+		color: $brand-color;
+	}
+}
+
+// .loader {
+// 	position: absolute;
+// 	top: 0;
+// 	bottom: 0;
+// 	z-index: 10;
+// }
+
+// .loader object {
+// 	width: 120px;
+// 	height: 120px;
+// }

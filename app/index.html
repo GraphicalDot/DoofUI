@@ -7,55 +7,24 @@
 
 	<meta name="author" content="Mad Machines">
 	<meta name="description" content="Doof- Find food & restaurents around you.">
-	<meta name="keywords" content="food,recommendation,new-delhi,restaurants,ambience,cost,service,NLP,AI,chat">
+	<meta name="keywords" content="food,recommendation,new-delhi,india,restaurants,ambience,cost,service,NLP,AI,chat">
 
-	<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
 
 	<link rel="shortcut icon" type="image/png" href="css/images/favicon.png" />
 
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
-
-	<style>
-		html,
-		body {
-			height: 100%;
-			width: 100%;
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-			/*font-family: 'Open Sans';*/
-		}
-
-		.doof,
-		.loader {
-			height: 100%;
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-
-		.loader {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			z-index: 10;
-		}
-
-		.loader object {
-			width: 120px;
-			height: 120px;
-		}
-
-
-	</style>
-	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<!--<link rel="stylesheet" href="css/app.css">-->
 </head>
 
 <body>
 	<div class="doof"></div>
+	<div class="loader">
+		<object data="./loader.svg" type="image/svg+xml"></object>
+		<span>Doof is loading..</span>
+	</div>
 	<script data-main="js/requirejs" src="../node_modules/requirejs/require.js"></script>
 
 	<script>

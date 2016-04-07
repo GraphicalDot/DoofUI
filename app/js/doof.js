@@ -33,6 +33,11 @@ define(function (require) {
 		if (Backbone.history) {
 			Backbone.history.start();
 		}
+		if(fbUser.isAuthorized()) {
+			Doof.router.navigate('application', {trigger: true});
+		} else {
+			Doof.router.navigate('landing', {trigger: true});
+		}
 	});
 	return Doof;
 });

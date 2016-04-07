@@ -1,38 +1,32 @@
-// This control the Router and controller of application.
 define(function (require) {
 	"use strict";
 
 	var $ = require('jquery');
 	var Marionette = require('marionette');
 
+	var LandingPage = require('./landingPage/i-landingPage');
+	var ApplicationPage = require('./applicationPage/l-applicationPage');
+
 	var Router = Marionette.AppRouter.extend({
 		initialize: function (opts) {
 			this.region = opts.region;
 			this.user = opts.user;
+			require(['velocity'], function () {
+				$('.loader').velocity("fadeOut", 1000);
+			});
 		},
 		routes: {
-			"": "landingPage",
+			"landing": "landingPage",
 			"application": "application"
 		},
 		landingPage: function () {
-			var self = this;
-			$('.loader').velocity("fadeOut", 1000);
-			if(self.user.isAuthorized()) {
-				self.application({});
-				return;
-			}
-			var LandingPage = require('./landingPage/i-landingPage');
 			var landingPage = new LandingPage({ user: this.user });
 			this.region.show(landingPage);
-			landingPage.on("goToApplication", function (location, nearEateries) {
-				self.application(location, nearEateries);
-			});
 		},
-		application: function (location, nearEateries) {
-			var ApplicationPage = require('./applicationPage/l-applicationPage');
-			var applicationPage = new ApplicationPage({ user: this.user, position: location, collection: nearEateries });
+		// Application Route.. position: {lat: x, lng: y, address: z}
+		application: function (position) {
+			var applicationPage = new ApplicationPage({ user: this.user, position: position });
 			this.region.show(applicationPage);
-			$('.loader').velocity("fadeOut", 1000);
 		}
 	});
 

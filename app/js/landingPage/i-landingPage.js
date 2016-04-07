@@ -1,9 +1,8 @@
 define(function (require) {
 	"use strict";
 
-	var $ = require('jquery');
-	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
+	var Handlebars = require('handlebars');
 	var Template = require('text!./landingPage.html');
 
 	var Promise = require('es6promise').Promise;
@@ -13,58 +12,20 @@ define(function (require) {
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			this.router= opts.router;
-			this.location = {
-				latLng: { lat: 28.613939, lng: 77.209021 },
-				place: 'Delhi'
-			};
 			this.user = opts.user;
-		},
-		templateHelpers: function () {
-			return {
-				'isUserAuthorized': function () {
-					return this.user.isAuthorized();
-				},
-				'getUsername': function () {
-					return this.user.get('name');
-				},
-				'startingAddress': function () {
-					return this.location.place;
-				},
-			}
+			this.location= {
+				latLng: {lat: 0, lng: 0},
+				place: ''
+			};
 		},
 		ui: {
-			'enterButton': '#landingPage-enter-btn',
-			'enter_as_options': 'input[type="radio"][name="enter_as"]'
+			'location-input': '#landingPage__location-input-box',
+			'enterButton': '#landingPage__enter-app-btn',
 		},
 		events: {
-			"click @ui.enterButton": "enterInsideDoof",
-			"change @ui.enter_as_options": "changedUserMode"
+			"click @ui.enterButton": "loadDoof"
 		},
-		changedUserMode: function (e) {
-			var target = $(e.currentTarget);
-			var self = this;
-			if (target.hasClass('is_not_logged')) {
-				this.user.login().then(function (success) {
-					self.render();
-				}, function (err) {
-
-				});
-			}
-		},
-		enterInsideDoof: function (e) {
-			e.preventDefault();
-			var self = this;
-			this.isDataPresent().then(function (nearestEateries) {
-				if (self.ui.enter_as_options.is(':checked')) {
-					self.router.navigate('application', {trigger: true});
-				} else {
-					Materialize.toast("Select a user.", 2000);
-				}
-			}, function (err) {
-				Materialize.toast("No data present for the given location. Please change.", 2000);
-			});
-		},
-		isDataPresent: function (e) {
+		isDataPresentAtLngLng: function (e) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
 				var NearestEateriesModel = require('../models/nearest_eateries');
@@ -79,25 +40,14 @@ define(function (require) {
 			});
 			return promise;
 		},
-		geoCodeLatLng: function (lat, lng) {
+		loadDoof: function (e) {
+			e.preventDefault();
 			var self = this;
-			var promise = new Promise(function (resolve, reject) {
-				require(['google-map-loader'], function (GoogleMapLoader) {
-					GoogleMapLoader.done(function (GoogleMaps) {
-						var geoCoder = new GoogleMaps.Geocoder;
-						geoCoder.geocode({ 'location': { lat: lat, lng: lng } }, function (results, status) {
-							if (status === GoogleMaps.GeocoderStatus.OK) {
-								var result_address = results[1] ? results[1] : results[0];
-								self.location.place = result_address.formatted_address;
-								resolve();
-							} else {
-								reject();
-							}
-						});
-					});
-				});
+			this.isDataPresentAtLngLng().then(function (nearestEateries) {
+				self.router.navigate('application', {trigger: true});
+			}, function (err) {
+				console.log("No data present for the given location. Please change.", 2000);
 			});
-			return promise;
 		},
 		createGoogleAutocomplete: function (input) {
 			var self = this;
@@ -110,33 +60,48 @@ define(function (require) {
 						if (place.geometry.location) {
 							self.location.latLng.lat = place.geometry.location.lat();
 							self.location.latLng.lng = place.geometry.location.lng();
+							self.location.place= place.formatted_address;
 						}
 					});
 				});
 			});
 		},
+		geoCodeLatLng: function (lat, lng) {
+			var promise = new Promise(function (resolve, reject) {
+				require(['google-map-loader'], function (GoogleMapLoader) {
+					GoogleMapLoader.done(function (GoogleMaps) {
+						var geoCoder = new GoogleMaps.Geocoder;
+						geoCoder.geocode({ 'location': { lat: lat, lng: lng } }, function (results, status) {
+							if (status === GoogleMaps.GeocoderStatus.OK) {
+								var result_address = results[1] ? results[1] : results[0];
+								resolve(result_address.formatted_address);
+							} else {
+								reject();
+							}
+						});
+					});
+				});
+			});
+			return promise;
+		},
+		getUserLocation: function(inputBox) {
+			var self= this;
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					self.location.latLng.lat= position.coords.latitude;
+					self.location.latLng.lng= position.coords.longitude;
+					self.geoCodeLatLng(position.coords.latitude, position.coords.longitude).then(function(geoCoded_address) {
+						self.location.place= geoCoded_address;
+						inputBox.value= geoCoded_address;
+					}, function(error) {});
+				}, function(fail) {}, {});
+			} else {}
+		},
 		onShow: function () {
 			var self = this;
-			var input = document.getElementById("landingPage-locationBox");
+			var input = document.getElementById("landingPage__location-input-box");
 			self.createGoogleAutocomplete(input);
-			function geoSuccess(position) {
-				self.location.latLng.lat = position.coords.latitude;
-				self.location.latLng.lng = position.coords.longitude;
-				self.location.accuracy = position.coords.accuracy;
-				self.geoCodeLatLng(self.location.latLng.lat, self.location.latLng.lng).then(function () {
-					input.value = self.location.place;
-				}, function (err) {
-					input.value = "Sorry, couldnt get your address. Please find one here."
-				});
-			}
-			function geoFail() {
-				input.value = "Sorry, couldnt get your address. Please find one here."
-			}
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(geoSuccess, geoFail, {});
-			} else {
-				geoFail();
-			}
+			self.getUserLocation(input);
 		},
 	});
 

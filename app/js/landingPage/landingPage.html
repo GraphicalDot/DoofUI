@@ -1,47 +1,24 @@
 <div class="landingPage-background">
-	<img src="css/images/landingPage-bg.jpg" alt="Bg">
+	<img src="css/images/landingPage-bg.jpg" alt="Bg" class="landingPage-background__image">
 	<div class="landingPage-background__overlay"></div>
 </div>
 
-<div class="landingPage-content">
-	<!--<div class="landingPage-content__welcome-text">Welcome to</div>-->
-	<h1 class="landingPage-content__content-logo">Welcome to <span class="landing_special"> Doof </span></h1>
-	<p class="landingPage-content__description">
-		<span class="landing_special_2">Doof</span> is
-		<span class="landing_special_2">Food discovery</span> web application which lets you
-		<span class="landing_special_2">Find Restaurants and Foods</span> in area. Whether you are
-		<span class="landing_special_2"> searching for Restaurants serving your favorite dish </span>, or want to
-		<span class="landing_special_2"> know Restaurants or Dish item trending in town </span>.
-		<span class="landing_special_2"> Doof </span> will help you make <span class="landing_special_2"> better food decisions </span>.</p>
-	<!--<div class="landingPage-content__description">
-        <p>Doof is Food discovery web application which lets user search and know about trending Restaurants and Foods nearby them
-			based on Sentiments.</p>
-    </div>-->
-	<div class="landing-content__enter_application">
-		<div class="landingPage-content__locationBox-wrapper">
-			<label for="landingPage-locationBox"><i class="material-icons">place</i></label>
-			<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location"
-			value="{{startingAddress}}">
-		</div>
-		<div class="landingPage-content__enterApplication-wrapper">
-			<div class="landingPage-content__enter-btn"><a href="#/application" id="landingPage-enter-btn" class="btn waves-effect waves-light">Enter Application</a></div>
-			<input type="radio" name="enter_as" id="guest">
-			<label for="guest">Enter as Guest</label>
-			{{#if isUserAuthorized}}
-			<input type="radio" name="enter_as" id="facebook" class="is_logged">
-			<label for="facebook">
-				Enter as {{getUsername}}
-			</label>
-			{{else}}
-			<input type="radio" name="enter_as" id="facebook" class="is_not_logged">
-			<label for="facebook">
-				Enter using Facebook Account
-			</label>
-			{{/if}}
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<div class="landingPage-content">
+				<h1>Welcome to Doof</h1>
+				<p>Doof is Food Discovery web application which lets you find Food & Restaurants in an area. Whether you are searching for Restaurants serving your favourite dish, or want to know Trending Food/Restaurants in your town. Doof will help you make better food decisions.</p>
+				<div class="landingPage-content__enter-application-box">
+					<div class="enter-application-box__input-wrapper">
+						<label for="landingPage__location-input-box"><i class="material-icons">place</i></label>
+						<input type="text" id="landingPage__location-input-box" name="landingPage__location-input-box" placeholder="Enter your location" placeholder="New Delhi" value="">
+					</div>
+					<div class="enter-application-box__btn-wrapper">
+						<a href="javascript:void(0)" id="landingPage__enter-app-btn" class="btn waves-effect waves-light">Enter Application <span>(requires facebook login)</span></a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!--<div class="landingPage-content__madmachines">
-        <p>Created by</p>
-        <a href="http://www.madmachines.io" target="_blank">Mad Machines</a>
-    </div>-->
 </div>

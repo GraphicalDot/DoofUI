@@ -4,7 +4,7 @@ define(function (require) {
 	var Backbone = require('backbone');
 	var Marionette = require('marionette');
 
-	var LoaderView= require('./loader/i-loader');
+	var LoaderView = require('./loader/i-loader');
 	var FacebookUser = require('./models/facebookUser');
 	var Router = require('./router');
 
@@ -15,16 +15,16 @@ define(function (require) {
 		// Check For Facebook Login Status.
 		var fbUser = new FacebookUser();
 		fbUser.init()
-		.then(function () { return fbUser.checkLogin(); })
-		.then(function () { return fbUser.fetchInfo(); })
-		.then(function () {
-			fbUser.sendUserData();
-			Doof.vent.trigger("start:app", fbUser);
-		})
-		.catch(console.log.bind(console));
+			.then(function () { return fbUser.checkLogin(); })
+			.then(function () { return fbUser.fetchInfo(); })
+			.then(function () {
+				fbUser.sendUserData();
+				Doof.vent.trigger("start:app", fbUser);
+			})
+			.catch(console.log.bind(console));
 	});
 
-	Doof.on("start", function (fbUser) {
+	Doof.vent.bind("start:app", function (fbUser) {
 		Doof.router = new Router({ region: Doof.region, user: fbUser });
 		if (Backbone.history) {
 			Backbone.history.start();

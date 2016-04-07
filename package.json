@@ -23,5 +23,11 @@
     "text": "github:requirejs/text",
     "typeahead": "^0.2.2",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.2",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0",
+    "run-sequence": "^1.1.5"
   }
 }

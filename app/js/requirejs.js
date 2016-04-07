@@ -1,5 +1,5 @@
 require.config({
-	urlArgs: new Date().getTime(),
+	urlArgs: "food=" + (new Date()).getTime(),
 	waitSeconds: 0,
 	paths: {
 		'jquery': '../../node_modules/jquery/dist/jquery',

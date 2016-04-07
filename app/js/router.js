@@ -20,7 +20,7 @@ define(function (require) {
 			"application": "application"
 		},
 		landingPage: function () {
-			var landingPage = new LandingPage({ user: this.user });
+			var landingPage = new LandingPage({ user: this.user, router: this });
 			this.region.show(landingPage);
 		},
 		// Application Route.. position: {lat: x, lng: y, address: z}

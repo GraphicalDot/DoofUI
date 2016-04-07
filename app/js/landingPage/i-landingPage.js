@@ -1,17 +1,18 @@
-/* global Materialize */
 define(function (require) {
 	"use strict";
 
 	var $ = require('jquery');
-	var Promise = require('es6promise').Promise;
 	var Handlebars = require('handlebars');
 	var Marionette = require('marionette');
 	var Template = require('text!./landingPage.html');
+
+	var Promise = require('es6promise').Promise;
 
 	var LandingPage = Marionette.ItemView.extend({
 		id: 'landingPage',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
+			this.router= opts.router;
 			this.location = {
 				latLng: { lat: 28.613939, lng: 77.209021 },
 				place: 'Delhi'
@@ -55,7 +56,7 @@ define(function (require) {
 			var self = this;
 			this.isDataPresent().then(function (nearestEateries) {
 				if (self.ui.enter_as_options.is(':checked')) {
-					self.trigger("goToApplication", self.location, nearestEateries);
+					self.router.navigate('application', {trigger: true});
 				} else {
 					Materialize.toast("Select a user.", 2000);
 				}

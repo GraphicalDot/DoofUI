@@ -1,9 +1,3 @@
-// It contains 2 search box [Location and Doof Search] & a button.
-// If only Location is changed, We update the Result in ListView.
-// If Doof Search is used, then we open a Search View above ListView for searched result, [ On Closing Saerch View, doof search input value is also cleared]
-
-// Pending Work -> Showing Suggestions
-// -> Restaurant Selection API change event.
 define(function (require) {
 	"use strict";
 

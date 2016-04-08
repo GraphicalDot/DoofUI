@@ -27,8 +27,8 @@ body {
 	z-index: 2;
 	flex-direction: column;
 	object {
-		width: 120px;
-		height: 120px;
+		width: $loader-dimensions;
+		height: $loader-dimensions;
 	}
 	span {
 		font-weight: bold;
@@ -37,3 +37,15 @@ body {
 }
 
 @import 'landing-page';
+
+#applicationPage {
+	flex: 1;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	@import 'header';
+	.doof-body {
+		flex: 1;
+	}
+}

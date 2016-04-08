@@ -9,11 +9,10 @@ require.config({
 		'jquery': '../../node_modules/jquery/dist/jquery',
 		'underscore': '../../node_modules/underscore/underscore',
 		'backbone': '../../node_modules/backbone/backbone',
-		'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
-		'handlebars': '../../node_modules/handlebars/dist/handlebars',
-
 		'backbone.radio': './../../node_modules/backbone.radio/build/backbone.radio',
+		'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
 		'marionette-service': './../../node_modules/marionette-service/dist/marionette-service',
+		'handlebars': '../../node_modules/handlebars/dist/handlebars',
 
 		//materialize
 		'picker': '../../node_modules/materialize-css/js/date_picker/picker',
@@ -72,8 +71,8 @@ require.config({
 		'underscore': { exports: '_' },
 		'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
 		'backbone.radio': { deps: ['backbone'], exports: 'Radio' },
-		'marionette-service': { deps: ['backbone.radio'], exports: 'Service' },
-		'marionette': { deps: ['marionette-service'], exports: 'Marionette' },
+		'marionette': { deps: ['backbone'], exports: 'Marionette' },
+		'marionette-service': { deps: ['marionette', 'backbone.radio'], exports: 'Service' },
 		'handlebars': { exports: 'Handlebars' },
 
 
@@ -118,9 +117,7 @@ require.config({
 				return require.s.contexts._.registry['typeahead.js'].factory($);
 			}
 		},
-
 		'jquery.actual': { deps: ['jquery'] },
-
 	}
 });
 

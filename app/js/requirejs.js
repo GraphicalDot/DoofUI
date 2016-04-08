@@ -1,6 +1,6 @@
 require.config({
 	urlArgs: "food=" + (new Date()).getTime(),
-	waitSeconds: 0,
+	waitSeconds: 40,
 	paths: {
 		//requirejs plugins
 		'text': '../../node_modules/text/text',
@@ -11,6 +11,9 @@ require.config({
 		'backbone': '../../node_modules/backbone/backbone',
 		'marionette': '../../node_modules/backbone.marionette/lib/backbone.marionette',
 		'handlebars': '../../node_modules/handlebars/dist/handlebars',
+
+		'backbone.radio': './../../node_modules/backbone.radio/build/backbone.radio',
+		'marionette-service': './../../node_modules/marionette-service/dist/marionette-service',
 
 		//materialize
 		'picker': '../../node_modules/materialize-css/js/date_picker/picker',
@@ -61,15 +64,18 @@ require.config({
 		'es6promise': '../../node_modules/es6-promise/dist/es6-promise',
 
 		//dont know if worth?? Can be removed
-		'radio': '../../node_modules/backbone.radio/build/backbone.radio',
+
 		'jquery.actual': '../../node_modules/jquery.actual',
 	},
 	shim: {
 		'jquery': { exports: '$' },
 		'underscore': { exports: '_' },
 		'backbone': { deps: ['jquery', 'underscore'], exports: 'Backbone' },
-		'marionette': { deps: ['backbone'], exports: 'Marionette' },
+		'backbone.radio': { deps: ['backbone'], exports: 'Radio' },
+		'marionette-service': { deps: ['backbone.radio'], exports: 'Service' },
+		'marionette': { deps: ['marionette-service'], exports: 'Marionette' },
 		'handlebars': { exports: 'Handlebars' },
+
 
 		'velocity': { deps: ['jquery'], exports: 'Vel' },
 		'jquery.easing': { deps: ['jquery'] },
@@ -114,7 +120,7 @@ require.config({
 		},
 
 		'jquery.actual': { deps: ['jquery'] },
-		'radio': { deps: ['marionette'], exports: 'Radio' },
+
 	}
 });
 

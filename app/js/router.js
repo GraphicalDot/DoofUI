@@ -34,7 +34,6 @@ define(function (require) {
 			});
 			this.region.show(landingPage);
 		},
-		// Application Route.. position: {lat: x, lng: y, address: z}
 		application: function (position, nearestEateriesList) {
 			var applicationPage = new ApplicationPage({ user: this.user, position: position, eateries: nearestEateriesList });
 			this.region.show(applicationPage);

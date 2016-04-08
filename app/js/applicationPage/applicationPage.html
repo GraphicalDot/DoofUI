@@ -1,0 +1,66 @@
+<header class="doof-masthead">
+	<div class="masthead__logo-container">
+		<a href="#" id="masthead_logo"><img src="css/images/doof.png" alt="Doof logo"></a>
+	</div>
+	<div class="masthead__search-container"></div>
+	<ul class="masthead__nav-menu right-align">
+		<li class="masthead__nav-menu-item nav-menu-item__feedback">
+			<a href="#feedback__modal" id="nav-menu__feedback-link">Send Feedback</a>
+		</li>
+		<li class="masthead__nav-menu-item nav-menu-item__user"></li>
+	</ul>
+</header>
+
+<main class="doof-body">
+	<div class="body__list-container">
+		<div class="body__sub-menu-wrapper">
+			<div class="body__sub-menu-container">
+				<ul class="body__sub-menu tabs">
+					<li class="tab"><a href="#" id="sub-menu__trending-link" class="active">Trending</a></li>
+					<li class="tab"><a href="#" id="sub-menu__nearme-link" >Nearby Places</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="body__list"></div>
+		<div class="body__list-pagination">
+			Showing results 1 - 10
+			<i class="material-icons pagination__next-btn">chevron_right</i>
+			<i class="material-icons pagination__prev-btn">chevron_left</i>
+		</div>
+	</div>
+	<div class="body__map-container"></div>
+	<div class="body-box body__detail-box hide"></div>
+	<div class="body-box body__search-results-container hide">
+		<a href="#" id="search-results__back-btn" class="">Go Back..</a>
+		<div class="search-results"></div>
+	</div>
+	<div class="body-box body__profile-box hide"></div>
+</main>
+
+
+<div id="feedback__modal" class="modal">
+	<div class="row">
+		<h5><i class="material-icons">feedback</i> Please leave your valuable feedback.</h5>
+		<form id="feedback-form" class="col s12">
+			<div class="row">
+				<div class="input-field col s6">
+					<input class="validate" type="text" id="feedback-name" value="{{username}}" required>
+					<label for="feedback-name">Your name</label>
+				</div>
+				<div class="input-field col s6">
+					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" value="{{useremail}}" required>
+					<label class="active" for="feedback-email">Your email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea class="validate materialize-textarea" id="feedback-body" required></textarea>
+					<label for="feedback-body">Your comments:</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light" type="submit">Submit
+				<i class="material-icons left">send</i>
+			</button>
+		</form>
+	</div>
+</div>

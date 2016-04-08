@@ -16,6 +16,7 @@
     "es6-promise": "^3.1.2",
     "handlebars": "^4.0.5",
     "jquery": "^2.2.3",
+    "marionette-service": "0.0.7",
     "marker-spider": "^0.1.0",
     "materialize-css": "^0.97.6",
     "nvd3": "^1.8.2",

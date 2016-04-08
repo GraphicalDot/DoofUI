@@ -8,7 +8,7 @@ define(function (require) {
 	var Router = require('./router');
 
 	var Doof = new Marionette.Application();
-	Doof.addRegions({ region: '.doof' })
+	Doof.addRegions({ region: '.doof' });
 
 	// 1. Load Helper Functions for Libraries.
 	// 2. Check Facebook Connection and Login Status

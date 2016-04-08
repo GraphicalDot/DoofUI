@@ -226,4 +226,12 @@ body {
       #applicationPage .doof-body .body__list-container .body__list-pagination {
         height: 54px; }
     #applicationPage .doof-body .body__map-container {
-      flex: 1; }
+      flex: 1;
+      position: relative;
+      overflow: hidden; }
+      #applicationPage .doof-body .body__map-container #doofMap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%; }

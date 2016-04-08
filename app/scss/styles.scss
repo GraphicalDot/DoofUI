@@ -47,5 +47,24 @@ body {
 	@import 'header';
 	.doof-body {
 		flex: 1;
+		display: flex;
+		position: relative;
+		.body__list-container {
+			flex: 0 0 400px;
+			display: flex;
+			flex-direction: column;
+			.body__sub-menu-wrapper {
+				height: 54px;
+			}
+			.body__list {
+				flex: 1;
+			}
+			.body__list-pagination {
+				height: 54px;
+			}
+		}
+		.body__map-container {
+			flex: 1;
+		}
 	}
 }

@@ -212,4 +212,18 @@ body {
           color: white;
           padding: 0 12px; }
   #applicationPage .doof-body {
-    flex: 1; }
+    flex: 1;
+    display: flex;
+    position: relative; }
+    #applicationPage .doof-body .body__list-container {
+      flex: 0 0 400px;
+      display: flex;
+      flex-direction: column; }
+      #applicationPage .doof-body .body__list-container .body__sub-menu-wrapper {
+        height: 54px; }
+      #applicationPage .doof-body .body__list-container .body__list {
+        flex: 1; }
+      #applicationPage .doof-body .body__list-container .body__list-pagination {
+        height: 54px; }
+    #applicationPage .doof-body .body__map-container {
+      flex: 1; }

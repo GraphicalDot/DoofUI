@@ -7,7 +7,9 @@ define(function (require) {
 	var Template = require('text!./applicationPage.html');
 	// var $ = require('jquery');
 
-	var SearchView = require('./search/i-search');
+	// var SearchView = require('./search/i-search');
+	var ListView= require('./list/c-listView');
+	var MapView= require('./map/i-mapView');
 	// var UserView = require('./userMenuView/i-userMenu');
 	// var ListView = require('./listView/c-list');
 	// var MapView = require('./mapView/i-map');
@@ -34,10 +36,10 @@ define(function (require) {
 			this.latLng = opts.position ? opts.position.latLng : { lat: 28, lng: 77 };
 			this.address = opts.position ? opts.position.place : 'Delhi';
 
-			this.searchView = new SearchView({ address: this.address, latLng: this.latLng });
+			// this.searchView = new SearchView({ address: this.address, latLng: this.latLng });
 			// this.userView = new UserView({ model: this.user });
-			// this.listView = new ListView({ user: this.user });
-			// this.mapView = new MapView({ lat: this.latLng.lat, lng: this.latLng.lng, user: this.user });
+			this.listView = new ListView({ user: this.user });
+			this.mapView = new MapView({ latLng: this.latLng });
 
 			// this.trendingItems = new TrendingItems();
 			// this.nearbyRestaurants = new NearbyRestaurants();
@@ -257,10 +259,10 @@ define(function (require) {
 		},
 		onShow: function () {
 			// this.ui.feedbackLink.leanModal();
-			this.showChildView('search', this.searchView);
+			// this.showChildView('search', this.searchView);
 			// this.showChildView('userMenu', this.userView);
-			// this.showChildView('list', this.listView);
-			// this.showChildView('map', this.mapView);
+			this.showChildView('list', this.listView);
+			this.showChildView('map', this.mapView);
 			// this.ui.mainMenuTabs.tabs();
 			// this.ui.subMenuTabs.tabs();
 

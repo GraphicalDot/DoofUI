@@ -11,10 +11,9 @@ define(function (require) {
 		id: 'landingPage',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
-			this.router= opts.router;
 			this.user = opts.user;
-			this.location= {
-				latLng: {lat: 0, lng: 0},
+			this.location = {
+				latLng: { lat: 0, lng: 0 },
 				place: ''
 			};
 		},
@@ -44,7 +43,7 @@ define(function (require) {
 			e.preventDefault();
 			var self = this;
 			this.isDataPresentAtLngLng().then(function (nearestEateries) {
-				self.router.navigate('application', {trigger: true});
+				self.trigger("goToApplication", self.location, nearestEateries);
 			}, function (err) {
 				console.log("No data present for the given location. Please change.", 2000);
 			});
@@ -60,7 +59,7 @@ define(function (require) {
 						if (place.geometry.location) {
 							self.location.latLng.lat = place.geometry.location.lat();
 							self.location.latLng.lng = place.geometry.location.lng();
-							self.location.place= place.formatted_address;
+							self.location.place = place.formatted_address;
 						}
 					});
 				});
@@ -84,24 +83,24 @@ define(function (require) {
 			});
 			return promise;
 		},
-		getUserLocation: function(inputBox) {
-			var self= this;
-			if(navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-					self.location.latLng.lat= position.coords.latitude;
-					self.location.latLng.lng= position.coords.longitude;
-					self.geoCodeLatLng(position.coords.latitude, position.coords.longitude).then(function(geoCoded_address) {
-						self.location.place= geoCoded_address;
-						inputBox.value= geoCoded_address;
-					}, function(error) {});
-				}, function(fail) {}, {});
-			} else {}
+		getUserLocation: function (inputBox) {
+			var self = this;
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					console.log(position);
+					self.location.latLng.lat = position.coords.latitude;
+					self.location.latLng.lng = position.coords.longitude;
+					self.geoCodeLatLng(position.coords.latitude, position.coords.longitude).then(function (geoCoded_address) {
+						self.location.place = geoCoded_address;
+						inputBox.value = geoCoded_address;
+					}, function (error) { });
+				}, function (fail) { }, {});
+			} else { }
 		},
 		onShow: function () {
-			var self = this;
 			var input = document.getElementById("landingPage__location-input-box");
-			self.createGoogleAutocomplete(input);
-			self.getUserLocation(input);
+			this.createGoogleAutocomplete(input);
+			this.getUserLocation(input);
 		},
 	});
 

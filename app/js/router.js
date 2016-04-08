@@ -16,11 +16,22 @@ define(function (require) {
 			});
 		},
 		routes: {
-			"landing": "landingPage",
-			"application": "application"
+			"": "home"
+		},
+		home: function() {
+			var fbUser= this.user;
+			if(fbUser.isAuthorized()) {
+				this.application();
+			} else {
+				this.landingPage();
+			}
 		},
 		landingPage: function () {
-			var landingPage = new LandingPage({ user: this.user, router: this });
+			var self= this;
+			var landingPage = new LandingPage({ user: this.user });
+			landingPage.on('goToApplication', function() {
+				self.application();
+			});
 			this.region.show(landingPage);
 		},
 		// Application Route.. position: {lat: x, lng: y, address: z}

@@ -19,9 +19,12 @@ Way to pass collection from landing Page to application Page because we have alr
 
 LANDING PAGE.JS :-
 self.location.accuracy= position.coords.accuracy;
+What to check when checking data.. Trending or nearest?
+Make an API to check for both if possible??? pata nahi
+
 
 LANDING PAGE.html :-
-<div class="landing-content__enter_application">
+	<div class="landing-content__enter_application">
 		<div class="landingPage-content__locationBox-wrapper">
 			<label for="landingPage-locationBox"><i class="material-icons">place</i></label>
 			<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location"

@@ -25,7 +25,6 @@ define(function (require) {
 		},
 		// Application Route.. position: {lat: x, lng: y, address: z}
 		application: function (position) {
-			console.log(arguments);
 			var applicationPage = new ApplicationPage({ user: this.user, position: position });
 			this.region.show(applicationPage);
 		}

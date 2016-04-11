@@ -87,7 +87,6 @@ define(function (require) {
 			var self = this;
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
-					console.log(position);
 					self.location.latLng.lat = position.coords.latitude;
 					self.location.latLng.lng = position.coords.longitude;
 					self.geoCodeLatLng(position.coords.latitude, position.coords.longitude).then(function (geoCoded_address) {

@@ -229,7 +229,7 @@ body {
       flex: 1;
       position: relative;
       overflow: hidden; }
-      #applicationPage .doof-body .body__map-container #doofMap {
+      #applicationPage .doof-body .body__map-container #doof-map {
         position: absolute;
         top: 0;
         left: 0;

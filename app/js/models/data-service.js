@@ -2,7 +2,7 @@ define(function (require) {
 	'use strict';
 
 	var Service = require('marionette-service');
-	var Promise = require('es6Promise').Promise;
+	var Promise = require('es6promise').Promise;
 
 	var TrendingRestaurants = require('./get_trending');
 	var NearbyRestaurants = require('./nearest_eateries');
@@ -14,8 +14,8 @@ define(function (require) {
 			this.nearbyRestaurants = new NearbyRestaurants();
 			this.textSearchRestaurants = new TextSearchRestaurants();
 		},
-		setup: function (opts) {
-			this.latLng = opts.latLng;
+		setup: function (latLng) {
+			this.latLng = latLng;
 		},
 		requests: {
 			'getTrending': 'getTrending',
@@ -26,7 +26,7 @@ define(function (require) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
 				self.trendingRestaurants.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
-					resolve(self.trendingRestaurants);
+					resolve(self.trendingRestaurants.toJSON());
 				}).fail(function () {
 					reject('Failed Trending API');
 				});

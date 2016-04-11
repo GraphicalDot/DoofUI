@@ -45,6 +45,7 @@ define(function (require) {
 			list: '.body__list'
 		},
 		ui: {
+			'feedbackLink': '#nav-menu__feedback-link',
 			'subMenuTabsWrapper': '.body__sub-menu',
 			'subMenuTrendingLink': '#sub-menu__trending-link',
 			'subMenuNearMeLink': '#sub-menu__nearme-link'
@@ -74,7 +75,8 @@ define(function (require) {
 		},
 		onShow: function () {
 			var self = this;
-			require(['tabs'], function () {
+			require(['leanModal', 'tabs'], function () {
+				self.ui.feedbackLink.leanModal();
 				self.ui.subMenuTabsWrapper.tabs();
 			});
 

@@ -9,8 +9,8 @@ define(function (require) {
 		className: 'list-item',
 		template: Handlebars.compile(Template),
 		templateHelpers: {
-			foodBlock: function() {
-				return this.model.get('category')=== 'food';
+			foodBlock: function () {
+				return this.model.get('category') === 'food';
 			}
 		},
 	});

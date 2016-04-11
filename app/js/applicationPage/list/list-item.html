@@ -1,25 +1,23 @@
 {{#if foodBlock}}
-	<div class="food-image">
-		<img src="css/images/placeholder_food.png" alt="food-placeholder" class="responsive-img">
-	</div>
-	<div class="mata-information">
-		<h6>{{name}}</h6>
-		<span class="eatery_name">@ {{eatery_details.eatery_name}}</span>
-		<span class="eatery_address">{{#strip_address}}{{eatery_details.eatery_address}}{{/strip_address}}</span>
-	</div>
+<div class="food-image">
+	<img src="css/images/placeholder_food.png" alt="food-placeholder" class="responsive-img">
+</div>
+<div class="mata-information">
+	<h6>{{name}}</h6>
+	<span class="eatery_name">@ {{eatery_details.eatery_name}}</span>
+	<span class="eatery_address">{{#strip_address}}{{eatery_details.eatery_address}}{{/strip_address}}</span>
+</div>
 {{else}}
-	<div class="rest-image">
-		<img src="css/images/placeholder_rest.png" alt="restaurant-placeholder" class="responsive-img">
-	</div>
-	<div class="mata-information">
-		<h6>{{eatery_details.eatery_name}}</h6>
-		<span>{{#strip_address}}{{eatery_details.eatery_address}}{{/strip_address}}</span>
-		<ul class="top-foods">
-			{{#if eatery_details.food.dishes}}
-				{{#each eatery_details.food.dishes}}
-					<li><i class="material-icons">star</i><span>{{name}}</span></li>
-				{{/each}}
-			{{/if}}
-		</ul>
-	</div>
+<div class="rest-image">
+	<img src="css/images/placeholder_rest.png" alt="restaurant-placeholder" class="responsive-img">
+</div>
+<div class="mata-information">
+	<h6>{{eatery_details.eatery_name}}</h6>
+	<span>{{#strip_address}}{{eatery_details.eatery_address}}{{/strip_address}}</span>
+	<ul class="top-foods">
+		{{#if eatery_details.food.dishes}} {{#each eatery_details.food.dishes}}
+		<li><i class="material-icons">star</i><span>{{name}}</span></li>
+		{{/each}} {{/if}}
+	</ul>
+</div>
 {{/if}}

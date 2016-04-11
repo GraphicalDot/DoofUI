@@ -73,8 +73,8 @@ define(function (require) {
 			this.mapBoxView.showMarkers(this.collection.toJSON());
 		},
 		onShow: function () {
-			var self= this;
-			require(['tabs'], function() {
+			var self = this;
+			require(['tabs'], function () {
 				self.ui.subMenuTabsWrapper.tabs();
 			});
 

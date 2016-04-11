@@ -45,6 +45,7 @@ define(function (require) {
 			list: '.body__list'
 		},
 		ui: {
+			'subMenuTabsWrapper': '.body__sub-menu',
 			'subMenuTrendingLink': '#sub-menu__trending-link',
 			'subMenuNearMeLink': '#sub-menu__nearme-link'
 		},
@@ -72,6 +73,11 @@ define(function (require) {
 			this.mapBoxView.showMarkers(this.collection.toJSON());
 		},
 		onShow: function () {
+			var self= this;
+			require(['tabs'], function() {
+				self.ui.subMenuTabsWrapper.tabs();
+			});
+
 			this.showChildView('search', this.searchBoxView);
 			this.showChildView('map', this.mapBoxView);
 			this.showChildView('list', this.listView);

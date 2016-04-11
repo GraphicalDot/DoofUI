@@ -7,7 +7,12 @@ define(function (require) {
 
 	var ListItem = Marionette.ItemView.extend({
 		className: 'list-item',
-		template: Handlebars.compile(Template)
+		template: Handlebars.compile(Template),
+		templateHelpers: {
+			foodBlock: function() {
+				return this.model.get('category')=== 'food';
+			}
+		},
 	});
 
 	var EmptyList = Marionette.ItemView.extend({

@@ -126,5 +126,21 @@ define(function (require) {
 		return 'no';
 	});
 
+	Handlebars.registerHelper('strip_address', function(options) {
+		var bigAddress= options.fn(this);
+		var split= bigAddress.split(',');
+		return split[split.length-2]+', '+ split[split.length-1];
+	});
+
+	Handlebars.registerHelper('safe-string', function(options) {
+		function escapeHtml(text) {
+			return text.replace(/&amp;/g, '&');
+		}
+		console.log(string);
+		var string= options.fn(this);
+		var safeString= escapeHtml(string);
+		return safeString;
+	});
+
 	return true;
 });

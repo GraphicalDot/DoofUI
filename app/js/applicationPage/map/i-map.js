@@ -1,7 +1,7 @@
 define(function (require) {
 	'use strict';
 
-	var _= require('underscore');
+	var _ = require('underscore');
 	var Marionette = require('marionette');
 	var Handlebars = require('handlebars');
 
@@ -10,18 +10,18 @@ define(function (require) {
 		template: Handlebars.compile(""),
 		initialize: function (opts) {
 			this.latLng = opts.latLng;
-			this.markersArray= [];
+			this.markersArray = [];
 		},
 		//remove old markers from map and array
-		removeOldMarkers: function() {
-			_.each(this.markersArray, function(marker) {
+		removeOldMarkers: function () {
+			_.each(this.markersArray, function (marker) {
 				marker.setMap(null);
 			});
-			this.markersArray= [];
+			this.markersArray = [];
 		},
 		//check if a specfied marker already exist for the restaurant to prevent duplicacy.
-		checkIfMarkerAlreayExist: function(marker_to_check) {
-			var isExist= false;
+		checkIfMarkerAlreayExist: function (marker_to_check) {
+			var isExist = false;
 			_.each(this.markersArray, function (marker) {
 				if (marker.get('restaurant_id') === marker_to_check.eatery_details.__eatery_id) {
 					isExist = true;
@@ -31,12 +31,12 @@ define(function (require) {
 			return isExist;
 		},
 		//bound map to markers position
-		setMarkersVisible: function() {
-			var self= this;
+		setMarkersVisible: function () {
+			var self = this;
 			require(['google-map-loader'], function (GoogleMapLoader) {
 				GoogleMapLoader.done(function (GoogleMaps) {
 					var markersBound = new GoogleMaps.LatLngBounds();
-					_.each(self.markersArray, function(marker) {
+					_.each(self.markersArray, function (marker) {
 						markersBound.extend(marker.getPosition());
 					});
 					self.map.fitBounds(markersBound);
@@ -44,11 +44,11 @@ define(function (require) {
 			});
 		},
 		//show a list of markers on map
-		showMarkers: function(markers) {
-			var self= this;
+		showMarkers: function (markers) {
+			var self = this;
 			this.removeOldMarkers();
-			_.each(markers, function(marker) {
-				if(!self.checkIfMarkerAlreayExist(marker)) {
+			_.each(markers, function (marker) {
+				if (!self.checkIfMarkerAlreayExist(marker)) {
 					require(['google-map-loader'], function (GoogleMapLoader) {
 						GoogleMapLoader.done(function (GoogleMaps) {
 							var googleMapMarker = new GoogleMaps.Marker({
@@ -62,8 +62,8 @@ define(function (require) {
 								html: "<div id='infobox'>" + marker.eatery_details.eatery_name + "<br />" + marker.eatery_details.eatery_address + "</div>"
 							});
 
-							GoogleMaps.event.addListener(googleMapMarker, 'mouseover', function () {});
-							GoogleMaps.event.addListener(googleMapMarker, 'mouseout', function () {});
+							GoogleMaps.event.addListener(googleMapMarker, 'mouseover', function () { });
+							GoogleMaps.event.addListener(googleMapMarker, 'mouseout', function () { });
 							GoogleMaps.event.addListener(googleMapMarker, 'click', function () {
 								self.infoWindow.setContent(this.get('html'));
 								self.infoWindow.open(self.map, this);

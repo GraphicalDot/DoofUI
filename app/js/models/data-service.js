@@ -37,7 +37,7 @@ define(function (require) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
 				self.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
-					resolve(self.nearbyRestaurants);
+					resolve(self.nearbyRestaurants.toJSON());
 				}).fail(function () {
 					reject('Failed Nearby API');
 				});

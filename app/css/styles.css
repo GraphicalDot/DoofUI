@@ -222,7 +222,24 @@ body {
       #applicationPage .doof-body .body__list-container .body__sub-menu-wrapper {
         height: 54px; }
       #applicationPage .doof-body .body__list-container .body__list {
-        flex: 1; }
+        flex: 1;
+        position: relative; }
+        #applicationPage .doof-body .body__list-container .body__list #doof-list {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          min-height: 100%;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column; }
+          #applicationPage .doof-body .body__list-container .body__list #doof-list .empty-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; }
       #applicationPage .doof-body .body__list-container .body__list-pagination {
         height: 54px; }
     #applicationPage .doof-body .body__map-container {

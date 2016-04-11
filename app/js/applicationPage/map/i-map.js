@@ -12,6 +12,28 @@ define(function (require) {
 			this.latLng = opts.latLng;
 			this.markersArray = [];
 		},
+		unhighlight: function () {
+			if (this.animatingMarker) {
+				this.animatingMarker.setIcon("./css/images/marker_non-selected.png");
+				this.animatingMarker.setAnimation(null);
+				this.animatingMarker = '';
+			}
+		},
+		highlight: function (markerId) {
+			var self = this;
+			this.unhighlight();
+			require(['google-map-loader'], function (GoogleMapLoader) {
+				GoogleMapLoader.done(function (GoogleMaps) {
+					_.each(self.markersArray, function (marker) {
+						if (marker.get('restaurant_id') === markerId) {
+							marker.setIcon("./css/images/marker_selected.png");
+							marker.setAnimation(GoogleMaps.Animation.BOUNCE);
+							self.animatingMarker = marker;
+						}
+					});
+				});
+			});
+		},
 		//remove old markers from map and array
 		removeOldMarkers: function () {
 			_.each(this.markersArray, function (marker) {
@@ -20,12 +42,11 @@ define(function (require) {
 			this.markersArray = [];
 		},
 		//check if a specfied marker already exist for the restaurant to prevent duplicacy.
-		checkIfMarkerAlreayExist: function (marker_to_check) {
+		checkIfMarkerAlreadyExist: function (marker_to_check) {
 			var isExist = false;
 			_.each(this.markersArray, function (marker) {
 				if (marker.get('restaurant_id') === marker_to_check.eatery_details.__eatery_id) {
 					isExist = true;
-					return;
 				}
 			});
 			return isExist;
@@ -48,9 +69,9 @@ define(function (require) {
 			var self = this;
 			this.removeOldMarkers();
 			_.each(markers, function (marker) {
-				if (!self.checkIfMarkerAlreayExist(marker)) {
-					require(['google-map-loader'], function (GoogleMapLoader) {
-						GoogleMapLoader.done(function (GoogleMaps) {
+				require(['google-map-loader'], function (GoogleMapLoader) {
+					GoogleMapLoader.done(function (GoogleMaps) {
+						if (!self.checkIfMarkerAlreadyExist(marker)) {
 							var googleMapMarker = new GoogleMaps.Marker({
 								map: self.map,
 								icon: './css/images/marker_non-selected.png',
@@ -62,17 +83,24 @@ define(function (require) {
 								html: "<div id='infobox'>" + marker.eatery_details.eatery_name + "<br />" + marker.eatery_details.eatery_address + "</div>"
 							});
 
-							GoogleMaps.event.addListener(googleMapMarker, 'mouseover', function () { });
-							GoogleMaps.event.addListener(googleMapMarker, 'mouseout', function () { });
-							GoogleMaps.event.addListener(googleMapMarker, 'click', function () {
+							GoogleMaps.event.addListener(googleMapMarker, 'mouseover', function () {
 								self.infoWindow.setContent(this.get('html'));
 								self.infoWindow.open(self.map, this);
+								self.triggerMethod('highlight:list-item', this.get('restaurant_id'));
+							 });
+							GoogleMaps.event.addListener(googleMapMarker, 'mouseout', function () {
+								self.infoWindow.setContent(this.get('html'));
+								self.infoWindow.open(self.map, this);
+								self.triggerMethod('unhighlight:list-item');
+							 });
+							GoogleMaps.event.addListener(googleMapMarker, 'click', function () {
+									self.infoWindow.setContent(this.get('html'));
+									self.infoWindow.open(self.map, this);
 							});
-
 							self.markersArray.push(googleMapMarker);
-						});
+						}
 					});
-				}
+				});
 			});
 			this.setMarkersVisible();
 		},
@@ -88,6 +116,11 @@ define(function (require) {
 					};
 					self.map = new GoogleMaps.Map(mapCanvas, mapOptions);
 					self.infoWindow = new GoogleMaps.InfoWindow({ content: "", });
+
+					self.locationMarker= new GoogleMaps.Marker({
+						map: self.map,
+						position: new GoogleMaps.LatLng(self.latLng.lat, self.latLng.lng),
+					});
 				});
 			});
 		},

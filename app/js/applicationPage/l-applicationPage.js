@@ -54,6 +54,26 @@ define(function (require) {
 			'click @ui.subMenuTrendingLink': 'showTrendingRestaurants',
 			'click @ui.subMenuNearMeLink': 'showNearMeRestaurants'
 		},
+		childEvents: {
+			'show:restaurant': 'openDetailViewRestaurant',
+			'hightlight:marker': 'highlightGoogleMapMarker',
+			'unhightlight:marker': 'unhighlightGoogleMapMarker',
+			'highlight:list-item': 'highlightRestaurantListItem',
+			'unhighlight:list-item': 'unhighlightRestaurantListItem',
+		},
+		highlightGoogleMapMarker: function(childView, markerId) {
+			this.mapBoxView.highlight(markerId);
+		},
+		unhighlightGoogleMapMarker: function() {
+			this.mapBoxView.unhighlight();
+		},
+		highlightRestaurantListItem: function(childView, markerId) {
+			console.log(markerId);
+			this.listView.highlight(markerId);
+		},
+		unhighlightRestaurantListItem: function() {
+			this.listView.unhighlight();
+		},
 		showTrendingRestaurants: function () {
 			var self = this;
 			this.dataService.getTrending().then(function (trendingRestaurants) {

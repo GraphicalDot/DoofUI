@@ -126,11 +126,25 @@
 		flex: 0 0 400px;
 		margin: 0;
 		display: flex;
+		justify-content: flex-end;
+		padding-right: 80px;
 		.masthead__nav-menu-item {
 			text-transform: uppercase;
+			padding: 0 24px;
+			&.nav-menu-item__feedback {
 				a {
-				color: rgba(255, 255, 255, 1);
-				padding: 0 12px;
+					color: rgba(255, 255, 255, 1);
+				}
+			}
+			a.user-menu__user-link img {
+				height: 36px;
+				width: 36px;
+				vertical-align: middle;
+			}
+			ul#user-menu__user-profile-dropdown {
+				a {
+					color: $brand-color;
+				}
 			}
 		}
 	}

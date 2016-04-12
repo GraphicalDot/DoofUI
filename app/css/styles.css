@@ -209,12 +209,20 @@ body {
       height: 100%;
       flex: 0 0 400px;
       margin: 0;
-      display: flex; }
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 80px; }
       #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item {
-        text-transform: uppercase; }
-        #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item a {
-          color: white;
-          padding: 0 12px; }
+        text-transform: uppercase;
+        padding: 0 24px; }
+        #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item.nav-menu-item__feedback a {
+          color: white; }
+        #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item a.user-menu__user-link img {
+          height: 36px;
+          width: 36px;
+          vertical-align: middle; }
+        #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item ul#user-menu__user-profile-dropdown a {
+          color: #F44336; }
   #applicationPage .doof-body {
     flex: 1;
     display: flex;

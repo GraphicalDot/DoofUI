@@ -6,6 +6,7 @@ define(function (require) {
 	var Handlebars = require('handlebars');
 	var Template = require('text!./applicationPage.html');
 
+	var UserView= require('./user/i-user');
 	var MapBoxView = require('./map/i-map');
 	var SearchBoxView = require('./search/i-searchBox');
 	var ListView = require('./list/c-list');
@@ -35,16 +36,19 @@ define(function (require) {
 				this.showTrendingRestaurants();
 			}
 
+			this.userView= new UserView({model: this.user, userProfileRegion: this.regions.userProfile});
 			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
 			this.listView = new ListView({ collection: this.collection });
 			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng });
 		},
 		template: Handlebars.compile(Template),
 		regions: {
+			userProfile: '.body__profile-box',
+			userMenu: '.nav-menu-item__user',
 			search: '.masthead__search-container',
 			map: '.body__map-container',
 			list: '.body__list',
-			detail: '.body__detail-box'
+			detail: '.body__detail-box',
 		},
 		ui: {
 			'feedbackLink': '#nav-menu__feedback-link',
@@ -104,6 +108,7 @@ define(function (require) {
 				self.ui.subMenuTabsWrapper.tabs();
 			});
 
+			this.showChildView('userMenu', this.userView);
 			this.showChildView('search', this.searchBoxView);
 			this.showChildView('map', this.mapBoxView);
 			this.showChildView('list', this.listView);

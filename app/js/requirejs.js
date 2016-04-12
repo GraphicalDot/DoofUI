@@ -85,7 +85,7 @@ require.config({
 		'toasts': { deps: ['hammerjs', 'velocity'] },
 		'carousel': { deps: ['jquery'] },
 		'collapsible': { deps: ['jquery'] },
-		'dropdown': { deps: ['jquery'] },
+		'dropdown': { deps: ['jquery', 'jquery.easing'] },
 		'leanModal': { deps: ['jquery'] },
 		'materialbox': { deps: ['jquery'] },
 		'parallax': { deps: ['jquery'] },

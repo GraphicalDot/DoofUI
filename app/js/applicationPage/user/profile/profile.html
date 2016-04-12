@@ -1,0 +1,24 @@
+<a href="#" class="user-profile__close-btn box-close-btn"><i class="material-icons">clear</i></a>
+
+<div class="user-profile__details">
+	<img src="{{image}}" alt="user-profile__details-image" class="circle user-img">
+	<div class="user-profile__details-info-wrapper">
+		<h4 class="name">{{name}}</h4>
+		<p class="email">{{email}}</p>
+	</div>
+</div>
+
+<div class="user-profile__reviews">
+	<h6>Reviews by you: </h6>
+	<ul class="user-profile__reviews-list">
+		{{#each reviews}}
+		<li>
+			<div class="user-profile__reviews-restaurant-name">{{__eatery_name}}</div>
+			<div class="user-profile__reviews-review-text">{{review_text}}</div>
+			<span class="user-profile__reviews-date">{{epoch}}</span>
+		</li>
+		{{else}}
+			<li class="no_reviews">No Reviews Written</li>
+		{{/each}}
+	</ul>
+</div>

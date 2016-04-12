@@ -152,16 +152,75 @@ body {
 				width: 100%;
 			}
 		}
-		.body__detail-box {
+		.body-box {
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			left: 480px;
-			width: 540px;
 			margin: 12px;
 			border-radius: 6px;
 			background-color: #fff;
 			box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12);
+			&>div {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			.box-close-btn {
+				position: absolute;
+				right: 0;
+				top: 0;
+				color: $brand-color;
+			}
+		}
+		.body__detail-box {
+			left: 480px;
+			width: 540px;
+		}
+		.body__profile-box {
+			right: 0;
+			width: 480px;
+		}
+		#profileView {
+			display: flex;
+			flex-direction: column;
+			.user-profile__details {
+				display: flex;
+				align-items: center;
+				background-color: #f2f2f2;
+				border-bottom: 1px solid #d9d9d9;
+				padding: 13px 17px;
+				img {
+					width: 60px;
+					height: 60px;
+				}
+				.user-profile__details-info-wrapper {
+					flex: 1;
+					color: #565a5c;
+    				margin-left: 20px;
+					 h4 {
+						font-size: 40px;
+    					margin-bottom: 0;
+					 }
+					 p {
+						font-size: 14px;
+    					margin-top: 5px;
+					 }
+				}
+			}
+			.user-profile__reviews {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 20px;
+				h6 {
+					font-size: 28px;
+    				font-weight: 200;
+    				color: #aaa;
+				}
+				ul {
+					flex: 1;
+				}
+			}
 		}
 	}
 }

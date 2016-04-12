@@ -305,13 +305,59 @@ body {
         left: 0;
         height: 100%;
         width: 100%; }
-    #applicationPage .doof-body .body__detail-box {
+    #applicationPage .doof-body .body-box {
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 480px;
-      width: 540px;
       margin: 12px;
       border-radius: 6px;
       background-color: #fff;
       box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12); }
+      #applicationPage .doof-body .body-box > div {
+        width: 100%;
+        height: 100%;
+        position: relative; }
+      #applicationPage .doof-body .body-box .box-close-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #F44336; }
+    #applicationPage .doof-body .body__detail-box {
+      left: 480px;
+      width: 540px; }
+    #applicationPage .doof-body .body__profile-box {
+      right: 0;
+      width: 480px; }
+    #applicationPage .doof-body #profileView {
+      display: flex;
+      flex-direction: column; }
+      #applicationPage .doof-body #profileView .user-profile__details {
+        display: flex;
+        align-items: center;
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 13px 17px; }
+        #applicationPage .doof-body #profileView .user-profile__details img {
+          width: 60px;
+          height: 60px; }
+        #applicationPage .doof-body #profileView .user-profile__details .user-profile__details-info-wrapper {
+          flex: 1;
+          color: #565a5c;
+          margin-left: 20px; }
+          #applicationPage .doof-body #profileView .user-profile__details .user-profile__details-info-wrapper h4 {
+            font-size: 40px;
+            margin-bottom: 0; }
+          #applicationPage .doof-body #profileView .user-profile__details .user-profile__details-info-wrapper p {
+            font-size: 14px;
+            margin-top: 5px; }
+      #applicationPage .doof-body #profileView .user-profile__reviews {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px; }
+        #applicationPage .doof-body #profileView .user-profile__reviews h6 {
+          font-size: 28px;
+          font-weight: 200;
+          color: #aaa; }
+        #applicationPage .doof-body #profileView .user-profile__reviews ul {
+          flex: 1; }

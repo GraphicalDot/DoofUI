@@ -36,7 +36,7 @@ define(function (require) {
 				this.showTrendingRestaurants();
 			}
 
-			this.userView= new UserView({model: this.user, userProfileRegion: this.regions.userProfile});
+			this.userView= new UserView({model: this.user, userProfileRegion: this.getRegion('userProfile')});
 			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
 			this.listView = new ListView({ collection: this.collection });
 			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng });

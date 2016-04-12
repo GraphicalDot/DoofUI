@@ -315,13 +315,10 @@ body {
                   padding-left: 0px; }
     #applicationPage .doof-body .body__map-container {
       flex: 1;
-      position: relative;
-      overflow: hidden; }
+      display: flex;
+      flex-direction: column; }
       #applicationPage .doof-body .body__map-container #doof-map {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
+        flex: 1;
         width: 100%; }
     #applicationPage .doof-body .body-box {
       position: absolute;
@@ -342,24 +339,8 @@ body {
         color: #F44336; }
     #applicationPage .doof-body .body__detail-box {
       left: 480px;
-      width: 540px; }
-    #applicationPage .doof-body .body__detail-box {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 480px;
-      height: auto;
-      width: 504px;
-      background-color: #fff;
-      box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12);
-      border-radius: 6px;
-      margin: 12px; }
+      width: 504px; }
       #applicationPage .doof-body .body__detail-box #detailView {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        background: #f5f5f5;
         display: flex;
         flex-direction: column; }
         #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information {
@@ -367,37 +348,29 @@ body {
           padding: 12px 18px;
           background-color: #f5f5f5; }
           #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-name {
-            font-family: Utopia;
+            font-family: "Utopia";
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 6px;
-            margin-bottom: 3px; }
+            color: #F44336; }
           #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-address {
-            color: rgba(0, 0, 0, 0.54); }
+            color: #212121; }
           #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews {
             margin-top: 12px;
             margin-bottom: 12px; }
             #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews i {
               margin-right: 3px;
-              color: rgba(0, 0, 0, 0.54); }
+              color: #727272; }
               #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews i.active {
                 color: #F44336; }
         #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper {
-          font-size: 12px;
-          padding: 0 18px;
-          background-color: #f5f5f5; }
+          font-size: 12px; }
           #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs {
             height: 36px;
             background-color: #f5f5f5; }
-            #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab {
-              height: 36px;
-              line-height: 36px;
-              flex-grow: 0; }
-              #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab a {
-                color: rgba(0, 0, 0, 0.87);
-                font-weight: bold; }
-                #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab a.active {
-                  color: #F44336; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab a {
+              color: #212121; }
+              #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab a.active {
+                color: #F44336; }
             #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .indicator {
               background-color: #F44336; }
         #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-wrapper {
@@ -423,82 +396,81 @@ body {
     #applicationPage .doof-body .food-item-list {
       margin-top: 0;
       box-shadow: none;
-      border: 0; }
-    #applicationPage .doof-body .food-menu_food-item-header {
+      padding: 12px 18px; }
+      #applicationPage .doof-body .food-item-list .details__food-menu_food-item {
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        margin-top: 6px;
+        margin-bottom: 6px; }
+        #applicationPage .doof-body .food-item-list .details__food-menu_food-item .food-menu_food-item-header {
+          display: flex;
+          align-items: center; }
+          #applicationPage .doof-body .food-item-list .details__food-menu_food-item .food-menu_food-item-header .food-item-image-wrapper {
+            flex: 0 0 12%; }
+            #applicationPage .doof-body .food-item-list .details__food-menu_food-item .food-menu_food-item-header .food-item-image-wrapper img {
+              vertical-align: middle; }
+          #applicationPage .doof-body .food-item-list .details__food-menu_food-item .food-menu_food-item-header .food-item-information-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column; }
+            #applicationPage .doof-body .food-item-list .details__food-menu_food-item .food-menu_food-item-header .food-item-information-wrapper .food-item-name {
+              font-weight: bold;
+              color: #212121;
+              font-family: "Utopia"; }
+    #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph {
+      position: relative;
+      height: 6px;
+      display: block;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.12);
+      border-radius: 3px;
+      overflow: hidden; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate {
+        position: absolute;
+        background-color: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #ff4081;
+        -webkit-transition: width 0.3s linear;
+        -moz-transition: width 0.3s linear;
+        -o-transition: width 0.3s linear;
+        -ms-transition: width 0.3s linear;
+        transition: width 0.3s linear; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:first-child {
+          border-radius: 3px 0 0 3px; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:last-child {
+          border-radius: 0 3px 3px 0; }
+    #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-more-information {
+      font-size: 12px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, 0.54); }
+    #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px; }
-      #applicationPage .doof-body .food-menu_food-item-header .food-item-image-wrapper {
-        flex: 0 0 12%; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-image-wrapper img {
-          width: 100%;
-          height: auto;
-          vertical-align: middle; }
-      #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper {
-        flex: 1;
-        padding: 0 12px;
-        display: flex;
-        flex-direction: column; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-name {
-          font-weight: bold;
-          line-height: 2rem;
-          font-family: 'Utopia'; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph {
-          position: relative;
-          height: 6px;
-          display: block;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.12);
-          border-radius: 3px;
-          overflow: hidden; }
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate {
-            position: absolute;
-            background-color: inherit;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            background-color: #ff4081;
-            -webkit-transition: width 0.3s linear;
-            -moz-transition: width 0.3s linear;
-            -o-transition: width 0.3s linear;
-            -ms-transition: width 0.3s linear;
-            transition: width 0.3s linear; }
-            #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:first-child {
-              border-radius: 3px 0 0 3px; }
-            #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:last-child {
-              border-radius: 0 3px 3px 0; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-more-information {
-          font-size: 12px;
-          line-height: 24px;
-          color: rgba(0, 0, 0, 0.54); }
-      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex: 0 0 24%; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment,
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment,
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment {
-          line-height: 1rem;
-          width: 2rem;
-          font-size: 12px;
-          text-align: center;
-          color: rgba(0, 0, 0, 0.54); }
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes,
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes,
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
-            font-weight: bold; }
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment i,
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment i,
-          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment i {
-            line-height: 2rem; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes {
-          color: #65a877; }
-        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes {
-          color: #fadb7d; }
+      flex: 0 0 24%; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment,
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment,
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment {
+        line-height: 1rem;
+        width: 2rem;
+        font-size: 12px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.54); }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes,
         #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
-          color: #eb7575; }
+          font-weight: bold; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment i,
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment i,
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment i {
+          line-height: 2rem; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes {
+        color: #65a877; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes {
+        color: #fadb7d; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
+        color: #eb7575; }
     #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header,
     #applicationPage .doof-body .ambience-overview .service-menu_service-item-header,
     #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header,

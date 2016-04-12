@@ -1,7 +1,7 @@
 define(function(require) {
 	'use strict';
 
-	// var _= require('underscore');
+	var _= require('underscore');
 	var Marionette= require('marionette');
 	var Handlebars= require('handlebars');
 	var Template= require('text!./detail.html');

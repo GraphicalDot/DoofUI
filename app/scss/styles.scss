@@ -37,27 +37,25 @@ body {
 		position: relative;
 
 		@import 'left-list';
-		
+
 		.body__map-container {
 			flex: 1;
-			position: relative;
-			overflow: hidden;
+			display: flex;
+			flex-direction: column;
 			#doof-map {
-				position: absolute;
-				top: 0;
-				left: 0;
-				height: 100%;
+				flex: 1;
 				width: 100%;
 			}
 		}
+
 		.body-box {
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			margin: 12px;
-			border-radius: 6px;
+			margin: $box-margin;
+			border-radius: $box-radius;
 			background-color: #fff;
-			box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12);
+			box-shadow: $box-shadow;
 			&>div {
 				width: 100%;
 				height: 100%;
@@ -69,10 +67,6 @@ body {
 				top: 0;
 				color: $brand-color;
 			}
-		}
-		.body__detail-box {
-			left: 480px;
-			width: 540px;
 		}
 		@import 'details';
 		.body__profile-box {

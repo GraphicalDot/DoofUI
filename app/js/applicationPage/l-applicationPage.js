@@ -9,6 +9,7 @@ define(function (require) {
 	var MapBoxView = require('./map/i-map');
 	var SearchBoxView = require('./search/i-searchBox');
 	var ListView = require('./list/c-list');
+	var DetailView= require('./detail/i-detail');
 
 	var DataService = require('./../models/data-service');
 
@@ -42,7 +43,8 @@ define(function (require) {
 		regions: {
 			search: '.masthead__search-container',
 			map: '.body__map-container',
-			list: '.body__list'
+			list: '.body__list',
+			detail: '.body__detail-box'
 		},
 		ui: {
 			'feedbackLink': '#nav-menu__feedback-link',
@@ -68,27 +70,29 @@ define(function (require) {
 			this.mapBoxView.unhighlight();
 		},
 		highlightRestaurantListItem: function(childView, markerId) {
-			console.log(markerId);
 			this.listView.highlight(markerId);
 		},
 		unhighlightRestaurantListItem: function() {
 			this.listView.unhighlight();
 		},
+		openDetailViewRestaurant: function(childView, markerId, markerData) {
+			var self= this;
+			this.dataService.getSingleRestaurant(markerId).then(function(restaurant_details) {
+				var detailView= new DetailView({restaurant_details: restaurant_details, user: self.user, restaurant_detail: markerData});
+				self.showChildView('detail', detailView);
+			}, function(error) { console.log(error); });
+		},
 		showTrendingRestaurants: function () {
 			var self = this;
 			this.dataService.getTrending().then(function (trendingRestaurants) {
 				self.collection.reset(trendingRestaurants);
-			}, function (error) {
-				console.log('failed');
-			});
+			}, function (error) { console.log('failed'); });
 		},
 		showNearMeRestaurants: function () {
 			var self = this;
 			this.dataService.getNearby().then(function (nearMeRestaurants) {
 				self.collection.reset(nearMeRestaurants);
-			}, function (error) {
-				console.log('failed');
-			});
+			}, function (error) { console.log('failed'); });
 		},
 		updateChildViewsData: function () {
 			this.mapBoxView.showMarkers(this.collection.toJSON());

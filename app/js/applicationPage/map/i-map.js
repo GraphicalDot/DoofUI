@@ -80,6 +80,7 @@ define(function (require) {
 								restaurant_name: marker.eatery_details.eatery_name,
 								restaurant_id: marker.eatery_details.__eatery_id,
 								address: marker.eatery_details.eatery_address,
+								data: marker,
 								html: "<div id='infobox'>" + marker.eatery_details.eatery_name + "<br />" + marker.eatery_details.eatery_address + "</div>"
 							});
 
@@ -96,6 +97,7 @@ define(function (require) {
 							GoogleMaps.event.addListener(googleMapMarker, 'click', function () {
 									self.infoWindow.setContent(this.get('html'));
 									self.infoWindow.open(self.map, this);
+									self.trigger('show:restaurant', this.get('restaurant_id'), this.get('data'))
 							});
 							self.markersArray.push(googleMapMarker);
 						}

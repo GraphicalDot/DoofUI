@@ -1,0 +1,58 @@
+<div class="restaurant-details__meta-information">
+	<h4 class="restaurant-details__name">{{restaurant-name}}</h4>
+	<div class="restaurant-details__meta">
+		<span class="overall-rating">{{restaurant-overall-rating}}</span>
+		<span class="star-rating">{{{restaurant-star-ratings}}}</span>
+		<span class="no-of-review">{{reviews-length}}</span>
+	</div>
+	<div class="restaurant-details__address">{{restaurant-address}}</div>
+</div>
+<ul class="restaurant-details__tabs tabs">
+	<li class="tab"><a href="#overview-tab" class="active">Details</a></li>
+	<li class="tab"><a href="#food-tab">Food</a></li>
+	<li class="tab"><a href="#cost-tab">Cost</a></li>
+	<li class="tab"><a href="#service-tab">Service</a></li>
+	<li class="tab"><a href="#ambience-tab">Ambience</a></li>
+	<li class="tab"><a href="#reviews-tab">Reviews ({{reviews-length}})</a></li>
+</ul>
+<div class="restaurant-details__tab-boxes">
+	<div id="overview-tab">
+		<div class="overview-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col s12"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="food-tab">
+		<div class="food-tab-wrapper">
+			<svg id="food-graph"></svg>
+			<div class="add-food-item"><a href="#" class="waves-effect waves-light btn">Add menu item..</a></div>
+		</div>
+	</div>
+	<div id="cost-tab">
+		<div class="cost-tab-wrapper">
+			<svg id="cost-graph"></svg>
+		</div>
+	</div>
+	<div id="service-tab">
+		<div class="service-tab-wrapper">
+			<svg id="service-graph"></svg>
+		</div>
+	</div>
+	<div id="ambience-tab">
+		<div class="ambience-tab-wrapper">
+			<svg id="ambience-graph"></svg>
+		</div>
+	</div>
+	<div id="reviews-tab">
+		<div class="reviews-wrapper">
+			<div class="reviews-list"></div>
+			<form action="" class="add-review-box">
+				<textarea name="review-box" id="review-box" cols="30" rows="10" placeholder="Write a review"></textarea>
+				<button type="submit" class="btn waves-effect right submit-review-form">Post</button>
+			</form>
+		</div>
+	</div>
+</div>

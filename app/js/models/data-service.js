@@ -8,11 +8,15 @@ define(function (require) {
 	var NearbyRestaurants = require('./nearest_eateries');
 	var TextSearchRestaurants = require('./text_search');
 
+	var SingleRestaurant= require('./geteatery');
+
 	var DataService = Service.extend({
 		initialize: function () {
 			this.trendingRestaurants = new TrendingRestaurants();
 			this.nearbyRestaurants = new NearbyRestaurants();
 			this.textSearchRestaurants = new TextSearchRestaurants();
+
+			this.singleRestaurant= new SingleRestaurant();
 		},
 		setup: function (latLng) {
 			this.latLng = latLng;
@@ -20,7 +24,8 @@ define(function (require) {
 		requests: {
 			'getTrending': 'getTrending',
 			'getNearby': 'getNearby',
-			'getTextSearch': 'getTextSearch'
+			'getTextSearch': 'getTextSearch',
+			'getSingleRestaurant': 'getSingleRestaurant'
 		},
 		getTrending: function () {
 			var self = this;
@@ -51,6 +56,17 @@ define(function (require) {
 					resolve(self.textSearchRestaurants);
 				}).fail(function () {
 					reject('Failed Text Search API');
+				});
+			});
+			return promise;
+		},
+		getSingleRestaurant: function (markerId) {
+			var self= this;
+			var promise= new Promise(function(resolve, reject) {
+				self.singleRestaurant.fetch({method: 'POST', data: {"__eatery_id": markerId}}).done(function() {
+					resolve(self.singleRestaurant.toJSON());
+				}).fail(function() {
+					reject('Failed SINGLE Restaurant API');
 				});
 			});
 			return promise;

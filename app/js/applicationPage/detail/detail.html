@@ -1,52 +1,156 @@
-<div class="restaurant-details__meta-information">
-	<h4 class="restaurant-details__name">{{restaurant-name}}</h4>
-	<div class="restaurant-details__meta">
-		<span class="overall-rating">{{restaurant-overall-rating}}</span>
-		<span class="star-rating">{{{restaurant-star-ratings}}}</span>
-		<span class="no-of-review">{{reviews-length}}</span>
+<a href="#" class="restaurant-details__close-btn box-close-btn"><i class="material-icons">clear</i></a>
+
+<div class="restaurant-meta-information">
+	<div class="restaurant-information-wrapper">
+		<h4 class="restaurant-name">{{restaurant-name}}</h4>
+		<span class="restaurant-address">{{restaurant-address}}</span>
 	</div>
-	<div class="restaurant-details__address">{{restaurant-address}}</div>
 </div>
-<ul class="restaurant-details__tabs tabs">
-	<li class="tab"><a href="#overview-tab" class="active">Details</a></li>
-	<li class="tab"><a href="#food-tab">Food</a></li>
-	<li class="tab"><a href="#cost-tab">Cost</a></li>
-	<li class="tab"><a href="#service-tab">Service</a></li>
-	<li class="tab"><a href="#ambience-tab">Ambience</a></li>
-	<li class="tab"><a href="#reviews-tab">Reviews ({{reviews-length}})</a></li>
-</ul>
-<div class="restaurant-details__tab-boxes">
-	<div id="overview-tab">
-		<div class="overview-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="col s12"></div>
+<div class="restaurant-tabs-menu-wrapper">
+	<ul class="restaurant-tabs-menu tabs">
+		<li class="tab"><a href="#restaurant-overview-tab">Overview</a></li>
+		<li class="tab"><a href="#restaurant-foods-tab">Food</a></li>
+		<li class="tab"><a href="#restaurant-photos-tab">Photos</a></li>
+		<li class="tab"><a href="#restaurant-reviews-tab">Reviews</a></li>
+	</ul>
+</div>
+
+
+<div class="restaurant-tabs-wrapper">
+	<div id="restaurant-overview-tab" class="restaurant-tab-detail">
+		<div class="ambience-wrapper">
+			<h6>Ambience</h6>
+			<ul class="collapsible ambience-overview" data-collapsible="accordion">
+				{{#each ambience-items.filtered}}
+					<li class="details__ambience-menu_ambience-item">
+					<div class="collapsible-header ambience-menu_ambience-item-header">
+						<div class="ambience-item-information-wrapper">
+							<span class="ambience-item-name">{{math @index "+" 1}}. {{#undasherized-text}}{{@key}}{{/undasherized-text}}</span>
+							<div class="ambience-item-graph">
+								{{{line_graph_html this}}}
+							</div>
+							<span class="ambience-item-more-information">{{total_sentiments}} Total, 0 Reviews</span>
+						</div>
+						<div class="ambience-item-actions-wrapper">
+							<div class="sad-sentiment {{is_highest 'sad' this}}">
+								<i class="material-icons">sentiment_very_dissatisfied</i><span>{{math poor "+" terrible}}</span>
+							</div>
+							<div class="neutral-sentiment {{is_highest 'neutral' this}}">
+								<i class="material-icons">sentiment_neutral</i><span>{{math average "+" mix}}</span>
+							</div>
+							<div class="happy-sentiment {{is_highest 'happy' this}}">
+								<i class="material-icons">sentiment_very_satisfied</i><span>{{math excellent "+" good}}</span>
+							</div>
+							<i class="material-icons hide expendor-icon">expand_more</i>
+						</div>
+					</div>
+					<div class="collapsible-body">
+						Hello, nothing to see here yet.
+					</div>
+				</li>
+				{{/each}}
+				{{#if ambience-items.notReviewed}}
+				<li class="un_reviewed_items">
+					<div class="collapsible-header">Not Reviewed Yet</div>
+					<div class="collapsible-body">
+						{{#each ambience-items.notReviewed}}
+						<div class="chip">{{#undasherized-text}}{{this}}{{/undasherized-text}}</div>
+						{{/each}}
+					</div>
+				</li>
+				{{/if}}
+			</ul>
+		</div>
+		<div class="service-wrapper">
+			<h6>Service</h6>
+			<ul class="collapsible service-overview" data-collapsible="accordion">
+				{{#each service-items.filtered}}
+				<li class="details__service-menu_service-item">
+					<div class="collapsible-header service-menu_service-item-header">
+						<div class="service-item-information-wrapper">
+							<span class="service-item-name">{{math @index "+" 1}}. {{#undasherized-text}}{{@key}}{{/undasherized-text}}</span>
+							<div class="service-item-graph">
+								{{{line_graph_html this}}}
+							</div>
+							<span class="service-item-more-information">{{total_sentiments}} Total, 0 Reviews</span>
+						</div>
+						<div class="service-item-actions-wrapper">
+							<div class="sad-sentiment {{is_highest 'sad' this}}">
+								<i class="material-icons">sentiment_very_dissatisfied</i><span>{{math poor "+" terrible}}</span>
+							</div>
+							<div class="neutral-sentiment {{is_highest 'neutral' this}}">
+								<i class="material-icons">sentiment_neutral</i><span>{{math average "+" mix}}</span>
+							</div>
+							<div class="happy-sentiment {{is_highest 'happy' this}}">
+								<i class="material-icons">sentiment_very_satisfied</i><span>{{math excellent "+" good}}</span>
+							</div>
+							<i class="material-icons hide expendor-icon">expand_more</i>
+						</div>
+					</div>
+					<div class="collapsible-body">
+						Hello, nothing to see here yet.
+					</div>
+				</li>
+				{{/each}}
+				{{#if service-items.notReviewed}}
+				<li class="un_reviewed_items">
+					<div class="collapsible-header">Not Reviewed Yet</div>
+					<div class="collapsible-body">
+						{{#each service-items.notReviewed}}
+						<div class="chip">{{#undasherized-text}}{{this}}{{/undasherized-text}}</div>
+						{{/each}}
+					</div>
+				</li>
+				{{/if}}
+			</ul>
+		</div>
+	</div>
+	<div id="restaurant-foods-tab" class="restaurant-tab-detail">
+		<ul class="collapsible food-item-list" data-collapsible="accordion">
+		{{#each food-items}}
+			<li class="details__food-menu_food-item">
+				<div class="collapsible-header food-menu_food-item-header">
+					<div class="food-item-image-wrapper">
+						{{#if food-item-image}}
+							<img src="{{food-item-image}}" alt="Food image" class="responsive_img">
+						{{else}}
+							<img src="http://placehold.it/50x50" alt="Food image" class="responsive_img">
+						{{/if}}
+					</div>
+					<div class="food-item-information-wrapper">
+						<span class="food-item-name">{{math @index "+" 1}}. {{#undasherized-text}}{{name}}{{/undasherized-text}}</span>
+						<div class="food-item-graph">
+							{{{line_graph_html this}}}
+						</div>
+						<span class="food-item-more-information">{{total_sentiments}} Total, 0 Reviews, 0 Photos</span>
+					</div>
+					<div class="food-item-actions-wrapper">
+						<div class="sad-sentiment {{is_highest 'sad' this}}">
+							<i class="material-icons">sentiment_very_dissatisfied</i><span>{{math poor "+" terrible}}</span>
+						</div>
+						<div class="neutral-sentiment {{is_highest 'neutral' this}}">
+							<i class="material-icons">sentiment_neutral</i><span>{{math average "+" mix}}</span>
+						</div>
+						<div class="happy-sentiment {{is_highest 'happy' this}}">
+							<i class="material-icons">sentiment_very_satisfied</i><span>{{math excellent "+" good}}</span>
+						</div>
+						<i class="material-icons hide expendor-icon">expand_more</i>
+					</div>
 				</div>
-			</div>
-		</div>
+				<div class="collapsible-body">
+					Hello, nothing to see here yet.
+				</div>
+			</li>
+		{{else}}
+		{{/each}}
+		</ul>
 	</div>
-	<div id="food-tab">
-		<div class="food-tab-wrapper">
-			<svg id="food-graph"></svg>
-			<div class="add-food-item"><a href="#" class="waves-effect waves-light btn">Add menu item..</a></div>
-		</div>
+	<div id="restaurant-photos-tab" class="restaurant-tab-detail">
+		{{#each images}}
+			<img class="grid-item" class="responsive_img" src="{{s3_url}}" alt="">
+		{{/each}}
 	</div>
-	<div id="cost-tab">
-		<div class="cost-tab-wrapper">
-			<svg id="cost-graph"></svg>
-		</div>
-	</div>
-	<div id="service-tab">
-		<div class="service-tab-wrapper">
-			<svg id="service-graph"></svg>
-		</div>
-	</div>
-	<div id="ambience-tab">
-		<div class="ambience-tab-wrapper">
-			<svg id="ambience-graph"></svg>
-		</div>
-	</div>
-	<div id="reviews-tab">
+	<div id="restaurant-reviews-tab" class="restaurant-tab-detail">
 		<div class="reviews-wrapper">
 			<div class="reviews-list"></div>
 			<form action="" class="add-review-box">

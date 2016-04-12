@@ -327,6 +327,483 @@ body {
     #applicationPage .doof-body .body__detail-box {
       left: 480px;
       width: 540px; }
+    #applicationPage .doof-body .body__detail-box {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 480px;
+      height: auto;
+      width: 504px;
+      background-color: #fff;
+      box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.06), 0 1px 1px rgba(0, 0, 0, 0.12);
+      border-radius: 6px;
+      margin: 12px; }
+      #applicationPage .doof-body .body__detail-box #detailView {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column; }
+        #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information {
+          border-radius: 6px 6px 0 0;
+          padding: 12px 18px;
+          background-color: #f5f5f5; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-name {
+            font-family: Utopia;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 6px;
+            margin-bottom: 3px; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-address {
+            color: rgba(0, 0, 0, 0.54); }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews {
+            margin-top: 12px;
+            margin-bottom: 12px; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews i {
+              margin-right: 3px;
+              color: rgba(0, 0, 0, 0.54); }
+              #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews i.active {
+                color: #F44336; }
+        #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper {
+          font-size: 12px;
+          padding: 0 18px;
+          background-color: #f5f5f5; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs {
+            height: 36px;
+            background-color: #f5f5f5; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab {
+              height: 36px;
+              line-height: 36px;
+              flex-grow: 0; }
+              #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab a {
+                color: rgba(0, 0, 0, 0.87);
+                font-weight: bold; }
+                #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .tab a.active {
+                  color: #F44336; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs .indicator {
+              background-color: #F44336; }
+        #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-wrapper {
+          flex: 1;
+          background-color: #fff;
+          position: relative; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-wrapper .restaurant-tab-detail {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow-y: auto;
+            padding: 12px 18px; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-wrapper #restaurant-foods-tab {
+            padding: 0; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-wrapper #restaurant-photos-tab {
+            padding: 0; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-wrapper #restaurant-photos-tab img {
+              width: 49%;
+              height: auto;
+              padding: 3px; }
+    #applicationPage .doof-body .food-item-list {
+      margin-top: 0;
+      box-shadow: none;
+      border: 0; }
+    #applicationPage .doof-body .food-menu_food-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-image-wrapper {
+        flex: 0 0 12%; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-image-wrapper img {
+          width: 100%;
+          height: auto;
+          vertical-align: middle; }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper {
+        flex: 1;
+        padding: 0 12px;
+        display: flex;
+        flex-direction: column; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-name {
+          font-weight: bold;
+          line-height: 2rem;
+          font-family: 'Utopia'; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph {
+          position: relative;
+          height: 6px;
+          display: block;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.12);
+          border-radius: 3px;
+          overflow: hidden; }
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate {
+            position: absolute;
+            background-color: inherit;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #ff4081;
+            -webkit-transition: width 0.3s linear;
+            -moz-transition: width 0.3s linear;
+            -o-transition: width 0.3s linear;
+            -ms-transition: width 0.3s linear;
+            transition: width 0.3s linear; }
+            #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:first-child {
+              border-radius: 3px 0 0 3px; }
+            #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-graph .determinate:last-child {
+              border-radius: 0 3px 3px 0; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-information-wrapper .food-item-more-information {
+          font-size: 12px;
+          line-height: 24px;
+          color: rgba(0, 0, 0, 0.54); }
+      #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 0 0 24%; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment {
+          line-height: 1rem;
+          width: 2rem;
+          font-size: 12px;
+          text-align: center;
+          color: rgba(0, 0, 0, 0.54); }
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
+            font-weight: bold; }
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment i {
+            line-height: 2rem; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .happy-sentiment.yes {
+          color: #65a877; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .neutral-sentiment.yes {
+          color: #fadb7d; }
+        #applicationPage .doof-body .food-menu_food-item-header .food-item-actions-wrapper .sad-sentiment.yes {
+          color: #eb7575; }
+    #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header,
+    #applicationPage .doof-body .ambience-overview .service-menu_service-item-header,
+    #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header,
+    #applicationPage .doof-body .service-overview .service-menu_service-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px; }
+      #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper,
+      #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper,
+      #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper,
+      #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper,
+      #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper,
+      #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper,
+      #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper,
+      #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper {
+        flex: 1;
+        padding: 0 12px;
+        display: flex;
+        flex-direction: column; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-name,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-name,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-name {
+          font-weight: bold;
+          line-height: 2rem;
+          font-family: 'Utopia'; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph {
+          position: relative;
+          height: 6px;
+          display: block;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.12);
+          border-radius: 3px;
+          overflow: hidden; }
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate {
+            position: absolute;
+            background-color: inherit;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #ff4081;
+            -webkit-transition: width 0.3s linear;
+            -moz-transition: width 0.3s linear;
+            -o-transition: width 0.3s linear;
+            -ms-transition: width 0.3s linear;
+            transition: width 0.3s linear; }
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:first-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:first-child {
+              border-radius: 3px 0 0 3px; }
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-graph .determinate:last-child,
+            #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-graph .determinate:last-child {
+              border-radius: 0 3px 3px 0; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-information-wrapper .service-item-more-information,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .ambience-item-more-information,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-information-wrapper .service-item-more-information {
+          font-size: 12px;
+          line-height: 24px;
+          color: rgba(0, 0, 0, 0.54); }
+      #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper,
+      #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper,
+      #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper,
+      #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper,
+      #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper,
+      #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper,
+      #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper,
+      #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 0 0 24%; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment {
+          line-height: 1rem;
+          width: 2rem;
+          font-size: 12px;
+          text-align: center;
+          color: rgba(0, 0, 0, 0.54); }
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes {
+            font-weight: bold; }
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment i,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment i,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment i,
+          #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment i {
+            line-height: 2rem; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .happy-sentiment.yes,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .happy-sentiment.yes {
+          color: #65a877; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .neutral-sentiment.yes,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .neutral-sentiment.yes {
+          color: #fadb7d; }
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .ambience-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .service-overview .ambience-menu_ambience-item-header .service-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .ambience-item-actions-wrapper .sad-sentiment.yes,
+        #applicationPage .doof-body .service-overview .service-menu_service-item-header .service-item-actions-wrapper .sad-sentiment.yes {
+          color: #eb7575; }
+    #applicationPage .doof-body #restaurant-reviews-tab {
+      position: relative; }
+      #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column; }
+        #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list {
+          flex: 1;
+          height: 0;
+          overflow-y: auto; }
+          #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews {
+            margin: 0;
+            padding: 12px; }
+            #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li {
+              margin-bottom: 24px;
+              display: flex; }
+              #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side {
+                text-align: center;
+                font-size: 12px;
+                color: #82888a; }
+                #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .left-side img {
+                  height: 60px;
+                  width: 60px; }
+              #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .right-side {
+                flex: 1;
+                margin-left: 36px;
+                border-bottom: 1px solid #F44336; }
+              #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .date {
+                margin-top: 12px;
+                font-size: 12px;
+                color: rgba(0, 0, 0, 0.618);
+                margin-bottom: 24px; }
+              #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li .review_text {
+                color: rgba(0, 0, 0, 0.818);
+                line-height: 18px; }
+              #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li:last-child {
+                margin-bottom: 12px; }
+              #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review {
+                text-align: center;
+                flex-direction: column; }
+                #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .reviews-list .reviews li.empty-review .empty-reviews__image {
+                  width: 354px;
+                  margin: 0 auto; }
+        #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .add-review-box {
+          padding: 12px;
+          background-color: #fafafa;
+          border-top: 1px solid #e6e6e6;
+          flex: 0 0 160px; }
+          #applicationPage .doof-body #restaurant-reviews-tab .reviews-wrapper .add-review-box textarea {
+            background-color: white;
+            height: 6rem; }
+    #applicationPage .doof-body .collapsible-header i {
+      margin-right: 0; }
+    #applicationPage .doof-body .collapsible-body {
+      padding: 12px; }
     #applicationPage .doof-body .body__profile-box {
       right: 0;
       width: 480px; }

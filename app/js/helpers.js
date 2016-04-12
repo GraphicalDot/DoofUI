@@ -136,7 +136,6 @@ define(function (require) {
 		function escapeHtml(text) {
 			return text.replace(/&amp;/g, '&');
 		}
-		console.log(string);
 		var string= options.fn(this);
 		var safeString= escapeHtml(string);
 		return safeString;

@@ -64,7 +64,7 @@ define(function (require) {
 			var self= this;
 			var promise= new Promise(function(resolve, reject) {
 				self.singleRestaurant.fetch({method: 'POST', data: {"__eatery_id": markerId}}).done(function() {
-					resolve(self.singleRestaurant.toJSON());
+					resolve(self.singleRestaurant);
 				}).fail(function() {
 					reject('Failed SINGLE Restaurant API');
 				});

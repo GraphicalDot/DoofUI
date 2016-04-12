@@ -79,10 +79,10 @@ define(function (require) {
 		unhighlightRestaurantListItem: function() {
 			this.listView.unhighlight();
 		},
-		openDetailViewRestaurant: function(childView, markerId, markerData) {
+		openDetailViewRestaurant: function(childView, restaurant_id, restaurant_info) {
 			var self= this;
-			this.dataService.getSingleRestaurant(markerId).then(function(restaurant_details) {
-				var detailView= new DetailView({restaurant_details: restaurant_details, user: self.user, restaurant_detail: markerData});
+			this.dataService.getSingleRestaurant(restaurant_id).then(function(restaurant_details) {
+				var detailView= new DetailView({model: restaurant_details, user: self.user, restaurant_detail: restaurant_info});
 				self.showChildView('detail', detailView);
 			}, function(error) { console.log(error); });
 		},

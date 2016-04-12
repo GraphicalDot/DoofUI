@@ -1,0 +1,25 @@
+@font-face {
+	font-family: Utopia;
+	src: url("../font/UtopiaStd-Regular.otf") format("opentype");
+}
+
+$heading-font: 'Utopia';
+
+$brand-color: #F44336;
+$background-color: #FFC952;
+$primary-text: #212121;
+$secondary-text: #727272;
+$divider-color: #B6B6B6;
+
+// 1. Loader
+$loader-width: 120px;
+
+// 2. Header
+$header-height: 72px;
+
+// 3. Body
+$list-division-width: 480px;
+$sub-menu-height: 48px;
+$sub-menu-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+$pagination-menu-height: 48px;
+$active-restaurant-list-item-shadow: 0 0px 8px #787878;

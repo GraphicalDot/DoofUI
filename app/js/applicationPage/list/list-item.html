@@ -14,10 +14,15 @@
 <div class="mata-information">
 	<h6>{{eatery_details.eatery_name}}</h6>
 	<span>{{#strip_address}}{{eatery_details.eatery_address}}{{/strip_address}}</span>
-	<ul class="top-foods">
-		{{#if eatery_details.food.dishes}} {{#each eatery_details.food.dishes}}
-		<li><i class="material-icons">star</i><span>{{name}}</span></li>
-		{{/each}} {{/if}}
-	</ul>
+	{{#if eatery_details.food.dishes}}
+		<div class="top-foods">
+		{{#each eatery_details.food.dishes}}
+			<div class="chip">
+				<i class="material-icons">star</i>
+				<span>{{name}}</span>
+			</div>
+		{{/each}}
+		</div>
+	{{/if}}
 </div>
 {{/if}}

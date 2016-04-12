@@ -26,11 +26,29 @@ define(function (require) {
 		},
 		events: {
 			'click @ui.profileLink': 'showProfile',
+			'click @ui.logOutLink': 'doLogout',
+			'click @ui.logInLink': 'doLogin'
 		},
 		showProfile: function (e){
 			e.preventDefault();
-			this.profileView= new ProfileView({model: this.model});
-			this.userProfileRegion.show(this.profileView);
+			if(this.model.isAuthorized()) {
+				this.profileView= new ProfileView({model: this.model});
+				this.userProfileRegion.show(this.profileView);
+			}
+		},
+		doLogout: function(e) {
+			var self= this;
+			e.preventDefault();
+			this.model.logout().then(function() {
+				self.render();
+			});
+		},
+		doLogin: function(e) {
+			var self= this;
+			e.preventDefault();
+			this.model.login().then(function() {
+				self.render();
+			});
 		},
 		onDomRefresh: function () {
 			var self = this;

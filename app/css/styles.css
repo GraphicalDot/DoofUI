@@ -217,6 +217,8 @@ body {
         padding: 0 24px; }
         #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item.nav-menu-item__feedback a {
           color: white; }
+        #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item #logged-out-user-menu__login-link {
+          color: white; }
         #applicationPage .doof-masthead .masthead__nav-menu .masthead__nav-menu-item a.user-menu__user-link img {
           height: 36px;
           width: 36px;
@@ -361,3 +363,15 @@ body {
           color: #aaa; }
         #applicationPage .doof-body #profileView .user-profile__reviews ul {
           flex: 1; }
+  #applicationPage #feedback__modal {
+    text-align: center;
+    padding: 15px;
+    overflow: hidden; }
+    #applicationPage #feedback__modal h5 {
+      margin: 0;
+      line-height: 1.42857143;
+      font-weight: bold;
+      font-size: 28px;
+      padding-top: 26px;
+      margin-bottom: 30px;
+      color: #F44336; }

@@ -4,11 +4,12 @@ define(function (require) {
 	var Service = require('marionette-service');
 	var Promise = require('es6promise').Promise;
 
-	var TrendingRestaurants = require('./get_trending');
-	var NearbyRestaurants = require('./nearest_eateries');
-	var TextSearchRestaurants = require('./text_search');
+	var TrendingRestaurants = require('./restaurant_data/get_trending');
+	var NearbyRestaurants = require('./restaurant_data/nearest_eateries');
+	var SingleRestaurant= require('./restaurant_data/geteatery');
 
-	var SingleRestaurant= require('./geteatery');
+	var TextSearchRestaurants = require('./restaurant_data/text_search');
+
 
 	var DataService = Service.extend({
 		initialize: function () {
@@ -18,19 +19,16 @@ define(function (require) {
 
 			this.singleRestaurant= new SingleRestaurant();
 		},
-		setup: function (latLng) {
-			this.latLng = latLng;
-		},
 		requests: {
 			'getTrending': 'getTrending',
 			'getNearby': 'getNearby',
 			'getTextSearch': 'getTextSearch',
 			'getSingleRestaurant': 'getSingleRestaurant'
 		},
-		getTrending: function () {
+		getTrending: function (latLng) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
-				self.trendingRestaurants.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
+				self.trendingRestaurants.fetch({ method: 'POST', data: { latitude: latLng.lat, longitude: latLng.lng } }).done(function () {
 					resolve(self.trendingRestaurants.toJSON());
 				}).fail(function () {
 					reject('Failed Trending API');
@@ -38,10 +36,10 @@ define(function (require) {
 			});
 			return promise;
 		},
-		getNearby: function () {
+		getNearby: function (latLng) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
-				self.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: self.latLng.lat, longitude: self.latLng.lng } }).done(function () {
+				self.nearbyRestaurants.fetch({ method: 'POST', data: { latitude: latLng.lat, longitude: latLng.lng } }).done(function () {
 					resolve(self.nearbyRestaurants.toJSON());
 				}).fail(function () {
 					reject('Failed Nearby API');

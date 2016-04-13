@@ -27,7 +27,7 @@ define(function (require) {
 		isDataPresentAtLngLng: function (e) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
-				var NearestEateriesModel = require('../models/nearest_eateries');
+				var NearestEateriesModel = require('../models/restaurant_data/nearest_eateries');
 				var nearestEateries = new NearestEateriesModel();
 				nearestEateries.fetch({ method: 'POST', data: { latitude: self.location.latLng.lat, longitude: self.location.latLng.lng } }).then(function () {
 					if (nearestEateries.length) {

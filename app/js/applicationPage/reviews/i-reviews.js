@@ -35,8 +35,8 @@ define(function (require) {
 
 			this.collection= new ReviewsCollection();
 
-			this.dataService = new ReviewsDataService({ restaurant_id: this.restaurant_id });
-			this.dataService.fetch().then(function (reviews_list) {
+			this.dataService = new ReviewsDataService();
+			this.dataService.fetch(this.restaurant_id ).then(function (reviews_list) {
 				self.collection.reset(reviews_list);
 				self.region.show(self);
 			}, function (fail) {

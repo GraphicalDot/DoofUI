@@ -13,6 +13,7 @@ define(function (require) {
 	var DetailView= require('./detail/i-detail');
 
 	var DataService = require('./../models/data-service');
+	var ReviewsDataService= require('./../models/reviews-service');
 
 	var ApplicationModel = Backbone.Model.extend();
 	var ApplicationCollection = Backbone.Collection.extend({ model: ApplicationModel });
@@ -20,26 +21,33 @@ define(function (require) {
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
 		initialize: function (opts) {
+			//store opts passed to this
 			this.user = opts.user;
 			this.latLng = opts.latLng ? opts.latLng : { lat: '28.6139', lng: '77.2090' },
 			this.place = opts.place ? opts.place : 'New Delhi';
+
+			//Set data service for getting restaurants data..
 			this.dataService = new DataService();
-			this.dataService.setup(this.latLng);
 
+			//Set data service for Reviews
+			this.reviewsDataService= new ReviewsDataService();
 
+			//Master Collection for View
 			this.collection = new ApplicationCollection();
 			this.collection.on('reset', this.updateChildViewsData, this);
 
+			// If eateries data is passed in options, use those eateries, otherwise find TrendingRestaurants;
 			if (opts.eateries) {
 				this.collection.reset(opts.eateries);
 			} else {
 				this.showTrendingRestaurants();
 			}
 
+			// ChildViews
 			this.userView= new UserView({model: this.user, userProfileRegion: this.getRegion('userProfile')});
-			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
-			this.listView = new ListView({ collection: this.collection });
 			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng });
+			this.listView = new ListView({ collection: this.collection });
+			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
 		},
 		template: Handlebars.compile(Template),
 		regions: {
@@ -88,16 +96,17 @@ define(function (require) {
 		},
 		showTrendingRestaurants: function () {
 			var self = this;
-			this.dataService.getTrending().then(function (trendingRestaurants) {
+			this.dataService.getTrending(this.latLng).then(function (trendingRestaurants) {
 				self.collection.reset(trendingRestaurants);
 			}, function (error) { console.log('failed'); });
 		},
 		showNearMeRestaurants: function () {
 			var self = this;
-			this.dataService.getNearby().then(function (nearMeRestaurants) {
+			this.dataService.getNearby(this.latLng).then(function (nearMeRestaurants) {
 				self.collection.reset(nearMeRestaurants);
 			}, function (error) { console.log('failed'); });
 		},
+		// Update Map with new Markers ..Trigged on Collection reset event
 		updateChildViewsData: function () {
 			this.mapBoxView.showMarkers(this.collection.toJSON());
 		},
@@ -110,8 +119,8 @@ define(function (require) {
 
 			this.showChildView('userMenu', this.userView);
 			this.showChildView('search', this.searchBoxView);
-			this.showChildView('map', this.mapBoxView);
 			this.showChildView('list', this.listView);
+			this.showChildView('map', this.mapBoxView);
 		}
 	});
 

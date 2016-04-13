@@ -6,7 +6,7 @@ define(function(require) {
 	var Handlebars = require('handlebars');
 	var Template = require('text!./profile.html');
 
-	var UserReviews = require('./../../../models/user_profile');
+	var UserReviews = require('./../../../models/reviews/user-reviews');
 
 	var ProfileView= Marionette.ItemView.extend({
 		id: 'profileView',

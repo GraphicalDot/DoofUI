@@ -4,24 +4,36 @@ define(function(require) {
 	var Service = require('marionette-service');
 	var Promise= require('es6promise').Promise;
 
-	var FetchReviews= require('./reviews/fetch-reviews');
-	var WriteReviews= require('./reviews/write-reviews');
+	var UserProfileReviews= require('./reviews/user-reviews');
+	var FetchReviews= require('./reviews/fetch-restaurant-reviews');
+	var WriteReviews= require('./reviews/write-restaurant-reviews');
 
 	var ReviewsService= Service.extend({
-		initialize: function(opts) {
-			this.restaurant_id= opts.restaurant_id;
+		intialize: function() {
+			this.userProfileReview= new UserProfileReviews();
 			this.getReviews= new FetchReviews();
 			this.WriteReview= new WriteReviews();
 		},
 		requests: {
 			'getReviews': 'fetch',
-			'writeReview': 'write'
+			'writeReview': 'write',
+			'getUserReviews': 'fetchUserReviews'
+		},
+		fetchUserReviews: function(user_id) {
+			var self= this;
+			var promise= new Promise(function(resolve, reject) {
+				self.userProfileReview.fetch({method: 'POST', data: {fb_id: user_id}}).then(function() {
+					resolve(self.userProfileReview);
+				}).fail(function() {
+					reject();
+				});
+			});
+			return promise;
 		},
 		fetch: function(restaurant_id) {
 			var self= this;
 			var promise= new Promise(function(resolve, reject) {
-				self.getReviews.fetch({ method: 'POST', data: { __eatery_id: self.restaurant_id } }).then(function () {
-					console.log(self.getReviews.toJSON());
+				self.getReviews.fetch({ method: 'POST', data: { __eatery_id: restaurant_id } }).then(function () {
 					resolve(self.getReviews.toJSON());
 				}).fail(function() {
 					console.log('error in fetching reviews');
@@ -29,7 +41,10 @@ define(function(require) {
 			});
 			return promise;
 		},
-		write: function() {},
+		write: function() {
+
+
+		},
 	});
 
 	return ReviewsService;

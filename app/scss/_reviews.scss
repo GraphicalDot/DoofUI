@@ -1,38 +1,58 @@
 .doof-reviews {
-	margin: 0;
-	li {
-		display: flex;
-		margin-bottom: 24px;
-		&:last-child {
-			margin-bottom: 12px;
-		}
-		&.empty-review {
-			text-align: center;
-			flex-direction: column;
-			.empty-reviews__image {
-				max-width: 354px;
-				margin: 0 auto;
-			}
-		}
-		&.review {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	.reviews-list {
+		margin: 0;
+		padding: 12px 24px 0;
+		flex: 1;
+		li {
 			display: flex;
-			img {
-				height: 60px;
-				width: 60px;
-			}
-			.review-container {
-				flex: 1;
-				font-size: 12px;
-				color: rgba(0, 0, 0, 0.54);
-				padding: 0 24px;
-				.review__user-name {
-					color: $brand-color;
-				}
-				.reviews-text,
-				.date {
-					color: rgba(0, 0, 0, 0.87);
+			margin-bottom: 24px;
+			&.empty-review {
+				text-align: center;
+				flex-direction: column;
+				.empty-reviews__image {
+					max-width: 354px;
+					margin: 0 auto;
 				}
 			}
+			&.review {
+				display: flex;
+				img {
+					height: 60px;
+					width: 60px;
+				}
+				.review-container {
+					flex: 1;
+					font-size: 12px;
+					color: $secondary-text;
+					border-bottom: 1px solid $divider-color;
+					padding: 0 24px;
+					.review__user-name {
+						color: $brand-color;
+					}
+					.reviews-text,
+					.date {
+						color: $primary-text;
+					}
+				}
+			}
+			&:last-child {
+				.review-container {
+					border: 0;
+				}
+			}
+		}
+	}
+	.add-review-box {
+		padding: 12px 24px;
+		background-color: #fafafa;
+		border-top: 1px solid #e6e6e6;
+		flex: 0 0 160px;
+		textarea {
+			background-color: white;
+			height: 6rem;
 		}
 	}
 }

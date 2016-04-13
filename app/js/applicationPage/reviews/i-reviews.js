@@ -5,6 +5,7 @@ define(function (require) {
 	var Marionette = require('marionette');
 	var Handlebars = require('handlebars');
 	var Template = require('text!./reviews.html');
+	var SingleTemplate= require('text!./review.html');
 	var EmptyTemplate= require('text!./empty-reviews.html');
 
 	// Data Service Facility for Getting and Write Reviews;
@@ -16,7 +17,7 @@ define(function (require) {
 	var ReviewView= Marionette.ItemView.extend({
 		className: 'review',
 		tagName: 'li',
-		template: Handlebars.compile(Template),
+		template: Handlebars.compile(SingleTemplate),
 	});
 
 	var EmptyReview= Marionette.ItemView.extend({
@@ -25,16 +26,14 @@ define(function (require) {
 		template: Handlebars.compile(EmptyTemplate)
 	});
 
-	var ReviewsView = Marionette.CollectionView.extend({
+	var ReviewsView = Marionette.CompositeView.extend({
 		className: 'doof-reviews',
-		tagName: 'ul',
 		initialize: function (opts) {
 			var self = this;
 			this.restaurant_id = opts.restaurant_id;
 			this.region = opts.region;
 
 			this.collection= new ReviewsCollection();
-			// this.model.on('add', this.render, this);
 
 			this.dataService = new ReviewsDataService({ restaurant_id: this.restaurant_id });
 			this.dataService.fetch().then(function (reviews_list) {
@@ -44,6 +43,7 @@ define(function (require) {
 				console.log('is anybody in here?"');
 			});
 		},
+		template: Handlebars.compile(Template),
 		childView: ReviewView,
 		emptyView: EmptyReview,
 		isEmpty: function() {
@@ -52,7 +52,8 @@ define(function (require) {
 				return false;
 			}
 			return true;
-		}
+		},
+		childViewContainer: ".reviews-list",
 	});
 
 	return ReviewsView;

@@ -89,7 +89,6 @@ define(function (require) {
 	});
 
 	Handlebars.registerHelper('line_graph_html', function (obj) {
-		console.log(obj);
 		var negative_sentiments = obj.poor + obj.terrible;
 		var positive_sentiments = obj.excellent + obj.good;
 		var neutral_sentiments = obj.average + (obj.mix ? obj.mix : 0);

@@ -17,7 +17,11 @@ define(function(require) {
 			'tabs': '.restaurant-tabs-menu',
 			'ambienceOverview': '.ambience-overview',
 			'serviceOverview': '.service-overview',
-			'foodOverview': '.food-item-list'
+			'foodOverview': '.food-item-list',
+			'closeBtn': '.restaurant-details__close-btn'
+		},
+		events: {
+			'click @ui.closeBtn': 'closeDetails'
 		},
 		templateHelpers: function () {
 			return {
@@ -102,8 +106,10 @@ define(function(require) {
 			// 	self.reviewsRegion.show(self.reviewsView);
 			// });
 		},
-		onClose: function () {
+		closeDetails: function(e) {
+			e.preventDefault();
 			this.$el.parent().addClass('hide');
+			this.remove();
 		}
 	});
 	return DetailView;

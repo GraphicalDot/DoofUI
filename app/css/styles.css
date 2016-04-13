@@ -840,3 +840,32 @@ body {
       padding-top: 26px;
       margin-bottom: 30px;
       color: #F44336; }
+
+.doof-reviews {
+  margin: 0; }
+  .doof-reviews li {
+    display: flex;
+    margin-bottom: 24px; }
+    .doof-reviews li:last-child {
+      margin-bottom: 12px; }
+    .doof-reviews li.empty-review {
+      text-align: center;
+      flex-direction: column; }
+      .doof-reviews li.empty-review .empty-reviews__image {
+        max-width: 354px;
+        margin: 0 auto; }
+    .doof-reviews li.review {
+      display: flex; }
+      .doof-reviews li.review img {
+        height: 60px;
+        width: 60px; }
+      .doof-reviews li.review .review-container {
+        flex: 1;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.54);
+        padding: 0 24px; }
+        .doof-reviews li.review .review-container .review__user-name {
+          color: #F44336; }
+        .doof-reviews li.review .review-container .reviews-text,
+        .doof-reviews li.review .review-container .date {
+          color: rgba(0, 0, 0, 0.87); }

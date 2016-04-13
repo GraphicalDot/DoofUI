@@ -140,5 +140,10 @@ define(function (require) {
 		return safeString;
 	});
 
+	Handlebars.registerHelper('first-name', function(opts) {
+		var name= opts.fn(this);
+		return name.split(" ")[0];
+	});
+
 	return true;
 });

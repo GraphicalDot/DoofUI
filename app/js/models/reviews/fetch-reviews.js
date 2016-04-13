@@ -8,7 +8,8 @@ define(function (require) {
 		model: Review,
 		url: "http://52.76.176.188:8000/fetchreview",
 		parse: function (response) {
-			// if(response.error) {return [];}
+			console.log(response);
+			if(response.error) {return [];}
 			return response.result;
 		}
 	});

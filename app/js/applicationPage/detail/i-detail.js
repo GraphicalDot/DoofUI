@@ -6,12 +6,19 @@ define(function(require) {
 	var Handlebars= require('handlebars');
 	var Template= require('text!./detail.html');
 
+	var ReviewsView= require('./../reviews/i-reviews');
+
 	var DetailView= Marionette.ItemView.extend({
 		id: 'detailView',
 		template: Handlebars.compile(Template),
 		initialize: function(opts) {
 			this.restaurant_detail= opts.restaurant_detail;
 			this.user= opts.user;
+
+			this.reviewsRegion = new Marionette.Region({
+				el: '#restaurant-reviews-tab'
+			});
+			this.reviewsView= new ReviewsView({restaurant_id: this.restaurant_detail.__eatery_id, region: this.reviewsRegion});
 		},
 		ui: {
 			'tabs': '.restaurant-tabs-menu',

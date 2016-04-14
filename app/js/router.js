@@ -18,19 +18,19 @@ define(function (require) {
 		routes: {
 			"": "home"
 		},
-		home: function() {
-			var fbUser= this.user;
-			if(fbUser.isAuthorized()) {
+		home: function () {
+			var fbUser = this.user;
+			if (fbUser.isAuthorized()) {
 				this.application();
 			} else {
 				this.landingPage();
 			}
 		},
 		landingPage: function () {
-			var self= this;
+			var self = this;
 			var landingPage = new LandingPage({ user: this.user });
-			landingPage.on('goToApplication', function() {
-				self.application();
+			landingPage.on('goToApplication', function (position, trending_eateries) {
+				self.application(position, trending_eateries);
 			});
 			this.region.show(landingPage);
 		},

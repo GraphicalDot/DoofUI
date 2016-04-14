@@ -1,8 +1,8 @@
 REquire JS Config
 
-// require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago', 'carousel'], function ($) {
+1. // require(['jquery', 'jquery.easing', 'animation', 'velocity', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter', 'chips', 'jquery.timeago', 'carousel'], function ($) {
 
-// 	require(['./helpers', './doof'], function (Helpers, Doof) {
+2. // 	require(['./helpers', './doof'], function (Helpers, Doof) {
 // 		Doof.start();
 // 	});
 // });
@@ -14,17 +14,18 @@ DOOF JS.
 
 
 ROUTER JS :-
-Way to pass collection from landing Page to application Page because we have already list of restaurants when we are shifting from landingPage to applicationPage.
+1. Way to pass collection from landing Page to application Page because we have already list of restaurants when we are shifting from landingPage to applicationPage.
 
 
 LANDING PAGE.JS :-
-self.location.accuracy= position.coords.accuracy;
-What to check when checking data.. Trending or nearest?
-Make an API to check for both if possible??? pata nahi
+1. self.location.accuracy= position.coords.accuracy;
+2. What to check when checking data.. Trending or nearest?
+3. Make an API to check for both if possible??? pata nahi
+4. Use data service to check for data. Refactoring left for Landing Page js..
 
 
 LANDING PAGE.html :-
-	<div class="landing-content__enter_application">
+1.	<div class="landing-content__enter_application">
 		<div class="landingPage-content__locationBox-wrapper">
 			<label for="landingPage-locationBox"><i class="material-icons">place</i></label>
 			<input type="text" id="landingPage-locationBox" name="landingPage-locationBox" class="search-box" placeholder="Enter your location"

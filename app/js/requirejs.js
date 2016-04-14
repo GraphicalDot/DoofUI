@@ -61,10 +61,6 @@ require.config({
 		//others
 		'typeahead': '../../node_modules/typeahead.bundle',
 		'es6promise': '../../node_modules/es6-promise/dist/es6-promise',
-
-		//dont know if worth?? Can be removed
-
-		'jquery.actual': '../../node_modules/jquery.actual',
 	},
 	shim: {
 		'jquery': { exports: '$' },
@@ -117,10 +113,9 @@ require.config({
 				return require.s.contexts._.registry['typeahead.js'].factory($);
 			}
 		},
-		'jquery.actual': { deps: ['jquery'] },
 	}
 });
 
-require(['./doof'], function(Doof) {
+require(['./doof'], function (Doof) {
 	Doof.start();
 });

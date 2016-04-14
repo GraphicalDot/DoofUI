@@ -17,7 +17,7 @@ define(function (require) {
 
 			this.dataService = new DataService();
 			this.googleService= new GoogleService();
-			
+
 			require(['velocity'], function () {
 				$('.loader').velocity("fadeOut", 1000);
 			});

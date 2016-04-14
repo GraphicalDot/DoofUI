@@ -42,7 +42,18 @@ define(function (require) {
 				self.googleService.geoCodeService(self.latLng.lat, self.latLng.lng).then(function (geoCodeResult) {
 					self.place = geoCodeResult.formatted_address;
 					self.ui.searchLocationBox.val(geoCodeResult.formatted_address);
-					self.search();
+					if(self.isSearchActive()) {
+						var searchBoxValue= self.ui.searchDoofBox.val();
+						if(self.selected=== 'restaurant') {
+							self.restaurantSelect(searchBoxValue);
+						} else if (self.selected=== 'cuisine') {
+							self.cuisineSelect(searchBoxValue);
+						} else {
+							self.foodSelect(searchBoxValue);
+						}
+					} else {
+						self.search();
+					}
 				});
 			};
 			function fail() {
@@ -58,25 +69,28 @@ define(function (require) {
 			this.search();
 		},
 		search: function(restaurants_list) {
-			this.triggerMethod('showSearchResults', restaurants_list);
+			this.triggerMethod('showSearchResults', restaurants_list, this.latLng);
 		},
 		isSearchActive: function() {
 			return Boolean(this.ui.searchDoofBox.val());
 		},
 		foodSelect: function (food_name) {
 			var self = this;
+			self.selected= 'food';
 			this.textService.getByFood(food_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
 				self.search(restaurants_list);
 			});
 		},
 		cuisineSelect: function (cuisine_name) {
 			var self = this;
+			self.selected= 'cuisine';
 			this.textService.getByCuisine(cuisine_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
 				self.search(restaurants_list);
 			});
 		},
 		restaurantSelect: function (restaurant_name) {
 			var self = this;
+			self.selected= 'restaurant';
 			this.textService.getByRestaurantName(restaurant_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
 				self.search(restaurants_list);
 			});
@@ -164,7 +178,18 @@ define(function (require) {
 						self.latLng.lat= place.geometry.location.lat();
 						self.latLng.lng= place.geometry.location.lng();
 						self.place= place.formatted_address;
-						self.search();
+						if(self.isSearchActive()) {
+							var searchBoxValue= self.ui.searchDoofBox.val();
+							if(self.selected=== 'restaurant') {
+								self.restaurantSelect(searchBoxValue);
+							} else if (self.selected=== 'cuisine') {
+								self.cuisineSelect(searchBoxValue);
+							} else {
+								self.foodSelect(searchBoxValue);
+							}
+						} else {
+							self.search();
+						}
 					}
 				});
 			});

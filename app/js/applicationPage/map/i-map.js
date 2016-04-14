@@ -34,6 +34,14 @@ define(function (require) {
 				});
 			});
 		},
+		updateMyLocationMarker: function() {
+			var self= this;
+			require(['google-map-loader'], function (GoogleMapLoader) {
+				GoogleMapLoader.done(function (GoogleMaps) {
+					self.locationMarker.setPosition(new GoogleMaps.LatLng(self.latLng.lat, self.latLng.lng));
+				});
+			});
+		},
 		//remove old markers from map and array
 		removeOldMarkers: function () {
 			_.each(this.markersArray, function (marker) {
@@ -95,9 +103,9 @@ define(function (require) {
 								self.triggerMethod('unhighlight:list-item');
 							 });
 							GoogleMaps.event.addListener(googleMapMarker, 'click', function () {
-									self.infoWindow.setContent(this.get('html'));
-									self.infoWindow.open(self.map, this);
-									self.trigger('show:restaurant', this.get('restaurant_id'), this.get('data'))
+								self.infoWindow.setContent(this.get('html'));
+								self.infoWindow.open(self.map, this);
+								self.triggerMethod('show:restaurant', this.get('restaurant_id'), this.get('data'))
 							});
 							self.markersArray.push(googleMapMarker);
 						}

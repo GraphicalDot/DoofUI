@@ -20,8 +20,8 @@ define(function (require) {
 		initialize: function (opts) {
 			//Options
 			this.user = opts.user;
-			this.latLng = opts.latLng ? opts.latLng : { lat: '28.6139', lng: '77.2090' },
-			this.place = opts.place ? opts.place : 'New Delhi';
+			this.latLng = opts.position.latLng ? opts.position.latLng : { lat: '28.6139', lng: '77.2090' },
+			this.place = opts.position.place ? opts.position.place : 'New Delhi';
 			this.startingEateries= opts.eateries;
 
 			//Services
@@ -63,6 +63,7 @@ define(function (require) {
 			'unhightlight:marker': 'unhighlightGoogleMapMarker',
 			'highlight:list-item': 'highlightRestaurantListItem',
 			'unhighlight:list-item': 'unhighlightRestaurantListItem',
+			'showSearchResults': 'updateResult'
 		},
 		highlightGoogleMapMarker: function (childView, markerId) {
 			this.mapBoxView.highlight(markerId);
@@ -75,6 +76,19 @@ define(function (require) {
 		},
 		unhighlightRestaurantListItem: function () {
 			this.listView.unhighlight();
+		},
+		updateResult: function(childView, eateries, newLatLng) {
+			this.latLng.lat= newLatLng.lat;
+			this.latLng.lng= newLatLng.lng;
+			if(eateries && eateries.length) {
+				this.collection.reset(eateries);
+			} else {
+				if ($("#sub-menu__nearme-link").hasClass('active')) {
+					this.showNearMeRestaurants();
+				} else {
+					this.showTrendingRestaurants();
+				}
+			}
 		},
 		showTrendingRestaurants: function () {
 			var self = this;
@@ -97,6 +111,7 @@ define(function (require) {
 		},
 		updateGoogleMapsMarker: function () {
 			this.mapBoxView.showMarkers(this.collection.toJSON());
+			this.mapBoxView.updateMyLocationMarker();
 		},
 		onShow: function () {
 			var self = this;

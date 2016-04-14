@@ -5,14 +5,16 @@ define(function (require) {
 	var Handlebars = require('handlebars');
 	var Template = require('text!./searchBox.html');
 
+	var TextSearchService = require('./../../services/text-search-service');
+
 	var SearchBoxView = Marionette.ItemView.extend({
 		id: 'doofSearch',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			this.place = opts.place;
 			this.latLng = opts.latLng;
-			this.textService = opts.textService;
 			this.googleService = opts.googleService;
+			this.textService = new TextSearchService();
 		},
 		templateHelpers: {
 			'startingAddress': function () {
@@ -35,9 +37,9 @@ define(function (require) {
 			e.preventDefault();
 			var self = this;
 			function success(position) {
-				this.latLng.lat = position.coords.latitude;
-				this.latLng.lng = position.coords.longitude;
-				self.googleService.geoCodeService(this.latLng.lat, this.latLng.lng).then(function (geoCodeResult) {
+				self.latLng.lat = position.coords.latitude;
+				self.latLng.lng = position.coords.longitude;
+				self.googleService.geoCodeService(self.latLng.lat, self.latLng.lng).then(function (geoCodeResult) {
 					self.place = geoCodeResult.formatted_address;
 					self.ui.searchLocationBox.val(geoCodeResult.formatted_address);
 					self.search();

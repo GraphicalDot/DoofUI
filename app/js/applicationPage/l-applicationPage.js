@@ -12,49 +12,31 @@ define(function (require) {
 	var MapBoxView = require('./map/i-map');
 	var DetailView = require('./detail/i-detail');
 
-	var DataService = require('./../models/data-service');
-	var ReviewsDataService = require('./../models/reviews-service');
-	var TextSearchService = require('./../models/text-search-service');
-	var GoogleService= require('./../services/google-services');
-
 	var ApplicationModel = Backbone.Model.extend();
 	var ApplicationCollection = Backbone.Collection.extend({ model: ApplicationModel });
 
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
 		initialize: function (opts) {
-			//store opts passed to this
+			//Options
 			this.user = opts.user;
 			this.latLng = opts.latLng ? opts.latLng : { lat: '28.6139', lng: '77.2090' },
 			this.place = opts.place ? opts.place : 'New Delhi';
+			this.startingEateries= opts.eateries;
 
-			//Set data service for getting restaurants data..
-			this.dataService = new DataService();
+			//Services
+			this.dataService= opts.dataService;
+			this.googleService= opts.googleService;
 
-			//Set data service for Reviews
-			this.reviewsDataService = new ReviewsDataService();
+			//Collection
+			this.collection = new ApplicationCollection(opts.eateries);
+			this.collection.on('reset', this.updateGoogleMapsMarker, this);
 
-			// set text search service
-			this.textSearchService = new TextSearchService();
-
-			this.googleService= new GoogleService();
-
-			//Master Collection for View
-			this.collection = new ApplicationCollection();
-			this.collection.on('reset', this.updateChildViewsData, this);
-
-			// If eateries data is passed in options, use those eateries, otherwise find TrendingRestaurants;
-			if (opts.eateries) {
-				this.collection.reset(opts.eateries);
-			} else {
-				this.showTrendingRestaurants();
-			}
-
-			// ChildViews
-			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng, textService: this.textSearchService, mapService: this.googleService });
+			//Views
+			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng, googleService: this.googleService });
 			this.userView = new UserView({ model: this.user, userProfileRegion: this.getRegion('userProfile') });
-			this.listView = new ListView({ collection: this.collection });
 			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
+			this.listView = new ListView({ collection: this.collection });
 		},
 		template: Handlebars.compile(Template),
 		regions: {
@@ -94,13 +76,6 @@ define(function (require) {
 		unhighlightRestaurantListItem: function () {
 			this.listView.unhighlight();
 		},
-		openDetailViewRestaurant: function (childView, restaurant_id, restaurant_info) {
-			var self = this;
-			this.dataService.getSingleRestaurant(restaurant_id).then(function (restaurant_details) {
-				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info });
-				self.showChildView('detail', detailView);
-			}, function (error) { console.log(error); });
-		},
 		showTrendingRestaurants: function () {
 			var self = this;
 			this.dataService.getTrending(this.latLng).then(function (trendingRestaurants) {
@@ -113,8 +88,14 @@ define(function (require) {
 				self.collection.reset(nearMeRestaurants);
 			}, function (error) { console.log('failed'); });
 		},
-		// Update Map with new Markers ..Trigged on Collection reset event
-		updateChildViewsData: function () {
+		openDetailViewRestaurant: function (childView, restaurant_id, restaurant_info) {
+			var self = this;
+			this.dataService.getSingleRestaurant(restaurant_id).then(function (restaurant_details) {
+				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info });
+				self.showChildView('detail', detailView);
+			}, function (error) { console.log(error); });
+		},
+		updateGoogleMapsMarker: function () {
 			this.mapBoxView.showMarkers(this.collection.toJSON());
 		},
 		onShow: function () {
@@ -128,6 +109,12 @@ define(function (require) {
 			this.showChildView('search', this.searchBoxView);
 			this.showChildView('list', this.listView);
 			this.showChildView('map', this.mapBoxView);
+
+			if(this.startingEateries) {
+				this.collection.reset(this.startingEateries);
+			} else {
+				this.showTrendingRestaurants();
+			}
 		}
 	});
 

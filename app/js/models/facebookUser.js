@@ -14,8 +14,7 @@ define(function (require) {
 				FB.init({
 					appId: "202326320112782",
 					// appId: "1605945752959547",
-					version: "v2.5",
-					status: true
+					version: "v2.5"
 				});
 				resolve();
 			});
@@ -30,7 +29,7 @@ define(function (require) {
 						self.set({ status: response.status }, { silent: true });
 					}
 					resolve();
-				});
+				}, true);
 			});
 			return promise;
 		},

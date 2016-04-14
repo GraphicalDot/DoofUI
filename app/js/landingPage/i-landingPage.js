@@ -16,6 +16,8 @@ define(function (require) {
 				latLng: { lat: 0, lng: 0 },
 				place: ''
 			};
+			this.googleService= opts.googleService;
+			this.dataService= opts.dataService;
 		},
 		ui: {
 			'location-input': '#landingPage__location-input-box',
@@ -27,11 +29,9 @@ define(function (require) {
 		isDataPresentAtLngLng: function (e) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
-				var NearestEateriesModel = require('../models/restaurant_data/nearest_eateries');
-				var nearestEateries = new NearestEateriesModel();
-				nearestEateries.fetch({ method: 'POST', data: { latitude: self.location.latLng.lat, longitude: self.location.latLng.lng } }).then(function () {
-					if (nearestEateries.length) {
-						resolve(nearestEateries);
+				self.dataService.getTrending(self.location.latLng).then(function (trendingRestaurants) {
+					if (trendingRestaurants.length) {
+						resolve(trendingRestaurants);
 					} else {
 						reject();
 					}
@@ -45,63 +45,40 @@ define(function (require) {
 			this.isDataPresentAtLngLng().then(function (nearestEateries) {
 				self.trigger("goToApplication", self.location, nearestEateries);
 			}, function (err) {
-				console.log("No data present for the given location. Please change.", 2000);
+				console.log("No data present for the given location. Please change.");
 			});
 		},
-		createGoogleAutocomplete: function (input) {
+		createGoogleAutocomplete: function () {
 			var self = this;
-			require(['google-map-loader'], function (GoogleMapLoader) {
-				GoogleMapLoader.done(function (GoogleMaps) {
-					var autoComplete = new GoogleMaps.places.Autocomplete(input);
-					autoComplete.addListener('place_changed', function () {
-						var place = autoComplete.getPlace();
-						if (!place.geometry) { return; }
-						if (place.geometry.location) {
-							self.location.latLng.lat = place.geometry.location.lat();
-							self.location.latLng.lng = place.geometry.location.lng();
-							self.location.place = place.formatted_address;
-						}
-					});
+			this.googleService.makeGeolocatorBox('landingPage__location-input-box').then(function(autoComplete) {
+				autoComplete.addListener('place_changed', function () {
+					var place = autoComplete.getPlace();
+					if (!place.geometry) { return; }
+					if (place.geometry.location) {
+						self.location.latLng.lat = place.geometry.location.lat();
+						self.location.latLng.lng = place.geometry.location.lng();
+						self.location.place = place.formatted_address;
+					}
 				});
 			});
 		},
-		geoCodeLatLng: function (lat, lng) {
-			var promise = new Promise(function (resolve, reject) {
-				require(['google-map-loader'], function (GoogleMapLoader) {
-					GoogleMapLoader.done(function (GoogleMaps) {
-						var geoCoder = new GoogleMaps.Geocoder;
-						geoCoder.geocode({ 'location': { lat: lat, lng: lng } }, function (results, status) {
-							if (status === GoogleMaps.GeocoderStatus.OK) {
-								var result_address = results[1] ? results[1] : results[0];
-								resolve(result_address.formatted_address);
-							} else {
-								reject();
-							}
-						});
-					});
-				});
-			});
-			return promise;
-		},
-		getUserLocation: function (inputBox) {
+		getUserLocation: function () {
 			var self = this;
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					self.location.latLng.lat = position.coords.latitude;
 					self.location.latLng.lng = position.coords.longitude;
-					self.geoCodeLatLng(position.coords.latitude, position.coords.longitude).then(function (geoCoded_address) {
-						self.location.place = geoCoded_address;
-						inputBox.value = geoCoded_address;
-					}, function (error) { });
+					self.googleService.geoCodeService(self.location.latLng.lat, self.location.latLng.lng).then(function (geoCodeResult) {
+						self.location.place = geoCodeResult.formatted_address;
+						self.ui['location-input'].val(self.location.place);
+					}, function(error) {});
 				}, function (fail) { }, {});
 			} else { }
 		},
 		onShow: function () {
-			var input = document.getElementById("landingPage__location-input-box");
-			this.createGoogleAutocomplete(input);
-			this.getUserLocation(input);
+			this.createGoogleAutocomplete();
+			this.getUserLocation();
 		},
 	});
-
 	return LandingPage;
 });

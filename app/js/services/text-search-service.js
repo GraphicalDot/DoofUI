@@ -5,9 +5,9 @@ define(function (require) {
 	var Promise = require('es6promise').Promise;
 
 	// Model for getting Suggestions
-	var SuggestionsModel = require('./text-search/suggestions');
+	var SuggestionsModel = require('./../models/text-search/suggestions');
 	// Model for searching Restaurants List by Text
-	var TextSearchModel = require('./text-search/text_search.js');
+	var TextSearchModel = require('./../models/text-search/text_search');
 
 	var TextSearchService = Service.extend({
 		initialize: function () {

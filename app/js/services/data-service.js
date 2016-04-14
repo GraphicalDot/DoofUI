@@ -4,19 +4,14 @@ define(function (require) {
 	var Service = require('marionette-service');
 	var Promise = require('es6promise').Promise;
 
-	var TrendingRestaurants = require('./restaurant_data/get_trending');
-	var NearbyRestaurants = require('./restaurant_data/nearest_eateries');
-	var SingleRestaurant = require('./restaurant_data/geteatery');
-
-	var TextSearchRestaurants = require('./restaurant_data/text_search');
-
+	var TrendingRestaurants = require('./../models/restaurant_data/get_trending');
+	var NearbyRestaurants = require('./../models/restaurant_data/nearest_eateries');
+	var SingleRestaurant = require('./../models/restaurant_data/geteatery');
 
 	var DataService = Service.extend({
 		initialize: function () {
 			this.trendingRestaurants = new TrendingRestaurants();
 			this.nearbyRestaurants = new NearbyRestaurants();
-			this.textSearchRestaurants = new TextSearchRestaurants();
-
 			this.singleRestaurant = new SingleRestaurant();
 		},
 		requests: {

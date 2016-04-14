@@ -7,14 +7,15 @@ define(function (require) {
 	var Template = require('text!./applicationPage.html');
 
 	var SearchBoxView = require('./search/i-searchBox');
-	var UserView= require('./user/i-user');
+	var UserView = require('./user/i-user');
 	var ListView = require('./list/c-list');
 	var MapBoxView = require('./map/i-map');
-	var DetailView= require('./detail/i-detail');
+	var DetailView = require('./detail/i-detail');
 
 	var DataService = require('./../models/data-service');
-	var ReviewsDataService= require('./../models/reviews-service');
-	var TextSearchService= require('./../models/text-search-service');
+	var ReviewsDataService = require('./../models/reviews-service');
+	var TextSearchService = require('./../models/text-search-service');
+	var GoogleService= require('./../services/google-services');
 
 	var ApplicationModel = Backbone.Model.extend();
 	var ApplicationCollection = Backbone.Collection.extend({ model: ApplicationModel });
@@ -31,7 +32,12 @@ define(function (require) {
 			this.dataService = new DataService();
 
 			//Set data service for Reviews
-			this.reviewsDataService= new ReviewsDataService();
+			this.reviewsDataService = new ReviewsDataService();
+
+			// set text search service
+			this.textSearchService = new TextSearchService();
+
+			this.googleService= new GoogleService();
 
 			//Master Collection for View
 			this.collection = new ApplicationCollection();
@@ -45,8 +51,8 @@ define(function (require) {
 			}
 
 			// ChildViews
-			this.userView= new UserView({model: this.user, userProfileRegion: this.getRegion('userProfile')});
-			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng });
+			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng, textService: this.textSearchService, mapService: this.googleService });
+			this.userView = new UserView({ model: this.user, userProfileRegion: this.getRegion('userProfile') });
 			this.listView = new ListView({ collection: this.collection });
 			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
 		},
@@ -76,24 +82,24 @@ define(function (require) {
 			'highlight:list-item': 'highlightRestaurantListItem',
 			'unhighlight:list-item': 'unhighlightRestaurantListItem',
 		},
-		highlightGoogleMapMarker: function(childView, markerId) {
+		highlightGoogleMapMarker: function (childView, markerId) {
 			this.mapBoxView.highlight(markerId);
 		},
-		unhighlightGoogleMapMarker: function() {
+		unhighlightGoogleMapMarker: function () {
 			this.mapBoxView.unhighlight();
 		},
-		highlightRestaurantListItem: function(childView, markerId) {
+		highlightRestaurantListItem: function (childView, markerId) {
 			this.listView.highlight(markerId);
 		},
-		unhighlightRestaurantListItem: function() {
+		unhighlightRestaurantListItem: function () {
 			this.listView.unhighlight();
 		},
-		openDetailViewRestaurant: function(childView, restaurant_id, restaurant_info) {
-			var self= this;
-			this.dataService.getSingleRestaurant(restaurant_id).then(function(restaurant_details) {
-				var detailView= new DetailView({model: restaurant_details, user: self.user, restaurant_detail: restaurant_info});
+		openDetailViewRestaurant: function (childView, restaurant_id, restaurant_info) {
+			var self = this;
+			this.dataService.getSingleRestaurant(restaurant_id).then(function (restaurant_details) {
+				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info });
 				self.showChildView('detail', detailView);
-			}, function(error) { console.log(error); });
+			}, function (error) { console.log(error); });
 		},
 		showTrendingRestaurants: function () {
 			var self = this;

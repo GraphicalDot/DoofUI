@@ -14,6 +14,12 @@ define(function (require) {
 			this.suggestionsModel = new SuggestionsModel();
 			this.model = new TextSearchModel();
 		},
+		requests: {
+			'getSuggestions': 'getSuggestions',
+			'getByFood': 'getByFood',
+			'getByCuisine': 'getByCuisine',
+			'getByRestaurantName': 'getByRestaurantName'
+		},
 		// Get Suggestions based on typed text..
 		getSuggestions: function (text) {
 			var self = this;

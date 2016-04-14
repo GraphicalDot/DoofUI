@@ -6,7 +6,7 @@ define(function (require) {
 
 	var TrendingRestaurants = require('./restaurant_data/get_trending');
 	var NearbyRestaurants = require('./restaurant_data/nearest_eateries');
-	var SingleRestaurant= require('./restaurant_data/geteatery');
+	var SingleRestaurant = require('./restaurant_data/geteatery');
 
 	var TextSearchRestaurants = require('./restaurant_data/text_search');
 
@@ -17,7 +17,7 @@ define(function (require) {
 			this.nearbyRestaurants = new NearbyRestaurants();
 			this.textSearchRestaurants = new TextSearchRestaurants();
 
-			this.singleRestaurant= new SingleRestaurant();
+			this.singleRestaurant = new SingleRestaurant();
 		},
 		requests: {
 			'getTrending': 'getTrending',
@@ -59,11 +59,11 @@ define(function (require) {
 			return promise;
 		},
 		getSingleRestaurant: function (markerId) {
-			var self= this;
-			var promise= new Promise(function(resolve, reject) {
-				self.singleRestaurant.fetch({method: 'POST', data: {"__eatery_id": markerId}}).done(function() {
+			var self = this;
+			var promise = new Promise(function (resolve, reject) {
+				self.singleRestaurant.fetch({ method: 'POST', data: { "__eatery_id": markerId } }).done(function () {
 					resolve(self.singleRestaurant);
-				}).fail(function() {
+				}).fail(function () {
 					reject('Failed SINGLE Restaurant API');
 				});
 			});

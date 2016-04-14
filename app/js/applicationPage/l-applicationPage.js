@@ -6,14 +6,15 @@ define(function (require) {
 	var Handlebars = require('handlebars');
 	var Template = require('text!./applicationPage.html');
 
-	var UserView= require('./user/i-user');
-	var MapBoxView = require('./map/i-map');
 	var SearchBoxView = require('./search/i-searchBox');
+	var UserView= require('./user/i-user');
 	var ListView = require('./list/c-list');
+	var MapBoxView = require('./map/i-map');
 	var DetailView= require('./detail/i-detail');
 
 	var DataService = require('./../models/data-service');
 	var ReviewsDataService= require('./../models/reviews-service');
+	var TextSearchService= require('./../models/text-search-service');
 
 	var ApplicationModel = Backbone.Model.extend();
 	var ApplicationCollection = Backbone.Collection.extend({ model: ApplicationModel });

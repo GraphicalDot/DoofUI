@@ -1,3 +1,4 @@
+/* global Materialize */
 define(function (require) {
 	'use strict';
 
@@ -15,13 +16,15 @@ define(function (require) {
 	var ApplicationModel = Backbone.Model.extend();
 	var ApplicationCollection = Backbone.Collection.extend({ model: ApplicationModel });
 
+	var UserFeedbackModel = require('./../models/user_feedback');
+
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
 		initialize: function (opts) {
 			//Options
 			this.user = opts.user;
-			this.latLng = opts.position.latLng ? opts.position.latLng : { lat: '28.6139', lng: '77.2090' },
-			this.place = opts.position.place ? opts.position.place : 'New Delhi';
+			this.latLng = opts.position ? opts.position.latLng : { lat: '28.6139', lng: '77.2090' },
+			this.place = opts.position ? opts.position.place : 'New Delhi';
 			this.startingEateries= opts.eateries;
 			this.eateryCategory= opts.category;
 
@@ -32,6 +35,9 @@ define(function (require) {
 			//Collection
 			this.collection = new ApplicationCollection(opts.eateries);
 			this.collection.on('reset', this.updateGoogleMapsMarker, this);
+
+			//Feedback Model
+			this.userFeedback = new UserFeedbackModel();
 
 			//Views
 			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng, googleService: this.googleService });
@@ -50,6 +56,27 @@ define(function (require) {
 				if(this.eateryCategory=== 'nearyby') {
 					return 'active';
 				}
+			},
+			isAuthorized: function() {
+				if(this.user.isAuthorized()) {
+					return 'active';
+				} else {
+					return '';
+				}
+			},
+			userName: function() {
+				if(this.user.isAuthorized()) {
+					return this.user.get('name');
+				} else {
+					return '';
+				}
+			},
+			userEmail: function() {
+				if(this.user.isAuthorized()) {
+					return this.user.get('email')
+				} else {
+					return '';
+				}
 			}
 		},
 		regions: {
@@ -66,10 +93,15 @@ define(function (require) {
 			'subMenuTabsWrapper': '.body__sub-menu',
 			'subMenuTrendingLink': '#sub-menu__trending-link',
 			'subMenuNearMeLink': '#sub-menu__nearme-link',
+			'feedbackModal': '#feedback__modal',
+			'feedbackName': '#feedback-name',
+			'feedbackEmail': '#feedback-email',
+			'feedbackBody': '#feedback-body'
 		},
 		events: {
 			'click @ui.subMenuTrendingLink': 'showTrendingRestaurants',
-			'click @ui.subMenuNearMeLink': 'showNearMeRestaurants'
+			'click @ui.subMenuNearMeLink': 'showNearMeRestaurants',
+			'submit form#feedback-form': 'submitFeedback',
 		},
 		childEvents: {
 			'show:restaurant': 'openDetailViewRestaurant',
@@ -145,6 +177,29 @@ define(function (require) {
 				} else {
 					this.showTrendingRestaurants();
 				}
+			}
+		},
+
+		/**
+		 * Function for submitted Feedback
+		 */
+		submitFeedback: function (e) {
+			var self= this;
+			e.preventDefault();
+			if (this.ui.feedbackName.val() && this.ui.feedbackEmail.val() && this.ui.feedbackBody.val()) {
+				this.userFeedback.fetch({ method: 'POST', data: { fb_id: this.user.get('id'), "feedback": this.ui.feedbackBody.val(), "name": this.ui.feedbackName.val(), "email": this.ui.feedbackEmail.val() } }).then(function (response) {
+					var toast_message= ''
+					if (response.success) {
+						self.ui.feedbackModal.closeModal();
+						self.ui.feedbackBody.val('');
+						toast_message= response.message ? response.message : "Thank you for submitting Feedback";
+					} else {
+						toast_message= "Sorry, some error.. Try again later..";
+					}
+					require(['toasts'], function() {
+						Materialize.toast("Thank you for submitted Feedback", 3000);
+					});
+				});
 			}
 		},
 

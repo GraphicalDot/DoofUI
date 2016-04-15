@@ -78,7 +78,7 @@ require.config({
 		'hammerjs': { exports: 'Hammer' },
 		'jquery.hammer': { deps: ['jquery', 'hammerjs', 'waves'] },
 		'global': { deps: ['jquery'] },
-		'toasts': { deps: ['hammerjs', 'velocity'] },
+		'toasts': { deps: ['hammerjs', 'velocity', 'global'] },
 		'carousel': { deps: ['jquery'] },
 		'collapsible': { deps: ['jquery'] },
 		'dropdown': { deps: ['jquery', 'jquery.easing'] },

@@ -34,39 +34,48 @@
 			</ul>
 		</div>
 		<div class="body-box body__search-list hide">
+			<a href="#" id="search-results__back-btn" class="">Go Back..</a>
+			<div class="search-results"></div>
+		</div>
 	</div>
 	<div class="body__map-container"></div>
 	<div class="body-box body__detail-box hide"></div>
-		<a href="#" id="search-results__back-btn" class="">Go Back..</a>
-		<div class="search-results"></div>
-	</div>
 	<div class="body-box body__profile-box hide"></div>
 </main>
 
 
 <div id="feedback__modal" class="modal">
-	<div class="row">
-		<h5><i class="material-icons">feedback</i> Please leave your valuable feedback.</h5>
-		<form id="feedback-form" class="col s12">
-			<div class="row">
-				<div class="input-field col s6">
-					<input class="validate" type="text" id="feedback-name" value="{{username}}" required>
-					<label for="feedback-name">Your name</label>
-				</div>
-				<div class="input-field col s6">
-					<input class="validate" data-error="valid email address please" type="email" id="feedback-email" value="{{useremail}}" required>
-					<label class="active" for="feedback-email">Your email</label>
-				</div>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h5>
+					<i class="material-icons">feedback</i>
+					Please leave your valuable feedback.
+				</h5>
 			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<textarea class="validate materialize-textarea" id="feedback-body" required></textarea>
-					<label for="feedback-body">Your comments:</label>
-				</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<form action="" id="feedback-form">
+					<div class="row">
+						<div class="input-field col s12">
+							<input class="validate" type="text" id="feedback-name" value="{{userName}}" required>
+							<label for="feedback-name" class="{{isAuthorized}}">Your name</label>
+						</div>
+						<div class="input-field col s12">
+							<input class="validate" data-error="valid email address please" type="email" id="feedback-email" value="{{userEmail}}" required>
+							<label class="{{isAuthorized}}" for="feedback-email">Your email</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea class="validate materialize-textarea" id="feedback-body" required></textarea>
+							<label for="feedback-body">Your comments:</label>
+						</div>
+						<button class="btn waves-effect waves-light" type="submit">Submit
+							<i class="material-icons left">send</i>
+						</button>
+					</div>
+				</form>
 			</div>
-			<button class="btn waves-effect waves-light" type="submit">Submit
-				<i class="material-icons left">send</i>
-			</button>
-		</form>
+		</div>
 	</div>
 </div>

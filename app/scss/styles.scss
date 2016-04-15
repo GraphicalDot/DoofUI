@@ -116,20 +116,7 @@ body {
 			}
 		}
 	}
-	#feedback__modal {
-		text-align: center;
-		padding: 15px;
-		overflow: hidden;
-		h5 {
-			margin: 0;
-			line-height: 1.42857143;
-			font-weight: bold;
-			font-size: 28px;
-			padding-top: 26px;
-			margin-bottom: 30px;
-			color: $brand-color;
-		}
-	}
+	@import 'feedback';
 }
 
 @import 'reviews';

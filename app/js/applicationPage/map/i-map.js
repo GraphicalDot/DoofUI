@@ -130,6 +130,11 @@ define(function (require) {
 					self.locationMarker= new GoogleMaps.Marker({
 						map: self.map,
 						position: new GoogleMaps.LatLng(self.latLng.lat, self.latLng.lng),
+						draggable: true,
+					});
+
+					self.locationMarker.addListener('dragend', function(event) {
+						self.triggerMethod('myLocation__changed:map', [], {lat: event.latLng.lat(), lng: event.latLng.lng()});
 					});
 				});
 			});

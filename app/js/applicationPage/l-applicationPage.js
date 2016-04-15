@@ -109,7 +109,8 @@ define(function (require) {
 			'unhightlight:marker': 'unhighlightGoogleMapMarker',
 			'highlight:list-item': 'highlightRestaurantListItem',
 			'unhighlight:list-item': 'unhighlightRestaurantListItem',
-			'showSearchResults': 'searchResults'
+			'showSearchResults': 'searchResults',
+			'myLocation__changed:map': 'searchResults'
 		},
 		onShow: function () {
 			var self = this;

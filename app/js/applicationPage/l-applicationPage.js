@@ -18,6 +18,8 @@ define(function (require) {
 
 	var UserFeedbackModel = require('./../models/user_feedback');
 
+	var ReviewsDataService = require('./../services/reviews-service');
+
 	var ApplicationPage = Marionette.LayoutView.extend({
 		id: 'applicationPage',
 		initialize: function (opts) {
@@ -31,6 +33,7 @@ define(function (require) {
 			//Services
 			this.dataService = opts.dataService;
 			this.googleService = opts.googleService;
+			this.reviewsService= new ReviewsDataService();
 
 			//Collection
 			this.collection = new ApplicationCollection(opts.eateries);
@@ -41,7 +44,7 @@ define(function (require) {
 
 			//Views
 			this.searchBoxView = new SearchBoxView({ place: this.place, latLng: this.latLng, googleService: this.googleService });
-			this.userView = new UserView({ model: this.user, userProfileRegion: this.getRegion('userProfile') });
+			this.userView = new UserView({ model: this.user, userProfileRegion: this.getRegion('userProfile'), reviewsService: this.reviewsService });
 			this.mapBoxView = new MapBoxView({ latLng: this.latLng });
 			this.listView = new ListView({ collection: this.collection });
 		},
@@ -157,7 +160,7 @@ define(function (require) {
 		openDetailViewRestaurant: function (childView, restaurant_id, restaurant_info) {
 			var self = this;
 			this.dataService.getSingleRestaurant(restaurant_id).then(function (restaurant_details) {
-				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info });
+				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info, reviewsService: self.reviewsService });
 				self.showChildView('detail', detailView);
 			}, function (error) { console.log(error); });
 		},

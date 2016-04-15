@@ -1,24 +1,32 @@
-define(function(require) {
+define(function (require) {
 	'use strict';
 
-	var _= require('underscore');
-	var Marionette= require('marionette');
-	var Handlebars= require('handlebars');
-	var Template= require('text!./detail.html');
+	var _ = require('underscore');
+	var Marionette = require('marionette');
+	var Handlebars = require('handlebars');
+	var Template = require('text!./detail.html');
 
-	var ReviewsView= require('./../reviews/i-reviews');
+	var ReviewsView = require('./../reviews/i-reviews');
 
-	var DetailView= Marionette.ItemView.extend({
+	var DetailView = Marionette.ItemView.extend({
 		id: 'detailView',
 		template: Handlebars.compile(Template),
-		initialize: function(opts) {
-			this.restaurant_detail= opts.restaurant_detail;
-			this.user= opts.user;
+		initialize: function (opts) {
+			this.restaurant_detail = opts.restaurant_detail;
+			this.user = opts.user;
+			this.reviewsService = opts.reviewsService;
 
 			this.reviewsRegion = new Marionette.Region({
 				el: '#restaurant-reviews-tab'
 			});
-			this.reviewsView= new ReviewsView({restaurant_id: this.restaurant_detail.__eatery_id, region: this.reviewsRegion});
+
+			this.reviewsService.getRestaurantReview(this.restaurant_id).then(function (reviews_list) {
+				// self.collection.reset(reviews_list);
+				// self.region.show(self);
+			}, function (fail) {
+				console.log('is anybody in here?"');
+			});
+			// this.reviewsView = new ReviewsView({ restaurant_id: this.restaurant_detail.__eatery_id, region: this.reviewsRegion, reviewsService: this.reviewsService });
 		},
 		ui: {
 			'tabs': '.restaurant-tabs-menu',
@@ -62,58 +70,55 @@ define(function(require) {
 				},
 				'ambience-items': function () {
 					var ambienceList = this.model.get('ambience');
-					var max_sentiments= _.max(ambienceList, function(ambienceItem) {return ambienceItem.total_sentiments;})
+					var max_sentiments = _.max(ambienceList, function (ambienceItem) { return ambienceItem.total_sentiments; })
 					var notReviewedAmbienceItem = [];
-					var reviewedAmbienceItem= {};
+					var reviewedAmbienceItem = {};
 					_.each(ambienceList, function (ambienceItem, key, obj) {
-						ambienceItem.max_sentiments= max_sentiments.total_sentiments;
+						ambienceItem.max_sentiments = max_sentiments.total_sentiments;
 						if (ambienceItem.total_sentiments) {
-							reviewedAmbienceItem[key]= ambienceItem;
+							reviewedAmbienceItem[key] = ambienceItem;
 						} else {
 							notReviewedAmbienceItem.push(key);
 						};
 					});
 					return { filtered: reviewedAmbienceItem, notReviewed: notReviewedAmbienceItem };
 				},
-				'service-items': function() {
+				'service-items': function () {
 					var serviceList = this.model.get('service');
-					var max_sentiments= _.max(serviceList, function(serviceItem) {return serviceItem.total_sentiments;})
+					var max_sentiments = _.max(serviceList, function (serviceItem) { return serviceItem.total_sentiments; })
 					var notReviewedServiceItem = [];
-					var reviewedServiceItem= {};
+					var reviewedServiceItem = {};
 					_.each(serviceList, function (serviceItem, key, obj) {
-						serviceItem.max_sentiments= max_sentiments.total_sentiments;
+						serviceItem.max_sentiments = max_sentiments.total_sentiments;
 						if (serviceItem.total_sentiments) {
-							reviewedServiceItem[key]= serviceItem;
+							reviewedServiceItem[key] = serviceItem;
 						} else {
 							notReviewedServiceItem.push(key);
 						};
 					});
 					return { filtered: reviewedServiceItem, notReviewed: notReviewedServiceItem };
 				},
-				'food-items': function() {
-					var foodList= this.model.get('food');
-					var max_sentiments= parseInt(foodList[0].total_sentiments);
-					foodList= _.each(foodList, function(foodItem, key, obj) {
-						foodItem.max_sentiments= max_sentiments;
+				'food-items': function () {
+					var foodList = this.model.get('food');
+					var max_sentiments = parseInt(foodList[0].total_sentiments);
+					foodList = _.each(foodList, function (foodItem, key, obj) {
+						foodItem.max_sentiments = max_sentiments;
 					});
 					return foodList;
 				},
 			}
 		},
-		onShow: function() {
+		onShow: function () {
 			var self = this;
-			require(['tabs', 'collapsible'], function() {
+			require(['tabs', 'collapsible'], function () {
 				self.ui.tabs.tabs();
 				self.ui.ambienceOverview.collapsible();
 				self.ui.serviceOverview.collapsible();
 				self.ui.foodOverview.collapsible();
 			});
 			this.$el.parent().removeClass('hide');
-			// this.reviews.fetch({ method: 'POST', data: { __eatery_id: this.restaurant_detail.__eatery_id } }).then(function () {
-			// 	self.reviewsRegion.show(self.reviewsView);
-			// });
 		},
-		closeDetails: function(e) {
+		closeDetails: function (e) {
 			e.preventDefault();
 			this.$el.parent().addClass('hide');
 			this.remove();

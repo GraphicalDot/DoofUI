@@ -458,12 +458,9 @@ body {
             padding: 0; }
     #applicationPage .doof-body .food-item-list {
       margin-top: 0;
-      box-shadow: none;
-      padding: 12px 18px; }
+      box-shadow: none; }
       #applicationPage .doof-body .food-item-list .details__food-menu_food-item {
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-        margin-top: 6px;
-        margin-bottom: 6px; }
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
         #applicationPage .doof-body .food-item-list .details__food-menu_food-item .food-menu_food-item-header {
           display: flex;
           align-items: center; }

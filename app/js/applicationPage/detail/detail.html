@@ -1,6 +1,10 @@
 <a href="#" class="restaurant-details__close-btn box-close-btn"><i class="material-icons">clear</i></a>
 
-<div class="restaurant-meta-information">
+{{#if images}}
+	<div class="restaurant-meta-information" style="background: url({{images.0.s3_url}}); background-size: cover;">
+{{else}}
+	<div class="restaurant-meta-information">
+{{/if}}
 	<div class="restaurant-information-wrapper">
 		<h4 class="restaurant-name">{{restaurant-name}}</h4>
 		<span class="restaurant-address">{{restaurant-address}}</span>

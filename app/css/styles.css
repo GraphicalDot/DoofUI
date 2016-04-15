@@ -400,23 +400,29 @@ body {
         flex-direction: column; }
         #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information {
           border-radius: 6px 6px 0 0;
-          padding: 12px 18px;
-          background-color: #f5f5f5; }
-          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-name {
-            font-family: "Utopia";
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #F44336; }
-          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-address {
-            color: #212121; }
-          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews {
-            margin-top: 12px;
-            margin-bottom: 12px; }
-            #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews i {
-              margin-right: 3px;
-              color: #727272; }
-              #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-reviews i.active {
-                color: #F44336; }
+          background-color: #f5f5f5;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover; }
+          #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-information-wrapper {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 6px; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-information-wrapper .restaurant-name {
+              font-family: "Utopia";
+              font-weight: bold;
+              text-transform: uppercase;
+              color: #F44336; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-information-wrapper .restaurant-address {
+              color: #212121; }
+            #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-information-wrapper .restaurant-reviews {
+              margin-top: 12px;
+              margin-bottom: 12px; }
+              #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-information-wrapper .restaurant-reviews i {
+                margin-right: 3px;
+                color: #727272; }
+                #applicationPage .doof-body .body__detail-box #detailView .restaurant-meta-information .restaurant-information-wrapper .restaurant-reviews i.active {
+                  color: #F44336; }
         #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper {
           font-size: 12px; }
           #applicationPage .doof-body .body__detail-box #detailView .restaurant-tabs-menu-wrapper .tabs {

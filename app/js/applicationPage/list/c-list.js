@@ -56,6 +56,7 @@ define(function (require) {
 
 	var List = Marionette.CollectionView.extend({
 		id: 'doof-list',
+		className: 'doof-list-item',
 		emptyView: EmptyList,
 		childView: ListItem,
 		highlight: function (markerId) {
@@ -63,7 +64,7 @@ define(function (require) {
 			var $target = this.$el.find('.list-item[eatery-id="' + markerId + '"]');
 			$target.addClass('active');
 			$target.velocity("scroll", {
-				container: $('#doof-list'),
+				container: $('.doof-list-item'),
 				duration: 500,
 				offset: -180,
 				easing: "ease-in-out"

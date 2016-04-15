@@ -58,13 +58,14 @@ define(function (require) {
 			search: '.masthead__search-container',
 			map: '.body__map-container',
 			list: '.body__list',
+			searchList: '.body__search-list',
 			detail: '.body__detail-box',
 		},
 		ui: {
 			'feedbackLink': '#nav-menu__feedback-link',
 			'subMenuTabsWrapper': '.body__sub-menu',
 			'subMenuTrendingLink': '#sub-menu__trending-link',
-			'subMenuNearMeLink': '#sub-menu__nearme-link'
+			'subMenuNearMeLink': '#sub-menu__nearme-link',
 		},
 		events: {
 			'click @ui.subMenuTrendingLink': 'showTrendingRestaurants',
@@ -76,7 +77,7 @@ define(function (require) {
 			'unhightlight:marker': 'unhighlightGoogleMapMarker',
 			'highlight:list-item': 'highlightRestaurantListItem',
 			'unhighlight:list-item': 'unhighlightRestaurantListItem',
-			'showSearchResults': 'updateResult'
+			'showSearchResults': 'searchResults'
 		},
 		onShow: function () {
 			var self = this;
@@ -133,7 +134,7 @@ define(function (require) {
 			this.mapBoxView.updateMyLocationMarker();
 		},
 
-		updateResult: function(childView, eateries, newLatLng) {
+		searchResults: function(childView, eateries, newLatLng) {
 			this.latLng.lat= newLatLng.lat;
 			this.latLng.lng= newLatLng.lng;
 			if(eateries && eateries.length) {

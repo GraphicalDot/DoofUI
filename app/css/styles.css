@@ -311,49 +311,49 @@ body {
         flex: 1;
         display: flex;
         flex-direction: column; }
-        #applicationPage .doof-body .body__list-container .body__list #doof-list {
+        #applicationPage .doof-body .body__list-container .body__list .doof-list-item {
           flex: 1 1 0;
           width: 100%;
           min-height: 100%;
           overflow-y: auto;
           display: flex;
           flex-direction: column; }
-          #applicationPage .doof-body .body__list-container .body__list #doof-list .empty-list {
+          #applicationPage .doof-body .body__list-container .body__list .doof-list-item .empty-list {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center; }
-          #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item {
+          #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item {
             display: flex;
             cursor: pointer;
             border-bottom: 1px solid #B6B6B6; }
-            #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item:hover, #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item.active {
+            #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item:hover, #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item.active {
               background-color: #f5f5f5;
               box-shadow: 0 0px 8px #787878; }
-            #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .food-image,
-            #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .rest-image {
+            #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .food-image,
+            #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .rest-image {
               flex: 0 0 120px;
               padding: 12px 0; }
-            #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .mata-information {
+            #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information {
               display: flex;
               flex-direction: column;
               padding: 12px 0; }
-              #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .mata-information .eatery_name {
+              #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information .eatery_name {
                 color: #212121; }
-              #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .mata-information h6 {
+              #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information h6 {
                 font-size: 1.2rem;
                 letter-spacing: .6px;
                 font-family: "Utopia";
                 color: #F44336;
                 text-transform: capitalize;
                 font-weight: bold; }
-              #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .mata-information span {
+              #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information span {
                 color: #727272; }
-              #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .mata-information .top-foods .chip {
+              #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information .top-foods .chip {
                 margin-top: 6px;
                 margin-right: 6px; }
-                #applicationPage .doof-body .body__list-container .body__list #doof-list .list-item .mata-information .top-foods .chip i {
+                #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information .top-foods .chip i {
                   float: left;
                   padding-right: 8px;
                   padding-left: 0px; }

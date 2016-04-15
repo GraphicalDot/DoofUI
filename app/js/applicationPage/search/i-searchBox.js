@@ -33,68 +33,14 @@ define(function (require) {
 			'click @ui.clearSearchBtn': 'clearSearch',
 			'click @ui.searchBtn': 'search'
 		},
-		getLocation: function (e) {
-			e.preventDefault();
-			var self = this;
-			function success(position) {
-				self.latLng.lat = position.coords.latitude;
-				self.latLng.lng = position.coords.longitude;
-				self.googleService.geoCodeService(self.latLng.lat, self.latLng.lng).then(function (geoCodeResult) {
-					self.place = geoCodeResult.formatted_address;
-					self.ui.searchLocationBox.val(geoCodeResult.formatted_address);
-					if(self.isSearchActive()) {
-						var searchBoxValue= self.ui.searchDoofBox.val();
-						if(self.selected=== 'restaurant') {
-							self.restaurantSelect(searchBoxValue);
-						} else if (self.selected=== 'cuisine') {
-							self.cuisineSelect(searchBoxValue);
-						} else {
-							self.foodSelect(searchBoxValue);
-						}
-					} else {
-						self.search();
-					}
-				});
-			};
-			function fail() {
-				console.log("soory could not get your location");
-			};
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(success, fail, {});
-			}
+		onShow: function () {
+			this.loadTypeahead();
+			this.makeGeolocationBox();
 		},
-		clearSearch: function (e) {
-			e.preventDefault();
-			this.ui.searchDoofBox.val('');
-			this.search();
-		},
-		search: function(restaurants_list) {
-			this.triggerMethod('showSearchResults', restaurants_list, this.latLng);
-		},
-		isSearchActive: function() {
-			return Boolean(this.ui.searchDoofBox.val());
-		},
-		foodSelect: function (food_name) {
-			var self = this;
-			self.selected= 'food';
-			this.textService.getByFood(food_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
-				self.search(restaurants_list);
-			});
-		},
-		cuisineSelect: function (cuisine_name) {
-			var self = this;
-			self.selected= 'cuisine';
-			this.textService.getByCuisine(cuisine_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
-				self.search(restaurants_list);
-			});
-		},
-		restaurantSelect: function (restaurant_name) {
-			var self = this;
-			self.selected= 'restaurant';
-			this.textService.getByRestaurantName(restaurant_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
-				self.search(restaurants_list);
-			});
-		},
+
+		/**
+		 * This function loads Typeahead suggestion box..
+		 */
 		loadTypeahead: function () {
 			var self = this;
 			var opts = { hint: true, highlight: true, minLength: 4 };
@@ -149,9 +95,11 @@ define(function (require) {
 				};
 				self.ui.searchDoofBox.typeahead(opts, foodQuery, restaurantQuery, cuisineQuery)
 					.on('typeahead:asyncrequest', function () {
-						//show loading..
+						$('.clear-search__icon').addClass('hide');
+						$('.typeahead-loader').removeClass('hide');
 					}).on('typeahead:asynccancel typeahead:asyncreceive', function () {
-						//hide spinner
+						$('.clear-search__icon').removeClass('hide');
+						$('.typeahead-loader').addClass('hide');
 					}).bind('typeahead:render', function (e) {
 						self.ui.searchDoofBox.parent().find('.tt-selectable:first').addClass('tt-cursor');
 					}).bind("typeahead:select", function (ev, suggestion) {
@@ -168,21 +116,24 @@ define(function (require) {
 					});
 			});
 		},
-		makeGeolocationBox: function() {
-			var self= this;
-			this.googleService.makeGeolocatorBox('search__location').then(function(autoCompleteBox) {
-				autoCompleteBox.addListener('place_changed', function() {
-					var place= autoCompleteBox.getPlace();
-					if(!place.geometry) {return ;}
-					if(place.geometry.location) {
-						self.latLng.lat= place.geometry.location.lat();
-						self.latLng.lng= place.geometry.location.lng();
-						self.place= place.formatted_address;
-						if(self.isSearchActive()) {
-							var searchBoxValue= self.ui.searchDoofBox.val();
-							if(self.selected=== 'restaurant') {
+		/**
+		 * This functions make Geolocator Box in search.
+		 */
+		makeGeolocationBox: function () {
+			var self = this;
+			this.googleService.makeGeolocatorBox('search__location').then(function (autoCompleteBox) {
+				autoCompleteBox.addListener('place_changed', function () {
+					var place = autoCompleteBox.getPlace();
+					if (!place.geometry) { return; }
+					if (place.geometry.location) {
+						self.latLng.lat = place.geometry.location.lat();
+						self.latLng.lng = place.geometry.location.lng();
+						self.place = place.formatted_address;
+						if (self.isSearchActive()) {
+							var searchBoxValue = self.ui.searchDoofBox.val();
+							if (self.selected === 'restaurant') {
 								self.restaurantSelect(searchBoxValue);
-							} else if (self.selected=== 'cuisine') {
+							} else if (self.selected === 'cuisine') {
 								self.cuisineSelect(searchBoxValue);
 							} else {
 								self.foodSelect(searchBoxValue);
@@ -194,9 +145,69 @@ define(function (require) {
 				});
 			});
 		},
-		onShow: function () {
-			this.loadTypeahead();
-			this.makeGeolocationBox();
+		isSearchActive: function () {
+			return Boolean(this.ui.searchDoofBox.val());
+		},
+		// Gets Restaurant based on Food Item
+		foodSelect: function (food_name) {
+			var self = this;
+			self.selected = 'food';
+			this.textService.getByFood(food_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
+				self.search(restaurants_list);
+			});
+		},
+		// Gets Restaurant based on Cuisine Item
+		cuisineSelect: function (cuisine_name) {
+			var self = this;
+			self.selected = 'cuisine';
+			this.textService.getByCuisine(cuisine_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
+				self.search(restaurants_list);
+			});
+		},
+		restaurantSelect: function (restaurant_name) {
+			var self = this;
+			self.selected = 'restaurant';
+			this.textService.getByRestaurantName(restaurant_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
+				self.search(restaurants_list);
+			});
+		},
+		search: function (restaurants_list) {
+			this.triggerMethod('showSearchResults', restaurants_list, this.latLng);
+		},
+		clearSearch: function (e) {
+			e.preventDefault();
+			this.ui.searchDoofBox.val('');
+			this.search();
+		},
+		getLocation: function (e) {
+			e.preventDefault();
+			var self = this;
+			function success(position) {
+				self.latLng.lat = position.coords.latitude;
+				self.latLng.lng = position.coords.longitude;
+				self.googleService.geoCodeService(self.latLng.lat, self.latLng.lng).then(function (geoCodeResult) {
+					self.place = geoCodeResult.formatted_address;
+					self.ui.searchLocationBox.val(geoCodeResult.formatted_address);
+					if (self.isSearchActive()) {
+						var searchBoxValue = self.ui.searchDoofBox.val();
+						if (self.selected === 'restaurant') {
+							self.restaurantSelect(searchBoxValue);
+						} else if (self.selected === 'cuisine') {
+							self.cuisineSelect(searchBoxValue);
+						} else {
+							self.foodSelect(searchBoxValue);
+						}
+					} else {
+						self.search();
+					}
+				});
+			};
+			function fail() {
+				console.log("soory could not get your location");
+			};
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(success, fail, {});
+			}
 		},
 	});
 	return SearchBoxView;

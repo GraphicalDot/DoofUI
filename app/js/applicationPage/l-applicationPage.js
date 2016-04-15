@@ -23,6 +23,7 @@ define(function (require) {
 			this.latLng = opts.position.latLng ? opts.position.latLng : { lat: '28.6139', lng: '77.2090' },
 			this.place = opts.position.place ? opts.position.place : 'New Delhi';
 			this.startingEateries= opts.eateries;
+			this.eateryCategory= opts.category;
 
 			//Services
 			this.dataService= opts.dataService;
@@ -39,6 +40,18 @@ define(function (require) {
 			this.listView = new ListView({ collection: this.collection });
 		},
 		template: Handlebars.compile(Template),
+		templateHelpers: {
+			'isTrendingActive': function() {
+				if(this.eateryCategory=== 'trending') {
+					return 'active';
+				}
+			},
+			'isNearbyActive': function() {
+				if(this.eateryCategory=== 'nearyby') {
+					return 'active';
+				}
+			}
+		},
 		regions: {
 			userProfile: '.body__profile-box',
 			userMenu: '.nav-menu-item__user',
@@ -65,54 +78,6 @@ define(function (require) {
 			'unhighlight:list-item': 'unhighlightRestaurantListItem',
 			'showSearchResults': 'updateResult'
 		},
-		highlightGoogleMapMarker: function (childView, markerId) {
-			this.mapBoxView.highlight(markerId);
-		},
-		unhighlightGoogleMapMarker: function () {
-			this.mapBoxView.unhighlight();
-		},
-		highlightRestaurantListItem: function (childView, markerId) {
-			this.listView.highlight(markerId);
-		},
-		unhighlightRestaurantListItem: function () {
-			this.listView.unhighlight();
-		},
-		updateResult: function(childView, eateries, newLatLng) {
-			this.latLng.lat= newLatLng.lat;
-			this.latLng.lng= newLatLng.lng;
-			if(eateries && eateries.length) {
-				this.collection.reset(eateries);
-			} else {
-				if ($("#sub-menu__nearme-link").hasClass('active')) {
-					this.showNearMeRestaurants();
-				} else {
-					this.showTrendingRestaurants();
-				}
-			}
-		},
-		showTrendingRestaurants: function () {
-			var self = this;
-			this.dataService.getTrending(this.latLng).then(function (trendingRestaurants) {
-				self.collection.reset(trendingRestaurants);
-			}, function (error) { console.log('failed'); });
-		},
-		showNearMeRestaurants: function () {
-			var self = this;
-			this.dataService.getNearby(this.latLng).then(function (nearMeRestaurants) {
-				self.collection.reset(nearMeRestaurants);
-			}, function (error) { console.log('failed'); });
-		},
-		openDetailViewRestaurant: function (childView, restaurant_id, restaurant_info) {
-			var self = this;
-			this.dataService.getSingleRestaurant(restaurant_id).then(function (restaurant_details) {
-				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info });
-				self.showChildView('detail', detailView);
-			}, function (error) { console.log(error); });
-		},
-		updateGoogleMapsMarker: function () {
-			this.mapBoxView.showMarkers(this.collection.toJSON());
-			this.mapBoxView.updateMyLocationMarker();
-		},
 		onShow: function () {
 			var self = this;
 			require(['leanModal', 'tabs'], function () {
@@ -130,7 +95,73 @@ define(function (require) {
 			} else {
 				this.showTrendingRestaurants();
 			}
-		}
+		},
+
+		/**
+		 * This function finds Trending Restaurants.
+		 */
+		showTrendingRestaurants: function () {
+			var self = this;
+			this.dataService.getTrending(this.latLng).then(function (trendingRestaurants) {
+				self.collection.reset(trendingRestaurants);
+			}, function (error) { console.log('failed'); });
+		},
+		/**
+		 * This function finds Near Me Restaurants.
+		 */
+		showNearMeRestaurants: function () {
+			var self = this;
+			this.dataService.getNearby(this.latLng).then(function (nearMeRestaurants) {
+				self.collection.reset(nearMeRestaurants);
+			}, function (error) { console.log('failed'); });
+		},
+		/**
+		 * This function open Detail View for a Restaurant.
+		 * @param restaurant_id -> Unique ID of Restaurant
+		 * @param restaurant_info -> Earlier meta information of Restaurant.
+		 */
+		openDetailViewRestaurant: function (childView, restaurant_id, restaurant_info) {
+			var self = this;
+			this.dataService.getSingleRestaurant(restaurant_id).then(function (restaurant_details) {
+				var detailView = new DetailView({ model: restaurant_details, user: self.user, restaurant_detail: restaurant_info });
+				self.showChildView('detail', detailView);
+			}, function (error) { console.log(error); });
+		},
+
+		updateGoogleMapsMarker: function () {
+			this.mapBoxView.showMarkers(this.collection.toJSON());
+			this.mapBoxView.updateMyLocationMarker();
+		},
+
+		updateResult: function(childView, eateries, newLatLng) {
+			this.latLng.lat= newLatLng.lat;
+			this.latLng.lng= newLatLng.lng;
+			if(eateries && eateries.length) {
+				this.collection.reset(eateries);
+			} else {
+				if (this.ui.subMenuNearMeLink.hasClass('active')) {
+					this.showNearMeRestaurants();
+				} else {
+					this.showTrendingRestaurants();
+				}
+			}
+		},
+
+		//Highlighters
+		highlightGoogleMapMarker: function (childView, markerId) {
+			this.mapBoxView.highlight(markerId);
+		},
+		unhighlightGoogleMapMarker: function () {
+			this.mapBoxView.unhighlight();
+		},
+		highlightRestaurantListItem: function (childView, markerId) {
+			this.listView.highlight(markerId);
+		},
+		unhighlightRestaurantListItem: function () {
+			this.listView.unhighlight();
+		},
+
+
 	});
 
 	return ApplicationPage;

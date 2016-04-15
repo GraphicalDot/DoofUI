@@ -45,7 +45,7 @@ define(function (require) {
 		 * Loads Application View.
 		 * @params position -> {latLng: {lat: startingLat, lng: startingLng}, place: 'New Delhi'}
 		 * @params eateries -> List of eateries to show [Optional]
-		 * @params eateryCategory -> Trending/ nearby [Type of eateries in one params ]
+		 * @params eateryCategory -> trending / nearby [Type of eateries in one params ]
 		 */
 		application: function (position, eateries, eateryCategory) {
 			var applicationPage = new ApplicationPage({ user: this.user, position: position, eateries: eateries, category: eateryCategory, dataService: this.dataService, googleService: this.googleService });

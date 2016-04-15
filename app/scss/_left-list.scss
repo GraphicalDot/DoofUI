@@ -71,7 +71,18 @@
 				.food-image,
 				.rest-image {
 					flex: 0 0 120px;
-					padding: 12px 0;
+					padding: 12px;
+					position: relative;
+					span.restaurant-rating {
+						position: absolute;
+						top: 12px;
+						right: 12px;
+    					padding: 3px;
+						background-color: $background-color;
+						color: $brand-color;
+						font-weight: bold;
+    					font-family: 'Utopia';
+					}
 				}
 				.mata-information {
 					display: flex;

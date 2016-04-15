@@ -17,6 +17,29 @@ define(function (require) {
 		templateHelpers: {
 			foodBlock: function () {
 				return this.model.get('category') === 'food';
+			},
+			sentiment: function () {
+				var terrible, poor, average, mix, good, excellent, total_sentiments = 0;
+				if (this.model.get('category') === 'food') {
+					terrible = this.model.get('terrible') ? this.model.get('terrible') : 0;
+					poor = this.model.get('poor') ? this.model.get('poor') : 0;
+					average = this.model.get('average') ? this.model.get('average') : 0;
+					mix = this.model.get('mix') ? this.model.get('mix') : 0;
+					good = this.model.get('good') ? this.model.get('good') : 0;
+					excellent = this.model.get('excellent') ? this.model.get('excellent') : 0;
+					total_sentiments = this.model.get('total_sentiments') ? this.model.get('total_sentiments') : 1;
+				} else {
+					terrible = this.model.get('eatery_details').overall.terrible ? this.model.get('eatery_details').overall.terrible : 0;
+					poor = this.model.get('eatery_details').overall.poor ? this.model.get('eatery_details').overall.poor : 0;
+					average = this.model.get('eatery_details').overall.average ? this.model.get('eatery_details').overall.average : 0;
+					mix = this.model.get('eatery_details').overall.mix ? this.model.get('eatery_details').overall.mix : 0;
+					good = this.model.get('eatery_details').overall.good ? this.model.get('eatery_details').overall.good : 0;
+					excellent = this.model.get('eatery_details').overall.excellent ? this.model.get('eatery_details').overall.excellent : 0;
+					total_sentiments = this.model.get('eatery_details').overall.total_sentiments ? this.model.get('eatery_details').overall.total_sentiments : 1;
+				}
+
+				// console.log(this.model.get('eatery_details').eatery_name, terrible, poor, average, mix, good, excellent, total_sentiments);
+				return ((0 * terrible + 2.5 * poor + 4.8 * average + 5.2 * mix + 7.5 * good + 10 * excellent) / total_sentiments).toFixed(1);
 			}
 		},
 		ui: {

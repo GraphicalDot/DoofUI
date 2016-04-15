@@ -1,6 +1,7 @@
 {{#if foodBlock}}
 <div class="food-image photo">
 	<img src="css/images/placeholder_food.png" alt="food-placeholder" class="responsive-img">
+	<span class="restaurant-rating">{{sentiment}}</span>
 </div>
 <div class="mata-information">
 	<h6>{{name}}</h6>
@@ -10,6 +11,7 @@
 {{else}}
 <div class="rest-image photo">
 	<img src="css/images/placeholder_rest.png" alt="restaurant-placeholder" class="responsive-img">
+	<span class="restaurant-rating">{{sentiment}}</span>
 </div>
 <div class="mata-information">
 	<h6>{{eatery_details.eatery_name}}</h6>

@@ -334,7 +334,18 @@ body {
             #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .food-image,
             #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .rest-image {
               flex: 0 0 120px;
-              padding: 12px 0; }
+              padding: 12px;
+              position: relative; }
+              #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .food-image span.restaurant-rating,
+              #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .rest-image span.restaurant-rating {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                padding: 3px;
+                background-color: #FFC952;
+                color: #F44336;
+                font-weight: bold;
+                font-family: 'Utopia'; }
             #applicationPage .doof-body .body__list-container .body__list .doof-list-item .list-item .mata-information {
               display: flex;
               flex-direction: column;

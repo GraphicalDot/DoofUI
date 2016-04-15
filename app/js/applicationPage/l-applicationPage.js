@@ -25,12 +25,12 @@ define(function (require) {
 			this.user = opts.user;
 			this.latLng = opts.position ? opts.position.latLng : { lat: '28.6139', lng: '77.2090' },
 			this.place = opts.position ? opts.position.place : 'New Delhi';
-			this.startingEateries= opts.eateries;
-			this.eateryCategory= opts.category;
+			this.startingEateries = opts.eateries;
+			this.eateryCategory = opts.category;
 
 			//Services
-			this.dataService= opts.dataService;
-			this.googleService= opts.googleService;
+			this.dataService = opts.dataService;
+			this.googleService = opts.googleService;
 
 			//Collection
 			this.collection = new ApplicationCollection(opts.eateries);
@@ -47,32 +47,32 @@ define(function (require) {
 		},
 		template: Handlebars.compile(Template),
 		templateHelpers: {
-			'isTrendingActive': function() {
-				if(this.eateryCategory=== 'trending') {
+			'isTrendingActive': function () {
+				if (this.eateryCategory === 'trending') {
 					return 'active';
 				}
 			},
-			'isNearbyActive': function() {
-				if(this.eateryCategory=== 'nearyby') {
+			'isNearbyActive': function () {
+				if (this.eateryCategory === 'nearyby') {
 					return 'active';
 				}
 			},
-			isAuthorized: function() {
-				if(this.user.isAuthorized()) {
+			isAuthorized: function () {
+				if (this.user.isAuthorized()) {
 					return 'active';
 				} else {
 					return '';
 				}
 			},
-			userName: function() {
-				if(this.user.isAuthorized()) {
+			userName: function () {
+				if (this.user.isAuthorized()) {
 					return this.user.get('name');
 				} else {
 					return '';
 				}
 			},
-			userEmail: function() {
-				if(this.user.isAuthorized()) {
+			userEmail: function () {
+				if (this.user.isAuthorized()) {
 					return this.user.get('email')
 				} else {
 					return '';
@@ -123,7 +123,7 @@ define(function (require) {
 			this.showChildView('list', this.listView);
 			this.showChildView('map', this.mapBoxView);
 
-			if(this.startingEateries) {
+			if (this.startingEateries) {
 				this.collection.reset(this.startingEateries);
 			} else {
 				this.showTrendingRestaurants();
@@ -166,10 +166,10 @@ define(function (require) {
 			this.mapBoxView.updateMyLocationMarker();
 		},
 
-		searchResults: function(childView, eateries, newLatLng) {
-			this.latLng.lat= newLatLng.lat;
-			this.latLng.lng= newLatLng.lng;
-			if(eateries && eateries.length) {
+		searchResults: function (childView, eateries, newLatLng) {
+			this.latLng.lat = newLatLng.lat;
+			this.latLng.lng = newLatLng.lng;
+			if (eateries && eateries.length) {
 				this.collection.reset(eateries);
 			} else {
 				if (this.ui.subMenuNearMeLink.hasClass('active')) {
@@ -184,19 +184,19 @@ define(function (require) {
 		 * Function for submitted Feedback
 		 */
 		submitFeedback: function (e) {
-			var self= this;
+			var self = this;
 			e.preventDefault();
 			if (this.ui.feedbackName.val() && this.ui.feedbackEmail.val() && this.ui.feedbackBody.val()) {
 				this.userFeedback.fetch({ method: 'POST', data: { fb_id: this.user.get('id'), "feedback": this.ui.feedbackBody.val(), "name": this.ui.feedbackName.val(), "email": this.ui.feedbackEmail.val() } }).then(function (response) {
-					var toast_message= ''
+					var toast_message = ''
 					if (response.success) {
 						self.ui.feedbackModal.closeModal();
 						self.ui.feedbackBody.val('');
-						toast_message= response.message ? response.message : "Thank you for submitting Feedback";
+						toast_message = response.messege ? response.messege : "Thank you for submitting Feedback";
 					} else {
-						toast_message= "Sorry, some error.. Try again later..";
+						toast_message = "Sorry, some error.. Try again later..";
 					}
-					require(['toasts'], function() {
+					require(['toasts'], function () {
 						Materialize.toast("Thank you for submitted Feedback", 3000);
 					});
 				});

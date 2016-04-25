@@ -22,10 +22,13 @@ define(function (require) {
 			'ambienceOverview': '.ambience-overview',
 			'serviceOverview': '.service-overview',
 			'foodOverview': '.food-item-list',
-			'closeBtn': '.restaurant-details__close-btn'
+			'closeBtn': '.restaurant-details__close-btn',
+			'reviewsBox': '#review-box',
+			'writeReviewBtn': '.submit-review-form'
 		},
 		events: {
-			'click @ui.closeBtn': 'closeDetails'
+			'click @ui.closeBtn': 'closeDetails',
+			'click @ui.writeReviewBtn': 'writeReview'
 		},
 		templateHelpers: function () {
 			return {
@@ -122,6 +125,9 @@ define(function (require) {
 			e.preventDefault();
 			this.$el.parent().addClass('hide');
 			this.remove();
+		},
+		writeReview: function(e) {
+			var reviewText= this.ui.reviewsBox.val();
 		}
 	});
 	return DetailView;

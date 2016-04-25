@@ -19,7 +19,6 @@ define(function(require) {
 			this.reviewsService.getUserReviews(id)
 				.then(function(user_reviews) {
 					self.userReviews= user_reviews;
-					console.log(user_reviews);
 					self.render();
 				})
 				.catch(console.log.bind(console));

@@ -15,6 +15,11 @@ define(function (require) {
 			this.restaurant_detail = opts.restaurant_detail;
 			this.user = opts.user;
 			this.reviewsService = opts.reviewsService;
+
+			// this.reviewsRegion = new Marionette.Region({
+			// 	el: '#restaurant-reviews-tab'
+			// });
+			// this.reviewsView = new ReviewsView({ restaurant_id: this.restaurant_detail.__eatery_id, reviewsService: this.reviewsService });
 		},
 		ui: {
 			'tabs': '.restaurant-tabs-menu',
@@ -105,18 +110,7 @@ define(function (require) {
 				self.ui.foodOverview.collapsible();
 			});
 
-			this.reviewsRegion = new Marionette.Region({
-				el: '#restaurant-reviews-tab'
-			});
-
-			this.reviewsService.getRestaurantReview(this.restaurant_id).then(function (reviews_list) {
-				self.collection.reset(reviews_list);
-				self.region.show(self);
-			}, function (fail) {
-				console.log('is anybody in here?"');
-			});
-			this.reviewsView = new ReviewsView({ restaurant_id: this.restaurant_detail.__eatery_id, region: this.reviewsRegion, reviewsService: this.reviewsService });
-
+			// this.reviewsRegion.show(this.reviewsView);
 			this.$el.parent().removeClass('hide');
 		},
 		closeDetails: function (e) {

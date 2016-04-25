@@ -4,35 +4,34 @@ define(function (require) {
 	var Service = require('marionette-service');
 	var Promise = require('es6promise').Promise;
 
-	// var UserProfileReviews = require('./../models/reviews/user-reviews');
-	// var WriteReviews = require('./../models/reviews/write-restaurant-reviews');
+	var UserProfileReviews = require('./../models/reviews/user-reviews');
+	var WriteReviews = require('./../models/reviews/write-restaurant-reviews');
 	var RestaurantReviews = require('./../models/reviews/fetch-restaurant-reviews');
 
 	var ReviewsService = Service.extend({
-		intialize: function () {
-			// this.userProfileReview = new UserProfileReviews();
+		initialize: function () {
+			this.userProfileReview = new UserProfileReviews();
 			this.restaurantReviews = new RestaurantReviews();
-			// this.WriteReview = new WriteReviews();
+			this.WriteReview = new WriteReviews();
 		},
 		requests: {
 			'getRestaurantReview': 'fetchRestaurantReviews',
-			// 'writeReview': 'write',
-			// 'getUserReviews': 'fetchUserReviews'
+			'writeReview': 'write',
+			'getUserReviews': 'getUserReviews'
 		},
-		// fetchUserReviews: function (user_id) {
-		// 	var self = this;
-		// 	var promise = new Promise(function (resolve, reject) {
-		// 		self.userProfileReview.fetch({ method: 'POST', data: { fb_id: user_id } }).then(function () {
-		// 			resolve(self.userProfileReview);
-		// 		}).fail(function () {
-		// 			reject();
-		// 		});
-		// 	});
-		// 	return promise;
-		// },
+		getUserReviews: function (user_id) {
+			var self = this;
+			var promise = new Promise(function (resolve, reject) {
+				self.userProfileReview.fetch({ method: 'POST', data: { fb_id: user_id } }).then(function () {
+					resolve(self.userProfileReview.toJSON());
+				}).fail(function () {
+					reject();
+				});
+			});
+			return promise;
+		},
 		fetchRestaurantReviews: function (restaurant_id) {
 			var self = this;
-			console.log(1);
 			var promise = new Promise(function (resolve, reject) {
 				self.restaurantReviews.fetch({ method: 'POST', data: { __eatery_id: restaurant_id } }).then(function () {
 					console.log(self.restaurantReviews);
@@ -43,7 +42,7 @@ define(function (require) {
 			});
 			return promise;
 		},
-		// write: function () {},
+		write: function () { },
 	});
 
 	return ReviewsService;

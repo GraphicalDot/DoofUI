@@ -6,23 +6,28 @@ define(function(require) {
 	var Handlebars = require('handlebars');
 	var Template = require('text!./profile.html');
 
-	var UserReviews = require('./../../../models/reviews/user-reviews');
-
 	var ProfileView= Marionette.ItemView.extend({
 		id: 'profileView',
 		template: Handlebars.compile(Template),
-		initialize: function() {
+		initialize: function(opts) {
 			var self= this;
 			var id= this.model.get('id');
-			this.reviews= new UserReviews();
-			this.reviews.fetch({ method: "POST", data: { fb_id: id } }).then(function () {
-				self.render();
-			});
+
+			this.userReviews= '';
+
+			this.reviewsService= opts.reviewsService;
+			this.reviewsService.getUserReviews(id)
+				.then(function(user_reviews) {
+					self.userReviews= user_reviews;
+					console.log(user_reviews);
+					self.render();
+				})
+				.catch(console.log.bind(console));
 		},
 		templateHelpers: function () {
 			return {
 				reviews: function () {
-					return this.reviews.toJSON();
+					return self.userReviews;
 				}
 			}
 		},

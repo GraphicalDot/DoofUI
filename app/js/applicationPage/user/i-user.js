@@ -12,6 +12,7 @@ define(function (require) {
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
 			this.userProfileRegion = opts.userProfileRegion;
+			this.reviewsService= opts.reviewsService;
 		},
 		ui: {
 			'userProfileDropdown': '.user-menu__user-link',
@@ -32,7 +33,7 @@ define(function (require) {
 		showProfile: function (e){
 			e.preventDefault();
 			if(this.model.isAuthorized()) {
-				this.profileView= new ProfileView({model: this.model});
+				this.profileView= new ProfileView({model: this.model, reviewsService: this.reviewsService});
 				this.userProfileRegion.show(this.profileView);
 			}
 		},

@@ -33,8 +33,8 @@ define(function (require) {
 			//Services
 			this.dataService = opts.dataService;
 			this.googleService = opts.googleService;
-			this.reviewsService= new ReviewsDataService();
-
+			this.reviewsService = new ReviewsDataService();
+			
 			//Collection
 			this.collection = new ApplicationCollection(opts.eateries);
 			this.collection.on('reset', this.updateGoogleMapsMarker, this);

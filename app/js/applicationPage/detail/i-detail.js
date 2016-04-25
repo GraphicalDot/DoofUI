@@ -20,12 +20,14 @@ define(function (require) {
 				el: '#restaurant-reviews-tab'
 			});
 
-			this.reviewsService.getRestaurantReview(this.restaurant_id).then(function (reviews_list) {
+
+
+			// this.reviewsService.getRestaurantReview(this.restaurant_id).then(function (reviews_list) {
 				// self.collection.reset(reviews_list);
 				// self.region.show(self);
-			}, function (fail) {
-				console.log('is anybody in here?"');
-			});
+			// }, function (fail) {
+				// console.log('is anybody in here?"');
+			// });
 			// this.reviewsView = new ReviewsView({ restaurant_id: this.restaurant_detail.__eatery_id, region: this.reviewsRegion, reviewsService: this.reviewsService });
 		},
 		ui: {

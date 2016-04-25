@@ -15,10 +15,6 @@ define(function (require) {
 			this.restaurant_detail = opts.restaurant_detail;
 			this.user = opts.user;
 			this.reviewsService = opts.reviewsService;
-
-			// this.reviewsRegion = new Marionette.Region({
-			// 	el: '#restaurant-reviews-tab'
-			// });
 			// this.reviewsView = new ReviewsView({ restaurant_id: this.restaurant_detail.__eatery_id, reviewsService: this.reviewsService });
 		},
 		ui: {
@@ -110,7 +106,16 @@ define(function (require) {
 				self.ui.foodOverview.collapsible();
 			});
 
-			// this.reviewsRegion.show(this.reviewsView);
+			this.reviewsRegion = new Marionette.Region({
+				el: '.reviews-list-wrapper'
+			});
+			this.reviewsService.fetchRestaurantReviews(this.restaurant_detail.__eatery_id)
+				.then(function(reviews_list) {
+					self.reviewsView= new ReviewsView({ reviews: reviews_list });
+					self.reviewsRegion.show(self.reviewsView);
+				}, function(err) {
+					console.log(err);
+				});
 			this.$el.parent().removeClass('hide');
 		},
 		closeDetails: function (e) {

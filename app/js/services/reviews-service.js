@@ -34,7 +34,6 @@ define(function (require) {
 			var self = this;
 			var promise = new Promise(function (resolve, reject) {
 				self.restaurantReviews.fetch({ method: 'POST', data: { __eatery_id: restaurant_id } }).then(function () {
-					console.log(self.restaurantReviews);
 					resolve(self.restaurantReviews.toJSON());
 				}).fail(function () {
 					console.log('error in fetching reviews');

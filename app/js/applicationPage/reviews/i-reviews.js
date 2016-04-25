@@ -1,12 +1,15 @@
 define(function (require) {
 	'use strict';
 
+	var Backbone= require('backbone');
 	var Marionette = require('marionette');
 	var Handlebars = require('handlebars');
 	var Template = require('text!./reviews.html');
 	var SingleTemplate = require('text!./review.html');
 	var EmptyTemplate = require('text!./empty-reviews.html');
 
+	var ReviewModel = Backbone.Model.extend();
+	var ReviewCollection = Backbone.Collection.extend({ model: ReviewModel });
 
 	var ReviewView = Marionette.ItemView.extend({
 		className: 'review',
@@ -20,20 +23,15 @@ define(function (require) {
 		template: Handlebars.compile(EmptyTemplate)
 	});
 
+
 	var ReviewsView = Marionette.CompositeView.extend({
 		className: 'doof-reviews',
-		initialize: function (opts) {
-			this.restaurant_id = opts.restaurant_id;
-			this.reviewsService.getRestaurantReview(this.restaurant_id).then(function (reviews_list) {
-				self.collection= reviews_list;
-				// self.region.show(self);
-			}, function (fail) {
-				console.log('is anybody in here?"');
-			});
-		},
 		template: Handlebars.compile(Template),
 		childView: ReviewView,
 		emptyView: EmptyReview,
+		initialize: function(opts) {
+			this.collection= new ReviewCollection(opts.reviews);
+		},
 		isEmpty: function () {
 			var data = this.collection.toJSON();
 			if (data.length && data[0].__eatery_id) {

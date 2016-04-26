@@ -35,7 +35,6 @@ define(function (require) {
 		},
 		isEmpty: function () {
 			var data = this.collection.toJSON();
-			console.log(data);
 			if (data.length && data[0].__eatery_id) {
 				return false;
 			}

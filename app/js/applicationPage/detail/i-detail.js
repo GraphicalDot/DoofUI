@@ -67,6 +67,9 @@ define(function (require) {
 					var notReviewedAmbienceItem = [];
 					var reviewedAmbienceItem = {};
 					_.each(ambienceList, function (ambienceItem, key, obj) {
+						if(key === 'ambience-overall' || key === 'ambience-null') {
+							return;
+						}
 						ambienceItem.max_sentiments = max_sentiments.total_sentiments;
 						if (ambienceItem.total_sentiments) {
 							reviewedAmbienceItem[key] = ambienceItem;
@@ -82,6 +85,9 @@ define(function (require) {
 					var notReviewedServiceItem = [];
 					var reviewedServiceItem = {};
 					_.each(serviceList, function (serviceItem, key, obj) {
+						if(key === 'service-overall' || key === 'service-null') {
+							return;
+						}
 						serviceItem.max_sentiments = max_sentiments.total_sentiments;
 						if (serviceItem.total_sentiments) {
 							reviewedServiceItem[key] = serviceItem;

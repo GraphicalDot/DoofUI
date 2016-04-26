@@ -31,6 +31,7 @@ define(function (require) {
 		emptyView: EmptyReview,
 		initialize: function(opts) {
 			this.collection= new ReviewCollection(opts.reviews);
+			this.collection.on('add', this.render, this);
 		},
 		isEmpty: function () {
 			var data = this.collection.toJSON();
@@ -38,6 +39,9 @@ define(function (require) {
 				return false;
 			}
 			return true;
+		},
+		addReview: function() {
+			this.collection.add();
 		},
 		childViewContainer: ".reviews-list",
 	});

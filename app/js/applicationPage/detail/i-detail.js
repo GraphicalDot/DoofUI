@@ -131,17 +131,25 @@ define(function (require) {
 			var self= this;
 			e.preventDefault();
 
-			var reviewText= this.ui.reviewsBox.val();
-			this.reviewsService.writeRestaurantReview(this.restaurant_detail.__eatery_id, reviewText).then(function() {
-					self.ui.reviewsBox.val('');
-					require(['toasts'], function() {
-						Materialize.toast('Thank you for Submitting Review.');
+			if(this.user.isAuthorized()) {
+				var reviewText= this.ui.reviewsBox.val();
+				this.reviewsService.writeRestaurantReview(this.restaurant_detail.__eatery_id, this.restaurant_detail.eatery_details.eatery_name, reviewText, this.user.get('id'), this.user.get('name')).then(function(result) {
+						self.ui.reviewsBox.val('');
+						console.log(result);
+						self.reviewsView.addReview(result);
+						require(['toasts'], function() {
+							Materialize.toast('Thank you for Submitting Review.');
+						});
+					}, function(err) {
+						require(['toasts'], function() {
+							Materialize.toast(err);
+						})
 					});
-				}, function(err) {
-					require(['toasts'], function() {
-						Materialize.toast('Could not submit Review.');
-					})
-				});
+			} else {
+				require(['toasts'], function() {
+					Materialize.toast('Please log in to write Reviews');
+				})
+			}
 		}
 	});
 	return DetailView;

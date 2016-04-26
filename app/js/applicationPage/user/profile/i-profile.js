@@ -18,6 +18,7 @@ define(function(require) {
 			this.reviewsService= opts.reviewsService;
 			this.reviewsService.getUserReviews(id)
 				.then(function(user_reviews) {
+					console.log(user_reviews);
 					self.userReviews= user_reviews;
 					self.render();
 				})

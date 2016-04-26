@@ -44,10 +44,14 @@ define(function (require) {
 			});
 			return promise;
 		},
-		writeRestaurantReview: function (restaurant_id, facebookUser, reviewText) {
+		writeRestaurantReview: function (restaurant_id, restaurant_name, reviewText, facebookUserId, facebookUser) {
 			var self= this;
 			var promise= new Promise(function(resolve, reject) {
-				self.writeReview.fetch({method: 'POST', data: {__eatery_id: restaurant_id, name: facebookUser, review_text: reviewText}}).then(function() {
+				self.writeReview.fetch({method: 'POST', data: {__eatery_id: restaurant_id, eatery_name: restaurant_name, fb_id: facebookUserId, name: facebookUser, review_text: reviewText}}).then(function(res) {
+					if(res.error) {
+						reject(res.messege);
+						return;
+					}
 					resolve('Done');
 				}).fail(function() {
 					console.log('Fail');

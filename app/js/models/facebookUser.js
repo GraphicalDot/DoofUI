@@ -64,7 +64,7 @@ define(function (require) {
 					url: "http://52.76.176.188:8000/usersdetails",
 					dataType: 'json',
 					method: 'POST',
-					data: { email: this.get('email'), fb_id: this.get('id'), picture: this.get('picture'), name: this.get('name') },
+					data: { email: this.get('email'), fb_id: this.get('id'), picture: this.get('image'), name: this.get('name') },
 					success: function () {
 						console.log('current user information successfully sent');
 					},

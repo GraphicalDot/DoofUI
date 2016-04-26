@@ -1,3 +1,6 @@
+/**
+ * This Service is responsible for fetching and writing Review
+ */
 define(function (require) {
 	'use strict';
 
@@ -12,12 +15,12 @@ define(function (require) {
 		initialize: function () {
 			this.userProfileReview = new UserProfileReviews();
 			this.restaurantReviews = new RestaurantReviews();
-			this.WriteReview = new WriteReviews();
+			this.writeReview = new WriteReviews();
 		},
 		requests: {
 			'getRestaurantReview': 'fetchRestaurantReviews',
-			'writeReview': 'write',
-			'getUserReviews': 'getUserReviews'
+			'getUserReviews': 'getUserReviews',
+			'writeReview': 'writeReview',
 		},
 		getUserReviews: function (user_id) {
 			var self = this;
@@ -41,7 +44,18 @@ define(function (require) {
 			});
 			return promise;
 		},
-		write: function () { },
+		writeRestaurantReview: function (restaurant_id, facebookUser, reviewText) {
+			var self= this;
+			var promise= new Promise(function(resolve, reject) {
+				self.writeReview.fetch({method: 'POST', data: {__eatery_id: restaurant_id, name: facebookUser, review_text: reviewText}}).then(function() {
+					resolve('Done');
+				}).fail(function() {
+					console.log('Fail');
+					reject();
+				});
+			});
+			return promise;
+		 },
 	});
 
 	return ReviewsService;

@@ -1,3 +1,4 @@
+/* global Materialize */
 define(function (require) {
 	'use strict';
 
@@ -127,7 +128,20 @@ define(function (require) {
 			this.remove();
 		},
 		writeReview: function(e) {
+			var self= this;
+			e.preventDefault();
+
 			var reviewText= this.ui.reviewsBox.val();
+			this.reviewsService.writeRestaurantReview(this.restaurant_detail.__eatery_id, reviewText).then(function() {
+					self.ui.reviewsBox.val('');
+					require(['toasts'], function() {
+						Materialize.toast('Thank you for Submitting Review.');
+					});
+				}, function(err) {
+					require(['toasts'], function() {
+						Materialize.toast('Could not submit Review.');
+					})
+				});
 		}
 	});
 	return DetailView;

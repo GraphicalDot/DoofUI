@@ -24,11 +24,14 @@ define(function (require) {
 			'foodOverview': '.food-item-list',
 			'closeBtn': '.restaurant-details__close-btn',
 			'reviewsBox': '#review-box',
-			'writeReviewBtn': '.submit-review-form'
+			'writeReviewBtn': '.submit-review-form',
+			'addDishModalOpenBtn': '.details__food-menu_addDishBtn',
+			'addDishBtn': '.add-dish__modal_submit-btn'
 		},
 		events: {
 			'click @ui.closeBtn': 'closeDetails',
-			'click @ui.writeReviewBtn': 'writeReview'
+			'click @ui.writeReviewBtn': 'writeReview',
+			'click @ui.addDishBtn': 'submitDish'
 		},
 		templateHelpers: function () {
 			return {
@@ -102,11 +105,12 @@ define(function (require) {
 		},
 		onShow: function () {
 			var self = this;
-			require(['tabs', 'collapsible'], function () {
+			require(['tabs', 'collapsible', 'leanModal'], function () {
 				self.ui.tabs.tabs();
 				self.ui.ambienceOverview.collapsible();
 				self.ui.serviceOverview.collapsible();
 				self.ui.foodOverview.collapsible();
+				self.ui.addDishModalOpenBtn.leanModal();
 			});
 
 			this.reviewsRegion = new Marionette.Region({

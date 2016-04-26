@@ -149,6 +149,17 @@
 		{{else}}
 		{{/each}}
 		</ul>
+
+		<div class="section">
+			<h5>User Added Dishes</h5>
+			{{#each user-added-dishes}}
+				Show Dish Item
+			{{else}}
+				No Dishes Added By User
+			{{/each}}
+
+			<a href="#addDishModal" class="btn waves-effect waves-light modal-trigger details__food-menu_addDishBtn">Add a Dish</a>
+		</div>
 	</div>
 	<div id="restaurant-photos-tab" class="restaurant-tab-detail">
 		{{#each images}}
@@ -163,5 +174,44 @@
 				<button type="submit" class="btn waves-effect right submit-review-form">Post</button>
 			</form>
 		</div>
+	</div>
+</div>
+
+<div id="addDishModal" class="modal">
+	<div class="modal-content">
+		<h4>Add a Dish Item</h4>
+		<div class="row">
+			<form action="" class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" placeholder="Enter Dish Name" id="add_dish_name_textbox" required class="validate">
+						<label for="add_dish_name_textbox">Enter a dish name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea name="add_dish_review_textarea" id="add_dish_review_textarea" class="materialize-textarea"></textarea>
+						<label for="add_dish_review_textarea">Write a Review</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="radio" name="add_dish_rating_radio" id="rating_terrible">
+						<label for="rating_terrible">Terrible</label>
+						<input type="radio" name="add_dish_rating_radio" id="rating_poor">
+						<label for="rating_poor">Poor</label>
+						<input type="radio" name="add_dish_rating_radio" id="rating_neutral">
+						<label for="rating_neutral">Neutral</label>
+						<input type="radio" name="add_dish_rating_radio" id="rating_good">
+						<label for="rating_good">Good </label>
+						<input type="radio" name="add_dish_rating_radio" id="rating_excellent">
+						<label for="rating_excellent">Excellent</label>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat add-dish__modal_submit-btn">Add Dish</a>
 	</div>
 </div>

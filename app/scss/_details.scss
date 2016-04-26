@@ -72,11 +72,14 @@
 				padding: 0;
 			}
 			#restaurant-photos-tab {
-				padding: 0;
-				img {
-					width: 49%;
-					height: auto;
-					padding: 3px;
+				.material-placeholder {
+					width: 50%;
+					float: left;
+					img {
+						width: 100%;
+						height: auto;
+						padding: 3px;
+					}
 				}
 			}
 			#restaurant-reviews-tab {
@@ -370,4 +373,12 @@
 
 .collapsible-body {
 	padding: 12px;
+}
+
+.details__food-menu_addDishBtn {
+	width: 100%;
+    border-radius: 0;
+    background-color: #F44336;
+    height: 45px;
+    line-height: 45px;
 }

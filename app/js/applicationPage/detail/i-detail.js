@@ -112,12 +112,13 @@ define(function (require) {
 		},
 		onShow: function () {
 			var self = this;
-			require(['tabs', 'collapsible', 'leanModal'], function () {
+			require(['tabs', 'collapsible', 'leanModal', 'materialbox'], function () {
 				self.ui.tabs.tabs();
 				self.ui.ambienceOverview.collapsible();
 				self.ui.serviceOverview.collapsible();
 				self.ui.foodOverview.collapsible();
 				self.ui.addDishModalOpenBtn.leanModal();
+				$('.materialboxed').materialbox();
 			});
 
 			this.reviewsRegion = new Marionette.Region({

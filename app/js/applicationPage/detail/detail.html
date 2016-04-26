@@ -143,7 +143,7 @@
 					</div>
 				</div>
 				<div class="collapsible-body">
-					Hello, nothing to see here yet.
+					No Reviews Present Yet..
 				</div>
 			</li>
 		{{else}}
@@ -153,7 +153,7 @@
 	</div>
 	<div id="restaurant-photos-tab" class="restaurant-tab-detail">
 		{{#each images}}
-			<img class="grid-item" class="responsive_img" src="{{s3_url}}" alt="">
+			<img class="grid-item materialboxed" class="responsive_img" src="{{s3_url}}" alt="">
 		{{/each}}
 	</div>
 	<div id="restaurant-reviews-tab" class="restaurant-tab-detail">
@@ -174,7 +174,7 @@
 			<form action="" class="col s12">
 				<div class="row">
 					<div class="input-field col s12">
-						<input type="text" placeholder="Enter Dish Name" id="add_dish_name_textbox" required class="validate">
+						<input type="text" id="add_dish_name_textbox" required class="validate">
 						<label for="add_dish_name_textbox">Enter a dish name</label>
 					</div>
 				</div>
@@ -186,12 +186,15 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
+						Rating :
 						<input type="radio" name="add_dish_rating_radio" id="rating_terrible">
 						<label for="rating_terrible">Terrible</label>
 						<input type="radio" name="add_dish_rating_radio" id="rating_poor">
 						<label for="rating_poor">Poor</label>
 						<input type="radio" name="add_dish_rating_radio" id="rating_neutral">
 						<label for="rating_neutral">Neutral</label>
+						<input type="radio" name="add_dish_rating_radio" id="rating_mix">
+						<label for="rating_mix">Mix</label>
 						<input type="radio" name="add_dish_rating_radio" id="rating_good">
 						<label for="rating_good">Good </label>
 						<input type="radio" name="add_dish_rating_radio" id="rating_excellent">
@@ -202,6 +205,6 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat add-dish__modal_submit-btn">Add Dish</a>
+		<a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat add-dish__modal_submit-btn">Add Dish</a>
 	</div>
 </div>

@@ -1,22 +1,19 @@
-var gulp= require('gulp');
-var sass= require('gulp-sass');
-var runSequence= require('run-sequence');
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var runSequence = require('run-sequence');
 
 // browser sync
-var browserSync= require('browser-sync').create();
+var browserSync = require('browser-sync').create();
 
 // build plugins
-var useref= require('gulp-useref');
-var gulpIf= require('gulp-if');
-var uglify= require('gulp-uglify');
-var cssnano= require('gulp-cssnano');
+var useref = require('gulp-useref');
+var gulpIf = require('gulp-if');
+var cssnano = require('gulp-cssnano');
 
-var amdOptimize= require('amd-optimize');
-var concat= require('gulp-concat');
-var del= require('del');
+var del = require('del');
 
 // Task: Browser Sync
-gulp.task('browserSync', function() {
+gulp.task('browserSync', function () {
 	browserSync.init({
 		port: 9000,
 		server: {
@@ -26,7 +23,7 @@ gulp.task('browserSync', function() {
 });
 
 // Task : Sass compile, reload browserSync server after that
-gulp.task('sass', function() {
+gulp.task('sass', function () {
 	return gulp.src('app/scss/styles.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('app/css'))
@@ -35,30 +32,39 @@ gulp.task('sass', function() {
 		}))
 });
 
+gulp.task('fonts', function() {
+	return gulp.src('app/font/**/*')
+	.pipe(gulp.dest('dist/font'))
+});
+
+gulp.task('images', function() {
+	return gulp.src('app/css/images/**/*.+(png|jpg|gif|svg)')
+	.pipe(cache(imagemin({
+		interlaced: true
+	})))
+	.pipe(gulp.dest('dist/images'))
+});
+
 // Task : Clean Dist folder
-gulp.task('clean:dist', function() {
+gulp.task('clean:dist', function () {
 	return del.sync('dist');
 });
 
-gulp.task('useref', function() {
+gulp.task('useref', function () {
 	return gulp.src('app/index.html')
 		.pipe(useref())
 		.pipe(gulpIf('*.css', cssnano()))
 		.pipe(gulp.dest('dist'))
 });
 
-gulp.task('scripts:build', function() {
-	// return gulp.src()
-});
-
-gulp.task('watch', ['browserSync', 'sass'], function() {
+gulp.task('watch', ['browserSync', 'sass'], function () {
 	gulp.watch('app/scss/*.scss', ['sass']);
 });
 
-gulp.task('default', function(callback) {
+gulp.task('default', function (callback) {
 	runSequence(['sass', 'browserSync', 'watch'], callback);
 });
 
-gulp.task('build', function(callback) {
-	runSequence('clean:dist', ['sass', 'useref'], callback);
+gulp.task('build', function (callback) {
+	runSequence('clean:dist', ['sass', 'useref', 'images', 'fonts'], callback);
 });

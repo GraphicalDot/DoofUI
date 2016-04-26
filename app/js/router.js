@@ -14,7 +14,7 @@ define(function (require) {
 		initialize: function (opts) {
 			this.region = opts.region;
 			this.user = opts.user;
-
+			
 			this.dataService = new DataService();
 			this.googleService= new GoogleService();
 
@@ -33,6 +33,9 @@ define(function (require) {
 				this.landingPage();
 			}
 		},
+		/**
+		 * Loads Landing Page
+		 */
 		landingPage: function () {
 			var self = this;
 			var landingPage = new LandingPage({ user: this.user, dataService: this.dataService, googleService: this.googleService });

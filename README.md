@@ -8,4 +8,6 @@ Steps:-
 Optimization Steps :-
 
 1. r.js -o rjs.build.js -> Optimize RequireJS project.
-2. 
+2. gulp build
+3. copy loader.svg
+4. copy roboto font

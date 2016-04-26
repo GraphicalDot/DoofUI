@@ -9,6 +9,8 @@ var browserSync = require('browser-sync').create();
 var useref = require('gulp-useref');
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
+var cache= require('gulp-cache');
+var imagemin= require('gulp-imagemin');
 
 var del = require('del');
 
@@ -42,7 +44,7 @@ gulp.task('images', function() {
 	.pipe(cache(imagemin({
 		interlaced: true
 	})))
-	.pipe(gulp.dest('dist/images'))
+	.pipe(gulp.dest('dist/css/images'))
 });
 
 // Task : Clean Dist folder

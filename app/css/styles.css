@@ -146,6 +146,7 @@ body {
           border-radius: 3px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02); }
           #applicationPage .doof-masthead .masthead__search-container #doofSearch .search-form label {
+            line-height: normal;
             z-index: 10; }
           #applicationPage .doof-masthead .masthead__search-container #doofSearch .search-form .search__location-wrapper {
             flex: 0 0 36%;
@@ -1560,7 +1561,8 @@ body {
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 20px; }
+        padding: 20px;
+        overflow-y: scroll; }
         #applicationPage .doof-body #profileView .user-profile__reviews h6 {
           font-size: 28px;
           font-weight: 200;

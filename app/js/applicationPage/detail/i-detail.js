@@ -193,7 +193,7 @@ define(function (require) {
 				this.reviewsService.writeRestaurantReview(this.model.get('__eatery_id'), this.model.get('eatery_name'), reviewText, this.user.get('id'), this.user.get('name')).then(function(result) {
 						self.ui.reviewsBox.val('');
 						console.log(result);
-						self.reviewsView.addReview(result);
+						self.reviewsView.addReview(result.object);
 						require(['toasts'], function() {
 							Materialize.toast('Thank you for Submitting Review.');
 						});

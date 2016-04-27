@@ -52,7 +52,7 @@ define(function (require) {
 						reject(res.messege);
 						return;
 					}
-					resolve('Done');
+					resolve(res);
 				}).fail(function() {
 					console.log('Fail');
 					reject();

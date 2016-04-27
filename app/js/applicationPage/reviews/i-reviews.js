@@ -30,8 +30,9 @@ define(function (require) {
 		childView: ReviewView,
 		emptyView: EmptyReview,
 		initialize: function(opts) {
+			console.log(opts.reviews);
 			this.collection= new ReviewCollection(opts.reviews);
-			this.collection.on('add', this.render, this);
+			// this.collection.on('add', this.render, this);
 		},
 		isEmpty: function () {
 			var data = this.collection.toJSON();
@@ -40,8 +41,10 @@ define(function (require) {
 			}
 			return true;
 		},
-		addReview: function() {
-			this.collection.add();
+		addReview: function(new_review_model) {
+			var m= new ReviewModel(new_review_model);
+			console.log(m);
+			this.collection.add(m);
 		},
 		childViewContainer: ".reviews-list",
 	});

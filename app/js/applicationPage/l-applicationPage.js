@@ -34,7 +34,7 @@ define(function (require) {
 			this.dataService = opts.dataService;
 			this.googleService = opts.googleService;
 			this.reviewsService = new ReviewsDataService();
-			
+
 			//Collection
 			this.collection = new ApplicationCollection(opts.eateries);
 			this.collection.on('reset', this.updateGoogleMapsMarker, this);
@@ -117,9 +117,10 @@ define(function (require) {
 		},
 		onShow: function () {
 			var self = this;
-			require(['leanModal', 'tabs'], function () {
+			require(['leanModal', 'tabs', 'forms'], function () {
 				self.ui.feedbackLink.leanModal();
 				self.ui.subMenuTabsWrapper.tabs();
+				Materialize.updateTextFields();
 			});
 
 			this.showChildView('userMenu', this.userView);

@@ -8,6 +8,9 @@
 	<div class="restaurant-information-wrapper">
 		<h4 class="restaurant-name">{{restaurant-name}}</h4>
 		<span class="restaurant-address">{{restaurant-address}}</span>
+		<div class="restaurant-cost">
+			{{{restaurant-cost}}}
+		</div>
 		<div class="restaurant-reviews">{{{restaurant-reviews}}}</div>
 	</div>
 </div>
@@ -102,6 +105,49 @@
 					<div class="collapsible-header">Not Reviewed Yet</div>
 					<div class="collapsible-body">
 						{{#each service-items.notReviewed}}
+						<div class="chip">{{#undasherized-text}}{{this}}{{/undasherized-text}}</div>
+						{{/each}}
+					</div>
+				</li>
+				{{/if}}
+			</ul>
+		</div>
+		<div class="cost-wrapper">
+			<h6>Cost</h6>
+			<ul class="collapsible cost-overview" data-collapsible="accordion">
+				{{#each cost-items.filtered}}
+					<li class="details__cost-menu_cost-item">
+					<div class="collapsible-header cost-menu_cost-item-header">
+						<div class="cost-item-information-wrapper">
+							<span class="cost-item-name">{{math @index "+" 1}}. {{#undasherized-text}}{{@key}}{{/undasherized-text}}</span>
+							<div class="cost-item-graph">
+								{{{line_graph_html this}}}
+							</div>
+							<span class="cost-item-more-information">{{total_sentiments}} Total, 0 Reviews</span>
+						</div>
+						<div class="cost-item-actions-wrapper">
+							<div class="sad-sentiment {{is_highest 'sad' this}}">
+								<i class="material-icons">sentiment_very_dissatisfied</i><span>{{math poor "+" terrible}}</span>
+							</div>
+							<div class="neutral-sentiment {{is_highest 'neutral' this}}">
+								<i class="material-icons">sentiment_neutral</i><span>{{math average "+" mix}}</span>
+							</div>
+							<div class="happy-sentiment {{is_highest 'happy' this}}">
+								<i class="material-icons">sentiment_very_satisfied</i><span>{{math excellent "+" good}}</span>
+							</div>
+							<i class="material-icons hide expendor-icon">expand_more</i>
+						</div>
+					</div>
+					<div class="collapsible-body">
+						Hello, nothing to see here yet.
+					</div>
+				</li>
+				{{/each}}
+				{{#if cost-items.notReviewed}}
+				<li class="un_reviewed_items">
+					<div class="collapsible-header">Not Reviewed Yet</div>
+					<div class="collapsible-body">
+						{{#each cost-items.notReviewed}}
 						<div class="chip">{{#undasherized-text}}{{this}}{{/undasherized-text}}</div>
 						{{/each}}
 					</div>
@@ -206,5 +252,47 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat add-dish__modal_submit-btn">Add Dish</a>
+	</div>
+</div>
+
+<div id="rateItemModal" class="modal">
+	<div class="modal-content">
+		<h4>Rate Item</h4>
+		<div class="row">
+			<form action="" class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="item-to-be-rated_name" required disabled class="validate">
+						<label for="item-to-be-rated">Enter a dish name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea name="item-to-be-rated_review" id="item-to-be-rated_review" class="materialize-textarea"></textarea>
+						<label for="item-to-be-rated_review">Review [optional]</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						Rating :
+						<input type="radio" name="item-to-be-rated_sentiment" id="rating_terrible">
+						<label for="rating_terrible">Terrible</label>
+						<input type="radio" name="item-to-be-rated_sentiment" id="rating_poor">
+						<label for="rating_poor">Poor</label>
+						<input type="radio" name="item-to-be-rated_sentiment" id="rating_neutral">
+						<label for="rating_neutral">Neutral</label>
+						<input type="radio" name="item-to-be-rated_sentiment" id="rating_mix">
+						<label for="rating_mix">Mix</label>
+						<input type="radio" name="item-to-be-rated_sentiment" id="rating_good">
+						<label for="rating_good">Good </label>
+						<input type="radio" name="item-to-be-rated_sentiment" id="rating_excellent">
+						<label for="rating_excellent">Excellent</label>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat rate-item_btn">Submit Review</a>
 	</div>
 </div>

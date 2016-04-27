@@ -27,12 +27,14 @@ define(function (require) {
 			'reviewsBox': '#review-box',
 			'writeReviewBtn': '.submit-review-form',
 			'addDishModalOpenBtn': '.details__food-menu_addDishBtn',
-			'addDishBtn': '.add-dish__modal_submit-btn'
+			'addDishBtn': '.add-dish__modal_submit-btn',
+			'ambienceSentimentsAction': '.ambience-item-actions-wrapper i'
 		},
 		events: {
 			'click @ui.closeBtn': 'closeDetails',
 			'click @ui.writeReviewBtn': 'writeReview',
-			'click @ui.addDishBtn': 'submitDish'
+			'click @ui.addDishBtn': 'submitDish',
+			'click @ui.ambienceSentimentsAction': 'ambienceItemSentimentUpdate'
 		},
 		templateHelpers: function () {
 			return {
@@ -41,6 +43,28 @@ define(function (require) {
 				},
 				'restaurant-address': function () {
 					return this.restaurant_detail.eatery_details.eatery_address;
+				},
+				'restaurant-cost': function() {
+					var expensive = this.model.get('cost').expensive;
+					var highest_value = 0;
+					var highest_sentiment = '';
+					_.each(expensive, function (value, key, obj) {
+						if (value > highest_value && key !== 'total_sentiments') {
+							highest_value = value;
+							highest_sentiment = key;
+						}
+					});
+					if (highest_sentiment === 'excellent') {
+						return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg>';
+					} else if (highest_sentiment === 'good') {
+						return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg>'
+					} else if (highest_sentiment === 'mix' || highest_sentiment === 'average') {
+						return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg>'
+					} else if (highest_sentiment === 'poor') {
+						return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg>'
+					} else {
+						return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="39.5 -0.5 169.756 250" enable-background="new 39.5 -0.5 169.756 250" xml:space="preserve"><path fill="#010101" d="M152.511,23.119h41.031L209.256-0.5H55.214L39.5,23.119h26.739c27.086,0,52.084,2.092,62.081,24.743H55.214 L39.5,71.482h91.769c-0.002,0.053-0.002,0.102-0.002,0.155c0,16.974-14.106,43.01-60.685,43.01l-22.537-0.026l0.025,22.068 L138.329,249.5h40.195l-93.42-116.709c38.456-2.074,74.523-23.563,79.722-61.309h28.716l15.714-23.62h-44.84 C162.606,38.761,158.674,29.958,152.511,23.119z"/></svg>'
+					}
 				},
 				'restaurant-reviews': function () {
 					var restaurant_sentiments = this.model.get('overall');
@@ -99,6 +123,24 @@ define(function (require) {
 						};
 					});
 					return { filtered: reviewedServiceItem, notReviewed: notReviewedServiceItem };
+				},
+				'cost-items': function () {
+					var costList = this.model.get('cost');
+					var max_sentiments = _.max(costList, function (costItem) { return costItem.total_sentiments; })
+					var notReviewedcostItem = [];
+					var reviewedcostItem = {};
+					_.each(costList, function (costItem, key, obj) {
+						if(key === 'cost-overall' || key === 'cost-null') {
+							return;
+						}
+						costItem.max_sentiments = max_sentiments.total_sentiments;
+						if (costItem.total_sentiments) {
+							reviewedcostItem[key] = costItem;
+						} else {
+							notReviewedcostItem.push(key);
+						};
+					});
+					return { filtered: reviewedcostItem, notReviewed: notReviewedcostItem };
 				},
 				'food-items': function () {
 					var foodList = this.model.get('food');
@@ -161,7 +203,11 @@ define(function (require) {
 					Materialize.toast('Please log in to write Reviews');
 				})
 			}
-		}
+		},
+		ambienceItemSentimentUpdate: function(e) {
+			e.preventDefault();
+
+		},
 	});
 	return DetailView;
 });

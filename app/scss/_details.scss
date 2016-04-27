@@ -14,19 +14,31 @@
 			background-size: cover;
 			.restaurant-information-wrapper {
 				background-color: rgba(255, 255, 255, 0.6);
-				padding: 6px;
+				padding: 6px 12px;
 				.restaurant-name {
 					font-family: $heading-font;
 					font-weight: bold;
 					text-transform: uppercase;
 					color: $brand-color;
+					margin-bottom: .3rem;
 				}
 				.restaurant-address {
 					color: $primary-text;
 				}
+				.restaurant-cost {
+					margin-top: 6px;
+					margin-bottom: 3px;
+					svg {
+						width: 20px;
+						height: 20px;
+						path {
+							fill: $brand-color;
+						}
+					}
+				}
 				.restaurant-reviews {
-					margin-top: 12px;
-					margin-bottom: 12px;
+					margin-top: 6px;
+					margin-bottom: 3px;
 					i {
 						margin-right: 3px;
 						color: $secondary-text;
@@ -201,29 +213,34 @@
 }
 
 .ambience-overview,
-.service-overview {
+.service-overview,
+.cost-overview {
 	// box-shadow: none;
 	// border: 0;
 	.ambience-menu_ambience-item-header,
-	.service-menu_service-item-header {
+	.service-menu_service-item-header,
+	.cost-menu_cost-item-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 12px;
 		.ambience-item-information-wrapper,
-		.service-item-information-wrapper {
+		.service-item-information-wrapper,
+		.cost-item-information-wrapper {
 			flex: 1;
 			padding: 0 12px;
 			display: flex;
 			flex-direction: column;
 			.ambience-item-name,
-			.service-item-name {
+			.service-item-name,
+			.cost-item-name {
 				font-weight: bold;
 				line-height: 2rem;
 				font-family: 'Utopia';
 			}
 			.ambience-item-graph,
-			.service-item-graph {
+			.service-item-graph,
+			.cost-item-graph {
 				position: relative;
 				height: 6px;
 				display: block;
@@ -252,14 +269,16 @@
 				}
 			}
 			.ambience-item-more-information,
-			.service-item-more-information {
+			.service-item-more-information,
+			.cost-item-more-information {
 				font-size: 12px;
 				line-height: 24px;
 				color: rgba(0, 0, 0, 0.54);
 			}
 		}
 		.ambience-item-actions-wrapper,
-		.service-item-actions-wrapper {
+		.service-item-actions-wrapper,
+		.cost-item-actions-wrapper {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;

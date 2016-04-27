@@ -252,6 +252,9 @@ body {
             width: 40px;
             color: #424242;
             text-align: center; }
+          #applicationPage .doof-masthead .masthead__search-container #doofSearch .search-form .tt-cursor {
+            background-color: #F44336;
+            color: #fff; }
     #applicationPage .doof-masthead .masthead__nav-menu {
       height: 100%;
       flex: 0 0 400px;

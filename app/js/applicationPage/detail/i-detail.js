@@ -16,6 +16,7 @@ define(function (require) {
 			this.restaurant_detail = opts.restaurant_detail;
 			this.user = opts.user;
 			this.reviewsService = opts.reviewsService;
+			// console.l
 			// this.reviewsView = new ReviewsView({ restaurant_id: this.restaurant_detail.__eatery_id, reviewsService: this.reviewsService });
 		},
 		ui: {
@@ -39,10 +40,12 @@ define(function (require) {
 		templateHelpers: function () {
 			return {
 				'restaurant-name': function () {
-					return this.restaurant_detail.eatery_details.eatery_name;
+					return this.model.get('eatery_name');
+					// return this.model.eatery_details.eatery_name;
 				},
 				'restaurant-address': function () {
-					return this.restaurant_detail.eatery_details.eatery_address;
+					return this.model.get('eatery_address');
+					// return this.model.eatery_details.eatery_address;
 				},
 				'restaurant-cost': function() {
 					var expensive = this.model.get('cost').expensive;
@@ -166,7 +169,8 @@ define(function (require) {
 			this.reviewsRegion = new Marionette.Region({
 				el: '.reviews-list-wrapper'
 			});
-			this.reviewsService.fetchRestaurantReviews(this.restaurant_detail.__eatery_id)
+			var id= this.model.get('__eatery_id');
+			this.reviewsService.fetchRestaurantReviews(id)
 				.then(function(reviews_list) {
 					self.reviewsView= new ReviewsView({ reviews: reviews_list });
 					self.reviewsRegion.show(self.reviewsView);
@@ -186,7 +190,7 @@ define(function (require) {
 
 			if(this.user.isAuthorized()) {
 				var reviewText= this.ui.reviewsBox.val();
-				this.reviewsService.writeRestaurantReview(this.restaurant_detail.__eatery_id, this.restaurant_detail.eatery_details.eatery_name, reviewText, this.user.get('id'), this.user.get('name')).then(function(result) {
+				this.reviewsService.writeRestaurantReview(this.model.get('__eatery_id'), this.model.get('eatery_name'), reviewText, this.user.get('id'), this.user.get('name')).then(function(result) {
 						self.ui.reviewsBox.val('');
 						console.log(result);
 						self.reviewsView.addReview(result);

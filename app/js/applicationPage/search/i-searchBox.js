@@ -167,8 +167,8 @@ define(function (require) {
 		restaurantSelect: function (restaurant_name) {
 			var self = this;
 			self.selected = 'restaurant';
-			this.textService.getByRestaurantName(restaurant_name, this.latLng.lat, this.latLng.lng).then(function (restaurants_list) {
-				self.search(restaurants_list);
+			this.textService.getByRestaurantName(restaurant_name, this.latLng.lat, this.latLng.lng).then(function (restaurant) {
+				self.triggerMethod('show:restaurant', restaurant[0].__eatery_id, restaurant[0]);
 			});
 		},
 		search: function (restaurants_list) {

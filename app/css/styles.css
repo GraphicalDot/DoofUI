@@ -1529,6 +1529,8 @@ body {
       background-color: #F44336;
       height: 45px;
       line-height: 45px; }
+    #applicationPage .doof-body .collapsible-body {
+      font-size: 12px; }
     #applicationPage .doof-body .body__profile-box {
       right: 0;
       width: 480px; }

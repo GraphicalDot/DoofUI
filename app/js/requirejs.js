@@ -116,6 +116,4 @@ require.config({
 	}
 });
 
-require(['./doof'], function (Doof) {
-	Doof.start();
-});
+require(['./doof']);

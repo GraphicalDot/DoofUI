@@ -34,5 +34,7 @@ define(function (require) {
 			Backbone.history.start();
 		}
 	});
+
+	Doof.start();
 	return Doof;
 });

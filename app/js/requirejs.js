@@ -116,4 +116,14 @@ require.config({
 	}
 });
 
+require.onError = function (err) {
+	console.log(err.requireModules);
+	console.log(err.requireType);
+	// if (err.requireType === 'timeout') {
+	// 	$("body").trigger({ type: "moduleFail", err: err })
+	// } else {
+	// 	throw err;
+	// }
+}
+
 require(['./doof']);

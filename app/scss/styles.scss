@@ -1,16 +1,6 @@
 @import 'variables';
 
-html,
-body {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-.doof,
-.loader {
+.doof {
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -19,7 +9,6 @@ body {
 	align-items: center;
 	z-index: 1;
 }
-@import 'loader';
 @import 'landing-page';
 
 #applicationPage {

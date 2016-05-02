@@ -2,16 +2,7 @@
   font-family: Utopia;
   src: url("../font/UtopiaStd-Regular.otf") format("opentype"); }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; }
-
-.doof,
-.loader {
+.doof {
   height: 100%;
   width: 100%;
   display: flex;
@@ -19,23 +10,6 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1; }
-
-.loader {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  background-color: #FFC952; }
-  .loader object {
-    width: 120px;
-    height: 120px; }
-  .loader span {
-    font-family: "Utopia";
-    font-size: 1.2rem;
-    color: #F44336;
-    font-weight: bold; }
 
 #landingPage .landingPage-background {
   position: fixed;

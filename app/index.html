@@ -16,10 +16,45 @@
 	<link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 	<!--endbuild-->
+	<!--Inline Critical CSS for Loader-->
+	<style>
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.loader {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			background-color: #FFC952;
+			color: #F44336;
+		}
+
+		.loader object {
+			width: 120px;
+			height: 120px;
+		}
+
+		.loader span {
+			font-family: 'Utopia';
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+	</style>
 </head>
 
 <body>
-	<div class="doof"></div>
+	<!--<div class="doof"></div>-->
 	<div class="loader">
 		<object data="./loader.svg" type="image/svg+xml"></object>
 		<span>Doof is loading..</span>

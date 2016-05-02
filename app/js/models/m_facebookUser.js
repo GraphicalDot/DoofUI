@@ -3,20 +3,28 @@ define(function (require) {
 
 	var $ = require('jquery');
 	var Backbone = require('backbone');
-	var FB = require('facebook');
+	var FB = '';
 	var Promise = require('es6promise').Promise;
 
 	var UserModel = Backbone.Model.extend({
 		defaults: { id: null, third_party_id: null, name: null, email: null, image: null, status: 0 },
 		// Initialize FB SDK
 		init: function () {
-			var promise = new Promise(function (resolve) {
-				FB.init({
-					appId: "202326320112782",
-					// appId: "1605945752959547",
-					version: "v2.5"
+			var promise = new Promise(function (resolve, reject) {
+				require(['facebook'], function (facebook) {
+					FB = facebook;
+					FB.init({
+						appId: "202326320112782", //development key
+						// appId: "1605945752959547", //product key
+						version: "v2.5"
+					});
+					resolve();
+				}, function (err) {
+					var failedId = err.requireModules && err.requireModules[0];
+					if (failedId === "facebook") {
+						reject("Could not connect to Facebook..");
+					}
 				});
-				resolve();
 			});
 			return promise;
 		},

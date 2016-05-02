@@ -11,7 +11,7 @@ define(function (require) {
 	 * Before Starting, Check for Server Connection(Jwt, APIS).
 	 * If cant connect, cant go [ ofcourse there is no use in going ahead anyways ]
 	 */
-	var ServerServices = require('./models/s_server');
+	var ServerServices = require('./services/server-service');
 	Doof.on("before:start", function () {
 		// When Server Connection is done [ We get JWT Token and APIS List.. ]
 		var serverServices = new ServerServices();

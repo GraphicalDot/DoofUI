@@ -9,29 +9,43 @@ define(function (require) {
 		id: 'landingPage',
 		template: Handlebars.compile(Template),
 		initialize: function (opts) {
-			this.user = opts.user;
 			this.location = {
-				latLng: { lat: 28.6139, lng: 77.2090 },
-				place: 'New Delhi'
+				latLng: {lat: 28.6139, lng: 77.2090}, place: 'New Delhi'
 			};
+
 			this.googleService = opts.googleService;
-			this.dataService = opts.dataService;
+			this.restaurantService = opts.restaurantService;
 		},
 		ui: {
-			'location-input': '#landingPage__location-input-box',
-			'enterButton': '#landingPage__enter-app-btn',
+			'location-input': '#lp__location-input-box',
+			'enterButton': '#lp__enter-app-btn',
 		},
 		events: {
 			"click @ui.enterButton": "loadDoof"
 		},
 		onShow: function () {
-			this.createGoogleAutocomplete();
 			this.getUserLocation();
+			this.createGoogleAutocomplete();
 		},
-		// Create Google AutoComplete Box..
+		/**
+		 * Use Navigator Geolocation to fetch User Position
+		 */
+		getUserLocation: function () {
+			var self = this;
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					self.location.latLng.lat = position.coords.latitude;
+					self.location.latLng.lng = position.coords.longitude;
+					self.googleService.geoCodeService(position.coords.latitude, position.coords.longitude).then(function (geoCodeResult) {
+						self.location.place = geoCodeResult.formatted_address;
+						self.ui['location-input'].val(self.location.place);
+					}, function (error) { });
+				}, function (fail) { }, {});
+			} else { }
+		},
 		createGoogleAutocomplete: function () {
 			var self = this;
-			this.googleService.makeGeolocatorBox('landingPage__location-input-box').then(function (autoComplete) {
+			this.googleService.makeGeolocatorBox('lp__location-input-box').then(function (autoComplete) {
 				autoComplete.addListener('place_changed', function () {
 					var place = autoComplete.getPlace();
 					if (!place.geometry) { return; }
@@ -43,25 +57,11 @@ define(function (require) {
 				});
 			});
 		},
-		// Get User Location using navigation geolocation..
-		getUserLocation: function () {
-			var self = this;
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function (position) {
-					self.location.latLng.lat = position.coords.latitude;
-					self.location.latLng.lng = position.coords.longitude;
-					self.googleService.geoCodeService(self.location.latLng.lat, self.location.latLng.lng).then(function (geoCodeResult) {
-						self.location.place = geoCodeResult.formatted_address;
-						self.ui['location-input'].val(self.location.place);
-					}, function (error) { });
-				}, function (fail) { }, {});
-			} else { }
-		},
 		// Loads Doof Application..
 		loadDoof: function (e) {
 			e.preventDefault();
 			var self = this;
-			this.dataService.checkIfDataAvailable(self.location.latLng).then(function (eateriesResponse) {
+			this.restaurantService.checkIfDataAvailable(self.location.latLng).then(function (eateriesResponse) {
 				//typeOfEateries can be 'trending' or 'nearby'
 				var typeOfEateries = eateriesResponse.status;
 				var eateriesList = eateriesResponse.restaurants;

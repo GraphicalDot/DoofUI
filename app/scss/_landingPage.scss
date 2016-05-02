@@ -1,8 +1,14 @@
 #landingPage  {
-	.landingPage-background {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.lp-background {
 		position: fixed;
 		z-index: -1;
-		img.landingPage-background__image,
+		img.lp-background__image,
 		landingPage-background__overlay {
 			min-height: 100%;
 			min-width: 1024px;
@@ -12,28 +18,26 @@
 			top: 0;
 			left: 0;
 		}
-		.landingPage-background__overlay {
+		.lp-background__overlay {
 			background: -moz-linear-gradient(top,rgba(173, 37, 37, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
 			background: -webkit-linear-gradient(top,rgba(173, 37, 37, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
 			background: linear-gradient(to bottom,rgba(173, 37, 37, 0.1) 0,rgba(10, 20, 40, 0.69) 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6141724', endColorstr='#f2141724', GradientType=0 );
 		}
 	}
-	.landingPage-content {
-		display: flex;
-		flex-direction: column;
+
+	.lp-content {
 		text-align: center;
 		color: white;
-		.landingPage-content__enter-application-box {
+		.lp-content__enter-box {
+			margin-top: 36px;
 			display: flex;
-			align-items: center;
-			margin-top: 30px;
-			.enter-application-box__input-wrapper,
-			.enter-application-box__btn-wrapper {
+			.enter-box__input-wrapper,
+			.enter-box__btn-wrapper {
     			margin: 0 0.75rem;
 				height: 3rem;
 			}
-			.enter-application-box__input-wrapper {
+			.enter-box__input-wrapper {
 				flex: 1;
 				display: flex;
 				background-color: #fff;
@@ -60,9 +64,9 @@
 					}
 				}
 			}
-			.enter-application-box__btn-wrapper {
+			.enter-box__btn-wrapper {
 				flex: 0 0 200px;
-				#landingPage__enter-app-btn {
+				#lp__enter-app-btn {
 					height: 3rem;
 					line-height: 3rem;
 					width: 100%;

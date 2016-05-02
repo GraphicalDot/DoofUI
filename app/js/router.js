@@ -4,23 +4,16 @@ define(function (require) {
 	var $ = require('jquery');
 	var Marionette = require('marionette');
 
-	var LandingPage = require('./landingPage/i-landingPage');
-	var ApplicationPage = require('./applicationPage/l-applicationPage');
-
-	var DataService = require('./services/data-service');
-	var GoogleService= require('./services/google-services');
+	var GoogleService = require('./services/google-service');
+	var RestaurantService = require('./services/restaurant-service');
 
 	var Router = Marionette.AppRouter.extend({
 		initialize: function (opts) {
 			this.region = opts.region;
 			this.user = opts.user;
-			
-			this.dataService = new DataService();
-			this.googleService= new GoogleService();
 
-			require(['velocity'], function () {
-				$('.loader').velocity("fadeOut", 1000);
-			});
+			this.googleService = new GoogleService();
+			this.restaurantService = new RestaurantService();
 		},
 		routes: {
 			"": "home"
@@ -38,11 +31,13 @@ define(function (require) {
 		 */
 		landingPage: function () {
 			var self = this;
-			var landingPage = new LandingPage({ user: this.user, dataService: this.dataService, googleService: this.googleService });
+			var LandingPage = require('./landingPage/i-landingPage');
+			var landingPage = new LandingPage({ googleService: this.googleService, restaurantService: this.restaurantService });
 			landingPage.on('goToApplication', function (position, eateries, eateryCategory) {
 				self.application(position, eateries, eateryCategory);
 			});
 			this.region.show(landingPage);
+			this.hideLoader();
 		},
 		/**
 		 * Loads Application View.
@@ -51,8 +46,15 @@ define(function (require) {
 		 * @params eateryCategory -> trending / nearby [Type of eateries in one params ]
 		 */
 		application: function (position, eateries, eateryCategory) {
+			var ApplicationPage = require('./applicationPage/l-applicationPage');
 			var applicationPage = new ApplicationPage({ user: this.user, position: position, eateries: eateries, category: eateryCategory, dataService: this.dataService, googleService: this.googleService });
 			this.region.show(applicationPage);
+			this.hideLoader();
+		},
+		hideLoader: function () {
+			require(['velocity'], function () {
+				$('.loader').velocity("fadeOut", 1000);
+			});
 		}
 	});
 
